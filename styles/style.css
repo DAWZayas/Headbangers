@@ -1,23 +1,74 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
+
+/*
+ *  General Style
+ */
 * {
     outline: none;
-    font-family:"Encode Sans Expanded"; 
+    font-family:"Encode Sans Expanded", Arial, sans-serif; 
 }
+
 
 body {
     background-color: #eee;
     margin: 0;
 }
 
+/*
+ *  Header Style
+ */
+
 header {
     width: 100%;
     background-color: rgba(255,255,255,0.9);
-    height: 60px;
     position: fixed;
+    padding: 12px;
+    box-sizing: border-box;
 }
-main{
-    padding-top: 60px;
+
+.header-elements-left {
+    float: left;
 }
+
+.header-elements-left > * {
+    float: left;
+    margin-right: 16px;
+}
+
+.header-elements-right {
+    float: right;
+}
+
+.header-elements-right > * {
+    float: left;
+    margin-left: 16px;
+}
+
+.header-button {
+    height: 36px;
+    width: 36px;
+    background-color: transparent;
+}
+
+.menu-button {
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid lightgray;
+}
+
+.user-button {
+    border: none;
+    font-size: 24px;
+}
+
+.header-button:hover {
+    cursor: pointer;
+}
+
+
+/*
+ *   Side Menu Style
+ */
 
 nav ul{
     list-style: none;
@@ -52,36 +103,10 @@ nav#side-menu{
     display: none;
 }
 
-.header-button {
-    height: 36px;
-    width: 36px;
-    background-color: transparent;
-}
+/*
+ *   Main Style
+ */
 
-.menu-button {
-    font-size: 20px;
-    background-color: #fff;
-    border: 1px solid lightgray;
-}
-
-.user-button {
-    border: none;
-    font-size: 24px;
-}
-
-.header-button:hover {
-    cursor: pointer;
-}
-
-.header-element {
-    margin: 12px;
-    float: left;
-}
-
-.header-elements-left {
-    float: left;
-}
-
-.header-elements-right {
-    float: right;
+main{
+    padding-top: 60px;
 }
