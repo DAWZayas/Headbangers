@@ -25,6 +25,7 @@ header {
     position: fixed;
     padding: 0.75em;
     box-sizing: border-box;
+    height: 3.75em;
 }
 
 .header-elements-left {
@@ -37,18 +38,21 @@ header {
 
 .header-elements-left>* {
     float: left;
-    margin-right: 24px;
+    margin-right: 1.25em;
 }
 
 .header-elements-right>* {
     float: left;
-    margin-left: 24px;
+    margin-left: 1.25em;
 }
 
 .header-button {
-    height: 36px;
-    width: 36px;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 1.5em;
     background-color: transparent;
+    border: none;
+    box-sizing: border-box;
 }
 
 .header-button:hover {
@@ -56,14 +60,11 @@ header {
 }
 
 .menu-button {
-    font-size: 1.25em;
+    width: 1.75em;
+    height: 1.75em;
+    font-size: 1.3em;
     background-color: #fff;
     border: 1px solid lightgray;
-}
-
-.user-button {
-    border: none;
-    font-size: 1.5em;
 }
 
 
@@ -72,13 +73,13 @@ header {
  */
 
 #side-menu {
-    margin-top: 60px;
+    margin-top: 3.75em;
     position: fixed;
     background-color: #323232;
-    width: 40%;
+    width: 18em;
     height: 100%;
     color: #fff;
-    margin-left: -40%;
+    margin-left: -18em;
     display: none;
 }
 
@@ -94,14 +95,14 @@ header {
 }
 
 #side-menu ul li .fa {
-    font-size: 24px;
-    margin-right: 16px;
+    font-size: 1.5em;
+    margin-right: 1em;
 }
 
 #side-menu ul a {
     text-decoration: none;
     color: #fff;
-    padding: 20px;
+    padding: 1.25em;
     display: block;
 }
 
@@ -111,7 +112,7 @@ header {
  */
 
 main {
-    padding-top: 60px;
+    padding-top: 2.25em;
 }
 
 section {
