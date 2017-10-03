@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
+
+/*
+* General Style
+*/
+
 * {
     outline: none;
-    font-family:"Encode Sans Expanded"; 
+    font-family: "Encode Sans Expanded";
 }
 
 body {
@@ -9,66 +14,35 @@ body {
     margin: 0;
 }
 
+
+/*
+    Header Style
+*/
+
 header {
     width: 100%;
-    background-color: rgba(255,255,255,0.9);
-    height: 60px;
+    background-color: rgba(255, 255, 255, 0.9);
     position: fixed;
+    padding: 12px;
+    box-sizing: border-box;
 }
-main{
-    padding-top: 60px;
+
+.header-elements-left {
+    float: left;
 }
-section{
-    height: 192px;
-    display: flex;
+
+.header-elements-right {
+    float: right;
 }
-article{
-margin: 16px;
-background-color: white;
-}
-article h4{
-    margin: -22px 0px 0px 5px;
-    font-style: italic;
-}
-article h6{
-    margin: 5px;
-    font-weight: lighter;
-    width: 118px;
-}
-article img{
-    width: 128px;
-}
-nav ul{
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-}
-nav ul li{
-    border-bottom: 1px solid lightgray;
-    width: 100%;
-}
-nav ul li .fa{
-    font-size: 24px;
+
+.header-elements-left > *{
+    float: left;
     margin-right: 16px;
 }
 
-nav ul a{
-    text-decoration: none;
-    color: #fff;
-    padding: 20px;
-    display: block;
-    
-}
-
-nav#side-menu{
-    margin-top: 60px;
-    position: fixed;
-    background-color: #323232;
-    width: 75%;
-    height: 100%;
-    color: #fff;
-    margin-left: -40%;
-    display: none;
+.header-elements-right > * {
+    float: left;
+    margin-left: 16px;
 }
 
 .header-button {
@@ -76,6 +50,11 @@ nav#side-menu{
     width: 36px;
     background-color: transparent;
 }
+
+.header-button:hover {
+    cursor: pointer;
+}
+
 
 .menu-button {
     font-size: 20px;
@@ -88,19 +67,75 @@ nav#side-menu{
     font-size: 24px;
 }
 
-.header-button:hover {
-    cursor: pointer;
+
+/*
+ *   Side Menu Style
+ */
+
+nav#side-menu {
+    margin-top: 60px;
+    position: fixed;
+    background-color: #323232;
+    width: 40%;
+    height: 100%;
+    color: #fff;
+    margin-left: -40%;
+    display: none;
 }
 
-.header-element {
-    margin: 12px;
-    float: left;
+section {
+    height: 192px;
+    display: flex;
 }
 
-.header-elements-left {
-    float: left;
+nav ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
 }
 
-.header-elements-right {
-    float: right;
+nav ul li {
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+}
+
+nav ul li .fa {
+    font-size: 24px;
+    margin-right: 16px;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: #fff;
+    padding: 20px;
+    display: block;
+}
+
+
+/*
+* Main Style
+*/
+
+main {
+    padding-top: 60px;
+}
+
+article {
+    margin: 16px;
+    background-color: white;
+}
+
+article h4 {
+    margin: -22px 0px 0px 5px;
+    font-style: italic;
+}
+
+article h6 {
+    margin: 5px;
+    font-weight: lighter;
+    width: 118px;
+}
+
+article img {
+    width: 128px;
 }
