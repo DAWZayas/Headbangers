@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
 
 /*
-* General Style
-*/
+ * General Style
+ */
 
 * {
     outline: none;
@@ -16,8 +16,8 @@ body {
 
 
 /*
-    Header Style
-*/
+ *   Header Style
+ */
 
 header {
     width: 100%;
@@ -35,12 +35,12 @@ header {
     float: right;
 }
 
-.header-elements-left > *{
+.header-elements-left>* {
     float: left;
     margin-right: 24px;
 }
 
-.header-elements-right > * {
+.header-elements-right>* {
     float: left;
     margin-left: 24px;
 }
@@ -54,7 +54,6 @@ header {
 .header-button:hover {
     cursor: pointer;
 }
-
 
 .menu-button {
     font-size: 1.25em;
@@ -72,7 +71,7 @@ header {
  *   Side Menu Style
  */
 
-nav#side-menu {
+#side-menu {
     margin-top: 60px;
     position: fixed;
     background-color: #323232;
@@ -83,24 +82,23 @@ nav#side-menu {
     display: none;
 }
 
-
-nav ul {
+#side-menu ul {
     list-style: none;
     padding: 0px;
     margin: 0px;
 }
 
-nav ul li {
+#side-menu ul li {
     border-bottom: 1px solid lightgray;
     width: 100%;
 }
 
-nav ul li .fa {
+#side-menu ul li .fa {
     font-size: 24px;
     margin-right: 16px;
 }
 
-nav ul a {
+#side-menu ul a {
     text-decoration: none;
     color: #fff;
     padding: 20px;
@@ -109,8 +107,8 @@ nav ul a {
 
 
 /*
-* Main Style
-*/
+ * Main Style
+ */
 
 main {
     padding-top: 60px;
