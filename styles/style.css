@@ -1,75 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
-
-/*
- *  General Style
- */
 * {
     outline: none;
-    font-family:"Encode Sans Expanded", Arial, sans-serif; 
+    font-family:"Encode Sans Expanded"; 
 }
-
 
 body {
     background-color: #eee;
     margin: 0;
 }
 
-/*
- *  Header Style
- */
-
 header {
     width: 100%;
     background-color: rgba(255,255,255,0.9);
+    height: 60px;
     position: fixed;
-    padding: 12px;
-    box-sizing: border-box;
 }
-
-.header-elements-left {
-    float: left;
+main{
+    padding-top: 60px;
 }
-
-.header-elements-left > * {
-    float: left;
-    margin-right: 16px;
+section{
+    height: 192px;
+    display: flex;
 }
-
-.header-elements-right {
-    float: right;
+article{
+margin: 16px;
+background-color: white;
 }
-
-.header-elements-right > * {
-    float: left;
-    margin-left: 16px;
+article h4{
+    margin: -22px 0px 0px 5px;
+    font-style: italic;
 }
-
-.header-button {
-    height: 36px;
-    width: 36px;
-    background-color: transparent;
+article h6{
+    margin: 5px;
+    font-weight: lighter;
+    width: 118px;
 }
-
-.menu-button {
-    font-size: 20px;
-    background-color: #fff;
-    border: 1px solid lightgray;
+article img{
+    width: 128px;
 }
-
-.user-button {
-    border: none;
-    font-size: 24px;
-}
-
-.header-button:hover {
-    cursor: pointer;
-}
-
-
-/*
- *   Side Menu Style
- */
-
 nav ul{
     list-style: none;
     padding: 0px;
@@ -96,17 +64,43 @@ nav#side-menu{
     margin-top: 60px;
     position: fixed;
     background-color: #323232;
-    width: 40%;
+    width: 75%;
     height: 100%;
     color: #fff;
     margin-left: -40%;
     display: none;
 }
 
-/*
- *   Main Style
- */
+.header-button {
+    height: 36px;
+    width: 36px;
+    background-color: transparent;
+}
 
-main{
-    padding-top: 60px;
+.menu-button {
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid lightgray;
+}
+
+.user-button {
+    border: none;
+    font-size: 24px;
+}
+
+.header-button:hover {
+    cursor: pointer;
+}
+
+.header-element {
+    margin: 12px;
+    float: left;
+}
+
+.header-elements-left {
+    float: left;
+}
+
+.header-elements-right {
+    float: right;
 }
