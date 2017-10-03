@@ -6,7 +6,7 @@
 
 * {
     outline: none;
-    font-family: "Encode Sans Expanded";
+    font-family: "Encode Sans Expanded", Arial, sans-serif;
 }
 
 body {
@@ -23,7 +23,7 @@ header {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.9);
     position: fixed;
-    padding: 12px;
+    padding: 0.75em;
     box-sizing: border-box;
 }
 
@@ -37,12 +37,12 @@ header {
 
 .header-elements-left > *{
     float: left;
-    margin-right: 16px;
+    margin-right: 24px;
 }
 
 .header-elements-right > * {
     float: left;
-    margin-left: 16px;
+    margin-left: 24px;
 }
 
 .header-button {
@@ -57,14 +57,14 @@ header {
 
 
 .menu-button {
-    font-size: 20px;
+    font-size: 1.25em;
     background-color: #fff;
     border: 1px solid lightgray;
 }
 
 .user-button {
     border: none;
-    font-size: 24px;
+    font-size: 1.5em;
 }
 
 
@@ -83,10 +83,6 @@ nav#side-menu {
     display: none;
 }
 
-section {
-    height: 192px;
-    display: flex;
-}
 
 nav ul {
     list-style: none;
@@ -118,6 +114,11 @@ nav ul a {
 
 main {
     padding-top: 60px;
+}
+
+section {
+    height: 192px;
+    display: flex;
 }
 
 article {
