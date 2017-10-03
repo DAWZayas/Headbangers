@@ -44,6 +44,7 @@ header {
 .header-elements-right>* {
     float: left;
     margin-left: 1.25em;
+    
 }
 
 .header-button {
@@ -68,6 +69,7 @@ header {
 }
 
 
+
 /*
  *   Side Menu Style
  */
@@ -76,11 +78,11 @@ header {
     margin-top: 3.75em;
     position: fixed;
     background-color: #323232;
-    width: 18em;
+    width: 14em;
     height: 100%;
     color: #fff;
-    margin-left: -18em;
-    display: none;
+    margin-left: -14em;
+    transition: margin-left 0.5s;
 }
 
 #side-menu ul {
@@ -113,6 +115,7 @@ header {
 
 main {
     padding-top: 2.25em;
+    transition: margin-left 0.5s;
 }
 
 section {
