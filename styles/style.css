@@ -170,20 +170,20 @@ article p{
 }
 .article-links{
     height: 1.5em;
-    background-color: #eee;
+    background-color: #CCCCCC;
     text-align: right;
     margin-top: 0.5em;
     margin-bottom: -0.5em;
+    margin-left: -0.5em;
     padding-top: 0.125em;
-    border-radius: 0.15em;
+    border-top-right-radius: 0.25em;
     }
 .article-links a{
-    padding: 0.125em;
+    padding: 0.125em 0.5em;
     text-decoration: none;
     color: #4D4D4D;
-}
-.article-links a + a{
-    border-left: solid 1px white;
+    border-right: solid 1px white;
+    border-top-right-radius: 0.25em;
 }
 
 
