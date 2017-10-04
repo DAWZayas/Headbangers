@@ -15,6 +15,11 @@ body {
     margin: 0;
 }
 
+[class*="col-"] {
+    width: 100%;
+    display: block;
+}
+
 
 /*
  *   Header Style
@@ -115,14 +120,18 @@ main {
     padding-top: 3.75em;
 }
 
+#top-picture img{
+    width: 100%;
+}
+
 section {
     padding: 1em;
     width: 100%;
 }
 
-#top-picture img{
-    width: 100%;
-}
+/*
+ * Articles Style
+ */
 
 article {
     background-color: white;
@@ -146,10 +155,6 @@ article p{
     font-weight: lighter;
 }
 
-[class*="col-"] {
-    width: 100%;
-    display: block;
-}
 
 
 @media screen and (min-width: 768px){
@@ -173,8 +178,6 @@ article p{
     [class*="col-"] {
         display: table-cell;
     }
-
-
 
     .col-1 {width: 8.33%;}
     .col-2 {width: 16.66%;}
