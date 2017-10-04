@@ -7,6 +7,7 @@
 * {
     outline: none;
     font-family: "Encode Sans Expanded", Arial, sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -24,7 +25,6 @@ header {
     background-color: rgba(255, 255, 255, 0.9);
     position: fixed;
     padding: 0.75em;
-    box-sizing: border-box;
     height: 3.75em;
 }
 
@@ -53,7 +53,6 @@ header {
     font-size: 1.5em;
     background-color: transparent;
     border: none;
-    box-sizing: border-box;
 }
 
 .header-button:hover {
@@ -78,7 +77,6 @@ header {
     margin-top: 3.75em;
     position: fixed;
     background-color: #323232;
-    width: 16em;
     height: 100%;
     color: #fff;
     display: none;
@@ -113,39 +111,83 @@ header {
  */
 
 main {
-    padding-top: 2.25em;
+    padding-top: 3.75em;
 }
 
 section {
-    height: 192px;
-    display: flex;
+    padding: 1em;
+    width: 100%;
+}
+
+#top-picture img{
+    width: calc(100% + 1em);
+    margin: -1em;
 }
 
 article {
-    margin: 16px;
     background-color: white;
+    padding: 0.5em;
 }
 
+article + article{
+    margin-top: 1em;
+}
+
+article > img {
+    width: calc(100% + 1em);
+    margin: -0.5em;
+}
 article h4 {
-    margin: -22px 0px 0px 5px;
+    margin-top: -1.5em;
     font-style: italic;
 }
 
-article h6 {
-    margin: 5px;
+article p{
     font-weight: lighter;
-    width: 118px;
 }
 
-article img {
-    width: 128px;
+[class*="col-"] {
+    width: 100%;
+    display: block;
 }
 
-@media screen and (min-width: 1080px){
+
+@media screen and (min-width: 768px){
     #side-menu{
         display:block;
+        width: 25%;
     }
     main{
-        margin-left: 16em;
+        margin-left: 25%;
+        width: 75%;
     }
+    section{
+        width: 100%;
+        display: table;
+        border-spacing: 1em;
+    }
+    .articles{
+        margin-left: -1em;
+        margin-right: -1em;
+    }
+
+    [class*="col-"] {
+        display: table-cell;
+    }
+
+
+
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+
 }
