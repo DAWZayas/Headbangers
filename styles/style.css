@@ -78,11 +78,10 @@ header {
     margin-top: 3.75em;
     position: fixed;
     background-color: #323232;
-    width: 14em;
+    width: 16em;
     height: 100%;
     color: #fff;
-    margin-left: -14em;
-    transition: margin-left 0.5s;
+    display: none;
 }
 
 #side-menu ul {
@@ -115,7 +114,6 @@ header {
 
 main {
     padding-top: 2.25em;
-    transition: margin-left 0.5s;
 }
 
 section {
@@ -141,4 +139,13 @@ article h6 {
 
 article img {
     width: 128px;
+}
+
+@media screen and (min-width: 1080px){
+    #side-menu{
+        display:block;
+    }
+    main{
+        margin-left: 16em;
+    }
 }
