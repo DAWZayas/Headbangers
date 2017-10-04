@@ -61,7 +61,7 @@ header {
 }
 
 .header-button:hover {
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .menu-button {
@@ -125,7 +125,7 @@ main {
 }
 
 section {
-    padding: 1em;
+    padding: 0.75em;
     width: 100%;
 }
 
@@ -201,6 +201,7 @@ article p{
         width: 100%;
         display: table;
         border-spacing: 1em;
+        padding: 0;
     }
     .articles{
         margin-left: -1em;
