@@ -104,7 +104,7 @@ header {
     margin-right: 1em;
 }
 
-#side-menu ul a {
+#side-menu ul li a {
     text-decoration: none;
     color: #fff;
     padding: 1.25em;
@@ -153,6 +153,37 @@ article h4 {
 
 article p{
     font-weight: lighter;
+}
+.article-dates{
+    color: #5A5959;
+}
+.article-dates p{
+    display: inline-block;
+    font-family: "arial";
+    font-size: 0.9em;
+    margin: 0em;
+}
+.article-dates i{
+    margin-bottom: 0.25em;
+    margin-right: 0.25em;
+    font-size: 1.25em;
+}
+.article-links{
+    height: 1.5em;
+    background-color: #eee;
+    text-align: right;
+    margin-top: 0.5em;
+    margin-bottom: -0.5em;
+    padding-top: 0.125em;
+    border-radius: 0.15em;
+    }
+.article-links a{
+    padding: 0.125em;
+    text-decoration: none;
+    color: #4D4D4D;
+}
+.article-links a + a{
+    border-left: solid 1px white;
 }
 
 
