@@ -98,7 +98,7 @@ header {
     margin-right: 1em;
 }
 
-#side-menu ul a {
+#side-menu ul li a {
     text-decoration: none;
     color: #fff;
     padding: 1.25em;
