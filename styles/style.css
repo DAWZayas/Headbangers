@@ -120,8 +120,7 @@ section {
 }
 
 #top-picture img{
-    width: calc(100% + 1em);
-    margin: -1em;
+    width: 100%;
 }
 
 article {
