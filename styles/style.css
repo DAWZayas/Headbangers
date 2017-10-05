@@ -136,7 +136,6 @@ section {
 article {
     background-color: white;
     padding: 0.5em;
-    position: relative;
 }
 
 article + article{
@@ -172,13 +171,13 @@ article p{
 }
 .article-links{
     width: 100%;
-    position: absolute;
-    bottom: 0;
     height: 1.5em;
     background-color: #CCCCCC;
     text-align: right;
     margin-left: -0.5em;
+    margin-bottom: -0.5em;
     padding-top: 0.125em;
+    border-top-right-radius: 0.4em;
     }
 .article-links a{
     padding: 0.125em 0.5em;
