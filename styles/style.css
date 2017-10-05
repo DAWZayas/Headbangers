@@ -136,6 +136,7 @@ section {
 article {
     background-color: white;
     padding: 0.5em;
+    position: relative;
 }
 
 article + article{
@@ -156,6 +157,7 @@ article p{
 }
 .article-dates{
     color: #5A5959;
+    margin-bottom:1.5em; 
 }
 .article-dates p{
     display: inline-block;
@@ -169,21 +171,20 @@ article p{
     font-size: 1.25em;
 }
 .article-links{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     height: 1.5em;
     background-color: #CCCCCC;
     text-align: right;
-    margin-top: 0.5em;
-    margin-bottom: -0.5em;
     margin-left: -0.5em;
     padding-top: 0.125em;
-    border-top-right-radius: 0.25em;
     }
 .article-links a{
     padding: 0.125em 0.5em;
     text-decoration: none;
     color: #4D4D4D;
     border-right: solid 1px white;
-    border-top-right-radius: 0.25em;
 }
 
 footer {
