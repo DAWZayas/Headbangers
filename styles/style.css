@@ -199,7 +199,7 @@ footer {
         width: 20%;
         display:block;
     }
-    main{
+    main, footer{
         margin-left: 20%;
         width: 80%;
     }
