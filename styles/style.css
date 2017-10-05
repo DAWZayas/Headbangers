@@ -186,7 +186,13 @@ article p{
     border-top-right-radius: 0.25em;
 }
 
-
+footer {
+    width: 100%;
+    background-color:#CCCCCC;
+    padding: 0.3em;
+    height: 3.75em;
+    text-align: center;
+}
 
 @media (min-width: 768px){
     #side-menu{
