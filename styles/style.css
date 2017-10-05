@@ -186,6 +186,10 @@ article p{
     border-top-right-radius: 0.25em;
 }
 
+
+/*
+ *  Footer style
+ */
 footer {
     width: 100%;
     background-color:#CCCCCC;
