@@ -186,10 +186,10 @@ article p{
     border-right: solid 1px white;
 }
 
-
 /*
  *  Footer style
  */
+
 footer{
     width: 100%;
     background-color:#CCCCCC;
@@ -220,9 +220,18 @@ div.nav-footer a{
         border-spacing: 1em;
         padding: 0;
     }
+    .flex-container{
+        display: flex;
+        padding: 1em;
+    }
     .articles{
         margin-left: -1em;
         margin-right: -1em;
+    }
+    .flex-item{
+        display: block;
+        margin-left: 1.5em;
+        margin-top: 0;
     }
     .nav-footer{
         padding: 1em 4em 0 4em;
