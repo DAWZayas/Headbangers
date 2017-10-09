@@ -188,21 +188,29 @@ article p{
     border-right: solid 1px white;
 }
 
-
 /*
  *  Footer style
  */
-footer {
+
+footer{
     width: 100%;
     background-color:#CCCCCC;
-    padding: 0.75em;
+    padding: 0.3em;
     text-align: center;
+}
+div.nav-footer ul > *{
+    list-style-type: none;
+    
+}
+div.nav-footer a{
+    text-decoration: none;
+    color: #4D4D4D;
 }
 
 @media (min-width: 768px){
     #side-menu{
         width: 20%;
-        display:block;
+        display: block;
     }
     main, footer{
         margin-left: 20%;
@@ -214,11 +222,22 @@ footer {
         border-spacing: 1em;
         padding: 0;
     }
+    .flex-container{
+        display: flex;
+        padding: 1em;
+    }
     .articles{
         margin-left: -1em;
         margin-right: -1em;
     }
-
+    .flex-item{
+        display: block;
+        margin-left: 1.5em;
+        margin-top: 0;
+    }
+    .nav-footer{
+        padding: 1em 4em 0 4em;
+    }
     [class*="col-"] {
         display: table-cell;
     }
