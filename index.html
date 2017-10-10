@@ -4,7 +4,6 @@
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <meta charset="utf-8">
     <script src="https://use.fontawesome.com/ca1bfde84f.js"></script>
-
     <!-- Para que se vea bien en el movil, no sabemos bien como funciona -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,14 +11,12 @@
 
 <body>
     <header>
-        <div class="header-elements-left">
-            <button class="header-button menu-button">
+            <button class="menu-button">
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
             <a href="index.html">Logo</a>
-        </div>
 
-        <div class="header-elements-right">
+        <div class="float-right">
 
             <button class="header-button">
                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -71,8 +68,8 @@
         </div>
         <section>
             <h2>Section 1</h2>
-            <div class="articles">
-                <article class="col-4">
+            <div class="articles flex-container">
+                <article class="flex-item">
                     <img src="img/placeholder.png">
                     <h4>Article 1</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -85,7 +82,7 @@
                         <a href=""><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                     </div>
                 </article>
-                <article class="col-4">
+                <article class="flex-item">
                     <img src="img/placeholder.png">
                     <h4>Article 2</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -98,7 +95,7 @@
                         <a href=""><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                     </div>
                 </article>
-                <article class="col-4">
+                <article class="flex-item">
                     <img src="img/placeholder.png">
                     <h4>Article 3</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -172,7 +169,36 @@
         </section>
     </main>
     <footer>
-        <p>This is the footer!</p>
+        <div class="nav-footer col-4">
+            <h4>Column 1 for the footer</h4>
+            <ul>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+            </ul>
+        </div>
+        <div class="nav-footer col-4">
+            <h4>Column 2 for the footer</h4>
+            <ul>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+            </ul>
+        </div>
+        <div class="nav-footer col-4">
+            <h4>Column 3 for the footer</h4>
+            <ul>
+                <li><a href="#">Content</a></li>             
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+                <li><a href="#">Content</a></li>
+            </ul>
+        </div>
     </footer>
 </body>
 </html>
