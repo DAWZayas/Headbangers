@@ -9,17 +9,14 @@
     font-family: "Encode Sans Expanded", Arial, sans-serif;
     box-sizing: border-box;
 }
-
 body {
     background-color: #eee;
     margin: 0;
 }
-
 [class*="col-"] {
     width: 100%;
     display: block;
 }
-
 
 /*
  *   Header Style
@@ -33,15 +30,12 @@ header {
     height: 3.75em;
     box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
 }
-
 header > *{
     float: left;
 }
-
 .float-right {
     float: right;
 }
-
 .header-button {
     height: 1.5em;
     width: 1.5em;
@@ -49,15 +43,12 @@ header > *{
     background-color: transparent;
     border: none;
 }
-
 .header-button + .header-button {
     margin-left: 0.5em;
 }
-
 .header-button:hover {
     cursor: pointer;    
 }
-
 .menu-button {
     width: 1.75em;
     height: 1.75em;
@@ -86,23 +77,19 @@ header > *{
     display: none;
     width: 25%;
 }
-
 #side-menu ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 #side-menu li {
     border-bottom: 1px solid lightgray;
     width: 100%;
 }
-
 #side-menu .fa {
     font-size: 1.5em;
     margin-right: 1em;
 }
-
 #side-menu a {
     text-decoration: none;
     color: #fff;
@@ -113,7 +100,6 @@ header > *{
     background-color: #4D4D4D;
 }
 
-
 /*
  * Main Style
  */
@@ -121,11 +107,9 @@ header > *{
 main {
     padding-top: 3.75em;
 }
-
 #top-picture img{
     width: 100%;
 }
-
 section {
     padding: 0.75em;
     width: 100%;
@@ -139,11 +123,9 @@ article {
     background-color: white;
     padding: 0.5em;
 }
-
 article + article{
     margin-top: 1em;
 }
-
 article > img {
     width: calc(100% + 1em);
     margin: -0.5em;
@@ -200,11 +182,11 @@ footer{
     padding: 0.3em;
     text-align: center;
 }
-div.nav-footer ul > *{
+footer > div > ul > *{
     list-style-type: none;
     
 }
-div.nav-footer a{
+footer > div.flex-item a{
     text-decoration: none;
     color: #4D4D4D;
 }
@@ -237,24 +219,7 @@ div.nav-footer a{
         margin-left: 1.5em;
         margin-top: 0;
     }
-    .nav-footer{
-        padding: 1em 4em 0 4em;
+    footer > div{
+        padding: 0 3em 0 3em;
     }
-    [class*="col-"] {
-        display: table-cell;
-    }
-
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
-
 }
