@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
 
+
 /*
  * General Style
  */
@@ -9,14 +10,17 @@
     font-family: "Encode Sans Expanded", Arial, sans-serif;
     box-sizing: border-box;
 }
+
 body {
     background-color: #eee;
     margin: 0;
 }
+
 [class*="col-"] {
     width: 100%;
     display: block;
 }
+
 
 /*
  *   Header Style
@@ -30,12 +34,15 @@ header {
     height: 3.75em;
     box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
 }
-header > *{
+
+header > * {
     float: left;
 }
+
 .float-right {
     float: right;
 }
+
 .header-button {
     height: 1.5em;
     width: 1.5em;
@@ -43,12 +50,15 @@ header > *{
     background-color: transparent;
     border: none;
 }
+
 .header-button + .header-button {
     margin-left: 0.5em;
 }
+
 .header-button:hover {
     cursor: pointer;    
 }
+
 .menu-button {
     width: 1.75em;
     height: 1.75em;
@@ -58,10 +68,10 @@ header > *{
     margin-right: 1em;
     border-radius: 0.2em;
 }
-.menu-button:hover{
+
+.menu-button:hover {
     cursor: pointer;
 }
-
 
 
 /*
@@ -77,28 +87,34 @@ header > *{
     display: none;
     width: 25%;
 }
+
 #side-menu ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 #side-menu li {
     border-bottom: 1px solid lightgray;
     width: 100%;
 }
+
 #side-menu .fa {
     font-size: 1.5em;
     margin-right: 1em;
 }
+
 #side-menu a {
     text-decoration: none;
     color: #fff;
     padding: 1.25em;
     display: block;
 }
-#side-menu a:hover{
+
+#side-menu a:hover {
     background-color: #4D4D4D;
 }
+
 
 /*
  * Main Style
@@ -107,13 +123,16 @@ header > *{
 main {
     padding-top: 3.75em;
 }
-#top-picture img{
+
+#top-picture img {
     width: 100%;
 }
+
 section {
     padding: 0.75em;
     width: 100%;
 }
+
 
 /*
  * Articles Style
@@ -123,37 +142,44 @@ article {
     background-color: white;
     padding: 0.5em;
 }
-article + article{
+
+article + article {
     margin-top: 1em;
 }
+
 article > img {
     width: calc(100% + 1em);
     margin: -0.5em;
 }
+
 article h4 {
     margin-top: -1.5em;
     font-style: italic;
 }
 
-article p{
+article p {
     font-weight: lighter;
 }
-.article-dates{
+
+.article-dates {
     color: #5A5959;
     margin-bottom:1.5em; 
 }
-.article-dates i{
+
+.article-dates i {
     margin-bottom: 0.25em;
     margin-right: 0.25em;
     font-size: 1.25em;
 }
-.article-dates p{
+
+.article-dates p {
     display: inline-block;
     font-family: "arial";
     font-size: 0.9em;
     margin: 0em;
 }
-.article-links{
+
+.article-links {
     display: flex;
     justify-content: space-between;
     width: calc(100% + 1em);
@@ -162,67 +188,75 @@ article p{
     background-color: #CCCCCC;
     text-align: right;
     padding: 0.20em 0em;
-    }
-.article-links a{
+}
+
+.article-links a {
     padding: 0.15em 0.5em;
     text-decoration: none;
     color: #4D4D4D;
 }
-.article-links a + a{
+
+.article-links a + a {
     padding-top: 0.30em;
 }
+
 
 /*
  *  Footer style
  */
 
-footer{
+footer {
     width: 100%;
     background-color:#CCCCCC;
     padding: 0.3em;
     text-align: center;
 }
 
-footer > div > ul > *{
-    list-style-type: none;
-    
+div.nav-footer ul > * {
+    list-style-type: none;  
 }
 
-footer > div.flex-item a{
+div.nav-footer a {
     text-decoration: none;
     color: #4D4D4D;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
     #side-menu{
         width: 20%;
         display: block;
     }
-
-    article + article{
-        margin-left: 1em;
-    }
-
-    main, footer{
+    
+    main, footer {
         margin-left: 20%;
         width: 80%;
     }
 
-    section{
+    section {
         width: 100%;
+        display: table;
+        border-spacing: 1em;
+        padding: 0;
+    }
+
+    .flex-container {
+        display: flex;
         padding: 1em;
     }
 
-    .flex-container{
-        display: flex;
+    .articles {
+        margin-left: -1em;
+        margin-right: -1em;
     }
 
-    .flex-item{
+    .flex-item {
         display: block;
+        margin-left: 1.5em;
         margin-top: 0;
     }
 
-    footer > div{
-        padding: 0 3em 0 3em;
+    .nav-footer {
+        padding: 1em 4em 0 4em;
     }
+    
 }
