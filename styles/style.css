@@ -241,18 +241,17 @@ div.nav-footer a {
 
     .flex-container {
         display: flex;
-        padding: 1em;
     }
 
-    .articles {
-        margin-left: -1em;
-        margin-right: -1em;
+    article + article{
+        margin-left: 1em;
     }
+
 
     .flex-item {
         display: block;
-        margin-left: 1.5em;
         margin-top: 0;
+        width: 100%;
     }
 
     .nav-footer {
