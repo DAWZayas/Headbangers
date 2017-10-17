@@ -142,16 +142,16 @@ article p{
     color: #5A5959;
     margin-bottom:1.5em; 
 }
+.article-dates i{
+    margin-bottom: 0.25em;
+    margin-right: 0.25em;
+    font-size: 1.25em;
+}
 .article-dates p{
     display: inline-block;
     font-family: "arial";
     font-size: 0.9em;
     margin: 0em;
-}
-.article-dates i{
-    margin-bottom: 0.25em;
-    margin-right: 0.25em;
-    font-size: 1.25em;
 }
 .article-links{
     display: flex;
@@ -167,6 +167,9 @@ article p{
     padding: 0.15em 0.5em;
     text-decoration: none;
     color: #4D4D4D;
+}
+.article-links a + a{
+    padding-top: 0.30em;
 }
 
 /*
