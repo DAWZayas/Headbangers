@@ -179,10 +179,12 @@ footer{
     padding: 0.3em;
     text-align: center;
 }
+
 footer > div > ul > *{
     list-style-type: none;
     
 }
+
 footer > div.flex-item a{
     text-decoration: none;
     color: #4D4D4D;
@@ -193,29 +195,30 @@ footer > div.flex-item a{
         width: 20%;
         display: block;
     }
+
+    article + article{
+        margin-left: 1em;
+    }
+
     main, footer{
         margin-left: 20%;
         width: 80%;
     }
+
     section{
         width: 100%;
-        display: table;
-        border-spacing: 1em;
-        padding: 0;
-    }
-    .flex-container{
-        display: flex;
         padding: 1em;
     }
-    .articles{
-        margin-left: -1em;
-        margin-right: -1em;
+
+    .flex-container{
+        display: flex;
     }
+
     .flex-item{
         display: block;
-        margin-left: 1.5em;
         margin-top: 0;
     }
+
     footer > div{
         padding: 0 3em 0 3em;
     }
