@@ -46,7 +46,7 @@ header > * {
 }
 
 header > a {
-    font-size: 2em;
+    font-size: 1.25em;
     color: var(--baseColor);
     font-family: "Ruda";
     text-decoration: none;
@@ -98,10 +98,11 @@ header > a {
     margin-top: 3.75em;
     position: fixed;
     background-color: var(--mainColorLight);
-    height: 100%;
+    height: calc(100% - 3.75em);
     color: #fff;
-    display: none;
-    width: 4em;
+    width: 16em;
+    margin-left: -16em;
+    transition: 0.5s ease;
 }
 
 #side-menu ul {
@@ -138,6 +139,7 @@ header > a {
 
 main {
     padding-top: 3.75em;
+    transition: 0.5s ease;
 }
 
 #top-picture img {
@@ -221,6 +223,7 @@ footer {
     background-color:#CCCCCC;
     padding: 0.3em;
     text-align: center;
+    transition: 0.5s ease;
 }
 
 div.nav-footer ul {
@@ -234,14 +237,18 @@ div.nav-footer a {
 }
 
 @media (min-width: 768px) {
+    header > a{
+        font-size: 2em;
+    }
+
     #side-menu{
         width: 16em;
         display: block;
+        margin-left: -16em;
     }
     
     main, footer {
-        margin-left: 16em;
-        width: 80%;
+        width: 100%;
     }
 
     section {
