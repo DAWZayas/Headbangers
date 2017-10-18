@@ -147,8 +147,9 @@ main {
 }
 
 section {
-    padding: 0.75em;
+    padding: 2em;
     width: 100%;
+    margin-top: -2em;
 }
 
 
@@ -256,6 +257,7 @@ div.nav-footer a {
         display: table;
         border-spacing: 1em;
         padding: 0;
+        margin-top: 0;
     }
 
     .flex-container {
