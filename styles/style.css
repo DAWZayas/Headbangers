@@ -22,11 +22,6 @@ body {
     margin: 0;
 }
 
-[class*="col-"] {
-    width: 100%;
-    display: block;
-}
-
 
 /*
  *   Header Style
@@ -38,7 +33,6 @@ header {
     position: fixed;
     padding: 0.75em;
     height: 3.75em;
-    box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
 }
 
 header > * {
@@ -51,6 +45,7 @@ header > a {
     font-family: "Ruda";
     text-decoration: none;
     font-weight: bold;
+    margin-top: 0.4em;
 }
 
 .float-right {
@@ -75,14 +70,17 @@ header > a {
 }
 
 #menu-button {
+    font-size: 1.3em;
     width: 1.75em;
     height: 1.75em;
-    font-size: 1.3em;
-    background-color: var(--sec);
-    border: none;
-    color: var(--baseColor);
     margin-right: 1em;
+    background-color: #1f273f;
+    border: none;
     border-radius: 0.2em;
+}
+
+#menu-button:hover {
+    background-color: var(--mainColorLight);
 }
 
 #menu-button:hover {
@@ -240,16 +238,18 @@ div.nav-footer a {
 @media (min-width: 768px) {
     header > a{
         font-size: 2em;
+        margin-top: 0;
     }
 
     #side-menu{
         width: 16em;
         display: block;
-        margin-left: -16em;
+        margin-left: 0;
     }
     
     main, footer {
-        width: 100%;
+        margin-left: 16em;
+        width: calc(100% - 16em);
     }
 
     section {

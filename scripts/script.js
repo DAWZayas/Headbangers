@@ -54,13 +54,12 @@ const toggleMenu = () => {
 
 const resized = () => {
     if(getWidth() < 768 && isMenuOpened()) closeMenuPush();
-    else if(getWidth() > 768 && !isMenuOpened()) openMenuPush();
+    else if(getWidth() > 768 && getWidth() - 30 < 768 ) openMenuPush();
 }
 
 const init = () => {
     document.getElementById("menu-button").addEventListener("click", toggleMenu);
     window.addEventListener("resize", resized);
-    if(getWidth() > 768) openMenuPush();
 }
 
 init();
