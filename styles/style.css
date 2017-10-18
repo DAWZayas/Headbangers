@@ -46,8 +46,7 @@ header > * {
 }
 
 header > a {
-    margin-top: -0.125em;
-    font-size: 2.5em;
+    font-size: 2em;
     color: var(--baseColor);
     font-family: "Ruda";
     text-decoration: none;
@@ -102,7 +101,7 @@ header > a {
     height: 100%;
     color: #fff;
     display: none;
-    width: 25%;
+    width: 4em;
 }
 
 #side-menu ul {
@@ -129,7 +128,7 @@ header > a {
 }
 
 #side-menu a:hover {
-    background-color: #4D4D4D;
+    background-color: #545c7e;
 }
 
 
@@ -236,12 +235,12 @@ div.nav-footer a {
 
 @media (min-width: 768px) {
     #side-menu{
-        width: 20%;
+        width: 16em;
         display: block;
     }
     
     main, footer {
-        margin-left: 20%;
+        margin-left: 16em;
         width: 80%;
     }
 
