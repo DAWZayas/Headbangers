@@ -9,3 +9,4 @@ const toggleMenu = (function(){
         menuOpened = !menuOpened;
     }
 })();
+document.getElementById("menu-button").addEventListener("click",toggleMenu);

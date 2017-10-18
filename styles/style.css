@@ -46,7 +46,7 @@ header > * {
 }
 
 header > a {
-    margin-top: -0.1em;
+    margin-top: -0.125em;
     font-size: 2.5em;
     color: var(--baseColor);
     font-family: "Ruda";
@@ -75,17 +75,18 @@ header > a {
     cursor: pointer;    
 }
 
-.menu-button {
+#menu-button {
     width: 1.75em;
     height: 1.75em;
     font-size: 1.3em;
-    background-color: var(--baseColor);
-    border: 1px solid var(--baseColor);
+    background-color: var(--sec);
+    border: none;
+    color: var(--baseColor);
     margin-right: 1em;
     border-radius: 0.2em;
 }
 
-.menu-button:hover {
+#menu-button:hover {
     cursor: pointer;
 }
 
