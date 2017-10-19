@@ -1,42 +1,44 @@
-const getWidth = () => document.body.clientWidth;
+function getWidth(){
+    return document.body.clientWidth;
+}
 
-const moveContentRight = () => {
+function moveContentRight(){
     document.getElementsByTagName("main")[0].style.marginLeft = "16em";
     document.getElementsByTagName("main")[0].style.width = "calc(100% - 16em)";
     document.getElementsByTagName("footer")[0].style.marginLeft = "16em";
     document.getElementsByTagName("footer")[0].style.width = "calc(100% - 16em)";
 }
 
-const moveContentLeft = () => {
+function moveContentLeft(){
     document.getElementsByTagName("main")[0].style.marginLeft = "0px";
     document.getElementsByTagName("main")[0].style.width = "100%";
     document.getElementsByTagName("footer")[0].style.marginLeft = "0px";
     document.getElementsByTagName("footer")[0].style.width = "100%";
 }
 
-const openMenu = () => {
+function openMenu(){
     document.getElementById("side-menu").style.marginLeft = "0px";
 }
 
-const closeMenu = () => {
+function closeMenu(){
     document.getElementById("side-menu").style.marginLeft = "-16em";
 }
 
-const openMenuPush = () => {
+function openMenuPush(){
     openMenu();
     moveContentRight();
 }
 
-const closeMenuPush = () => {
+function closeMenuPush(){
     closeMenu();
     moveContentLeft();
 }
 
-const isMenuOpened = () => {
+function isMenuOpened(){
     return document.getElementById("side-menu").style.marginLeft === "0px";
 }
 
-const toggleMenu = () => {
+function toggleMenu(){
     if (!isMenuOpened()) {
         if (getWidth() < 768) {
             openMenu();
@@ -52,12 +54,12 @@ const toggleMenu = () => {
     }
 }
 
-const resized = () => {
+function resized(){
     if(getWidth() < 768 && isMenuOpened()) closeMenuPush();
     else if(getWidth() > 768 && getWidth() - 50 < 768) openMenuPush();
 }
 
-const init = () => {
+function init(){
     document.getElementById("menu-button").addEventListener("click", toggleMenu);
     window.addEventListener("resize", resized);
 }
