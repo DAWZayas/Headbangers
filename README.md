@@ -1,5 +1,5 @@
-# ProyectoDAW
+# Headbangers
 
 <h2>Description</h2>
-<p>This application is about music concerts and events. </p>
+<p>Web application to find music concerts based on the user preferences or distance. </p>
 
