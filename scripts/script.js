@@ -54,7 +54,7 @@ const toggleMenu = () => {
 
 const resized = () => {
     if(getWidth() < 768 && isMenuOpened()) closeMenuPush();
-    else if(getWidth() > 768 && getWidth() - 30 < 768 ) openMenuPush();
+    else if(getWidth() > 768 && !isMenuOpened()) openMenuPush();
 }
 
 const init = () => {
