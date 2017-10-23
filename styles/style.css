@@ -157,7 +157,7 @@ header > a{
 main{
     padding-top: 3.75em;
 
-    transition: .5s ease;
+    
 }
 
 #top-picture img{
@@ -250,7 +250,6 @@ footer{
     width: 100%;
     padding: .3em;
 
-    transition: .5s ease;
     text-align: center;
 
     background-color: #ccc;
@@ -271,6 +270,7 @@ div.nav-footer a{
 }
 
 @media (min-width: 768px){
+
     header > a{
         font-size: 2em;
 
@@ -281,12 +281,7 @@ div.nav-footer a{
         display: block;
 
         width: 16em;
-        margin-left: 0;
-    }
-
-    main,footer{
-        width: calc(100% - 16em);
-        margin-left: 16em;
+        margin-left: 0px;
     }
 
     section{
@@ -312,6 +307,12 @@ div.nav-footer a{
 
         width: 100%;
         margin-top: 0;
+    }
+
+    #wrapper{
+        margin-left: 16em;
+        width: calc(100% - 16em);
+        transition: .5s ease;
     }
 
     .nav-footer{
