@@ -178,7 +178,7 @@ main{
 }
 
 #search-bar input{
-    font-size: 0.9em;
+    font-size: 1em;
     flex-grow: 0.9;
     padding: 0.75em;
 }
@@ -222,10 +222,10 @@ article > img{
     margin: -1em;
 }
 
-article h4{
+article h3{
     font-style: italic;
 
-    margin-top: -0.5em;
+    margin-top: -0.75em;
 }
 
 .article-info{
