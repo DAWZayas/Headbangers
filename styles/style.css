@@ -251,6 +251,8 @@ article h4{
 
 .article-location{
     grid-area: location;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .article-price{
