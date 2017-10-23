@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
 @import url('https://fonts.googleapis.com/css?family=Ruda');
+@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600');
 
 /*
  * General Style
@@ -200,43 +201,98 @@ article p{
     font-weight: lighter;
 }
 
-.article-dates{
-    margin-bottom: 1.5em;
+.article-icons{
+    display: grid;
+    grid-template-columns: 10fr 40fr 20fr 30fr;
+    grid-template-rows: 20fr 20fr 20fr 40fr;
+    grid-template-areas: 
+    "icon description price price"
+    "icon description price price"
+    "icon description description description" 
+    "more more share share"
+    ;
+
+    text-align: center;
+    align-items: center;
 
     color: #5a5959;
 }
-
-.article-dates i{
-    font-size: 1.25em;
-
-    margin-right: .25em;
-    margin-bottom: .25em;
+.article-icons *{
+    margin: 0em;
 }
 
-.article-dates p{
-    font-family: 'arial';
-    font-size: .9em;
+.article-icons > i{
+    background-color: yellow;
 
-    display: inline-block;
-
-    margin: 0;
+    grid-area: "icon";
 }
 
-.article-link{
-    margin-right: .75em;
-    margin-bottom: .75em;
+.article-icons > p{
+    background-color: lightcoral;
 
-    text-align: right;
+    text-align: left;
+
+    grid-area: "description";
 }
 
-.article-link i{
+.article-icons > .location{
+    grid-column-start: 2;
+    grid-column-end: 5;
+
+}
+
+.article-price{
+    background-color: lightblue;
+
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+.article-price p{
+    font-family: "Saira Extra Condensed";
+    font-size: 3em;
+    
+}
+.article-more{
+    background-color: lightslategray;
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+.article-more a{
     padding: .75em;
 
-    text-decoration: none;
+    background-color: lightblue;
 
     color: var(--mainColor);
-    border-radius: 2em;
+    text-decoration: none;
+    
+    border-radius: .25em;
+    
+}
+
+.article-share{
+    background-color: lightgreen;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+.article-share a{
+    padding: .75em .9em;
+
     background-color: var(--accentColor);
+
+    color: var(--mainColor);
+    text-decoration: none;
+
+    border-radius: 5em;
 }
 
 
