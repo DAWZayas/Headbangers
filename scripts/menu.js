@@ -45,9 +45,9 @@ function resized() {
     else if (getWidth() > 768) openMenuPush();
 }
 
-function init() {
+function initMenu() {
     document.getElementById("menu-button").addEventListener("click", toggleMenu);
     window.addEventListener("resize", resized);
 }
 
-init();
+initMenu();
