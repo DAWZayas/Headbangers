@@ -1,0 +1,11 @@
+{
+  "name": "Headbangers",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nuxt"
+  },
+  "dependencies": {
+    "nuxt": "^1.0.0-rc11",
+    "vue": "^2.5.2"
+  }
+}
