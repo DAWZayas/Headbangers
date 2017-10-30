@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: "menu-logo"
+  name: "header-logo"
 };
 </script>
 <style>

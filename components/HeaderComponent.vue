@@ -1,7 +1,7 @@
 <template>
     <header>
         <menu-button></menu-button>
-        <menu-logo></menu-logo>
+        <header-logo></header-logo>
         <div class="float-right">
             <icon-button icon="fa-search"></icon-button>
             <icon-button icon="fa-user-o"></icon-button>
@@ -9,13 +9,13 @@
     </header>
 </template>
 <script>
-import MenuLogo from "./MenuLogo";
+import HeaderLogo from "./HeaderLogo";
 import IconButton from "./IconButton";
 import MenuButton from "./MenuButton";
 
 export default {
   name: "header-component",
-  components: {IconButton, MenuButton, MenuLogo}
+  components: {IconButton, MenuButton, HeaderLogo}
 }
 </script>
 
