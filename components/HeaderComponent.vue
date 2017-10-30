@@ -1,25 +1,22 @@
 <template>
-        <header>
-        <button id="menu-button" class="header-button">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
+    <header>
+        <menu-button></menu-button>
         
         <a href="index.html">Headbangers</a>
 
         <div class="float-right">
-
             <icon-button icon="fa-search" color="white"></icon-button>
             <icon-button icon="fa-user-o"></icon-button>
-
         </div>
 
     </header>
 </template>
 <script>
-import IconButton from "./IconButton"
+import IconButton from "./IconButton";
+import MenuButton from "./MenuButton";
 export default {
   name: "header-component",
-  components: {IconButton}
+  components: {IconButton, MenuButton}
 };
 </script>
 
@@ -54,23 +51,7 @@ header > a {
   float: right;
 }
 
-#menu-button{
-    font-size: 1.3em;
 
-    width: 1.75em;
-    height: 1.75em;
-    margin-right: 1em;
-
-    border: none;
-    border-radius: .2em;
-    background-color: #1f273f;
-}
-
-#menu-button:hover{
-    cursor: pointer;
-
-    background-color: #293352;
-}
 
 @media (min-width: 768px){
 
