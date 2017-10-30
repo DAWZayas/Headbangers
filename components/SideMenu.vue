@@ -2,7 +2,7 @@
     <el-menu id="side-menu"
         background-color="#293352"
         text-color="#fff"
-        active-text-color="#ffd04b">
+        active-text-color="#edb83d">
         <el-menu-item index="1">
             <i class="el-icon-view" aria-hidden="true"></i>
             <span>Explorar</span>
@@ -30,9 +30,19 @@ export default {
 
 <style>
 #side-menu {
-  width: 16em;
-  padding-top: 4em;
-  position: fixed;
-  z-index: 1;
+    width: 16em;
+    padding-top: 4em;
+    position: fixed;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+.el-menu-item i {
+    color: #eee;
+}
+@media (min-width: 768px){
+    #side-menu{
+        display: block;
+    }
 }
 </style>

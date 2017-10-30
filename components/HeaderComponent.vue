@@ -25,6 +25,7 @@ export default {
         width: 100%;
         padding: 0.75em;
         background-color: #000b29;
+        z-index: 10;
     }
     header > * {
         float: left;
