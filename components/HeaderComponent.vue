@@ -3,24 +3,23 @@
         <button id="menu-button" class="header-button">
             <i class="fa fa-bars" aria-hidden="true"></i>
         </button>
+        
         <a href="index.html">Headbangers</a>
 
         <div class="float-right">
 
-            <button class="header-button">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
+            <icon-button icon="fa-search" color="white"></icon-button>
+            <icon-button icon="fa-user-o"></icon-button>
 
-            <button class="header-button">
-                <i class="fa fa-user-o" aria-hidden="true"></i>
-            </button>
         </div>
 
     </header>
 </template>
 <script>
+import IconButton from "./IconButton"
 export default {
-  name: "header-component"
+  name: "header-component",
+  components: {IconButton}
 };
 </script>
 
@@ -55,24 +54,6 @@ header > a {
   float: right;
 }
 
-.header-button {
-  font-size: 1.5em;
-
-  width: 1.5em;
-  height: 1.5em;
-
-  color: #fff;
-  border: none;
-  background-color: transparent;
-}
-
-.header-button + .header-button {
-  margin-left: 0.5em;
-}
-
-.header-button:hover {
-  cursor: pointer;
-}
 #menu-button{
     font-size: 1.3em;
 
