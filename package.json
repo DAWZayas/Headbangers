@@ -5,6 +5,7 @@
         "dev": "nuxt"
     },
     "dependencies": {
+        "element-ui": "2.0.1",
         "nuxt": "^1.0.0-rc11"
     },
     "devDependencies": {
