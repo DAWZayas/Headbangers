@@ -1,8 +1,5 @@
 <template>
-    <el-menu id="side-menu"
-        background-color="#293352"
-        text-color="#fff"
-        active-text-color="#edb83d">
+    <el-menu id="side-menu" background-color="#293352" text-color="#fff" active-text-color="#edb83d">
         <el-menu-item index="1">
             <i class="el-icon-view" aria-hidden="true"></i>
             <span>Explorar</span>
@@ -23,26 +20,28 @@
 </template>
 
 <script>
-export default {
-  name: "side-menu"
-};
+    export default {
+        name: "side-menu"
+    };
 </script>
 
 <style>
-#side-menu {
-    width: 16em;
-    padding-top: 60px;
-    position: fixed;
-    height: 100%;
-    z-index: 1;
-    display: none;
-}
-.el-menu-item i {
-    color: #eee;
-}
-@media (min-width: 768px){
-    #side-menu{
-        display: block;
+    #side-menu {
+        width: 16em;
+        padding-top: 60px;
+        position: fixed;
+        height: 100%;
+        z-index: 1;
+        display: none;
     }
-}
+    
+    .el-menu-item i {
+        color: #eee;
+    }
+    
+    @media (min-width: 768px) {
+        #side-menu {
+            display: block;
+        }
+    }
 </style>

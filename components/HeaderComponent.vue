@@ -1,24 +1,35 @@
 <template>
     <header>
-        
         <el-menu class="top-menu" mode="horizontal">
-            <el-menu-item><icon-button icon="fa-bars"></icon-button></el-menu-item>
-            <el-menu-item id="top-logo"><header-logo></header-logo></el-menu-item>
+            <el-menu-item>
+                <icon-button icon="fa-bars"></icon-button>
+            </el-menu-item>
+            <el-menu-item id="top-logo">
+                <header-logo></header-logo>
+            </el-menu-item>
             <div class="float-right">
-                <el-menu-item><icon-button icon="fa-search"></icon-button></el-menu-item>
-                <el-menu-item><icon-button icon="fa-user-o"></icon-button></el-menu-item>
+                <el-menu-item>
+                    <icon-button icon="fa-search"></icon-button>
+                </el-menu-item>
+                <el-menu-item>
+                    <icon-button icon="fa-user-o"></icon-button>
+                </el-menu-item>
             </div>
         </el-menu>
     </header>
 </template>
-<script>
-import HeaderLogo from "./HeaderLogo";
-import IconButton from "./IconButton";
 
-export default {
-  name: "header-component",
-  components: {IconButton, HeaderLogo}
-}
+<script>
+    import HeaderLogo from "./HeaderLogo";
+    import IconButton from "./IconButton";
+    
+    export default {
+        name: "header-component",
+        components: {
+            IconButton,
+            HeaderLogo
+        }
+    }
 </script>
 
 <style>
@@ -29,18 +40,20 @@ export default {
         z-index: 10;
         border: none;
     }
-    .top-menu  > * {
+    
+    .top-menu>* {
         float: left;
     }
+    
     .float-right {
         float: right;
     }
-
-    #top-logo:hover{
+    
+    #top-logo:hover {
         background-color: transparent;
     }
-
-    .top-menu .el-menu-item:hover{
+    
+    .top-menu .el-menu-item:hover {
         background-color: #293352;
     }
 </style>
