@@ -1,17 +1,5 @@
 <template>
-    <div>
-        <header-component></header-component>
-        <side-menu></side-menu>
-    </div>
+    <main>
+        <h1>Hello</h1>
+    </main>
 </template>
-
-<script>
-    import HeaderComponent from "~/components/HeaderComponent";
-    import SideMenu from "~/components/SideMenu";
-    export default {
-        data () {
-            return {}
-        },
-        components: { HeaderComponent, SideMenu}
-    }
-</script>

@@ -52,8 +52,16 @@
     #top-logo:hover {
         background-color: transparent;
     }
+
     
+    .top-menu .el-menu-item.is-active{
+        border-bottom: none;
+        background-color: #000b29;
+    }
+
     .top-menu .el-menu-item:hover {
         background-color: #293352;
     }
+
+    
 </style>
