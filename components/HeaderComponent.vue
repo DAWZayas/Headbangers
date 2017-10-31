@@ -1,17 +1,17 @@
 <template>
     <header>
         <el-menu class="top-menu" mode="horizontal">
-            <el-menu-item>
+            <el-menu-item index="1">
                 <icon-button icon="lnr-menu"></icon-button>
             </el-menu-item>
-            <el-menu-item id="top-logo">
+            <el-menu-item id="top-logo" index="2">
                 <header-logo></header-logo>
             </el-menu-item>
             <div class="float-right">
-                <el-menu-item>
+                <el-menu-item index="3">
                     <icon-button icon="lnr-magnifier"></icon-button>
                 </el-menu-item>
-                <el-menu-item>
+                <el-menu-item index="4">
                     <icon-button icon="lnr-user"></icon-button>
                 </el-menu-item>
             </div>
