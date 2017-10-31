@@ -31,7 +31,7 @@ export default {
 <style>
 #side-menu {
     width: 16em;
-    padding-top: 4em;
+    padding-top: 60px;
     position: fixed;
     height: 100%;
     z-index: 1;

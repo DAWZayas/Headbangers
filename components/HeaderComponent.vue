@@ -1,11 +1,12 @@
 <template>
     <header>
+        
         <el-menu class="top-menu" mode="horizontal">
-            <el-menu-item index="1"><menu-button></menu-button></el-menu-item>
-            <el-menu-item index="2"><header-logo></header-logo></el-menu-item>
+            <el-menu-item><icon-button icon="fa-bars"></icon-button></el-menu-item>
+            <el-menu-item id="top-logo"><header-logo></header-logo></el-menu-item>
             <div class="float-right">
-                <el-menu-item index="3"><icon-button icon="fa-search"></icon-button></el-menu-item>
-                <el-menu-item index="4"><icon-button icon="fa-user-o"></icon-button></el-menu-item>
+                <el-menu-item><icon-button icon="fa-search"></icon-button></el-menu-item>
+                <el-menu-item><icon-button icon="fa-user-o"></icon-button></el-menu-item>
             </div>
         </el-menu>
     </header>
@@ -13,11 +14,10 @@
 <script>
 import HeaderLogo from "./HeaderLogo";
 import IconButton from "./IconButton";
-import MenuButton from "./MenuButton";
 
 export default {
   name: "header-component",
-  components: {IconButton, MenuButton, HeaderLogo}
+  components: {IconButton, HeaderLogo}
 }
 </script>
 
@@ -36,11 +36,11 @@ export default {
         float: right;
     }
 
-    .top-menu .el-menu-item:hover{
+    #top-logo:hover{
         background-color: transparent;
     }
 
-    .float-right .el-menu-item:hover{
+    .top-menu .el-menu-item:hover{
         background-color: #293352;
     }
 </style>
