@@ -2,17 +2,17 @@
     <header>
         <el-menu class="top-menu" mode="horizontal">
             <el-menu-item>
-                <icon-button icon="fa-bars"></icon-button>
+                <icon-button icon="lnr-menu"></icon-button>
             </el-menu-item>
             <el-menu-item id="top-logo">
                 <header-logo></header-logo>
             </el-menu-item>
             <div class="float-right">
                 <el-menu-item>
-                    <icon-button icon="fa-search"></icon-button>
+                    <icon-button icon="lnr-magnifier"></icon-button>
                 </el-menu-item>
                 <el-menu-item>
-                    <icon-button icon="fa-user-o"></icon-button>
+                    <icon-button icon="lnr-user"></icon-button>
                 </el-menu-item>
             </div>
         </el-menu>

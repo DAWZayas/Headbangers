@@ -1,28 +1,28 @@
 <template>
     <el-menu id="side-menu" background-color="#293352" text-color="#fff" active-text-color="#edb83d">
         <el-menu-item index="1">
-            <i class="el-icon-view" aria-hidden="true"></i>
-            <span>Explorar</span>
+            <icon-text icon="lnr-eye" text="Explorar"></icon-text>
         </el-menu-item>
         <el-menu-item index="2">
-            <i class="el-icon-location-outline" aria-hidden="true"></i>
-            <span>Mapa</span>
+            <icon-text icon="lnr-map" text="Mapa"></icon-text>
         </el-menu-item>
         <el-menu-item index="3">
-            <i class="el-icon-date" aria-hidden="true"></i>
-            <span>Calendario</span>
+            <icon-text icon="lnr-calendar-full" text="Calendario"></icon-text>
         </el-menu-item>
         <el-menu-item index="4">
-            <i class="el-icon-bell" aria-hidden="true"></i>
-            <span>Notificaciones</span>
+            <icon-text icon="lnr-alarm" text="Notificaciones"></icon-text>
         </el-menu-item>
     </el-menu>
 </template>
 
 <script>
+    import IconText from "./IconText";
     export default {
-        name: "side-menu"
-    };
+        name: "side-menu",
+        components: {
+            IconText
+        }
+    }
 </script>
 
 <style>

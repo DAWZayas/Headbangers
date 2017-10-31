@@ -1,6 +1,6 @@
 <template>
   <button class="icon-button">
-          <i class="fa" v-bind:class="icon" aria-hidden="true" ></i>
+          <span class="lnr" :class="icon"></span>
       </button>
 </template>
 
