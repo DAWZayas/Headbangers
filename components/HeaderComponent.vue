@@ -2,7 +2,9 @@
     <header>
         <el-menu class="top-menu" mode="horizontal">
             <el-menu-item>
+                <router-link to="index2">
                 <icon-button icon="fa-bars"></icon-button>
+                </router-link>
             </el-menu-item>
             <el-menu-item id="top-logo">
                 <header-logo></header-logo>
