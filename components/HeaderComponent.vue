@@ -1,11 +1,13 @@
 <template>
     <header>
-        <menu-button></menu-button>
-        <header-logo></header-logo>
-        <div class="float-right">
-            <icon-button icon="fa-search"></icon-button>
-            <icon-button icon="fa-user-o"></icon-button>
-        </div>
+        <el-menu class="top-menu" mode="horizontal">
+            <el-menu-item index="1"><menu-button></menu-button></el-menu-item>
+            <el-menu-item index="2"><header-logo></header-logo></el-menu-item>
+            <div class="float-right">
+                <el-menu-item index="3"><icon-button icon="fa-search"></icon-button></el-menu-item>
+                <el-menu-item index="4"><icon-button icon="fa-user-o"></icon-button></el-menu-item>
+            </div>
+        </el-menu>
     </header>
 </template>
 <script>
@@ -20,17 +22,25 @@ export default {
 </script>
 
 <style>
-    header {
+    .top-menu {
         position: fixed;
         width: 100%;
-        padding: 0.75em;
         background-color: #000b29;
         z-index: 10;
+        border: none;
     }
-    header > * {
+    .top-menu  > * {
         float: left;
     }
     .float-right {
         float: right;
+    }
+
+    .top-menu .el-menu-item:hover{
+        background-color: transparent;
+    }
+
+    .float-right .el-menu-item:hover{
+        background-color: #293352;
     }
 </style>

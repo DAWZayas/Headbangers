@@ -13,7 +13,6 @@ export default {
   font-size: 1.3em;
   width: 1.75em;
   height: 1.75em;
-  margin-right: 1em;
   border: none;
   border-radius: 0.2em;
   background-color: #1f273f;
