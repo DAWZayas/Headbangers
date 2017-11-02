@@ -1,5 +1,19 @@
 <template>
     <main>
-        <h1>Hello</h1>
+
     </main>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                posters: ["poster1.jpg", "poster2.jpg"]
+            };
+        }
+    };
+</script>
+
+<style>
+
+</style>

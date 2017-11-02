@@ -33,6 +33,7 @@
         height: 100%;
         z-index: 1;
         display: none;
+        border: none;
     }
     
     .el-menu-item i {

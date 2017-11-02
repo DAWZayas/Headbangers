@@ -15,6 +15,12 @@ body{
 }
 
 main{
-    padding-top: 60px;
-    padding-left: 16em;
+    margin-top: 60px; 
+    position: absolute;
+}
+
+@media screen and (min-width: 768px){
+    main{
+        margin-left: 16em;
+    }
 }

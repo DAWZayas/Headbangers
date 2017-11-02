@@ -2,7 +2,7 @@
     <header>
         <el-menu class="top-menu" mode="horizontal">
             <el-menu-item index="1">
-                <icon-button icon="lnr-menu"></icon-button>
+                <menu-button></menu-button>
             </el-menu-item>
             <el-menu-item id="top-logo" index="2">
                 <header-logo></header-logo>
@@ -22,12 +22,14 @@
 <script>
     import HeaderLogo from "./HeaderLogo";
     import IconButton from "./IconButton";
+    import MenuButton from "./MenuButton";
     
     export default {
         name: "header-component",
         components: {
             IconButton,
-            HeaderLogo
+            HeaderLogo,
+            MenuButton
         }
     }
 </script>
@@ -52,16 +54,13 @@
     #top-logo:hover {
         background-color: transparent;
     }
-
     
-    .top-menu .el-menu-item.is-active{
+    .top-menu .el-menu-item.is-active {
         border-bottom: none;
         background-color: #000b29;
     }
-
+    
     .top-menu .el-menu-item:hover {
         background-color: #293352;
     }
-
-    
 </style>

@@ -1,28 +1,25 @@
 <template>
-  <button id="menu-button">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-      </button>
+    <button id="menu-button">
+        <span class="lnr lnr-menu"></span>
+    </button>
 </template>
 
 <script>
-  export default {
-    name: "menu-button"
-  };
+    export default {
+        name: "menu-button"
+    };
 </script>
 
 <style>
-  #menu-button {
-    font-size: 1.3em;
-    width: 1.75em;
-    height: 1.75em;
-    border: none;
-    border-radius: 0.2em;
-    background-color: #1f273f;
-    color: #fff;
-  }
-  
-  #menu-button:hover {
-    cursor: pointer;
-    background-color: #293352;
-  }
+    #menu-button {
+        font-size: 1.9em;
+        margin-top: -0.3em;
+        border: none;
+        color: #fff;
+        background-color: transparent;
+    }
+    
+    #menu-button:hover {
+        cursor: pointer;
+    }
 </style>
