@@ -2,7 +2,9 @@
     <div id="app">
         <header-component></header-component>
         <side-menu></side-menu>
-        <nuxt/>
+        <main>
+            <nuxt/>
+        </main>
     </div>
 </template>
 

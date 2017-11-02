@@ -1,5 +1,5 @@
 <template>
-    <el-menu id="side-menu" background-color="#293352" text-color="#fff" active-text-color="#edb83d">
+    <el-menu id="side-menu" background-color="#293352" text-color="#fff" active-text-color="#edb83d" default-active="1" mode="vertical">
         <nuxt-link to="/">
             <el-menu-item index="1">
                 <icon-text icon="lnr-home" text="Inicio"></icon-text>
@@ -20,8 +20,8 @@
                 <icon-text icon="lnr-calendar-full" text="Calendario"></icon-text>
             </el-menu-item>
         </nuxt-link>
-        <el-menu-item index="4">
-            <icon-text icon="lnr-alarm" text="Notificaciones"></icon-text>
+        <el-menu-item index="5">
+            <icon-text icon="lnr-bullhorn" text="Publicar"></icon-text>
         </el-menu-item>
     </el-menu>
 </template>
@@ -45,6 +45,7 @@
         z-index: 1;
         display: none;
         border: none;
+        box-shadow: 2px 0px 3px 0 rgba(0, 0, 0, 0.26);
     }
 
     #side-menu a{

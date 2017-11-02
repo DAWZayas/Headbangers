@@ -1,5 +1,3 @@
 <template>
-    <main>
-        <h2>Explorar</h2>
-    </main>
+    <h2>Explorar</h2>
 </template>

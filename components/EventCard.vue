@@ -2,29 +2,26 @@
     <el-card>
         <img class="card-img" src="img/placeholder.png">
         <h3>{{title}}</h3>
-        <div>
+        <div class="event-info">
             <el-row>
                 <el-col :span="12">
                     <icon-text icon="lnr-calendar-full" :text="date"></icon-text>
                     <icon-text icon="lnr-clock" :text="time"></icon-text>
                 </el-col>
                 <el-col :span="12">
-                    {{ price }} €
+                    <div class="price-info">
+                        {{ price }} €
+                    </div>
                 </el-col>
             </el-row>
             <el-row>
                 <icon-text icon="lnr-map-marker" :text="location"></icon-text>
             </el-row>
-            <el-row :gutter="10">
-                <el-col :span="18">
-                    <el-button type="primary" class="block-button" >
-                        Ver más
-                    </el-button>
-                </el-col>
-                <el-col :span="6" >
-                    <el-button type="text" class="block-button" icon="el-icon-share"></el-button>    
-                </el-col>
-            </el-row>
+    
+                <div class="article-more">
+                    Ver más
+                </div>
+    
         </div>
     </el-card>
 </template>
@@ -44,13 +41,25 @@
         name: "event-card",
         components: {
             IconText
+        },
+        methods: {
+            mas: () => console.log("mas")
         }
     }
 </script>
 
 <style lang='scss'>
+    @import "assets/styles/colors.scss";
     .el-card {
         width: 33%;
+        line-height: 1.75em;
+    }
+    .el-card h3{
+        margin: 0.5em;
+        text-align: center;
+    }
+    .el-card:hover{
+        cursor: pointer;
     }
     
     .el-card__body {
@@ -62,8 +71,23 @@
         margin-left: -1em;
         width: calc(100% + 2em);
     }
-    .block-button{
-        width: 100%;
+    
+    .article-more {
+        padding: 0.75em;
+        text-align: center;
+        background-color: $accentColor;
+        color: #fff;
+        margin-top: 1em;
     }
-
+    .article-more:hover {
+        background-color: $accentColorLight;
+    }
+    .event-info{
+        color: $lightGray;
+    }
+    .price-info{
+        font-size: 1.5em;
+        text-align: center;
+        line-height: 2.5em;
+    }
 </style>

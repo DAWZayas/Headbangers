@@ -1,6 +1,7 @@
 <template>
-    <nuxt-link id="logo" to="/">
-        Headbangers</nuxt-link>
+    <a id="logo" href="/">
+        Headbangers
+    </a>
 </template>
 
 <script>

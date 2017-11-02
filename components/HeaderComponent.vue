@@ -41,6 +41,7 @@
         background-color: $mainColor;
         z-index: 10;
         border: none;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 
         .el-menu-item:hover {
             background-color: $mainColorLight;

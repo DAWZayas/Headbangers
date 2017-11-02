@@ -1,7 +1,5 @@
 <template>
-    <main>
-        <event-card></event-card>
-    </main>
+    <event-card></event-card>
 </template>
 
 <script>
