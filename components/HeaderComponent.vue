@@ -42,11 +42,7 @@
         z-index: 10;
         border: none;
     }
-    
-    .top-menu>* {
-        float: left;
-    }
-    
+
     .float-right {
         float: right;
     }
@@ -54,7 +50,9 @@
     #top-logo:hover {
         background-color: transparent;
     }
-    
+    .top-menu .el-menu-item{
+        border-bottom: none;
+    }
     .top-menu .el-menu-item.is-active {
         border-bottom: none;
         background-color: #000b29;

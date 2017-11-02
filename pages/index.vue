@@ -1,19 +1,16 @@
 <template>
     <main>
-
+        <event-card></event-card>
     </main>
 </template>
 
 <script>
+    import EventCard from "@/components/EventCard";
     export default {
-        data() {
-            return {
-                posters: ["poster1.jpg", "poster2.jpg"]
-            };
-        }
-    };
+        components: {EventCard }
+    }
 </script>
 
 <style>
-
+    
 </style>

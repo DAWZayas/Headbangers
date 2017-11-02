@@ -1,7 +1,7 @@
 <template>
     <button class="icon-button">
-            <span class="lnr" :class="icon"></span>
-        </button>
+        <span class="lnr" :class="icon"></span>
+    </button>
 </template>
 
 <script>

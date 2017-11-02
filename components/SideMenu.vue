@@ -1,14 +1,25 @@
 <template>
     <el-menu id="side-menu" background-color="#293352" text-color="#fff" active-text-color="#edb83d">
-        <el-menu-item index="1">
-            <icon-text icon="lnr-eye" text="Explorar"></icon-text>
-        </el-menu-item>
-        <el-menu-item index="2">
-            <icon-text icon="lnr-map" text="Mapa"></icon-text>
-        </el-menu-item>
-        <el-menu-item index="3">
-            <icon-text icon="lnr-calendar-full" text="Calendario"></icon-text>
-        </el-menu-item>
+        <nuxt-link to="/">
+            <el-menu-item index="1">
+                <icon-text icon="lnr-home" text="Inicio"></icon-text>
+            </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/explore">
+            <el-menu-item index="2">
+                <icon-text icon="lnr-eye" text="Explorar"></icon-text>
+            </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/map">
+            <el-menu-item index="3">
+                <icon-text icon="lnr-map" text="Mapa"></icon-text>
+            </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/calendar">
+            <el-menu-item index="4">
+                <icon-text icon="lnr-calendar-full" text="Calendario"></icon-text>
+            </el-menu-item>
+        </nuxt-link>
         <el-menu-item index="4">
             <icon-text icon="lnr-alarm" text="Notificaciones"></icon-text>
         </el-menu-item>
@@ -34,6 +45,10 @@
         z-index: 1;
         display: none;
         border: none;
+    }
+
+    #side-menu a{
+        text-decoration: none;
     }
     
     .el-menu-item i {
