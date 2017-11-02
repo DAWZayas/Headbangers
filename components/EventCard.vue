@@ -52,7 +52,7 @@
     @import "assets/styles/colors.scss";
     .el-card {
         width: 33%;
-        line-height: 1.75em;
+        line-height: 2em;
     }
     .el-card h3{
         margin: 0.5em;
@@ -66,6 +66,10 @@
         padding: 1em;
     }
     
+    .el-card .lnr{
+        color: $gray;
+        vertical-align: text-bottom;
+    }
     .card-img {
         margin-top: -1em;
         margin-left: -1em;
@@ -73,7 +77,7 @@
     }
     
     .article-more {
-        padding: 0.75em;
+        padding: 0.5em;
         text-align: center;
         background-color: $accentColor;
         color: #fff;
@@ -89,5 +93,7 @@
         font-size: 1.5em;
         text-align: center;
         line-height: 2.5em;
+        color: $gray;
     }
+
 </style>

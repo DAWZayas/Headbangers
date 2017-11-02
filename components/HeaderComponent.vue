@@ -1,20 +1,19 @@
 <template>
-    <header>
-        <el-menu class="top-menu" mode="horizontal">
-            <el-menu-item index="1">
-                <menu-button></menu-button>
-            </el-menu-item>
-            <el-menu-item id="top-logo" index="2">
-                <header-logo></header-logo>
-            </el-menu-item>
-            <div class="float-right">
-                <el-menu-item index="3">
-                    <icon-button icon="lnr-magnifier"></icon-button>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <icon-button icon="lnr-user"></icon-button>
-                </el-menu-item>
+    <header class="top-menu">
+        <div class="menu-item">
+            <menu-button></menu-button>
+        </div>
+        <div class="menu-item top-logo">
+            <header-logo></header-logo>
+        </div>
+        <div class="float-right">
+            <div class="menu-item">
+                <icon-button icon="lnr-magnifier"></icon-button>
             </div>
+            <div class="menu-item">
+                <icon-button icon="lnr-user"></icon-button>
+            </div>
+        </div>
         </el-menu>
     </header>
 </template>
@@ -22,7 +21,7 @@
 <script>
     import HeaderLogo from "./HeaderLogo";
     import IconButton from "./IconButton";
-    import MenuButton from "./MenuButton";   
+    import MenuButton from "./MenuButton";
     export default {
         name: "header-component",
         components: {
@@ -34,7 +33,7 @@
 </script>
 
 <style lang='scss'>
-@import "assets/styles/colors.scss";
+    @import "assets/styles/colors.scss";
     .top-menu {
         position: fixed;
         width: 100%;
@@ -42,23 +41,30 @@
         z-index: 10;
         border: none;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        height: 60px;
+        line-height: 60px;
 
-        .el-menu-item:hover {
+        .menu-item {
+            text-align: center;
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            padding: 0 15px;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .menu-item * {
+            vertical-align: middle;
+        }
+        .menu-item:hover {
             background-color: $mainColorLight;
         }
-
-        .el-menu-item.is-active {
-            border-bottom: none;
-            background-color: $mainColor;
-        }
-
         .float-right {
             float: right;
+            display: flex;
         }
-
-        #top-logo:hover {
+        .top-logo:hover {
             background-color: transparent;
         }
-
     }
 </style>

@@ -13,11 +13,12 @@
 
 <style lang='scss'>
     .icon-button {
-        margin-bottom: .2em;
+        line-height: 1.5em;
         font-size: 1.5em;
         color: #fff;
         border: none;
         background-color: transparent;
+        padding-bottom: 0.5em;
     }
     .icon-button:hover {
         cursor: pointer;

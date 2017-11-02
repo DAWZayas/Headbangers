@@ -1,5 +1,5 @@
 <template>
-    <button id="menu-button">
+    <button class="menu-button">
         <span class="lnr lnr-menu"></span>
     </button>
 </template>
@@ -12,15 +12,15 @@
 
 <style lang='scss'>
 
-    #menu-button {
+    .menu-button {
         font-size: 1.9em;
-        margin-top: -0.3em;
         border: none;
         color: #fff;
         background-color: transparent;
+        padding-bottom: 0.4em;
     }
     
-    #menu-button:hover {
+    .menu-button:hover {
         cursor: pointer;
     }
 </style>
