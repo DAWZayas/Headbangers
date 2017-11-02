@@ -22,8 +22,7 @@
 <script>
     import HeaderLogo from "./HeaderLogo";
     import IconButton from "./IconButton";
-    import MenuButton from "./MenuButton";
-    
+    import MenuButton from "./MenuButton";   
     export default {
         name: "header-component",
         components: {
@@ -34,33 +33,34 @@
     }
 </script>
 
-<style>
+<style lang='scss'>
+@import "assets/styles/colors.scss";
     .top-menu {
         position: fixed;
         width: 100%;
-        background-color: #000b29;
+        background-color: $mainColor;
         z-index: 10;
         border: none;
-    }
-    
-    .top-menu>* {
-        float: left;
-    }
-    
-    .float-right {
-        float: right;
-    }
-    
-    #top-logo:hover {
-        background-color: transparent;
-    }
-    
-    .top-menu .el-menu-item.is-active {
-        border-bottom: none;
-        background-color: #000b29;
-    }
-    
-    .top-menu .el-menu-item:hover {
-        background-color: #293352;
+
+        .el-menu-item:hover {
+            background-color: $mainColorLight;
+        }
+
+        .el-menu-item.is-active {
+            border-bottom: none;
+            background-color: $mainColor;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        #top-logo:hover {
+            background-color: transparent;
+        }
+        
+        .icon-button{
+            margin-bottom: .2em;
+        }
     }
 </style>
