@@ -6,15 +6,15 @@
 </template>
 
 <script>
-  export default {
-    name: "icon-text",
-    props: ["icon", "text"]
-  };
+    export default {
+      name: "icon-text",
+      props: ["icon", "text"]
+    };
 </script>
-<style>
-.icon-text > .lnr{
-    font-size: 1.5em;
-    margin-right: 0.5em;
-}
 
+<style lang='scss'>
+  .icon-text > .lnr{
+      font-size: 1.5em;
+      margin-right: 0.5em;
+  }
 </style>

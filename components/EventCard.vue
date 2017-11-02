@@ -48,7 +48,7 @@
     }
 </script>
 
-<style>
+<style lang='scss'>
     .el-card {
         width: 33%;
     }

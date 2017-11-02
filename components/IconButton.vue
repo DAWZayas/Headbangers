@@ -11,18 +11,14 @@
     };
 </script>
 
-<style>
+<style lang='scss'>
     .icon-button {
+        margin-bottom: .2em;
         font-size: 1.5em;
         color: #fff;
         border: none;
         background-color: transparent;
     }
-    
-    .icon-button+.icon-button {
-        margin-left: 0.5em;
-    }
-    
     .icon-button:hover {
         cursor: pointer;
     }

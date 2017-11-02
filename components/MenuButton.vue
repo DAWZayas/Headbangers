@@ -10,7 +10,8 @@
     };
 </script>
 
-<style>
+<style lang='scss'>
+
     #menu-button {
         font-size: 1.9em;
         margin-top: -0.3em;
