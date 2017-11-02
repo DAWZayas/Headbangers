@@ -25,7 +25,7 @@
     }
 </script>
 
-<style>
+<style lang='scss'>
     #side-menu {
         width: 16em;
         padding-top: 60px;
@@ -36,8 +36,10 @@
         border: none;
     }
     
-    .el-menu-item i {
-        color: #eee;
+    .el-menu-item{
+        i {
+            color: #fff;
+        }
     }
     
     @media (min-width: 768px) {

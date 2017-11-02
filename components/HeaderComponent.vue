@@ -58,9 +58,5 @@
         #top-logo:hover {
             background-color: transparent;
         }
-        
-        .icon-button{
-            margin-bottom: .2em;
-        }
     }
 </style>

@@ -9,13 +9,13 @@
     };
 </script>
 
-<style>
+<style lang='scss'>
     #logo {
         font-family: "Ruda";
         font-size: 1.25em;
         font-weight: bold;
         margin-top: 0.4em;
-        margin-left: -10px;
+        margin-left: -0.625em;
         text-decoration: none;
         color: #fff;
     }
