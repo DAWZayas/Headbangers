@@ -1,5 +1,5 @@
 <template>
-    <button class="menu-button" @click="toggleMenu">
+    <button class="menu-button">
         <span class="lnr lnr-menu"></span>
     </button>
 </template>
@@ -8,12 +8,7 @@
     import SideMenu from "./SideMenu";
 
     export default {
-        name: "menu-button",
-        methods: {
-            toggleMenu: () => {
-               SideMenu.isOpened();
-            }
-        },
+        name: "menu-button"
     };
 </script>
 

@@ -40,11 +40,6 @@
         name: "side-menu",
         components: {
             IconText
-        },
-        methods: {
-            isOpened: () => {
-                return this;
-            }
         }
     }
 </script>
