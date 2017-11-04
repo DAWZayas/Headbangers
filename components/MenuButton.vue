@@ -1,12 +1,19 @@
 <template>
-    <button class="menu-button">
+    <button class="menu-button" @click="toggleMenu">
         <span class="lnr lnr-menu"></span>
     </button>
 </template>
 
 <script>
+    import SideMenu from "./SideMenu";
+
     export default {
-        name: "menu-button"
+        name: "menu-button",
+        methods: {
+            toggleMenu: () => {
+               SideMenu.isOpened();
+            }
+        },
     };
 </script>
 

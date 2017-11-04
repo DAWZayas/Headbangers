@@ -2,26 +2,34 @@
     <el-menu id="side-menu" background-color="#293352" text-color="#fff" active-text-color="#edb83d" default-active="1" mode="vertical">
         <nuxt-link to="/">
             <el-menu-item index="1">
-                <icon-text icon="lnr-home" text="Inicio"></icon-text>
+                <icon-text icon="lnr-home" text="Home"></icon-text>
             </el-menu-item>
         </nuxt-link>
-        <nuxt-link to="/explore">
-            <el-menu-item index="2">
-                <icon-text icon="lnr-eye" text="Explorar"></icon-text>
-            </el-menu-item>
-        </nuxt-link>
-        <nuxt-link to="/map">
-            <el-menu-item index="3">
-                <icon-text icon="lnr-map" text="Mapa"></icon-text>
-            </el-menu-item>
-        </nuxt-link>
-        <nuxt-link to="/calendar">
-            <el-menu-item index="4">
-                <icon-text icon="lnr-calendar-full" text="Calendario"></icon-text>
-            </el-menu-item>
-        </nuxt-link>
-        <el-menu-item index="5">
-            <icon-text icon="lnr-bullhorn" text="Publicar"></icon-text>
+        <el-submenu index="2">
+            <template slot="title">
+                <icon-text icon="lnr-earth" text="Browse"></icon-text>
+            </template>
+            <nuxt-link to="/explore">
+                <el-menu-item index="2-1">
+                    <icon-text icon="lnr-list" text="List"></icon-text>
+                </el-menu-item>
+            </nuxt-link>
+            <nuxt-link to="/explore">
+                <el-menu-item index="2-2">
+                    <icon-text icon="lnr-map" text="Map"></icon-text>
+                </el-menu-item>
+            </nuxt-link>
+            <nuxt-link to="/explore">
+                <el-menu-item index="2-3">
+                    <icon-text icon="lnr-calendar-full" text="Calendar"></icon-text>
+                </el-menu-item>
+            </nuxt-link>
+        </el-submenu>
+        <el-menu-item index="3">
+            <icon-text icon="lnr-heart" text="My Concerts"></icon-text>
+        </el-menu-item>
+        <el-menu-item index="4">
+            <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>
         </el-menu-item>
     </el-menu>
 </template>
@@ -32,6 +40,11 @@
         name: "side-menu",
         components: {
             IconText
+        },
+        methods: {
+            isOpened: () => {
+                return this;
+            }
         }
     }
 </script>
@@ -47,12 +60,12 @@
         border: none;
         box-shadow: 2px 0px 3px 0 rgba(0, 0, 0, 0.26);
     }
-
-    #side-menu a{
+    
+    #side-menu a {
         text-decoration: none;
     }
     
-    .el-menu-item{
+    .el-menu-item {
         i {
             color: #fff;
         }
