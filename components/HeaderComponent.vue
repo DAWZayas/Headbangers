@@ -36,6 +36,7 @@
     @import "assets/styles/colors.scss";
     .top-menu {
         position: fixed;
+        top: 0;
         width: 100%;
         background-color: $mainColor;
         z-index: 10;

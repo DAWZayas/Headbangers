@@ -12,16 +12,13 @@
 
 body{
     margin: 0;
+    background-color: #eee;
 }
 
 main{
     margin-top: 60px; 
     position: absolute;
     padding:1em;
-}
-
-@media screen and (min-width: 768px){
-    main{
-        margin-left: 16em;
-    }
+    background-color: #eee;
+    width: 100%;
 }
