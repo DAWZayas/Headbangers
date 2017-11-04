@@ -10,9 +10,15 @@
             <div class="menu-item">
                 <icon-button icon="lnr-magnifier"></icon-button>
             </div>
+            <el-dropdown>
             <div class="menu-item">
                 <icon-button icon="lnr-user"></icon-button>
             </div>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item><icon-text icon="lnr-enter" text="Log In"></icon-text></el-dropdown-item>
+                <el-dropdown-item><icon-text icon="lnr-pencil" text="Sign Up"></icon-text></el-dropdown-item>
+            </el-dropdown-menu>
+            </el-dropdown>
         </div>
         </el-menu>
     </header>
@@ -22,12 +28,14 @@
     import HeaderLogo from "./HeaderLogo";
     import IconButton from "./IconButton";
     import MenuButton from "./MenuButton";
+    import IconText from "./IconText";
     export default {
         name: "header-component",
         components: {
             IconButton,
             HeaderLogo,
-            MenuButton
+            MenuButton,
+            IconText
         }
     }
 </script>
