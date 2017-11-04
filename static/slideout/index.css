@@ -30,4 +30,10 @@
     .slideout-open .slideout-panel {
         width: calc(100% - 16em);
     }
+
+    .slideout-open,
+    .slideout-open body,
+    .slideout-open .slideout-panel {
+        overflow: auto;
+    }
 }

@@ -8,8 +8,8 @@
             </nuxt-link>
             <el-submenu index="2">
                 <template slot="title">
-                        <icon-text icon="lnr-eye" text="Browse"></icon-text>
-</template>
+                    <icon-text icon="lnr-eye" text="Browse"></icon-text>
+                </template>
                 <nuxt-link to="/explore">
                     <el-menu-item index="2-1">
                         <icon-text icon="lnr-list" text="List"></icon-text>
@@ -54,20 +54,16 @@
         height: 100%;
         z-index: 1;
         background-color: #293352;
-    }
-    
-    #side-menu a {
-        text-decoration: none;
-    }
-    
-    .el-menu {
-        border: none;
-    }
-    
-    .el-menu-item {
-        i {
-            color: #fff;
+        a {
+            text-decoration: none;
+        }
+        .el-menu {
+            border: none;
+        }
+        .el-menu-item {
+            i {
+                color: #fff;
+            }
         }
     }
-
 </style>

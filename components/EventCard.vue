@@ -18,9 +18,9 @@
                 <icon-text icon="lnr-map-marker" :text="location"></icon-text>
             </el-row>
     
-                <div class="article-more">
-                    Ver más
-                </div>
+            <div class="article-more">
+                Ver más
+            </div>
     
         </div>
     </el-card>
@@ -54,11 +54,13 @@
         width: 33%;
         line-height: 2em;
     }
-    .el-card h3{
+    
+    .el-card h3 {
         margin: 0.5em;
         text-align: center;
     }
-    .el-card:hover{
+    
+    .el-card:hover {
         cursor: pointer;
     }
     
@@ -66,10 +68,11 @@
         padding: 1em;
     }
     
-    .el-card .lnr{
+    .el-card .lnr {
         color: $gray;
         vertical-align: text-bottom;
     }
+    
     .card-img {
         margin-top: -1em;
         margin-left: -1em;
@@ -83,17 +86,19 @@
         color: #fff;
         margin-top: 1em;
     }
+    
     .article-more:hover {
         background-color: $accentColorLight;
     }
-    .event-info{
+    
+    .event-info {
         color: $lightGray;
     }
-    .price-info{
+    
+    .price-info {
         font-size: 1.5em;
         text-align: center;
         line-height: 2.5em;
         color: $gray;
     }
-
 </style>
