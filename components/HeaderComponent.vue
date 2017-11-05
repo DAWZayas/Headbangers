@@ -58,7 +58,7 @@
             display: inline-block;
             height: 60px;
             line-height: 60px;
-            padding: 0 15px;
+            padding: 0 5px;
             position: relative;
             box-sizing: border-box;
         }
@@ -74,6 +74,11 @@
         }
         .top-logo:hover {
             background-color: transparent;
+        }
+        @media (min-width: 768px) {
+            .menu-item {
+                padding: 0 15px;
+            }
         }
     }
 </style>

@@ -1,30 +1,26 @@
 <template>
-    <a id="logo" href="/">
-        Headbangers
+    <a href="/">
+        <img id="logo" src="/img/logo-big.svg">
     </a>
 </template>
 
 <script>
     export default {
-        name: "header-logo"
+        name: "header-logo",
     };
 </script>
 
-<style lang='scss'>
-    #logo {
-        font-family: "Ruda";
-        font-size: 1.25em;
-        font-weight: bold;
-        margin-top: 0.4em;
-        margin-left: -0.625em;
-        text-decoration: none;
-        color: #fff;
-    }
-    
-    @media (min-width: 768px) {
-        #logo {
-            font-size: 2em;
-            margin-top: 0;
-        }
-    }
+<style>
+    #logo{
+        width: 10em;
+    }    
+@media(min-width: 768px) {
+    #logo{
+        margin-left: -15px;
+        margin-top:-0.2em;
+        width: 13em;
+
+    }    
+}
+
 </style>
