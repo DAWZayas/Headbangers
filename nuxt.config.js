@@ -8,7 +8,10 @@ module.exports = {
         ],
         script: [
             { type: 'text/javascript', src: '/slideout/slideout.min.js' },
-        ]
+        ],
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: 'img/favicon.ico' }
+          ]
     },
     css: [
         '~/assets/styles/main.scss',

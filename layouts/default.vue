@@ -5,7 +5,7 @@
         <main>
             <nuxt/>
         </main>
-        <script src="/slideout-config.js"></script>
+        <script src="/slideout/slideout.config.js"></script>
     </div>
 </template>
 
