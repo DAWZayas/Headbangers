@@ -1,14 +1,25 @@
 <template>
-    <event-card></event-card>
+<main>
+    <section-component class="section" icon="lnr-bubble" text="Sugerencias"></section-component>
+    <section-component class="section" icon="lnr-star" text="Populares"></section-component>
+</main>
 </template>
 
 <script>
-    import EventCard from "@/components/EventCard";
+    import SectionComponent from "@/components/SectionComponent";
     export default {
-        components: {EventCard }
+        components: {SectionComponent }
     }
 </script>
 
-<style>
+<style lang="scss">
+@import "assets/styles/colors.scss";
+
+main{
+    margin: 0em;
+}
+.section + .section{
+    margin-top: 10em;
+}
     
 </style>

@@ -10,11 +10,11 @@
         "dev": "nuxt"
     },
     "dependencies": {
-        "element-ui": "2.0.1",
+        "element-ui": "2.0.3",
         "nuxt": "^1.0.0-rc11"
     },
     "devDependencies": {
-        "node-sass": "^4.5.3",
+        "node-sass": "^4.6.0",
         "sass-loader": "^6.0.6"
     }
 }
