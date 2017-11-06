@@ -65,7 +65,6 @@
     
     .el-card .lnr {
         color: $gray;
-        vertical-align: text-bottom;
     }
     
     .card-img {

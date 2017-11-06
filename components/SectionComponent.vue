@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-      <icon-text class="icon-text" :icon="icon" :text="text"></icon-text>
+      <icon-text class="section-title" :icon="icon" :text="text"></icon-text>
         <el-row gutter="32">
             <el-col class="event-col" :key="num" v-for="num in 3" :xs="24" :sm="12" :md="12" :lg="8" :xl="2"><event-card></event-card></el-col>
         </el-row>
@@ -11,11 +11,6 @@
     import IconText from "./IconText";
     import EventCard from "./EventCard";
         export default {
-             data() {
-            return {
-                title: ['a','b','c','d']
-            }
-        },
             name: "section-component",
             props: ["icon", "text"],
             components: {
@@ -27,7 +22,7 @@
 
 <style lang="scss">
     @import "assets/styles/colors.scss";
-    .section > .icon-text{
+    .section-title{
         font-size: 1.5em;
         margin-bottom: 1em;
     }
