@@ -34,7 +34,7 @@
         font-size: 1.5em;
         margin-bottom: 1em;
     }
-    .el-col + .el-col{
+    .el-col{
         margin-bottom: 2em;
     }
     
