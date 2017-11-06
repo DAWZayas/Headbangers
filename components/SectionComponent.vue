@@ -2,10 +2,7 @@
   <div class="section">
       <icon-text class="icon-text" :icon="icon" :text="text"></icon-text>
         <el-row gutter="32">
-            <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="2"><event-card></event-card></el-col>
-            <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="2"><event-card></event-card></el-col>
-            <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="2"><event-card></event-card></el-col>
-            <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="2"><event-card></event-card></el-col>
+            <el-col :key="num" v-for="num in 3" :xs="24" :sm="12" :md="12" :lg="8" :xl="2"><event-card></event-card></el-col>
         </el-row>
   </div>
 </template>
