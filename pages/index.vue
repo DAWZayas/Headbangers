@@ -1,7 +1,7 @@
 <template>
     <div>
         <section-component class="section" icon="lnr-star" text="Populares"></section-component>
-        <section-component class="section" icon="lnr-bubble" text="Sugerencias"></section-component>
+        <section-component class="section" icon="lnr-pushpin" text="Sugerencias"></section-component>
     </div>
 </template>
 
@@ -15,9 +15,5 @@
 
 <style lang="scss">
 @import "assets/styles/colors.scss";
-
-.section + .section{
-    margin-top: 5em;
-}
     
 </style>

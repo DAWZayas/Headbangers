@@ -1,5 +1,5 @@
 <template>
-    <el-input placeholder="Buscar" v-model="input">
+    <el-input class="box-search" placeholder="Buscar" v-model="input">
         
     </el-input>
 </template>
