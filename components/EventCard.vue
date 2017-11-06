@@ -21,12 +21,10 @@
         <hr>
         <div class="event-buttons">
             <button @click="liked = !liked">
-                <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
-                <icon-text v-if="liked" class="liked-button" icon="lnr-heart" text="Liked"></icon-text>
+                <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
             </button>
             <button @click="saved = !saved">
-                <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
-                <icon-text v-if="saved" class="saved-button" icon="lnr-bookmark" text="Saved"></icon-text>
+                <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
             </button>
             <button>
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>
@@ -38,20 +36,34 @@
 <script>
     import IconText from "./IconText";
     export default {
-        data: () => ({
-                id: "01",
-                img: "img/placeholder.png",
-                title: "Concierto en nosedonde",
-                date: "01/02/2018",
-                time: "22:00",
-                location: "Sala Galileo, Madrid",
-                price: "9,00",
-                liked: false,
-                saved: false
-        }),
         name: "event-card",
         components: {
             IconText
+        },
+        data: () => ({
+            id: "01",
+            img: "img/placeholder.png",
+            title: "Concierto en nosedonde",
+            date: "01/02/2018",
+            time: "22:00",
+            location: "Sala Galileo, Madrid",
+            price: "9,00",
+            liked: false,
+            saved: false
+        }),
+        computed: {
+            likeClass: function() {
+                return this.liked && 'liked-button'
+            },
+            likeText: function() {
+                return (this.liked) ? 'Liked' : 'Like'
+            },
+            saveClass: function() {
+                return this.saved && 'saved-button'
+            },
+            saveText: function() {
+                return (this.saved) ? 'Saved' : 'Save'
+            },
         }
     }
 </script>
@@ -71,14 +83,14 @@
     
     .el-card:hover {
         cursor: pointer;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
-
-    .el-card:hover .event-info .lnr{
+    
+    .el-card:hover .event-info .lnr {
         color: $accentColor;
     }
-
-    .event-info .lnr{
+    
+    .event-info .lnr {
         transition: 0.2s;
     }
     
@@ -109,37 +121,39 @@
         line-height: 2.5em;
         color: $gray;
     }
-
-    .event-buttons{
+    
+    .event-buttons {
         display: flex;
         padding: 0.5em;
-        
     }
-    .event-buttons > button{
+    
+    .event-buttons>button {
         border: none;
         background-color: transparent;
-        cursor: pointer;    
+        cursor: pointer;
         font-size: 0.8em;
         font-weight: bold;
         color: $lightGray;
         width: 100%;
     }
-
-    .event-buttons > button:hover{
+    
+    .event-buttons>button:hover {
         color: #409EFF;
     }
-
-    hr{
-        margin:0 0 0 5%;
+    
+    hr {
+        margin: 0 0 0 5%;
         width: 90%;
         border: 0;
         height: 1px;
         background: #bbb;
     }
-    .liked-button .lnr{
+    
+    .liked-button .lnr {
         color: red;
     }
-    .saved-button .lnr{
+    
+    .saved-button .lnr {
         color: green;
     }
 </style>
