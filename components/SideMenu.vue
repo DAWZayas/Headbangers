@@ -27,7 +27,7 @@
                 </nuxt-link>
             </el-submenu>
             <el-menu-item index="3">
-                <icon-text icon="lnr-heart" text="My Concerts"></icon-text>
+                <icon-text icon="lnr-heart" text="My Events"></icon-text>
             </el-menu-item>
             <el-menu-item index="4">
                 <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>

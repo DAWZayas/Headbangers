@@ -1,9 +1,10 @@
 <template>
-<main>
-    <section-component class="section" icon="lnr-bubble" text="Sugerencias"></section-component>
-    <section-component class="section" icon="lnr-star" text="Populares"></section-component>
-</main>
+    <div>
+        <section-component class="section" icon="lnr-bubble" text="Sugerencias"></section-component>
+        <section-component class="section" icon="lnr-star" text="Populares"></section-component>
+    </div>
 </template>
+
 
 <script>
     import SectionComponent from "@/components/SectionComponent";
@@ -15,9 +16,6 @@
 <style lang="scss">
 @import "assets/styles/colors.scss";
 
-main{
-    margin: 0em;
-}
 .section + .section{
     margin-top: 10em;
 }
