@@ -17,11 +17,7 @@
             <el-row>
                 <icon-text icon="lnr-map-marker" :text="location"></icon-text>
             </el-row>
-    
-            <div class="article-more">
-                Ver más
-            </div>
-    
+                
         </div>
     </el-card>
 </template>
