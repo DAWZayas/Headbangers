@@ -20,11 +20,13 @@
         </div>
         <hr>
         <div class="event-buttons">
-            <button>
-                <icon-text icon="lnr-heart" text="Like"></icon-text>
+            <button @click="liked = !liked">
+                <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
+                <icon-text v-if="liked" class="liked-button" icon="lnr-heart" text="Liked"></icon-text>
             </button>
-            <button>
-                <icon-text icon="lnr-bookmark" text="Save"></icon-text>
+            <button @click="saved = !saved">
+                <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
+                <icon-text v-if="saved" class="saved-button" icon="lnr-bookmark" text="Saved"></icon-text>
             </button>
             <button>
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>
@@ -36,17 +38,17 @@
 <script>
     import IconText from "./IconText";
     export default {
-        data() {
-            return {
+        data: () => ({
                 id: "01",
                 img: "img/placeholder.png",
                 title: "Concierto en nosedonde",
                 date: "01/02/2018",
                 time: "22:00",
                 location: "Sala Galileo, Madrid",
-                price: "9,00"
-            }
-        },
+                price: "9,00",
+                liked: false,
+                saved: false
+        }),
         name: "event-card",
         components: {
             IconText
@@ -58,7 +60,7 @@
     @import "assets/styles/colors.scss";
     .el-card {
         line-height: 2em;
-        transition: 0.2s;
+        transition: 0.3s;
         border: 1px solid #ddd;
     }
     
@@ -133,5 +135,11 @@
         border: 0;
         height: 1px;
         background: #bbb;
+    }
+    .liked-button .lnr{
+        color: red;
+    }
+    .saved-button .lnr{
+        color: green;
     }
 </style>
