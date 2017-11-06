@@ -51,7 +51,6 @@
 <style lang='scss'>
     @import "assets/styles/colors.scss";
     .el-card {
-        width: 33%;
         line-height: 2em;
     }
     
