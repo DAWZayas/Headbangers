@@ -29,9 +29,11 @@
             <el-menu-item index="3">
                 <icon-text icon="lnr-heart" text="My Events"></icon-text>
             </el-menu-item>
-            <el-menu-item index="4">
-                <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>
-            </el-menu-item>
+            <nuxt-link to="/publish">
+                <el-menu-item index="4">
+                    <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>
+                </el-menu-item>
+            </nuxt-link>
         </el-menu>
     </div>
 </template>

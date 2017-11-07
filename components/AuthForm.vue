@@ -2,11 +2,11 @@
     <div>
         <el-row v-if="show == 'login'">
                 <button class="loginBtn loginBtn--facebook">
-                        Login with Facebook
-                    </button>
-                                    <button class="loginBtn loginBtn--google">
-                        Login with Google
-                    </button>
+                    Login with Facebook
+                </button>
+                <button class="loginBtn loginBtn--google">
+                    Login with Google
+                </button>
         </el-row>
     </div>
 </template>
