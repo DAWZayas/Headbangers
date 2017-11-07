@@ -2,7 +2,7 @@
 
   <div class="section">
       <icon-text class="section-title" :icon="icon" :text="text"></icon-text>
-        <el-row :gutter="32">
+        <el-row :gutter="16">
             <el-col class="event-col" :key="num" v-for="num in 4" :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
                 <event-card></event-card>
             </el-col>
@@ -35,6 +35,6 @@
     }
     
     .event-col {
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
 </style>

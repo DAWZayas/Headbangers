@@ -44,7 +44,7 @@
             id: "01",
             img: "img/placeholder.png",
             title: "Concierto en nosedonde",
-            date: "01/FEB/18",
+            date: "01/Feb/18",
             time: "22:00",
             location: "Sala Galileo, Madrid",
             price: "9,00",
@@ -166,7 +166,7 @@
         }
     }
 
-    @media screen and (min-width: $break-sm) and (max-width: $break-md) {
+    @media (min-width: $break-sm) and (max-width: $break-md) {
         .event-card-title{
             font-size: 1em;
         }
@@ -182,7 +182,7 @@
         }
     }
     
-    @media screen and (min-width: $break-md) and (max-width: $break-lg) {
+    @media (min-width: $break-md) and (max-width: $break-lg) {
         .event-card-title{
             font-size: 1.25em;
         }
@@ -198,12 +198,12 @@
         }
     }
 
-    @media screen and (min-width: $break-lg) and (max-width: $break-lg-xl) {
+    @media (min-width: $break-lg) and (max-width: $break-lg-xl) {
         .event-card-title{
-            font-size: .9em;
+            font-size: 1em;
         }
         .card-data{
-            font-size: .75em;
+            font-size: .9em;
         }
          .price-info {
             padding-top: 1.25em;
