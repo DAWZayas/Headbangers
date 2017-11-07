@@ -7,7 +7,7 @@
             <header-logo></header-logo>
         </div>
         <div class="float-right">
-            <div class="menu-item">
+            <div class="menu-item top-logo">
                 <box-search></box-search>
             </div>
             <div class="menu-item">

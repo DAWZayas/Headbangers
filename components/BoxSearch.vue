@@ -20,9 +20,7 @@
         display: none;
         
     }
-    .box-search:hover {
-        
-    }
+
     @media (min-width: 768px) {
         .box-search {
             display: inline;
