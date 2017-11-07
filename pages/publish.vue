@@ -5,15 +5,11 @@
             <el-step title="Location"></el-step>
             <el-step title="Musical"></el-step>
         </el-steps>
-        <div v-if="active == 0">
-            <basics-form @done="active++"></basics-form>
-        </div>
-        <div v-if="active == 1">
-            <location-form @done="active++"></location-form>
-        </div>
-        <div v-if="active == 2">
-            <musical-form @done="active++"></musical-form>
-        </div>
+
+        <basics-form v-if="active == 0" @done="active++"></basics-form>
+        <location-form v-if="active == 1" @done="active++"></location-form>
+        <musical-form v-if="active == 2" @done="active++"></musical-form>
+
         <div v-if="active == 3">
             <h3>Done!</h3>
         </div>
