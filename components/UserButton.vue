@@ -39,6 +39,7 @@
     import IconButton from "./IconButton";
     import IconText from "./IconText";
     import AuthForm from "./AuthForm";
+    import publish from "~/pages/publish";
     
     export default {
         name: "user-button",
