@@ -53,10 +53,4 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-    .location-address > {
-        margin-top: 10em;
-    }
-
-</style>
 
