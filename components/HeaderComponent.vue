@@ -8,7 +8,7 @@
         </div>
         <div class="float-right">
             <div class="menu-item top-logo">
-                <box-search></box-search>
+                <search-box></search-box>
             </div>
             <div class="menu-item">
                 <icon-button icon="lnr-magnifier"></icon-button>
@@ -27,7 +27,7 @@
     import MenuButton from "./MenuButton";
     import IconText from "./IconText";
     import UserButton from "./UserButton";
-    import BoxSearch from "./BoxSearch";
+    import SearchBox from "./SearchBox";
     export default {
         name: "header-component",
         components: {
@@ -36,7 +36,7 @@
             MenuButton,
             IconText,
             UserButton,
-            BoxSearch
+            SearchBox
         }
     }
 </script>

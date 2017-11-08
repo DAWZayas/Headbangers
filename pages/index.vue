@@ -1,7 +1,7 @@
 <template>
     <div>
-        <section-component class="section" icon="lnr-star" text="Populares"></section-component>
-        <section-component class="section" icon="lnr-pushpin" text="Sugerencias"></section-component>
+        <section-component class="section" icon="lnr-star" text="Populars"></section-component>
+        <section-component class="section" icon="lnr-pushpin" text="Recommended"></section-component>
     </div>
 </template>
 
@@ -12,8 +12,3 @@
         components: {SectionComponent}
     }
 </script>
-
-<style lang="scss">
-@import "assets/styles/colors.scss";
-    
-</style>
