@@ -19,7 +19,6 @@
         color: #fff;
         border: none;
         background-color: transparent;
-        padding-bottom: 0.5em;
     }
     .icon-button:hover {
         cursor: pointer;

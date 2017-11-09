@@ -26,15 +26,15 @@
                     <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                 </el-upload>
             </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="done">Next</el-button>
-            </el-form-item>
         </el-form>
-    
+        <footer-buttons>
+            <el-button type="primary" @click="done">Next</el-button>
+        </footer-buttons>
     </div>
 </template>
 
 <script>
+    import FooterButtons from './FooterButtons'
     export default {
         name: "basic-form",
     
@@ -54,7 +54,9 @@
             done() {
                 this.$emit("done")
             }
+        },
+        components: {
+            FooterButtons
         }
-    
     };
 </script>

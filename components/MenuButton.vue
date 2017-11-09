@@ -19,7 +19,7 @@
         border: none;
         color: #fff;
         background-color: transparent;
-        padding-bottom: 0.4em;
+        padding-bottom: 0.2em;
     }
     
     #menu-button:hover {

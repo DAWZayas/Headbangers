@@ -6,16 +6,16 @@
         <div class="menu-item top-logo">
             <header-logo></header-logo>
         </div>
-        <div class="float-right">
-            <div class="menu-item top-logo">
-                <search-box></search-box>
-            </div>
-            <div class="menu-item">
-                <icon-button icon="lnr-magnifier"></icon-button>
-            </div>
-            <div class="menu-item">
-                <user-button></user-button>
-            </div>
+        <div class="separator"></div>
+    
+        <div class="menu-item top-logo">
+            <search-box></search-box>
+        </div>
+        <div class="menu-item">
+            <icon-button icon="lnr-magnifier"></icon-button>
+        </div>
+        <div class="menu-item">
+            <user-button></user-button>
         </div>
         </el-menu>
     </header>
@@ -49,16 +49,14 @@
         width: 100%;
         background-color: $mainColor;
         z-index: 10;
-        border: none;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
         height: 60px;
         line-height: 60px;
-
+        display: flex;
+        justify-content: space-around;
         .menu-item {
             text-align: center;
             display: inline-block;
-            height: 60px;
-            line-height: 60px;
             padding: 0 4px;
             position: relative;
             box-sizing: border-box;
@@ -69,9 +67,8 @@
         .menu-item:hover {
             background-color: $mainColorLight;
         }
-        .float-right {
-            float: right;
-            display: flex;
+        .top-logo {
+            margin-left: 0;
         }
         .top-logo:hover {
             background-color: transparent;
@@ -79,6 +76,9 @@
         @media (min-width: 768px) {
             .menu-item {
                 padding: 0 15px;
+            }
+            .separator {
+                flex-grow: 2;
             }
         }
     }

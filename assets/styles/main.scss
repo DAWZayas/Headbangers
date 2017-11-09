@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded');
-@import url('https://fonts.googleapis.com/css?family=Ruda');
-@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,800');
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded: 200');
+//@import url('https://fonts.googleapis.com/css?family=Ruda');
+//@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,700,800');
 
 @import "assets/styles/breakpoints.scss";
+@import "assets/styles/colors.scss";
 
 *{
     font-family: 'Encode Sans Expanded', Arial, sans-serif;
@@ -18,16 +19,21 @@ body{
 
 main{
     margin-top: 60px; 
-    position: absolute;
     padding:1em;
     background-color: #fff;
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 60px);
 }
 
 .el-dialog {
     width: 90% !important;
 }
+
+a{
+    color: $mainColorLightest;
+    text-decoration: none;
+}
+
 
 @media (min-width: $break-sm){
     .el-dialog{

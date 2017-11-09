@@ -131,7 +131,7 @@
             border: none;
             background-color: transparent;
             font-size: 0.8em;
-            font-weight: bold;
+            font-weight: 600;
             color: $grayLight;
         }
         >button:hover {

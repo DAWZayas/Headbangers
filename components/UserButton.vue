@@ -62,6 +62,6 @@
     }
     
     .user-dropdown .icon-button {
-        padding-bottom: 0.7em;
+        padding-bottom: 0.3em;
     }
 </style>
