@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="step-form">
         <h3>Location</h3>
-        <el-form ref="form" :model="form" label-width="10em">
+        <el-form ref="form" :model="form" label-width="7em">
             <el-form-item label="Venue">
                 <el-input placeholder="where it gonna take place"></el-input>
             </el-form-item>
@@ -23,7 +23,7 @@
                 </el-form-item>
 
             <el-form-item>
-                <el-button>Back</el-button>
+                <el-button @click="back">Back</el-button>
                 <el-button type="primary" @click="done">Next</el-button>
             </el-form-item>
         </el-form>
@@ -47,8 +47,11 @@ export default {
     };
   },
   methods: {
-    done: function() {
+    done() {
       this.$emit("done");
+    },
+    back(){
+        this.$emit("back");
     }
   }
 };

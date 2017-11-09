@@ -59,7 +59,7 @@
             display: inline-block;
             height: 60px;
             line-height: 60px;
-            padding: 0 5px;
+            padding: 0 4px;
             position: relative;
             box-sizing: border-box;
         }

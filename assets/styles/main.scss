@@ -2,24 +2,35 @@
 @import url('https://fonts.googleapis.com/css?family=Ruda');
 @import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,800');
 
+@import "assets/styles/breakpoints.scss";
+
 *{
     font-family: 'Encode Sans Expanded', Arial, sans-serif;
-
     box-sizing: border-box;
-
     outline: none;
 }
 
 body{
     margin: 0;
-    background-color: #eee;
+    background-color: #fff;
+    
 }
 
 main{
     margin-top: 60px; 
     position: absolute;
     padding:1em;
-    background-color: #eee;
+    background-color: #fff;
     width: 100%;
     min-height: 100vh;
+}
+
+.el-dialog {
+    width: 90% !important;
+}
+
+@media (min-width: $break-sm){
+    .el-dialog{
+        width: 50% !important;
+    }
 }
