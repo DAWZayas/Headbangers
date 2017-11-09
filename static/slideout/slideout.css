@@ -12,8 +12,7 @@
 
 .slideout-panel {
     position: relative;
-    z-index: 1;
-    transition: width 1s;
+    z-index: 5;
 }
 
 .slideout-open,
@@ -27,7 +26,7 @@
 }
 
 @media(min-width: 768px) {
-    .slideout-open .slideout-panel, .slideout-open .footer-buttons {
+    .panel-open .slideout-panel, .slideout-open .footer-buttons {
         width: calc(100% - 16em);
     }
 

@@ -2,19 +2,30 @@
     <div class="step-form">
         <h3>Basic Info</h3>
     
-        <el-form ref="form" :model="form" label-width="7em">
+        <el-form ref="form" :model="form">
     
-            <el-form-item label="Event Name">
+            <el-form-item label="Event name">
                 <el-input placeholder="name" v-model="form.input"></el-input>
             </el-form-item>
-    
-            <el-form-item label="Choose Date">
-                <el-date-picker v-model="form.value1" type="date" placeholder="Pick a day"></el-date-picker>
-            </el-form-item>
-    
+
             <el-form-item label="Description">
                 <el-input type="textarea" v-model="form.desc"></el-input>
             </el-form-item>
+
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="Date">
+                        <el-date-picker v-model="form.value1" type="date"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="Time">
+                        <el-time-picker v-model="form.value1"></el-time-picker>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+    
+            
     
             <el-form-item label="Price">
                 <el-input-number v-model="form.num1" controls-position="right" @change="handleChange" :min="1" :max="100000"></el-input-number>
@@ -60,3 +71,10 @@
         }
     };
 </script>
+
+<style>
+    .el-date-editor.el-input,
+    .el-date-editor.el-input__inner {
+        width: 100%;
+    }
+</style>

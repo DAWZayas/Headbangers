@@ -16,5 +16,6 @@
         display: flex;
         justify-content: flex-end;
         background-color: #fff;
+        z-index: 6;
     }
 </style>

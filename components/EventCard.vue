@@ -21,14 +21,14 @@
         <hr>
         <div class="event-buttons">
             <button @click="liked = !liked">
-                    <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
-                </button>
+                        <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
+                    </button>
             <button @click="saved = !saved">
-                    <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
-                </button>
+                        <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
+                    </button>
             <button>
-                    <icon-text icon="lnr-bubble" text="Share"></icon-text>
-                </button>
+                        <icon-text icon="lnr-bubble" text="Share"></icon-text>
+                    </button>
         </div>
     </el-card>
 </template>
@@ -89,14 +89,12 @@
     
     .event-card:hover {
         cursor: pointer;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
-        0 3px 6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         .event-info {
             .lnr {
                 color: $accentColor;
             }
         }
-        
     }
     
     .event-info {
@@ -163,7 +161,7 @@
         .event-card-title {
             font-size: 1em;
         }
-        .event-info{
+        .event-info {
             font-size: .9em;
         }
         .price-info {
@@ -179,7 +177,7 @@
         .event-card-title {
             font-size: 1.15em;
         }
-        .event-info{
+        .event-info {
             font-size: 1em;
         }
         .price-info {
@@ -189,11 +187,9 @@
         .event-buttons {
             font-size: 1.15em;
         }
-
-        .el-col:nth-child(4) .event-card{
+        .el-col:nth-child(4) .event-card {
             display: none;
         }
-
     }
     
     @media (min-width: $break-lg) and (max-width: $break-lg-xl) {

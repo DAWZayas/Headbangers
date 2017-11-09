@@ -12,7 +12,7 @@
         
         <basics-form v-show="active === 0" @done="stepUp()"></basics-form>
         <location-form v-show="active === 1" @done="stepUp()" @back="stepDown()"></location-form>
-        <musical-form v-show="active === 2" @done="stepUp()" @back="stepDown()"></musical-form>
+        <music-form v-show="active === 2" @done="stepUp()" @back="stepDown()"></music-form>
     
         <div v-if="active == 3">
             <h3>Done!</h3>
@@ -30,7 +30,7 @@
     import {
         BasicsForm,
         LocationForm,
-        MusicalForm
+        MusicForm
     } from '~/components/PublishForms'
     export default {
         data: () => ({
@@ -39,7 +39,7 @@
         components: {
             BasicsForm,
             LocationForm,
-            MusicalForm
+            MusicForm
         },
         methods: {
             stepUp() {

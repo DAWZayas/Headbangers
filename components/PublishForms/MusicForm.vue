@@ -5,7 +5,7 @@
         <band-card v-for="band in bands" :key="band.name" :band="{name: band.name, description: band.description, link: band.link}" @remove="removeBand"></band-card>
         <el-button @click="showBandDialog = true" icon="el-icon-plus" size="small">Add band</el-button>
     
-        <p>And the genres:</p>
+        <p>And finally add the genres:</p>
         <genre-tags @added="addedGenre"></genre-tags>
     
         <footer-buttons>

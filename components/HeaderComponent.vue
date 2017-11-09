@@ -7,7 +7,6 @@
             <header-logo></header-logo>
         </div>
         <div class="separator"></div>
-    
         <div class="menu-item top-logo">
             <search-box></search-box>
         </div>
@@ -53,11 +52,11 @@
         height: 60px;
         line-height: 60px;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         .menu-item {
             text-align: center;
             display: inline-block;
-            padding: 0 4px;
+            padding: 0 5px;
             position: relative;
             box-sizing: border-box;
         }
@@ -72,6 +71,9 @@
         }
         .top-logo:hover {
             background-color: transparent;
+        }
+        .separator{
+           flex-grow: 1;
         }
         @media (min-width: 768px) {
             .menu-item {

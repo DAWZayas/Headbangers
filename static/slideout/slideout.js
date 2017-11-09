@@ -117,6 +117,7 @@ Slideout.prototype.open = function() {
   this.emit('beforeopen');
   if (!html.classList.contains('slideout-open')) {
     html.classList.add('slideout-open');
+    html.classList.add('panel-open');
   }
   this._setTransition();
   this._translateXTo(this._translateTo);
@@ -140,6 +141,7 @@ Slideout.prototype.close = function() {
   this._setTransition();
   this._translateXTo(0);
   this._opened = false;
+  html.classList.remove('panel-open');
   setTimeout(function() {
     html.classList.remove('slideout-open');
     //self.panel.style.transition = self.panel.style['-webkit-transition'] = self.panel.style[prefix + 'transform'] = self.panel.style.transform = '';
