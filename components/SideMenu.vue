@@ -1,31 +1,16 @@
 <template>
     <div id="side-menu">
-        <el-menu background-color="#293352" text-color="#fff" active-text-color="#edb83d" default-active="1" mode="vertical">
+        <el-menu background-color="#293352" text-color="#fff" active-text-color="#edb83d" :default-active="index" mode="vertical">
             <nuxt-link to="/">
                 <el-menu-item index="1">
                     <icon-text icon="lnr-home" text="Home"></icon-text>
                 </el-menu-item>
             </nuxt-link>
-            <el-submenu index="2">
-                <template slot="title">
-                    <icon-text icon="lnr-eye" text="Browse"></icon-text>
-                </template>
-                <nuxt-link to="/browse/list">
-                    <el-menu-item index="2-1">
-                        <icon-text icon="lnr-list" text="List"></icon-text>
-                    </el-menu-item>
-                </nuxt-link>
-                <nuxt-link to="/browse/map">
-                    <el-menu-item index="2-2">
-                        <icon-text icon="lnr-map" text="Map"></icon-text>
-                    </el-menu-item>
-                </nuxt-link>
-                <nuxt-link to="/browse/calendar">
-                    <el-menu-item index="2-3">
-                        <icon-text icon="lnr-calendar-full" text="Calendar"></icon-text>
-                    </el-menu-item>
-                </nuxt-link>
-            </el-submenu>
+            <nuxt-link to="/browse">
+                <el-menu-item index="2">
+                    <icon-text icon="lnr-earth" text="Browse"></icon-text>
+                </el-menu-item>
+            </nuxt-link>
             <el-menu-item index="3">
                 <icon-text icon="lnr-heart" text="My Events"></icon-text>
             </el-menu-item>
@@ -41,7 +26,14 @@
 <script>
     import IconText from "./IconText";
     export default {
-        name: "side-menu",
+        data() {
+            return {
+                pages: ['home', 'browse', 'mine', 'publish'],
+            }
+        },
+        computed: {
+            index(){ return this.pages.indexOf(this.$route.path.slice(1)).toString()}
+        },  
         components: {
             IconText
         }

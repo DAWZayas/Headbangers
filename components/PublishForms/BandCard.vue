@@ -1,29 +1,31 @@
 <template>
     <el-card class="band-card">
-        <el-button type="text" icon="el-icon-close" class="close-button" @click="removeBand"></el-button>
+        <el-button type="text" icon="el-icon-close" class="close-button" @click="remove"></el-button>
         <b>{{band.name}}</b>
         <p>{{band.description}}</p>
-        <a :href="link">{{band.link}}</a>
+        <a :href="band.link">{{band.link}}</a>
     </el-card>
 </template>
+
 <script>
-    export default { 
+    export default {
         props: ["band"],
         methods: {
-            remove(){
-                this.$emit("remove", this.key);
+            remove() {
+                this.$emit("remove", this.band.key);
             }
         }
     }
 </script>
+
 <style lang="scss">
-    .band-card{
-        margin-bottom: 0.5em; 
+    .band-card {
+        margin-bottom: 0.5em;
         position: relative;
-        p{
+        p {
             font-size: 0.8em;
         }
-        .close-button{
+        .close-button {
             position: absolute;
             right: 0.75em;
             top: 0;

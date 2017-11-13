@@ -15,14 +15,10 @@
 
 <script>
     import IconText from '~/components/IconText';
-    const modes = ['list', 'map', 'calendar'];
     export default {
-        validate({params}) {
-            return modes.includes(params.mode)
-        },
         data() {
             return {
-                selectedMode: this.$route.params.mode
+                selectedMode: 'list'
             }
         },
         components: {

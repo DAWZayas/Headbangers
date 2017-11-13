@@ -1,9 +1,8 @@
 <template>
     <div>
-
         <el-tag class="tag" v-for="tag in tags" :key="tag" closable type="warning" @close="removeTag(tag)">{{tag}}</el-tag>
         <el-button v-if="!showTagInput" class="tag button-new-tag" size="small" @click="showTagInput = true" icon="el-icon-plus" >Add genre</el-button>
-        <el-input v-else v-model="tagInput" autofocus="true" class="tag input-new-tag" size="small" autosize="true" @blur="addTag" @keyup.enter.native="addTag"></el-input>
+        <el-input v-else v-model="tagInput" class="tag input-new-tag" size="small" @blur="addTag" @keyup.enter.native="addTag"></el-input>
     </div>
 </template>
 
@@ -32,7 +31,7 @@
     }
 </script>
 
-<<style lang="scss">
+<style lang="scss">
     .tag {
         margin-right: 0.5em;
         margin-bottom: 0.5em;
