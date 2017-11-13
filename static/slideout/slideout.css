@@ -26,7 +26,7 @@
 }
 
 @media(min-width: 768px) {
-    .panel-open .slideout-panel, .slideout-open .footer-buttons {
+    .panel-open .slideout-panel{
         width: calc(100% - 16em);
     }
 
