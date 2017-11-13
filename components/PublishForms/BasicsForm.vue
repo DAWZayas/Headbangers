@@ -28,11 +28,11 @@
             
     
             <el-form-item label="Price">
-                <el-input-number v-model="form.num1" controls-position="right" @change="handleChange" :min="1" :max="100000"></el-input-number>
+                <el-input-number v-model="form.num1" controls-position="right" :min="1" :max="100000"></el-input-number>
             </el-form-item>
     
             <el-form-item label="Picture">
-                <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" multiple :limit="3" :on-exceed="handleExceed" :file-list="fileList">
+                <el-upload class="upload-demo" action="">
                     <el-button size="small" type="primary">Click to upload</el-button>
                     <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                 </el-upload>

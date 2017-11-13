@@ -10,17 +10,17 @@
                 <template slot="title">
                     <icon-text icon="lnr-eye" text="Browse"></icon-text>
                 </template>
-                <nuxt-link to="/explore">
+                <nuxt-link to="/browse/list">
                     <el-menu-item index="2-1">
                         <icon-text icon="lnr-list" text="List"></icon-text>
                     </el-menu-item>
                 </nuxt-link>
-                <nuxt-link to="/explore">
+                <nuxt-link to="/browse/map">
                     <el-menu-item index="2-2">
                         <icon-text icon="lnr-map" text="Map"></icon-text>
                     </el-menu-item>
                 </nuxt-link>
-                <nuxt-link to="/explore">
+                <nuxt-link to="/browse/calendar">
                     <el-menu-item index="2-3">
                         <icon-text icon="lnr-calendar-full" text="Calendar"></icon-text>
                     </el-menu-item>
@@ -56,6 +56,7 @@
         height: 100%;
         z-index: 1;
         background-color: #293352;
+        overflow: hidden;
         a {
             text-decoration: none;
         }

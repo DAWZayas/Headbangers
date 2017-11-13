@@ -6,11 +6,10 @@
 <style lang="scss">
     @import "assets/styles/colors.scss";
     .footer-buttons{
-        padding: 0.5em;
+        padding: 1em;
         position: fixed;
-        height: 3.5em;
         width: 100%;
-        border-top: 2px solid $grayLighter;
+        //border-top: 2px solid $grayLighter;
         margin-left: -1em;
         bottom: 0;
         display: flex;
