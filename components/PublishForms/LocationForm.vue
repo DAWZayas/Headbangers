@@ -8,28 +8,37 @@
             <el-form-item label="Description">
                 <el-input type="textarea" placeholder="warnings, restrictions, all info you can tell us about the place"></el-input>
             </el-form-item>
-            <el-row>
-            <el-col :span="18">
-                <el-form-item label="Street">
-                    <el-input placeholder="'skynyrd avenue'"></el-input>
-                </el-form-item>
-            </el-col>
-            <el-col :span="6">
-                <el-form-item label="Nº">
-                    <el-input placeholder=""></el-input>
-                </el-form-item>
-            </el-col>
+            <el-row :gutter="20">
+                <el-col :span="13">
+                    <el-form-item label="Street">
+                        <el-input placeholder="skynyrd avenue"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :xs="5" :sm="3" :md="3" :lg="3" :xl="3">
+                    <el-form-item label="Number">
+                        <el-input placeholder="21"></el-input>
+                    </el-form-item>
+                </el-col>
             </el-row>
-            <el-form-item label="Country">
-                <el-col :span="12">
-                    <el-input placeholder="'north korea'"></el-input>
+            <el-row>
+                <el-col :span="24">
+                    <el-form-item label="Country">
+                        <el-input placeholder="south korea"></el-input>
+                    </el-form-item>
                 </el-col>
-            </el-form-item>
-            <el-form-item label="ZIP Code">
-                <el-col :span="8">
-                    <el-input placeholder=""></el-input>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="13">
+                    <el-form-item label="City">
+                        <el-input placeholder="amsterdam"></el-input>
+                    </el-form-item>
                 </el-col>
-            </el-form-item>
+                <el-col :xs="8" :sm="5" :md="5" :lg="5" :xl="5">
+                    <el-form-item label="ZIP Code">
+                        <el-input placeholder="56984"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
         </el-form>
         <div class="form-buttons">
             <el-button @click="back">Back</el-button>
