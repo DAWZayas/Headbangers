@@ -28,7 +28,7 @@
             <el-row>          
                 <el-col :span="12">
                     <el-form-item label="Price (in eur)">
-                        <el-input-number class="c-size" v-model="form.num1" controls-position="right" size="medium" :min="0.01" :max="100000" step="0.01" ></el-input-number>
+                        <el-input-number class="c-size" v-model="form.num1" controls-position="right" size="medium" :min="0.01" :max="100000" :step="0.01" ></el-input-number>
                     </el-form-item>
                 </el-col>          
                 <el-col :span="12">
