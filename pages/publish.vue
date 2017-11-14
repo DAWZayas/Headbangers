@@ -18,11 +18,11 @@
                 <h3>Done!</h3>
             </div>
             <!--    <div class="not-auth" v-if="!isAuthenticated">
-                            <img src="#">
-                            <h3>You need to be Logged in</h3>
-                            <el-button type="primary" >Log In</el-button>
-                        </div>
-                -->
+                                <img src="#">
+                                <h3>You need to be Logged in</h3>
+                                <el-button type="primary" >Log In</el-button>
+                            </div>
+                    -->
         </div>
     </div>
 </template>
@@ -56,7 +56,13 @@
 <style lang="scss">
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
-
+    .form-buttons {
+        padding: 1em;
+        display: flex;
+        justify-content: flex-end;
+        background-color: #fff;
+    }
+    
     .not-auth {
         width: 100%;
         text-align: center;

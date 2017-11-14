@@ -40,10 +40,10 @@
                 </el-col>
             </el-row>
         </el-form>
-        <footer-buttons>
+        <div class="form-buttons">
             <el-button @click="back">Back</el-button>
             <el-button type="primary" @click="done">Next</el-button>
-        </footer-buttons>
+        </div>
     </div>
 </template>
     
