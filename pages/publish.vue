@@ -56,6 +56,7 @@
 <style lang="scss">
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
+
     .not-auth {
         width: 100%;
         text-align: center;
@@ -90,7 +91,7 @@
         }
     }
     
-        @media (min-width: $break-lg) {
+    @media (min-width: $break-lg) {
         .publish-form {
             width: 50%;
             margin: 0 auto;
