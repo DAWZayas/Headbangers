@@ -25,18 +25,21 @@
                 </el-col>
             </el-row>
     
-            
-    
-            <el-form-item label="Price">
-                <el-input-number v-model="form.num1" controls-position="right" :min="1" :max="100000"></el-input-number>
-            </el-form-item>
-    
-            <el-form-item label="Picture">
-                <el-upload class="upload-demo" action="">
-                    <el-button size="small" type="primary">Click to upload</el-button>
-                    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-                </el-upload>
-            </el-form-item>
+            <el-row>          
+                <el-col :span="12">
+                    <el-form-item label="Price (in eur)">
+                        <el-input-number class="c-size" v-model="form.num1" controls-position="right" size="medium" :min="0.01" :max="100000" step="0.01" ></el-input-number>
+                    </el-form-item>
+                </el-col>          
+                <el-col :span="12">
+                    <el-form-item label="Picture"><br>
+                        <el-upload class="upload-demo" action="">
+                            <el-button class="f-upload" size="medium" type="primary">Click to upload</el-button>
+                            <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+                        </el-upload>
+                    </el-form-item>    
+                </el-col> 
+            </el-row>  
         </el-form>
         <footer-buttons>
             <el-button type="primary" @click="done">Next</el-button>
@@ -55,7 +58,7 @@
                     input: '',
                     value1: '',
                     desc: '',
-                    num1: 1,
+                    num1: 0.00,
                     fileList: [{}]
                 }
             }
@@ -77,4 +80,14 @@
     .el-date-editor.el-input__inner {
         width: 100%;
     }
+    .upload-demo{
+        text-align: right;
+    }
+    .c-size {
+        width: 100%;
+    }
+    .el-button f-upload {
+        width: 100%;
+    }
+
 </style>
