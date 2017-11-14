@@ -7,11 +7,11 @@
             <el-form-item label="Event name">
                 <el-input placeholder="name" v-model="form.input"></el-input>
             </el-form-item>
-
+    
             <el-form-item label="Description">
                 <el-input type="textarea" v-model="form.desc"></el-input>
             </el-form-item>
-
+    
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Date">
@@ -25,7 +25,7 @@
                 </el-col>
             </el-row>
     
-            
+    
     
             <el-form-item label="Price">
                 <el-input-number v-model="form.num1" controls-position="right" :min="1" :max="100000"></el-input-number>
@@ -37,10 +37,11 @@
                     <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                 </el-upload>
             </el-form-item>
+    
+            <div class="form-buttons">
+                <el-button type="primary" @click="done">Next</el-button>
+            </div>
         </el-form>
-        <footer-buttons>
-            <el-button type="primary" @click="done">Next</el-button>
-        </footer-buttons>
     </div>
 </template>
 
