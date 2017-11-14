@@ -8,10 +8,10 @@
         <p>And finally add the genres:</p>
         <genre-tags @added="addedGenre"></genre-tags>
     
-        <footer-buttons>
+        <div class="form-buttons">
             <el-button @click="back">Back</el-button>
             <el-button type="primary" @click="done">Publish</el-button>
-        </footer-buttons>
+        </div>
     
         <el-dialog v-if="showBandDialog" :visible.sync="showBandDialog" append-to-body title="Add band">
             <band-form @confirm="addedBand" @cancel="showBandDialog = false"></band-form>
