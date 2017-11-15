@@ -10,9 +10,10 @@
         "dev": "nuxt"
     },
     "devDependencies": {
+        "element-theme-chalk": "^2.0.4",
         "element-ui": "2.0.3",
-        "nuxt": "^1.0.0-rc9",
         "node-sass": "^4.6.1",
+        "nuxt": "^1.0.0-rc9",
         "sass-loader": "^6.0.6",
         "vue": "^2.5.3",
         "vue-server-renderer": "^2.5.3",

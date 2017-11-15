@@ -24,28 +24,8 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-    
-<<<<<<< HEAD
-            <el-row>          
-                <el-col :span="12">
-                    <el-form-item label="Price (in eur)">
-                        <el-input-number class="c-size" v-model="form.num1" controls-position="right" size="medium" :min="0.01" :max="100000" :step="0.01" ></el-input-number>
-                    </el-form-item>
-                </el-col>          
-                <el-col :span="12">
-                    <el-form-item label="Picture"><br>
-                        <el-upload class="upload-demo" action="">
-                            <el-button class="f-upload" size="medium" type="primary">Click to upload</el-button>
-                            <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-                        </el-upload>
-                    </el-form-item>    
-                </el-col> 
-            </el-row>  
-=======
-    
-    
             <el-form-item label="Price">
-                <el-input-number v-model="form.num1" controls-position="right" :min="1" :max="100000"></el-input-number>
+                <el-input v-model="form.num1"></el-input>
             </el-form-item>
     
             <el-form-item label="Picture">
@@ -58,7 +38,6 @@
             <div class="form-buttons">
                 <el-button type="primary" @click="done">Next</el-button>
             </div>
->>>>>>> ad3e3b98c6f13c677b5a73972b9f10b2b3b7344c
         </el-form>
     </div>
 </template>
