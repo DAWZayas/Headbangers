@@ -10,7 +10,7 @@
     
         <div class="form-buttons">
             <el-button @click="back">Back</el-button>
-            <el-button type="primary" @click="done">Publish</el-button>
+            <el-button type="primary" @click="done">Next</el-button>
         </div>
     
         <el-dialog v-if="showBandDialog" :visible.sync="showBandDialog" append-to-body title="Add band">
@@ -25,8 +25,7 @@
     import BandCard from './BandCard'
     import BandForm from './BandForm'
     import GenreTags from './GenreTags'
-    import FooterButtons from './FooterButtons'
-
+    
     export default {
         data() {
             return {
@@ -45,10 +44,14 @@
                 this.bands.splice(this.bands.indexOf(band), 1)
             },
             addedGenre(genre) {
+                console.log(genre);
                 this.genres.push(genre);
             },
             done() {
-                this.$emit("done")
+                this.$emit("done", {
+                    bands: this.bands,
+                    genres: this.genres
+                });
             },
             back() {
                 this.$emit("back")
@@ -57,8 +60,7 @@
         components: {
             BandCard,
             BandForm,
-            GenreTags,
-            FooterButtons
+            GenreTags
         }
     }
 </script>
