@@ -28,8 +28,8 @@
     
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="Price">
-                        <el-input placeholder="price" v-model="basics.price"></el-input>
+                    <el-form-item label="Price" prop="price" :rules="[ { type: 'number', message: 'price must be a number'} ]">
+                        <el-input type="price" placeholder="price" v-model.number="basics.price"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
