@@ -1,6 +1,22 @@
 <template>
-    <div>
-        <el-row v-if="show == 'login'">
+    <div v-if="show == 'login'">
+        <el-form ref="authForm" :model="form">
+            <el-row>
+                <el-col :span="16" :offset="4">
+                    <el-form-item label="Username">
+                        <el-input placeholder=""></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="16" :offset="4">
+                    <el-form-item label="Password">
+                        <el-input placeholder=""></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+        </el-form>
+        <el-row type="flex" justify="center">
                 <button class="loginBtn loginBtn--facebook">
                     Login with Facebook
                 </button>

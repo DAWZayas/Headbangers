@@ -25,8 +25,6 @@
                 </el-col>
             </el-row>
     
-    
-    
             <el-form-item label="Price">
                 <el-input-number v-model="basics.price" controls-position="right" :min="1" :max="100000"></el-input-number>
             </el-form-item>
@@ -41,6 +39,7 @@
             <div class="form-buttons">
                 <el-button type="primary" @click="done">Next</el-button>
             </div>
+    
         </el-form>
     </div>
 </template>
@@ -72,6 +71,18 @@
 <style>
     .el-date-editor.el-input,
     .el-date-editor.el-input__inner {
+        width: 100%;
+    }
+    
+    .upload-demo {
+        text-align: right;
+    }
+    
+    .c-size {
+        width: 100%;
+    }
+    
+    .el-button f-upload {
         width: 100%;
     }
 </style>
