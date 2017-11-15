@@ -1,0 +1,30 @@
+// Material Forms
+
+@import "assets/styles/colors.scss";
+
+input.el-input__inner{
+    background-color: $grayLighter;
+    padding: .25em 0em 0em .5em;
+
+    border: none;
+    border-radius: 0em;
+    border-bottom: 2px solid $grayLight;
+}
+input.el-input__inner:focus{
+    border-color: $mainColorLightest;
+}
+textarea.el-textarea__inner{
+    padding: .5em 0em 0em .75em;
+    background-color: $grayLighter;
+
+    border: none;
+    border-radius: 0em;
+    border-bottom: 2px solid $grayLight;
+}
+textarea.el-textarea__inner:focus{
+    border-color: $mainColorLightest;
+}
+button.el-button{
+    border-radius: 0em;
+
+}
