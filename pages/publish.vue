@@ -2,7 +2,7 @@
     <div>
         <!--    <div v-if="isAuthenticated"> -->
         <div class="steps-wrapper">
-            <el-steps :active="active" finish-status="success" align-center>
+            <el-steps :active="currentStep" finish-status="success" align-center>
                 <el-step title="Basics"></el-step>
                 <el-step title="Location"></el-step>
                 <el-step title="Music"></el-step>
@@ -10,19 +10,21 @@
     
         </div>
         <div class="publish-form">
-            <basics-form v-show="active === 0" @done="stepUp()"></basics-form>
-            <location-form v-show="active === 1" @done="stepUp()" @back="stepDown()"></location-form>
-            <music-form v-show="active === 2" @done="stepUp()" @back="stepDown()"></music-form>
+            <basics-form v-show="currentStep === 0" @done="basicsDone"></basics-form>
+            <location-form v-show="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
+            <music-form v-show="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>
     
-            <div v-if="active == 3">
+            <div v-if="currentStep === 3">
                 <h3>Done!</h3>
+                <p>We have everything you can publish it now</p>
+                <el-button @click="publish">Publish</el-button>
             </div>
             <!--    <div class="not-auth" v-if="!isAuthenticated">
-                                <img src="#">
-                                <h3>You need to be Logged in</h3>
-                                <el-button type="primary" >Log In</el-button>
-                            </div>
-                    -->
+                        <img src="#">
+                        <h3>You need to be Logged in</h3>
+                        <el-button type="primary" >Log In</el-button>
+                    </div>
+            -->
         </div>
     </div>
 </template>
@@ -35,7 +37,8 @@
     } from '~/components/PublishForms'
     export default {
         data: () => ({
-            active: 0
+            currentStep: 0,
+            eventInfo: {}
         }),
         components: {
             BasicsForm,
@@ -43,11 +46,27 @@
             MusicForm
         },
         methods: {
+            basicsDone(basicsInfo){
+                this.eventInfo = {...basicsInfo};
+                this.stepUp();
+            },
+            locationDone(locationInfo){
+                this.eventInfo.location = locationInfo;
+                this.stepUp();
+            },
+            musicDone(musicInfo){
+                this.eventInfo.bands = musicInfo.bands;
+                this.eventInfo.genres = musicInfo.genres;
+                this.stepUp();
+            },
             stepUp() {
-                this.active++;
+                this.currentStep++;
             },
             stepDown() {
-                this.active--;
+                this.currentStep--;
+            },
+            publish() {
+                this.$store.commit('addEvent', this.eventInfo);
             }
         }
     }
@@ -74,8 +93,7 @@
     .steps-wrapper {
         background-color: $grayLighter;
         width: calc(100% + 2em);
-        margin-left: -1em;
-        margin-top: -1em;
+        margin: -1em 0 0 -1em;
         padding-top: 1em;
         border-bottom: 1px solid $grayLight;
         .el-step__title.is-wait {

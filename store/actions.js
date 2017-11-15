@@ -1,3 +1,6 @@
 export default {
-    addEvent: (state, event) => state.events.push(event)
+    addEvent: ({commit, state}, event) => {
+        if(!event) return;
+        commit('addEvent', event);
+    }
 }

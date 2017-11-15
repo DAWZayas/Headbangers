@@ -2,25 +2,25 @@
     <div class="step-form">
         <h3>Basic Info</h3>
     
-        <el-form ref="form" :model="form">
+        <el-form ref="form" :model="basics">
     
             <el-form-item label="Event name">
-                <el-input placeholder="name" v-model="form.input"></el-input>
+                <el-input placeholder="name" v-model="basics.name"></el-input>
             </el-form-item>
     
             <el-form-item label="Description">
-                <el-input type="textarea" v-model="form.desc"></el-input>
+                <el-input type="textarea" v-model="basics.description"></el-input>
             </el-form-item>
     
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Date">
-                        <el-date-picker v-model="form.value1" type="date"></el-date-picker>
+                        <el-date-picker v-model="basics.date" type="date"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="Time">
-                        <el-time-picker v-model="form.value1"></el-time-picker>
+                        <el-time-picker v-model="basics.time"></el-time-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -28,7 +28,7 @@
     
     
             <el-form-item label="Price">
-                <el-input-number v-model="form.num1" controls-position="right" :min="1" :max="100000"></el-input-number>
+                <el-input-number v-model="basics.price" controls-position="right" :min="1" :max="100000"></el-input-number>
             </el-form-item>
     
             <el-form-item label="Picture">
@@ -46,17 +46,16 @@
 </template>
 
 <script>
-    import FooterButtons from './FooterButtons'
     export default {
         name: "basic-form",
     
         data() {
             return {
-                form: {
-                    input: '',
-                    value1: '',
-                    desc: '',
-                    num1: 1,
+                basics: {
+                    name: '',
+                    description: '',
+                    date: '',
+                    time: '',
                     fileList: [{}]
                 }
             }
@@ -64,11 +63,8 @@
     
         methods: {
             done() {
-                this.$emit("done")
+                this.$emit("done", this.basics)
             }
-        },
-        components: {
-            FooterButtons
         }
     };
 </script>

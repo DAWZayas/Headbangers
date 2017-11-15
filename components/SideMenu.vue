@@ -1,6 +1,6 @@
 <template>
     <div id="side-menu">
-        <el-menu background-color="#293352" text-color="#fff" active-text-color="#edb83d" :default-active="index" mode="vertical">
+        <el-menu background-color="#293352" text-color="#fff" active-text-color="#edb83d" default-active="1" mode="vertical">
             <nuxt-link to="/">
                 <el-menu-item index="1">
                     <icon-text icon="lnr-home" text="Home"></icon-text>
@@ -26,14 +26,6 @@
 <script>
     import IconText from "./IconText";
     export default {
-        data() {
-            return {
-                pages: ['home', 'browse', 'mine', 'publish'],
-            }
-        },
-        computed: {
-            index(){ return this.pages.indexOf(this.$route.path.slice(1)).toString()}
-        },  
         components: {
             IconText
         }

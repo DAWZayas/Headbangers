@@ -18,11 +18,11 @@
         methods: {
             addTag() {
                 if (this.tagInput !== "") {
-                    this.tags.push(this.tagInput)
-                    this.tagInput = "" 
-                    this.$emit("added", this.tagInput)
+                    this.tags.push(this.tagInput);
+                    this.$emit("added", this.tagInput);
+                    this.tagInput = "";
                 }
-                this.showTagInput = false
+                this.showTagInput = false;
             },
             removeTag(tag) {
                 this.tags.splice(this.tags.indexOf(tag), 1)
