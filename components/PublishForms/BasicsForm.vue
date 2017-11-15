@@ -59,7 +59,6 @@
                 }
             }
         },
-    
         methods: {
             done() {
                 this.$emit("done", this.basics)

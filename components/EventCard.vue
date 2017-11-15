@@ -5,8 +5,8 @@
         <div class="event-info">
             <el-row>
                 <el-col :span="12">
-                    <icon-text icon="lnr-calendar-full" :text="date"></icon-text>
-                    <icon-text icon="lnr-clock" :text="time"></icon-text>
+                    <icon-text icon="lnr-calendar-full" :text="formattedDate"></icon-text>
+                    <icon-text icon="lnr-clock" :text="formattedTime"></icon-text>
                 </el-col>
                 <el-col :span="12">
                     <div class="price-info">
@@ -37,31 +37,29 @@
     import IconText from "./IconText";
     export default {
         name: "event-card",
+        data(){
+            return {
+                liked: false,
+                saved: false
+            }
+        },
         components: {
             IconText
         },
-        data: () => ({
-            id: "01",
-            img: "img/placeholder.png",
-            title: "Concierto en nosedonde",
-            date: "01/Feb/18",
-            time: "22:00",
-            location: "Sala Galileo, Madrid",
-            price: "9,00",
-            liked: false,
-            saved: false
-        }),
+        props: ["id", "img", "title", "date", "time", "location", "price"],
         computed: {
-            likeClass: function() {
+            formattedDate(){ return new Date(this.date).toLocaleDateString()},
+            formattedTime(){ return new Date(this.time).toLocaleTimeString().slice(0, 5)},
+            likeClass() {
                 return this.liked && 'liked-button'
             },
-            likeText: function() {
+            likeText() {
                 return (this.liked) ? 'Liked' : 'Like'
             },
-            saveClass: function() {
+            saveClass() {
                 return this.saved && 'saved-button'
             },
-            saveText: function() {
+            saveText() {
                 return (this.saved) ? 'Saved' : 'Save'
             },
         }
@@ -140,7 +138,7 @@
     hr {
         margin: 0 0 0 5%;
         width: 90%;
-        height: .075em;
+        height: 1px;
         border: 0;
         background-color: $grayLight;
     }

@@ -15,7 +15,7 @@ module.exports = {
     },
     css: [
         '~/assets/styles/main.scss',
-        'element-ui/lib/theme-chalk/index.css',
+        '~/node_modules/element-ui/lib/theme-chalk/index.css',
         '~/assets/styles/linearicons/style.css',
         '~/static/slideout/slideout.css' 
     ],

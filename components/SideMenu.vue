@@ -1,24 +1,18 @@
 <template>
     <div id="side-menu">
-        <el-menu background-color="#293352" text-color="#fff" active-text-color="#edb83d" default-active="1" mode="vertical">
-            <nuxt-link to="/">
-                <el-menu-item index="1">
-                    <icon-text icon="lnr-home" text="Home"></icon-text>
-                </el-menu-item>
-            </nuxt-link>
-            <nuxt-link to="/browse">
-                <el-menu-item index="2">
-                    <icon-text icon="lnr-earth" text="Browse"></icon-text>
-                </el-menu-item>
-            </nuxt-link>
-            <el-menu-item index="3">
+        <el-menu background-color="#293352" text-color="#fff" active-text-color="#edb83d" :default-active="this.$route.path" mode="vertical" router>
+            <el-menu-item index="/">
+                <icon-text icon="lnr-home" text="Home"></icon-text>
+            </el-menu-item>
+            <el-menu-item index="/browse" >
+                <icon-text icon="lnr-earth" text="Browse"></icon-text>
+            </el-menu-item>
+            <el-menu-item index="/myevents">
                 <icon-text icon="lnr-heart" text="My Events"></icon-text>
             </el-menu-item>
-            <nuxt-link to="/publish">
-                <el-menu-item index="4">
-                    <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>
-                </el-menu-item>
-            </nuxt-link>
+            <el-menu-item index="/publish">
+                <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>
+            </el-menu-item>
         </el-menu>
     </div>
 </template>

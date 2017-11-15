@@ -16,15 +16,15 @@
     
             <div v-if="currentStep === 3">
                 <h3>Done!</h3>
-                <p>We have everything you can publish it now</p>
+                <p>We have everything, you can publish it now</p>
                 <el-button @click="publish">Publish</el-button>
             </div>
             <!--    <div class="not-auth" v-if="!isAuthenticated">
-                        <img src="#">
-                        <h3>You need to be Logged in</h3>
-                        <el-button type="primary" >Log In</el-button>
-                    </div>
-            -->
+                            <img src="#">
+                            <h3>You need to be Logged in</h3>
+                            <el-button type="primary" >Log In</el-button>
+                        </div>
+                -->
         </div>
     </div>
 </template>
@@ -46,15 +46,15 @@
             MusicForm
         },
         methods: {
-            basicsDone(basicsInfo){
-                this.eventInfo = {...basicsInfo};
+            basicsDone(basicsInfo) {
+                this.eventInfo = { ...basicsInfo };
                 this.stepUp();
             },
-            locationDone(locationInfo){
+            locationDone(locationInfo) {
                 this.eventInfo.location = locationInfo;
                 this.stepUp();
             },
-            musicDone(musicInfo){
+            musicDone(musicInfo) {
                 this.eventInfo.bands = musicInfo.bands;
                 this.eventInfo.genres = musicInfo.genres;
                 this.stepUp();
