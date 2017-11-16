@@ -13,13 +13,13 @@
     </el-radio-group>
     -->
     <div>
-        <event-card v-for="event in events" :key="event.name" :id="event.name" :img="event.img" :title="event.name" :date="event.date" :time="event.time" :location="`${event.location.name} (${event.location.city})`" :price="event.price"></event-card>
+        <event-card v-for="event in events" :key="event.name" :id="event.name" img="/img/placeholder.png" :title="event.name" :date="event.date" :time="event.time" :location="`${event.location.name} (${event.location.city})`" :price="event.price"></event-card>
     </div>
 </template>
 
 <script>
-    import IconText from '~/components/IconText';
-    import EventCard from '~/components/EventCard';
+    import IconText from '~/components/common/IconText';
+    import EventCard from '~/components/index/EventCard';
     export default {
         data() {
             return {

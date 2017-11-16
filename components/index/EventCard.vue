@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import IconText from "./IconText";
+    import {IconText} from "~/components/common";
     export default {
         name: "event-card",
         data(){
@@ -144,12 +144,14 @@
     }
     
     .liked-button {
+        color: $mainColorLightest;
         .lnr {
             color: $secondaryColor;
         }
     }
     
     .saved-button {
+        color: $mainColorLightest;
         .lnr {
             color: $green;
         }

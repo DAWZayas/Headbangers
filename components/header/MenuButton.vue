@@ -5,8 +5,6 @@
 </template>
 
 <script>
-    import SideMenu from "./SideMenu";
-
     export default {
         name: "menu-button"
     };

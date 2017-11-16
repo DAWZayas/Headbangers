@@ -44,7 +44,6 @@
                 this.bands.splice(this.bands.indexOf(band), 1)
             },
             addedGenre(genre) {
-                console.log(genre);
                 this.genres.push(genre);
             },
             done() {
