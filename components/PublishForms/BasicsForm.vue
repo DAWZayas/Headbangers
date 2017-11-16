@@ -70,7 +70,7 @@
                         { max: 30, message: 'Length should less than 30 characters.', trigger: 'blur' },
                     ],
                     price: [
-                        { type: 'number', message: 'Price must be a number.', trigger: 'blur' },
+                        { validator: this.checkPrice, trigger: 'blur' },
                     ]
                 }
             };         
@@ -80,15 +80,22 @@
                 // this.$emit("done", this.basics);
                 this.$refs['form-basics'].validate((valid) => {
                     if (valid) {
-                        this.$emit("done", this.basics);
+                        // this.$emit("done", this.basics);
                         alert('submit!');
                     } else {
-                        alert('error submit!');
+                        // alert('error submit!');
                         return false;
                     }
                 });
+            
             },
-
+            checkPrice(rule, value, callback){
+                if (value === ''){
+                    callback(new Error ('number empty'));
+                } else {
+                    callback();
+                }
+            }
         }
     };
 </script>
