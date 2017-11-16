@@ -22,9 +22,8 @@
 
 <script>
     import HeaderLogo from "./HeaderLogo";
-    import IconButton from "./IconButton";
     import MenuButton from "./MenuButton";
-    import IconText from "./IconText";
+    import {IconText, IconButton} from "~/components/common";
     import UserButton from "./UserButton";
     import SearchBox from "./SearchBox";
     export default {

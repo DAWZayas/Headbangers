@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import HeaderComponent from "~/components/HeaderComponent";
+    import HeaderComponent from "~/components/header/HeaderComponent";
     import SideMenu from "~/components/SideMenu";
     export default {
         data () {

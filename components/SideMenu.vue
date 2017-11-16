@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import IconText from "./IconText";
+    import IconText from "~/components/common/IconText";
     export default {
         components: {
             IconText

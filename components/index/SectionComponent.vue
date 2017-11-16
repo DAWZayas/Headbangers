@@ -4,15 +4,15 @@
       <icon-text class="section-title" :icon="icon" :text="text"></icon-text>
         <el-row :gutter="16">
             <el-col class="event-col" :key="num" v-for="num in 4" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-                <event-card></event-card>
+                <event-card title="Concierto" img="/img/placeholder.png" :date="Date.now()" :time="Date.now()" price="18.00" location="Sala Galileo (Madrid)"></event-card>
             </el-col>
         </el-row>
     </div>
 </template>
 
 <script>
-    import IconText from "./IconText";
-    import EventCard from "./EventCard";
+    import IconText from "~/components/common/IconText";
+    import EventCard from "~/components/index/EventCard";
         export default {
             name: "section-component",
             props: ["icon", "text"],

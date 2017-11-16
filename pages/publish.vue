@@ -28,9 +28,8 @@
     import {
         BasicsForm,
         LocationForm,
-        MusicForm,
-        PublishSummary
-    } from '~/components/PublishForms'
+        MusicForm
+    } from '~/components/publish'
     export default {
         data: () => ({
             currentStep: 0,

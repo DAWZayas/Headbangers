@@ -1,8 +1,7 @@
 (() => {
     var slideout = new Slideout({
         'panel': document.querySelector('main'),
-        'menu': document.querySelector('#side-menu'),
-        'tolerance': 256
+        'menu': document.querySelector('#side-menu')
     });
     document.querySelector("#menu-button").onclick = () => slideout.toggle();
     window.innerWidth > 768 && slideout.open();
