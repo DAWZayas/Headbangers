@@ -2,9 +2,9 @@
     <div class="step-form">
         <h3>Basic Info</h3>
     
-        <el-form ref="form" :model="basics">
+        <el-form ref="form-basics" :model="basics" :rules="rules">
     
-            <el-form-item label="Event name">
+            <el-form-item label="Event name" prop="name">
                 <el-input placeholder="name" v-model="basics.name"></el-input>
             </el-form-item>
     
@@ -28,7 +28,7 @@
     
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="Price" prop="price" :rules="[ { type: 'number', message: 'price must be a number'} ]">
+                    <el-form-item label="Price" prop="price">
                         <el-input type="price" placeholder="price" v-model.number="basics.price"></el-input>
                     </el-form-item>
                 </el-col>
@@ -63,13 +63,32 @@
                     time: '',
                     price: 0.00,
                     fileList: [{}]
+                },
+                rules: {
+                    name: [
+                        { required: true, message: 'Please, input event name.', trigger: 'blur' },
+                        { max: 30, message: 'Length should less than 30 characters.', trigger: 'blur' },
+                    ],
+                    price: [
+                        { type: 'number', message: 'Price must be a number.', trigger: 'blur' },
+                    ]
                 }
-            }
+            };         
         },
         methods: {
             done() {
-                this.$emit("done", this.basics)
-            }
+                // this.$emit("done", this.basics);
+                this.$refs['form-basics'].validate((valid) => {
+                    if (valid) {
+                        this.$emit("done", this.basics);
+                        alert('submit!');
+                    } else {
+                        alert('error submit!');
+                        return false;
+                    }
+                });
+            },
+
         }
     };
 </script>
