@@ -8,18 +8,18 @@
                 <el-input placeholder="name" v-model="basics.name"></el-input>
             </el-form-item>
     
-            <el-form-item label="Description">
-                <el-input type="textarea" v-model="basics.description"></el-input>
+            <el-form-item label="Description" prop="descr">
+                <el-input type="textarea" v-model="basics.descr"></el-input>
             </el-form-item>
     
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="Date">
-                        <el-date-picker v-model="basics.date" type="date"></el-date-picker>
+                    <el-form-item label="Date" prop="date">
+                        <el-date-picker type="date" v-model="basics.date" ></el-date-picker>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
-                    <el-form-item label="Time">
+                <el-col :span="11" :offset="1">
+                    <el-form-item label="Time" prop="time">
                         <el-time-picker v-model="basics.time"></el-time-picker>
                     </el-form-item>
                 </el-form-item>
@@ -29,13 +29,13 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Price" prop="price">
-                        <el-input type="price" placeholder="price" v-model.number="basics.price"></el-input>
+                        <el-input placeholder="price" v-model="basics.price"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="Picture"><br>
+                    <el-form-item label="Picture" prop="pic"><br>
                         <el-upload class="upload-demo" action="">
-                            <el-button size="medium" type="primary">Click to upload</el-button>
+                            <el-button type="primary" size="medium">Click to upload</el-button>
                             <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                         </el-upload>
                     </el-form-item>
@@ -58,44 +58,56 @@
             return {
                 basics: {
                     name: '',
-                    description: '',
+                    descr: '',
                     date: '',
                     time: '',
-                    price: 0.00,
+                    price: '0.00',
                     fileList: [{}]
                 },
                 rules: {
                     name: [
-                        { required: true, message: 'Please, input event name.', trigger: 'blur' },
-                        { max: 30, message: 'Length should less than 30 characters.', trigger: 'blur' },
+                        { required: true , message: 'Please, input event name.', trigger: 'blur' },
+                        { required: true , pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Name must be alphanumeric.', trigger: 'blur' },
+                        { max: 50, message: 'Length should less than 50 characters.', trigger: 'blur' },
+                    ],
+                    date: [
+                        //{ required: true , message: 'Please, choose a date.', trigger: 'blur' },
+                    ],
+                    time: [
+                        //{ required: true , message: 'Please, choose a time.', trigger: 'blur' },
+                    ],
+                    descr: [
+                        { required: true, message: 'Please input description.', trigger: 'blur' },
+                        { max: 200, message: 'Length should less than 200 characters.', trigger: 'blur' },
                     ],
                     price: [
+                        { required: true, message: 'Please input price.', trigger: 'blur' },
+                        //{ required: true, pattern: /^[0-9]{1,6}([,.][0-9]{2})?$/, message: 'Price not valid.', trigger: 'blur' },
                         { validator: this.checkPrice, trigger: 'blur' },
-                    ]
+                        // { digits: true, message: 'Please input price.', trigger: 'blur' },
+                    ],
                 }
             };         
         },
         methods: {
             done() {
-                // this.$emit("done", this.basics);
                 this.$refs['form-basics'].validate((valid) => {
                     if (valid) {
                         this.$emit("done", this.basics);
-                        //alert('submit!');
                     } else {
-                        // alert('error submit!');
                         return false;
                     }
                 });
-            
             },
             checkPrice(rule, value, callback){
-                if (value === ''){
-                    callback(new Error ('number empty'));
-                } else {
+                //var re = new RegExp("^[0-9]{1,6}([,.][0-9]{2})?$");
+                //if (re.test(value)) {
+                if (value.match(/^[0-9]{1,6}([,.][0-9]{2})?$/)){
                     callback();
+                } else {
+                    callback(new Error ('Not valid.'));
                 }
-            }
+            },
         }
     };
 </script>

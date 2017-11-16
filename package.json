@@ -11,6 +11,7 @@
         "dev": "nuxt"
     },
     "devDependencies": {
+        "element-theme-chalk": "^2.0.4",
         "element-ui": "2.0.3",
         "node-sass": "^4.6.1",
         "nuxt": "^1.0.0-rc9",

@@ -1,4 +1,17 @@
 <template>
+    <!--
+    <el-radio-group v-model="selectedMode" size="mini">
+        <el-radio-button label="list">
+            <icon-text icon="lnr-list" text="List"></icon-text>
+        </el-radio-button>
+        <el-radio-button label="map">
+            <icon-text icon="lnr-map" text="Map"></icon-text>
+        </el-radio-button>
+        <el-radio-button label="calendar">
+            <icon-text icon="lnr-calendar-full" text="Calendar"></icon-text>
+        </el-radio-button>
+    </el-radio-group>
+    -->
     <div>
         <el-tabs type="border-card">
             <el-tab-pane>
@@ -28,9 +41,7 @@
             }
         },
         computed: {
-            events() {
-                return this.$store.getters.getEvents;
-            }
+            events() { return this.$store.getters.getEvents; }
         },
         components: {
             IconText,
