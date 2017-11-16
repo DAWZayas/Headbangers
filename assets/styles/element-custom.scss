@@ -32,3 +32,18 @@ button.el-button{
 .el-radio-button:last-child .el-radio-button__inner{
     border-radius: 0;
 }
+
+.el-tabs__nav{
+    display: flex !important;
+    float: none !important;
+}
+
+.el-tabs__item{
+    width: 100%;
+    text-align: center;
+}
+
+.el-tabs--border-card{
+    border: none !important;
+    box-shadow: none !important;
+}

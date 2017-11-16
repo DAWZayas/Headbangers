@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="padding">
         <!--    <div v-if="isAuthenticated"> -->
         <div class="steps-wrapper">
             <el-steps :active="currentStep" finish-status="success" align-center>
@@ -28,7 +28,8 @@
     import {
         BasicsForm,
         LocationForm,
-        MusicForm
+        MusicForm,
+        PublishSummary
     } from '~/components/publish'
     export default {
         data: () => ({

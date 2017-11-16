@@ -19,10 +19,25 @@ body{
 
 main{
     margin-top: 60px; 
-    padding:1em;
     background-color: #fff;
     width: 100%;
     min-height: calc(100vh - 60px);
+}
+
+.padding{
+    padding:1em;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.text-center{
+    text-align: center;
 }
 
 .el-dialog {

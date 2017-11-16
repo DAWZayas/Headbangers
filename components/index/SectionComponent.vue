@@ -12,7 +12,7 @@
 
 <script>
     import IconText from "~/components/common/IconText";
-    import EventCard from "~/components/index/EventCard";
+    import EventCard from "~/components/browse/EventCard";
         export default {
             name: "section-component",
             props: ["icon", "text"],

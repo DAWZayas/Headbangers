@@ -15,9 +15,9 @@ module.exports = {
     },
     css: [
         '~/assets/styles/main.scss',
-        '~/assets/styles/materialforms.scss',
-        '~/node_modules/element-ui/lib/theme-chalk/index.css',
+        '~/assets/styles/element-custom.scss',
         '~/assets/styles/linearicons/style.css',
+        '~/node_modules/element-ui/lib/theme-chalk/index.css',
         '~/static/slideout/slideout.css' 
     ],
     plugins: [

@@ -2,6 +2,7 @@
     "name": "headbangers",
     "description": "App to find music events based on location and interests of the user.",
     "version": "1.0.0",
+    "license": "Apache-2.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/DAWZayas/Headbangers"
