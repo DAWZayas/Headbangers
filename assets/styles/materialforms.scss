@@ -28,3 +28,7 @@ button.el-button{
     border-radius: 0em;
 
 }
+
+.el-radio-button:last-child .el-radio-button__inner{
+    border-radius: 0;
+}

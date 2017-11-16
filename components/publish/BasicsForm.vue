@@ -80,8 +80,8 @@
                 // this.$emit("done", this.basics);
                 this.$refs['form-basics'].validate((valid) => {
                     if (valid) {
-                        // this.$emit("done", this.basics);
-                        alert('submit!');
+                        this.$emit("done", this.basics);
+                        //alert('submit!');
                     } else {
                         // alert('error submit!');
                         return false;
