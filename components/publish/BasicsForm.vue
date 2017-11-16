@@ -8,8 +8,8 @@
                 <el-input placeholder="name" v-model="basics.name"></el-input>
             </el-form-item>
     
-            <el-form-item label="Description">
-                <el-input type="textarea" v-model="basics.description"></el-input>
+            <el-form-item label="Description" prop="descr">
+                <el-input type="textarea" v-model="basics.descr"></el-input>
             </el-form-item>
     
             <el-row>
@@ -18,7 +18,7 @@
                         <el-date-picker v-model="basics.date" type="date"></el-date-picker>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="11" :offset="1">
                     <el-form-item label="Time">
                         <el-time-picker v-model="basics.time"></el-time-picker>
                     </el-form-item>
@@ -29,7 +29,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Price" prop="price">
-                        <el-input type="price" placeholder="price" v-model.number="basics.price"></el-input>
+                        <el-input placeholder="price" v-model="basics.price"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -58,7 +58,7 @@
             return {
                 basics: {
                     name: '',
-                    description: '',
+                    descr: '',
                     date: '',
                     time: '',
                     price: 0.00,
@@ -69,8 +69,12 @@
                         { required: true, message: 'Please, input event name.', trigger: 'blur' },
                         { max: 30, message: 'Length should less than 30 characters.', trigger: 'blur' },
                     ],
+                    descr: [
+                        { required: true, message: 'Please input description.', trigger: 'blur' }
+                    ],
                     price: [
-                        { validator: this.checkPrice, trigger: 'blur' },
+                        { required: true, message: 'Please input price.', trigger: 'blur' },
+                        //{ validator: this.checkPrice, trigger: 'blur' },
                     ]
                 }
             };         
@@ -80,18 +84,16 @@
                 // this.$emit("done", this.basics);
                 this.$refs['form-basics'].validate((valid) => {
                     if (valid) {
-                        // this.$emit("done", this.basics);
-                        alert('submit!');
+                        this.$emit("done", this.basics);
                     } else {
-                        // alert('error submit!');
                         return false;
                     }
                 });
-            
+            // { validator: this.checkPrice, trigger: 'blur' },
             },
             checkPrice(rule, value, callback){
                 if (value === ''){
-                    callback(new Error ('number empty'));
+                    callback(new Error ('Please, input price.'));
                 } else {
                     callback();
                 }
