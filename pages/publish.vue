@@ -13,12 +13,7 @@
             <basics-form v-show="currentStep === 0" @done="basicsDone"></basics-form>
             <location-form v-show="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
             <music-form v-show="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>
-    
-            <div v-if="currentStep === 3">
-                <h3>Done!</h3>
-                <p>We have everything, you can publish it now</p>
-                <el-button @click="publish">Publish</el-button>
-            </div>
+            <publish-summary v-show="currentStep === 3" @publish="publish()" @back="stepDown()" :event="eventInfo"></publish-summary>
             <!--    <div class="not-auth" v-if="!isAuthenticated">
                             <img src="#">
                             <h3>You need to be Logged in</h3>
@@ -33,7 +28,8 @@
     import {
         BasicsForm,
         LocationForm,
-        MusicForm
+        MusicForm,
+        PublishSummary
     } from '~/components/PublishForms'
     export default {
         data: () => ({
@@ -43,7 +39,8 @@
         components: {
             BasicsForm,
             LocationForm,
-            MusicForm
+            MusicForm,
+            PublishSummary
         },
         methods: {
             basicsDone(basicsInfo) {
