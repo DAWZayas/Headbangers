@@ -7,7 +7,7 @@
 
 
 <script>
-    import SectionComponent from "@/components/SectionComponent";
+    import SectionComponent from "@/components/index/SectionComponent";
     export default {
         components: {SectionComponent}
     }

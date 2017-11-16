@@ -11,8 +11,8 @@
 </template>
 
 <script>
-    import IconText from "./IconText";
-    import EventCard from "./EventCard";
+    import IconText from "~/components/common/IconText";
+    import EventCard from "~/components/index/EventCard";
         export default {
             name: "section-component",
             props: ["icon", "text"],

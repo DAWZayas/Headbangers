@@ -34,7 +34,7 @@
         BasicsForm,
         LocationForm,
         MusicForm
-    } from '~/components/PublishForms'
+    } from '~/components/publish'
     export default {
         data: () => ({
             currentStep: 0,
