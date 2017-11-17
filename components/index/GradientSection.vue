@@ -3,12 +3,14 @@
         <div class="section-background" :style="`background-image: url('${background}')`"></div>
         <div :class="`gradient-${alignment}`" class="full-width">
             <div :class="`float-${alignment}`" class="section-content text-center padding">
-                <h4> {{title}} </h4>
-                <p> {{text}} </p>
-                <div class="text-center full-width">
-                    <nuxt-link :to="target">
-                        <el-button class="accent-button"> {{ buttonText}} </el-button>
-                    </nuxt-link>
+                <div>
+                    <h4> {{title}} </h4>
+                    <p> {{text}} </p>
+                    <div class="text-center full-width">
+                        <nuxt-link :to="target">
+                            <el-button class="accent-button"> {{ buttonText}} </el-button>
+                        </nuxt-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,8 +38,11 @@
     .section-content {
         color: #fff;
         height: 50vh;
-        font-size: 1.4em;
+        font-size: 1.3em;
         z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     
     .section-content .el-button {

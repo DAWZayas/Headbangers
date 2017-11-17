@@ -1,54 +1,52 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded: 200');
 //@import url('https://fonts.googleapis.com/css?family=Ruda');
 //@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,700,800');
-
 @import "assets/styles/breakpoints.scss";
 @import "assets/styles/colors.scss";
-
-*{
+* {
     font-family: 'Encode Sans Expanded', Arial, sans-serif;
     box-sizing: border-box;
     outline: none;
 }
 
-body{
+body {
     margin: 0;
     background-color: #fff;
-    
 }
 
-main{
-    margin-top: 60px; 
+main {
+    margin-top: 60px;
     background-color: #fff;
     width: 100%;
     min-height: calc(100vh - 60px);
 }
 
-.padding{
-    padding:1em;
+
+.padding {
+    padding: 1em;
 }
 
-.text-left{
+.text-left {
     text-align: left;
 }
 
-.text-right{
+.text-right {
     text-align: right;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
-.float-right{
-    float:right;
+.float-right {
+    float: right;
 }
 
-.float-left{
-    float:left;
+.float-left {
+    float: left;
 }
 
-.full-width{
+.full-width {
     width: 100%;
     overflow: hidden;
 }
@@ -57,23 +55,34 @@ main{
     width: 90% !important;
 }
 
-a{
+a {
     color: $mainColorLightest;
     text-decoration: none;
 }
 
-.el-button.accent-button{
+.el-button.accent-button {
     background-color: $accentColor;
     color: #fff;
 }
 
-.el-button.accent-button:hover, .el-button.accent-button:focus{
+.el-button.accent-button:hover,
+.el-button.accent-button:focus {
     background-color: $accentColorLight;
     color: #fff;
 }
 
-@media (min-width: $break-sm){
-    .el-dialog{
+.page-enter-active,
+.page-leave-active {
+    transition: opacity .3s;
+}
+
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+}
+
+@media (min-width: $break-sm) {
+    .el-dialog {
         width: 50% !important;
     }
 }

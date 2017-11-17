@@ -1,7 +1,7 @@
 <template>
-    <a href="/">
+    <nuxt-link to="/" exact>
         <img id="logo" src="/img/logo-big.svg">
-    </a>
+    </nuxt-link>
 </template>
 
 <script>
