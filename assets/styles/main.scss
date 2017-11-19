@@ -3,6 +3,14 @@
 //@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,700,800');
 @import "assets/styles/breakpoints.scss";
 @import "assets/styles/colors.scss";
+
+:root:before{
+    content: url('/img/index/banner.jpg'),
+    url('/img/index/section_1.jpg'),
+    url('/img/index/section_2.jpg'),
+    url('/img/index/section_3.jpg')
+}
+
 * {
     font-family: 'Encode Sans Expanded', Arial, sans-serif;
     box-sizing: border-box;

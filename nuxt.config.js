@@ -14,7 +14,6 @@ module.exports = {
             { rel: 'manifest', href: 'manifest.json', type: "application/manifest+json"}
           ]
     },
-    mode : "spa",
     loading:{
         height: '2px',
         color: '#5B7BD5'
