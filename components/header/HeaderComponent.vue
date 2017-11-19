@@ -46,7 +46,7 @@
         top: 0;
         width: 100%;
         background-color: $mainColor;
-        z-index: 2;
+        z-index: 10;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
         height: 60px;
         line-height: 60px;
