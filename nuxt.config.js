@@ -10,9 +10,11 @@ module.exports = {
             { type: 'text/javascript', src: '/slideout/slideout.js' },
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: 'img/brand/favicon.ico' }
+            { rel: 'icon', type: 'image/x-icon', href: 'img/brand/favicon.ico' },
+            { rel: 'manifest', href: 'manifest.json', type: "application/manifest+json"}
           ]
     },
+    mode : "spa",
     loading:{
         height: '2px',
         color: '#5B7BD5'

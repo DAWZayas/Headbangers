@@ -8,7 +8,10 @@
         "url": "https://github.com/DAWZayas/Headbangers"
     },
     "scripts": {
-        "dev": "HOST=0.0.0.0 PORT=3000 nuxt"
+        "dev": "HOST=0.0.0.0 PORT=3000 nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate"
     },
     "devDependencies": {
         "element-theme-chalk": "^2.0.4",

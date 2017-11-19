@@ -1,0 +1,12 @@
+{
+    "short_name": "Headbangers",
+    "name": "Headbangers",
+    "icons": [{
+        "src": "/img/brand/logo.png",
+        "type": "image/png",
+        "sizes": "155x174"
+    }],
+    "background_color": "#293352",
+    "theme_color": "#293352",
+    "display": "standalone"
+}
