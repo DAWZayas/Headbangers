@@ -26,7 +26,6 @@ textarea.el-textarea__inner:focus{
 }
 button.el-button{
     border-radius: 0em;
-    border:none;
 }
 
 .el-tabs__nav{
@@ -42,4 +41,17 @@ button.el-button{
 .el-tabs--border-card{
     border: none !important;
     box-shadow: none !important;
+}
+
+.el-button.accent-button {
+    background-color: $accentColor;
+    color: #fff;
+    border: none;
+}
+
+.el-button.accent-button:hover,
+.el-button.accent-button:focus {
+    background-color: $accentColorLight;
+    color: #fff;
+    border: none;
 }

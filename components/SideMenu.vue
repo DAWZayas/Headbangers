@@ -4,7 +4,7 @@
             <el-menu-item index="/">
                 <icon-text icon="lnr-home" text="Home"></icon-text>
             </el-menu-item>
-            <el-menu-item index="/browse" >
+            <el-menu-item index="/browse">
                 <icon-text icon="lnr-earth" text="Browse"></icon-text>
             </el-menu-item>
             <el-menu-item index="/myevents">
@@ -27,6 +27,7 @@
 </script>
 
 <style lang='scss'>
+    @import "assets/styles/breakpoints.scss";
     #side-menu {
         width: 16em;
         padding-top: 60px;
@@ -45,6 +46,12 @@
             i {
                 color: #fff;
             }
+        }
+    }
+    
+    @media (min-width: $break-lg-xl) {
+        #side-menu .icon-text {
+            font-size: 1.2em;
         }
     }
 </style>

@@ -5,11 +5,11 @@
         <el-form ref="form-basics" :model="basics" :rules="rules">
     
             <el-form-item label="Event name" prop="name">
-                <el-input placeholder="name" v-model="basics.name"></el-input>
+                <el-input placeholder="Name" v-model="basics.name"></el-input>
             </el-form-item>
     
             <el-form-item label="Description" prop="descr">
-                <el-input type="textarea" v-model="basics.descr"></el-input>
+                <el-input type="textarea" v-model="basics.descr" placeholder="Description"></el-input>
             </el-form-item>
     
             <el-row>
@@ -29,7 +29,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Price" prop="price">
-                        <el-input placeholder="price" v-model="basics.price"></el-input>
+                        <el-input placeholder="0.00" v-model="basics.price"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -61,7 +61,7 @@
                     descr: '',
                     date: '',
                     time: '',
-                    price: '0.00',
+                    price: '',
                     fileList: [{}]
                 },
                 rules: {
@@ -71,14 +71,14 @@
                         { max: 50, message: 'Length should less than 50 characters.', trigger: 'blur' },
                     ],
                     date: [
-                        //{ required: true , message: 'Please, choose a date.', trigger: 'blur' },
+                        { required: true , type: 'date', message: 'Please, choose a date.', trigger: 'blur' },
                     ],
                     time: [
-                        //{ required: true , message: 'Please, choose a time.', trigger: 'blur' },
+                        { required: true , type: 'date', message: 'Please, choose a time.', trigger: 'blur' },
                     ],
                     descr: [
                         { required: true, message: 'Please input description.', trigger: 'blur' },
-                        { max: 200, message: 'Length should less than 200 characters.', trigger: 'blur' },
+                        { max: 200, message: 'Length should be less than 200 characters.', trigger: 'blur' },
                     ],
                     price: [
                         { required: true, message: 'Please input price.', trigger: 'blur' },
@@ -105,7 +105,7 @@
                 if (value.match(/^[0-9]{1,6}([,.][0-9]{2})?$/)){
                     callback();
                 } else {
-                    callback(new Error ('Not valid.'));
+                    callback(new Error ('Please enter a valid price.'));
                 }
             },
         }

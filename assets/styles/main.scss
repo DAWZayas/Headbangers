@@ -46,6 +46,10 @@ main {
     float: left;
 }
 
+.float-center{
+    margin: auto;
+}
+
 .full-width {
     width: 100%;
     overflow: hidden;
@@ -58,17 +62,6 @@ main {
 a {
     color: $mainColorLightest;
     text-decoration: none;
-}
-
-.el-button.accent-button {
-    background-color: $accentColor;
-    color: #fff;
-}
-
-.el-button.accent-button:hover,
-.el-button.accent-button:focus {
-    background-color: $accentColorLight;
-    color: #fff;
 }
 
 .page-enter-active,

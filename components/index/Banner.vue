@@ -1,6 +1,6 @@
 <template>
     <div class="banner" :style="`background-image: url('${background}')`">
-        <div style="margin-top:-4em;">
+        <div style="margin-top:-4em">
             <p>Find the best concerts around you</p>
             <div id="search-bar">
                 <input type="text" placeholder="Band, location, genre...">
@@ -22,7 +22,7 @@
     @import "assets/styles/breakpoints.scss";
     .banner {
         background-size: cover;
-        background-position: center;
+        background-position: bottom;
         padding: 2em;
         width: 100%;
         color: #fff;
@@ -44,6 +44,12 @@
             height: 60vh;
         }
         .banner p {
+            font-size: 1.5em;
+        }
+    }
+
+    @media (min-width: $break-lg-xl){
+        .banner p{
             font-size: 2em;
         }
     }

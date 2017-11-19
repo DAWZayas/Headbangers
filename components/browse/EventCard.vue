@@ -1,6 +1,6 @@
 <template>
     <el-card class="event-card">
-        <img class="card-img" :src="img">
+        <img class="full-width" :src="img">
         <h3 class="event-card-title">{{title}}</h3>
         <div class="event-info">
             <el-row>
@@ -101,10 +101,6 @@
         .lnr {
             transition: color 0.2s;
         }
-    }
-    
-    .card-img {
-        width: 100%;
     }
     
     .article-more:hover {
