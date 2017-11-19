@@ -1,6 +1,6 @@
 <template>
     <div class="splash">
-        <img src="/img/splash-logo.svg">
+        <img src="/img/brand/splash-logo.svg">
     </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
     <nuxt-link to="/" exact>
-        <img id="logo" src="/img/logo-big.svg">
+        <img id="logo" src="/img/brand/header-logo.svg">
     </nuxt-link>
 </template>
 
