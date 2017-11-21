@@ -77,8 +77,8 @@
                         { required: true , type: 'date', message: 'Please, choose a time.', trigger: 'blur' },
                     ],
                     description: [
-                        { required: true, message: 'Please input description.', trigger: 'blur' },
-                        { max: 200, message: 'Length should be less than 200 characters.', trigger: 'blur' },
+                        { required: true, message: 'Please input a description.', trigger: 'blur' },
+                        { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' },f2e3fa6170d3b825
                     ],
                     price: [
                         { required: true, message: 'Please input price.', trigger: 'blur' },
