@@ -78,7 +78,7 @@
                 ],
                 number: [
                     { required: true , message: 'Please input number' , trigger: 'blur' },
-                    { type: 'number' , message: 'Please input a number' , trigger: 'blur' },
+                    { required: true , pattern: /^[0-9]+$/ , message: 'Please input a number' , trigger: 'blur' },
                     { max: 6 , message: 'The number must be less or equal than 999999', trigger: 'blur' }
                 ],
                 country: [
@@ -95,7 +95,7 @@
                 ],
                 code: [
                     { required: true , message: 'Please input Zip Code' , trigger: 'blur' },
-                    { type: 'number' , message: 'Please input a number' , trigger: 'blur' },
+                    { required: true , pattern: /^[0-9]+$/ , message: 'Please input a number' , trigger: 'blur' },
                     { max: 10 , message: 'The zip code must be less or equal than 9999999999', trigger: 'blur' }
 
                 ]
