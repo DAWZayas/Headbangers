@@ -29,7 +29,7 @@
 <style lang='scss'>
     @import "assets/styles/breakpoints.scss";
     #side-menu {
-        width: 16em;
+        //width: 16em;
         padding-top: 60px;
         position: fixed;
         height: 100%;

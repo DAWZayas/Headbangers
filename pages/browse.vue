@@ -25,7 +25,7 @@
             </el-tab-pane>
         </el-tabs>
     
-        <div>
+        <div class="padding">
             <event-card v-for="event in events" :key="event.name" :id="event.name" img="/img/placeholder.png" :title="event.name" :date="event.date" :time="event.time" :location="`${event.location.name} (${event.location.city})`" :price="event.price"></event-card>
         </div>
     </div>
@@ -34,6 +34,7 @@
 <script>
     import IconText from '~/components/common/IconText';
     import EventCard from '~/components/browse/EventCard';
+    import { mapActions } from 'vuex';
     export default {
         data() {
             return {
@@ -41,11 +42,17 @@
             }
         },
         computed: {
-            events() { return this.$store.getters.getEvents; }
+            events() { return this.$store.getters.getConcerts; }
         },
         components: {
             IconText,
             EventCard
+        },
+        methods:{
+            ...mapActions(['bindConcerts'])
+        },
+        created(){
+            this.bindConcerts();
         }
     }
 </script>

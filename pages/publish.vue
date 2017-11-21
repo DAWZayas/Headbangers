@@ -34,8 +34,9 @@
         BasicsForm,
         LocationForm,
         MusicForm,
-        PublishSummary
+        PublishSummary,
     } from '~/components/publish'
+    import { mapActions } from 'vuex';
     export default {
         data: () => ({
             currentStep: 0,
@@ -47,6 +48,7 @@
             MusicForm
         },
         methods: {
+            ...mapActions(['addConcert']),
             basicsDone(basicsInfo) {
                 this.eventInfo = { ...basicsInfo };
                 this.stepUp();
@@ -67,7 +69,7 @@
                 this.currentStep--;
             },
             publish() {
-                this.$store.commit('addEvent', this.eventInfo);
+                this.addConcert(this.eventInfo);
             }
         }
     }

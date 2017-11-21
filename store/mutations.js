@@ -1,3 +1,5 @@
 export default {
-    addEvent: (state, event) => state.events.push(event)
+    addConcert: (state, concert) => state.concerts[concert.id] = concert,
+    setConcerts: (state, concerts) => state.concerts = concerts,
+    setConcertsRef: (state, ref) => state.concertsRef = ref
 }

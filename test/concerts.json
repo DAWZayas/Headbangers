@@ -1,0 +1,30 @@
+{
+    "concerts" : {
+        "01" : {
+            "name" : "rock in hell",
+            "decription": "Best rock concert ever",
+            "date": "Tue Nov 21 2017 10:16:50 GMT+0100 (CET)",
+            "time": "Tue Nov 21 2017 10:16:50 GMT+0100 (CET)",
+            "price": "12.50",
+            "location": {
+                "name": "The cave",
+                "description": "Nice place to concerts",
+                "street": "Baker street",
+                "number": "666",
+                "country": "Spain",
+                "city": "Madrid",
+                "code": "28028"
+            },
+            "bands": { 
+                "0": "Gatillazo",
+                "1": "Eskorbuto",
+                "2": "Non servium"
+            },
+            "genres": {
+                "0": "Rock",
+                "1": "Punk",
+                "2": "Hard Rock"
+            }
+        }
+    }
+}

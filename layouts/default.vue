@@ -10,7 +10,9 @@
                 <nuxt/>
             </main>
         </div>
-        <script src="/slideout/slideout.config.js"></script>
+<script src="/slideout/slideout.config.js">
+    
+</script>
     </div>
 </template>
 
@@ -19,21 +21,22 @@
     import SideMenu from "~/components/SideMenu";
     import Splash from "~/components/Splash"
     export default {
+        components: {
+            HeaderComponent,
+            SideMenu,
+            Splash
+        },
         data() {
             return {
                 isLoading: true
             }
         },
-        beforeCreate() {
-            isLoading: true;
+        created() {
+            this.isLoading = true;
             setTimeout(() => {
                 this.isLoading = false;
             }, 2000)
         },
-        components: {
-            HeaderComponent,
-            SideMenu,
-            Splash
-        }
+    
     }
 </script>
