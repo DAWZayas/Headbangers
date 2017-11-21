@@ -78,7 +78,7 @@
                     ],
                     description: [
                         { required: true, message: 'Please input a description.', trigger: 'blur' },
-                        { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' },f2e3fa6170d3b825
+                        { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' },
                     ],
                     price: [
                         { required: true, message: 'Please input price.', trigger: 'blur' },

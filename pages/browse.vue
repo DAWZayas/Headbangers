@@ -24,17 +24,16 @@
                 <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
             </el-tab-pane>
         </el-tabs>
-    
-        <div class="padding">
-            <event-card v-for="event in events" :key="event.name" :id="event.name" img="/img/placeholder.png" :title="event.name" :date="event.date" :time="event.time" :location="`${event.location.name} (${event.location.city})`" :price="event.price"></event-card>
-        </div>
+
+            <event-card v-for="concert in concerts" v-if="concert.location" :key="concert.key" :id="concert.name" img="/img/placeholder.png" :title="concert.name" :date="concert.date" :time="concert.time" :location="`${concert.location.name} (${concert.location.city})`" :price="concert.price"></event-card>
+
     </div>
 </template>
 
 <script>
     import IconText from '~/components/common/IconText';
     import EventCard from '~/components/browse/EventCard';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
     export default {
         data() {
             return {
@@ -42,7 +41,7 @@
             }
         },
         computed: {
-            events() { return this.$store.getters.getConcerts; }
+            ...mapGetters({concerts: 'getConcerts'})
         },
         components: {
             IconText,
