@@ -41,12 +41,6 @@ var Bands = SchemaObject({
     pictures: [String]
 });
 
-//Genres
-
-var Genres = SchemaObject({
-    genre: String
-});
-
 //ConcertsShort
 
 var ConcertsShort = SchemaObject({

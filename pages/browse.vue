@@ -1,18 +1,5 @@
 <template>
-    <!--
-    <el-radio-group v-model="selectedMode" size="mini">
-        <el-radio-button label="list">
-            <icon-text icon="lnr-list" text="List"></icon-text>
-        </el-radio-button>
-        <el-radio-button label="map">
-            <icon-text icon="lnr-map" text="Map"></icon-text>
-        </el-radio-button>
-        <el-radio-button label="calendar">
-            <icon-text icon="lnr-calendar-full" text="Calendar"></icon-text>
-        </el-radio-button>
-    </el-radio-group>
-    -->
-    <div>
+<!--
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
@@ -24,9 +11,9 @@
                 <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
             </el-tab-pane>
         </el-tabs>
-
-            <event-card v-for="concert in concerts" v-if="concert.location" :key="concert.key" :id="concert.name" img="/img/placeholder.png" :title="concert.name" :date="concert.date" :time="concert.time" :location="`${concert.location.name} (${concert.location.city})`" :price="concert.price"></event-card>
-
+        -->
+    <div class="padding">
+        <event-card v-for="concert in concerts" v-if="concert.location" :key="concert.key" :id="concert.name" img="/img/placeholder.png" :title="concert.name" :date="concert.date" :time="concert.time" :location="`${concert.location.venue} (${concert.location.city})`" :price="concert.price"></event-card>
     </div>
 </template>
 

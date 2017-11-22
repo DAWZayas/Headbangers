@@ -11,7 +11,7 @@
             <el-form-item label="Description" prop="description">
                 <el-input type="textarea" v-model="basics.description" placeholder="Description"></el-input>
             </el-form-item>
-    
+    <!--
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Date" prop="date">
@@ -25,7 +25,7 @@
                 </el-form-item>
                 </el-col>
             </el-row>
-    
+    -->
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Price" prop="price">
@@ -33,12 +33,14 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
+                    
                     <el-form-item label="Picture" prop="pic"><br>
                         <el-upload class="upload-demo" action="">
                             <el-button type="primary" size="medium">Click to upload</el-button>
                             <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
                         </el-upload>
                     </el-form-item>
+                    
                 </el-col>
             </el-row>
     
@@ -47,6 +49,7 @@
             </div>
     
         </el-form>
+        
     </div>
 </template>
 
@@ -55,6 +58,15 @@
         name: "basic-form",
     
         data() {
+            const checkPrice = function (rule, value, callback){
+                //var re = new RegExp("^[0-9]{1,6}([,.][0-9]{2})?$");
+                //if (re.test(value)) {
+                if (value.match(/^[0-9]{1,6}([,.][0-9]{2})?$/)){
+                    callback();
+                } else {
+                    callback(new Error ('Please enter a valid price.'));
+                }
+            }
             return {
                 basics: {
                     name: '',
@@ -67,15 +79,17 @@
                 rules: {
                     name: [
                         { required: true , message: 'Please, input event name.', trigger: 'blur' },
-                        { required: true , pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Name must be alphanumeric.', trigger: 'blur' },
+                        { pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Name must be alphanumeric.', trigger: 'blur' },
                         { max: 50, message: 'Length should less than 50 characters.', trigger: 'blur' },
                     ],
+                    /*
                     date: [
                         { required: true , type: 'date', message: 'Please, choose a date.', trigger: 'blur' },
                     ],
                     time: [
                         { required: true , type: 'date', message: 'Please, choose a time.', trigger: 'blur' },
                     ],
+                    */
                     description: [
                         { required: true, message: 'Please input a description.', trigger: 'blur' },
                         { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' },
@@ -98,16 +112,7 @@
                         return false;
                     }
                 });
-            },
-            checkPrice(rule, value, callback){
-                //var re = new RegExp("^[0-9]{1,6}([,.][0-9]{2})?$");
-                //if (re.test(value)) {
-                if (value.match(/^[0-9]{1,6}([,.][0-9]{2})?$/)){
-                    callback();
-                } else {
-                    callback(new Error ('Please enter a valid price.'));
-                }
-            },
+            }
         }
     };
 </script>
