@@ -1,5 +1,5 @@
-const events = [];
-
-export default{
-    events
+export default {
+    country: null,
+    concerts: null,
+    concertsRef: ''
 }

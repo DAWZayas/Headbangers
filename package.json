@@ -7,9 +7,10 @@
         "type": "git",
         "url": "https://github.com/DAWZayas/Headbangers"
     },
-    "config":{
-      "host": "0.0.0.0",
-      "port": "3000" 
+    "config": {
+        "host": "0.0.0.0",
+        "port": "3000"
+
     },
     "scripts": {
         "dev": "nuxt",
@@ -23,8 +24,12 @@
         "node-sass": "^4.6.1",
         "nuxt": "^1.0.0-rc9",
         "sass-loader": "^6.0.6",
-        "vue": "^2.5.3",
-        "vue-server-renderer": "^2.5.3",
-        "vue-template-compiler": "^2.5.3"
+        "vue": "^2.5.7",
+        "vue-server-renderer": "^2.5.7",
+        "vue-template-compiler": "^2.5.7"
+    },
+    "dependencies": {
+        "firebase": "^4.6.2",
+        "vuexfire": "^2.3.0"
     }
 }

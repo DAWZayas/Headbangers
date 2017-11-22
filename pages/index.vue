@@ -8,7 +8,6 @@
     </div>
 </template>
 
-
 <script>
     import SectionComponent from "~/components/index/SectionComponent";
     import { TopGenres, Banner,GradientSection } from "~/components/index";

@@ -55,6 +55,8 @@
 </script>
 
 <style lang="scss">
+    @import "assets/styles/breakpoints.scss";
+    
     .index-genres {
         width: 100%;
     }
@@ -85,5 +87,11 @@
         width: 50%;
         display: block;
         margin: 1em auto 0;
+    }
+
+    @media (min-width: $break-lg){
+        .square{
+            font-size: 1.2em;
+        }
     }
 </style>

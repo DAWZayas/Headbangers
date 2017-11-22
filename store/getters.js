@@ -1,3 +1,3 @@
 export default{
-    getEvents: state => state.events
+    getConcerts: state => state.concerts
 }

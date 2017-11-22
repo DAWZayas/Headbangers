@@ -8,8 +8,8 @@
                 <el-input placeholder="Name" v-model="basics.name"></el-input>
             </el-form-item>
     
-            <el-form-item label="Description" prop="descr">
-                <el-input type="textarea" v-model="basics.descr" placeholder="Description"></el-input>
+            <el-form-item label="Description" prop="description">
+                <el-input type="textarea" v-model="basics.description" placeholder="Description"></el-input>
             </el-form-item>
     
             <el-row>
@@ -58,7 +58,7 @@
             return {
                 basics: {
                     name: '',
-                    descr: '',
+                    description: '',
                     date: '',
                     time: '',
                     price: '',
@@ -76,7 +76,7 @@
                     time: [
                         { required: true , type: 'date', message: 'Please, choose a time.', trigger: 'blur' },
                     ],
-                    descr: [
+                    description: [
                         { required: true, message: 'Please input a description.', trigger: 'blur' },
                         { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' },
                     ],

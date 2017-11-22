@@ -10,30 +10,37 @@
                 <nuxt/>
             </main>
         </div>
-        <script src="/slideout/slideout.config.js"></script>
+<script src="/slideout/slideout.config.js">
+    
+</script>
     </div>
 </template>
 
 <script>
     import HeaderComponent from "~/components/header/HeaderComponent";
     import SideMenu from "~/components/SideMenu";
-    import Splash from "~/components/Splash"
+    import Splash from "~/components/Splash";
+    import { mapActions } from 'vuex';
     export default {
+        components: {
+            HeaderComponent,
+            SideMenu,
+            Splash
+        },
         data() {
             return {
                 isLoading: true
             }
         },
-        beforeCreate() {
-            isLoading: true;
+        created() {
+            this.setConcertsRef();
+            this.isLoading = true;
             setTimeout(() => {
                 this.isLoading = false;
             }, 2000)
         },
-        components: {
-            HeaderComponent,
-            SideMenu,
-            Splash
+        methods: {
+            ...mapActions(['setConcertsRef'])
         }
     }
 </script>
