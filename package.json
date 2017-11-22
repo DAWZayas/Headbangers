@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "firebase": "^4.6.2",
+        "schema-object": "^4.0.11",
         "vuexfire": "^2.3.0"
     }
 }
