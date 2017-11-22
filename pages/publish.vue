@@ -12,16 +12,19 @@
         <div class="publish-form">
             <basics-form v-show="currentStep === 0" @done="basicsDone"></basics-form>
             <location-form v-show="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
-            <music-form v-show="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>  
-            <publish-summary v-show="currentStep === 3" @publsh="publish" @back="stepDown()"></publish-summary>           
+            <music-form v-show="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
         </div>
-           
+           <div v-if="currentStep === 3">
+            <el-button type="primary" @click="publish">Yeah, Publish</el-button>
+
             <!--    <div class="not-auth" v-if="!isAuthenticated">
                         <img src="#">
                         <h3>You need to be Logged in</h3>
                         <el-button type="primary" >Log In</el-button>
                     </div>
                 -->
+                
+           </div>
     </div>
 </template>
 
