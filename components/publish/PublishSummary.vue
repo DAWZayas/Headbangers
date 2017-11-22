@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="step-form">
         <h3>Summary</h3>
-            <span>{{event.name}}</span>
+            <span></span>
             <p>We got it everything?</p>
             <el-button @click="back">No, Go Back</el-button>
             <el-button type="primary" @click="publish">Yeah, Publish</el-button>
@@ -9,12 +9,8 @@
 </template>
 
 <script>
-    import {
-        publish
-    } from '~/pages/publish'
     export default {
         name: "publish-summary",
-        props: ["event"],
         methods: {
                 publish() {
                     this.$emit("publish");
