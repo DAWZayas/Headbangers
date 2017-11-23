@@ -10,7 +10,7 @@
             </el-steps>
         </div>
         <div class="publish-form">
-            <basics-form v-if="currentStep === 0" @done="basicsDone"></basics-form>
+            <basics-form v-if="currentStep === 0" @done="basicsDone" :data="concert"></basics-form>
             <location-form v-if="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
             <music-form v-if="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
             <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
@@ -20,11 +20,36 @@
 
 <script>
     import { BasicsForm, LocationForm, MusicForm, PublishSummary} from '~/components/publish'
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
+    
     export default {
         data: () => ({
             currentStep: 0,
-            eventInfo: {}
+            concert: {
+                title: "",
+                date: "",
+                time: "",
+                price: "",
+                description: "",
+                genres: [],
+                bands: [],
+                location: "",
+                likes: 0,
+                assisting: 0,
+                author: "",
+                slug: ""
+            },
+            location: {
+                venue: "",
+                description: "",
+                street: "",
+                number: "",
+                country: "",
+                city: "",
+                code: "",
+                coordinates: ""
+            },
+            bands: []
         }),
         components: {
             BasicsForm,
@@ -32,10 +57,13 @@
             MusicForm,
             PublishSummary
         },
+        computed: {
+            ...mapGetters({currentUser: 'getCurrentUser'}),
+        },
         methods: {
             ...mapActions(['addConcert']),
-            basicsDone(basicsInfo) {
-                this.eventInfo = { ...basicsInfo };
+            basicsDone(concert) {
+                this.concert = { ...concert };
                 this.stepUp();
             },
             locationDone(locationInfo) {
@@ -54,6 +82,10 @@
                 this.currentStep--;
             },
             publish() {
+                delete this.concert.date;
+                delete this.concert.time;
+                this.concert.datetime = this.data.date.getTime() + this.data.time.getTime();
+                this.concert.author = this.currentUser.id;
                 this.addConcert(this.eventInfo);
             }
         }

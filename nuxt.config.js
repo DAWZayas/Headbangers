@@ -28,10 +28,11 @@ module.exports = {
         '~/assets/styles/linearicons/style.css',
         '~/node_modules/element-ui/lib/theme-chalk/index.css',
         '~/static/slideout/slideout.css',
-        '~/static/pickadate/themes/default.css',
-        '~/static/pickadate/themes/default.date.css' ,
-        '~/static/pickadate/themes/default.time.css' 
+        '~/static/pickadate/themes/classic.css',
+        '~/static/pickadate/themes/classic.date.css' ,
+        '~/static/pickadate/themes/classic.time.css' 
     ],
+    //modules: ['modules/schemas.js'],
     plugins: [
         'plugins/element-ui.js',
         {src: 'plugins/slideout.config.js', ssr: false},

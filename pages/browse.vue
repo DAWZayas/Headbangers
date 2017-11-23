@@ -25,7 +25,7 @@
             </el-tab-pane>
         </el-tabs>
 
-            <browse-list :concerts="concerts"></browse-list>
+        <browse-list :concerts="concerts"></browse-list>
 
     </div>
 </template>
