@@ -18,18 +18,18 @@
         "generate": "nuxt generate"
     },
     "devDependencies": {
-        "element-theme-chalk": "^2.0.4",
-        "element-ui": "2.0.3",
-        "node-sass": "^4.6.1",
+        "element-ui": "^2.0.5",
+        "node-sass": "^4.7.2",
         "nuxt": "^1.0.0-rc9",
         "sass-loader": "^6.0.6",
-        "vue": "^2.5.7",
-        "vue-server-renderer": "^2.5.7",
-        "vue-template-compiler": "^2.5.7"
+        "vue": "^2.5.8",
+        "vue-server-renderer": "^2.5.8",
+        "vue-template-compiler": "^2.5.8"
     },
     "dependencies": {
         "firebase": "^4.6.2",
         "schema-object": "^4.0.11",
+        "tiny-date-picker": "^3.1.5",
         "vuexfire": "^2.3.0"
     }
 }

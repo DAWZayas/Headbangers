@@ -10,9 +10,6 @@
                 <nuxt/>
             </main>
         </div>
-<script src="/slideout/slideout.config.js">
-    
-</script>
     </div>
 </template>
 

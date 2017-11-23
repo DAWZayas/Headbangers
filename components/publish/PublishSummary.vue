@@ -4,7 +4,7 @@
             <span></span>
             <p>We got it everything?</p>
             <el-button @click="back">No, Go Back</el-button>
-            <el-button type="primary" @click="publish">Yeah, Publish</el-button>
+            <el-button type="primary" @click="done">Yeah, Publish</el-button>
      </div>
 </template>
 
@@ -12,8 +12,8 @@
     export default {
         name: "publish-summary",
         methods: {
-                publish() {
-                    this.$emit("publish");
+                done() {
+                    this.$emit("done");
                 },
                 back() {
                     this.$emit("back");

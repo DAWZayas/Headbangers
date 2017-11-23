@@ -10,10 +10,10 @@
             </el-steps>
         </div>
         <div class="publish-form">
-            <basics-form v-show="currentStep === 0" @done="basicsDone"></basics-form>
-            <location-form v-show="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
-            <music-form v-show="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
-            <publish-summary v-show="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
+            <basics-form v-if="currentStep === 0" @done="basicsDone"></basics-form>
+            <location-form v-if="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
+            <music-form v-if="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
+            <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
         </div>
     </div>
 </template>
