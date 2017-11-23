@@ -6,5 +6,6 @@ export default {
     },
     country: null,
     concerts: null,
-    concertsRef: ''
+    concertsRef: '',
+    countryList: require('countries-cities').getCountries(),
 }

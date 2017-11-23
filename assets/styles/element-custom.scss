@@ -27,31 +27,30 @@ textarea.el-textarea__inner:focus{
 button.el-button{
     border-radius: 0em;
 }
-
 .el-tabs__nav{
     display: flex !important;
     float: none !important;
 }
-
 .el-tabs__item{
     width: 100%;
     text-align: center;
 }
-
 .el-tabs--border-card{
     border: none !important;
     box-shadow: none !important;
 }
-
 .el-button.accent-button {
     background-color: $accentColor;
     color: #fff;
     border: none;
 }
-
 .el-button.accent-button:hover,
 .el-button.accent-button:focus {
     background-color: $accentColorLight;
     color: #fff;
     border: none;
+}
+.el-date-editor.el-input, 
+.el-date-editor.el-input__inner{
+    width: 100% !important;
 }

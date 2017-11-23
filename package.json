@@ -18,15 +18,17 @@
         "generate": "nuxt generate"
     },
     "devDependencies": {
-        "element-ui": "^2.0.5",
+        "element-ui": "2.0.1",
         "node-sass": "^4.7.2",
         "nuxt": "^1.0.0-rc9",
         "sass-loader": "^6.0.6",
-        "vue": "^2.5.8",
-        "vue-server-renderer": "^2.5.8",
-        "vue-template-compiler": "^2.5.8"
+        "vue": "2.5.3",
+        "vue-server-renderer": "2.5.3",
+        "vue-template-compiler": "2.5.3"
     },
     "dependencies": {
+        "blob-util": "^1.3.0",
+        "countries-cities": "0.0.11",
         "firebase": "^4.6.2",
         "schema-object": "^4.0.11",
         "vuexfire": "^2.3.0"

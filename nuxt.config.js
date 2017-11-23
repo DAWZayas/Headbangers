@@ -9,9 +9,7 @@ module.exports = {
         script: [
             { type: 'text/javascript', src: '/slideout/slideout.js' },
             { type: 'text/javascript', src: 'https://code.jquery.com/jquery-3.2.1.min.js'},
-            { type: 'text/javascript', src: '/pickadate/picker.js'},
-            { type: 'text/javascript', src: '/pickadate/picker.date.js'},
-            { type: 'text/javascript', src: '/pickadate/picker.time.js'}
+            { type: 'text/javascript', src: '/utils/blob-util.min.js'}
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: 'img/brand/favicon.ico' },
@@ -27,10 +25,7 @@ module.exports = {
         '~/assets/styles/element-custom.scss',
         '~/assets/styles/linearicons/style.css',
         '~/node_modules/element-ui/lib/theme-chalk/index.css',
-        '~/static/slideout/slideout.css',
-        '~/static/pickadate/themes/classic.css',
-        '~/static/pickadate/themes/classic.date.css' ,
-        '~/static/pickadate/themes/classic.time.css' 
+        '~/static/slideout/slideout.css'
     ],
     //modules: ['modules/schemas.js'],
     plugins: [

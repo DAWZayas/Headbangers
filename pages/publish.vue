@@ -10,8 +10,8 @@
             </el-steps>
         </div>
         <div class="publish-form">
-            <basics-form v-if="currentStep === 0" @done="basicsDone" :data="concert"></basics-form>
-            <location-form v-if="currentStep === 1" @done="locationDone" @back="stepDown()"></location-form>
+            <basics-form v-if="currentStep === 1" @done="basicsDone" :data="concert"></basics-form>
+            <location-form v-if="currentStep === 0" @done="locationDone" :data="location" @back="stepDown()"></location-form>
             <music-form v-if="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
             <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
         </div>
@@ -30,6 +30,7 @@
                 date: "",
                 time: "",
                 price: "",
+                currency: "euro",
                 description: "",
                 genres: [],
                 bands: [],
@@ -37,7 +38,8 @@
                 likes: 0,
                 assisting: 0,
                 author: "",
-                slug: ""
+                slug: "",
+                poster: ""
             },
             location: {
                 venue: "",
@@ -82,9 +84,9 @@
                 this.currentStep--;
             },
             publish() {
+                this.concert.datetime = this.concert.date.getTime() + this.concert.time.getTime();
                 delete this.concert.date;
                 delete this.concert.time;
-                this.concert.datetime = this.data.date.getTime() + this.data.time.getTime();
                 this.concert.author = this.currentUser.id;
                 this.addConcert(this.eventInfo);
             }
