@@ -13,7 +13,7 @@
         </el-tabs>
         -->
     <div class="padding">
-        <event-card v-for="concert in concerts" v-if="concert.location" :key="concert.key" :id="concert.name" img="/img/placeholder.png" :title="concert.name" :date="concert.date" :time="concert.time" :location="`${concert.location.venue} (${concert.location.city})`" :price="concert.price"></event-card>
+        <event-card v-for="concert in concerts" v-if="concert.location" :key="concert.key" :id="concert.name" img="/img/placeholder.png" :title="concert.name" :datetime="concert.datetime" :location="`${concert.location.venue} (${concert.location.city})`" :price="concert.price"></event-card>
     </div>
 </template>
 

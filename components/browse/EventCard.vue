@@ -21,14 +21,14 @@
         <hr>
         <div class="event-buttons">
             <button @click="liked = !liked">
-                        <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
-                    </button>
+                <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
+            </button>
             <button @click="saved = !saved">
-                        <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
-                    </button>
+                <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
+            </button>
             <button>
-                        <icon-text icon="lnr-bubble" text="Share"></icon-text>
-                    </button>
+                <icon-text icon="lnr-bubble" text="Share"></icon-text>
+            </button>
         </div>
     </el-card>
 </template>
@@ -46,10 +46,10 @@
         components: {
             IconText
         },
-        props: ["id", "img", "title", "date", "time", "location", "price"],
+        props: ["id", "img", "title", "datetime", "location", "price"],
         computed: {
-            formattedDate(){ return new Date(this.date).toLocaleDateString()},
-            formattedTime(){ return new Date(this.time).toLocaleTimeString().slice(0, 5)},
+            formattedDate(){ return new Date(Number(this.datetime)).toLocaleDateString()},
+            formattedTime(){ return new Date(Number(this.datetime)).toLocaleTimeString().slice(0, 5)},
             likeClass() {
                 return this.liked && 'liked-button'
             },
