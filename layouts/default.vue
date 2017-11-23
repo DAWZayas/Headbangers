@@ -8,8 +8,8 @@
             <side-menu></side-menu>
             <main>
                 <nuxt/>
+                <footer-component></footer-component>
             </main>
-            <footer-component></footer-component>
         </div>
     </div>
 </template>

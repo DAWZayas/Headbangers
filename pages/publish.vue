@@ -10,8 +10,8 @@
             </el-steps>
         </div>
         <div class="publish-form">
-            <basics-form v-if="currentStep === 1" @done="basicsDone" :data="concert"></basics-form>
-            <location-form v-if="currentStep === 0" @done="locationDone" :data="location" @back="stepDown()"></location-form>
+            <basics-form v-if="currentStep === 0" @done="basicsDone" :data="concert"></basics-form>
+            <location-form v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></location-form>
             <music-form v-if="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
             <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
         </div>
