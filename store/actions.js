@@ -12,5 +12,6 @@ export default {
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef}, {reference, toBind}) => {
         bindFirebaseRef(toBind, reference);
-    })
+    }),
+    getCountryCities: (country) => require('countries-cities').getCities(country)
 }

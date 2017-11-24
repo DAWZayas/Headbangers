@@ -8,6 +8,7 @@
             <side-menu></side-menu>
             <main>
                 <nuxt/>
+                <footer-component></footer-component>
             </main>
         </div>
     </div>
@@ -17,12 +18,14 @@
     import HeaderComponent from "~/components/header/HeaderComponent";
     import SideMenu from "~/components/SideMenu";
     import Splash from "~/components/Splash";
+    import FooterComponent from "~/components/index/FooterComponent";
     import { mapActions } from 'vuex';
     export default {
         components: {
             HeaderComponent,
             SideMenu,
-            Splash
+            Splash,
+            FooterComponent
         },
         data() {
             return {
