@@ -1,5 +1,5 @@
 <template>
-    <div class="cards">
+    <div class="cards padding">
         <event-card v-for="concert in concerts" v-if="concert.location" :key="concert.key" :id="concert.name" img="/img/placeholder.png" :title="concert.name" :date="concert.date" :time="concert.time" :location="`${concert.location.name} (${concert.location.city})`" :price="concert.price"></event-card>
     </div>
 </template>
@@ -17,22 +17,10 @@
 
 <style lang="scss">
     @import "assets/styles/breakpoints.scss";
-
-    @media (min-width: $break-md) {
-        .cards {
+    .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             grid-auto-rows: 1fr;
-            grid-gap: 3px;
+            grid-gap: 1em;
         }
-    }
-
-    @media (min-width: $break-lg) {
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
-            grid-auto-rows: 1fr;
-            grid-gap: 3px;
-        }
-    }
 </style>
