@@ -4,8 +4,10 @@ export default {
         name: "Peter Panda",
         picture: ""
     },
-    country: null,
-    concerts: null,
-    concertsRef: '',
-    countryList: require('countries-cities').getCountries(),
+    currentCountry: null,
+    concertsList: null,
+    concertsListRef: '',
+    concertsFullRef: '',
+    countryList: require('~/static/utils/countries.js').default,
+    genreList: require('~/static/utils/genres.js').default,
 }

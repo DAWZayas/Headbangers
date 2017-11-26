@@ -26,6 +26,9 @@ main {
     margin-top: 60px;
     background-color: #fff;
     width: 100%;
+}
+
+main > *:nth-child(1){
     min-height: calc(100vh - 60px);
 }
 
@@ -79,6 +82,14 @@ a {
 .page-enter,
 .page-leave-to {
     opacity: 0;
+}
+
+hr {
+    margin: 0 0 0 5%;
+    width: 90%;
+    height: 1px;
+    border: 0;
+    background-color: $grayLight;
 }
 
 @media (min-width: $break-sm) {

@@ -8,7 +8,6 @@ module.exports = {
         ],
         script: [
             { type: 'text/javascript', src: '/slideout/slideout.js' },
-            { type: 'text/javascript', src: 'https://code.jquery.com/jquery-3.2.1.min.js'},
             { type: 'text/javascript', src: '/utils/blob-util.min.js'}
         ],
         link: [

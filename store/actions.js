@@ -1,17 +1,18 @@
 import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp';
 export default {
-    addConcert: ({commit, state}, concert) => {
-        state.concertsRef.push(concert);     
+    publishConcert: ({commit, state}, {concert, shortConcert}) => {
+        let newConcertKey = state.concertsFullRef.push(concert).key;
+        state.concertsListRef.child(newConcertKey).set(shortConcert);  
     },
-    setConcertsRef: ({state, commit}) => {
-        commit('setConcertsRef', firebaseApp.database().ref('/concerts'));
+    setReferences: ({state, commit}) => {
+        commit('setConcertsListRef', firebaseApp.database().ref('/concertsList'));
+        commit('setConcertsFullRef', firebaseApp.database().ref('/concertsFull'));
     },
-    bindConcerts: firebaseAction(({state, dispatch}) => {
-        dispatch('bindFirebaseReference', {reference: state.concertsRef, toBind: 'concerts'});
+    bindConcertsList: firebaseAction(({state, dispatch}) => {
+        dispatch('bindFirebaseReference', {reference: state.concertsListRef, toBind: 'concertsList'});
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef}, {reference, toBind}) => {
-        bindFirebaseRef(toBind, reference);
+        reference.once('value').then(concerts => concerts.val() && bindFirebaseRef(toBind, reference))
     }),
-    getCountryCities: (country) => require('countries-cities').getCities(country)
 }

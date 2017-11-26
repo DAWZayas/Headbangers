@@ -1,5 +1,6 @@
 export default{
-    getConcerts: state => state.concerts,
+    getConcertsList: state => state.concertsList,
     getCurrentUser: state => state.currentUser,
-    getCountryList: state => state.countryList
+    getCountryList: state => state.countryList,
+    getGenreList: state => state.genreList,
 }

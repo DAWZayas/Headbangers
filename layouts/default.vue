@@ -33,14 +33,14 @@
             }
         },
         created() {
-            this.setConcertsRef();
+            this.setReferences();
             this.isLoading = true;
             setTimeout(() => {
                 this.isLoading = false;
             }, 2000)
         },
         methods: {
-            ...mapActions(['setConcertsRef'])
+            ...mapActions(['setReferences'])
         }
     }
 </script>

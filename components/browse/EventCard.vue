@@ -1,21 +1,21 @@
 <template>
     <el-card class="event-card">
-        <img class="full-width" :src="img">
-        <h3 class="event-card-title">{{title}}</h3>
+        <img class="full-width" :src="concert.poster">
+        <h3 class="event-card-title">{{concert.title}}</h3>
         <div class="event-info">
             <el-row>
                 <el-col :span="12">
                     <icon-text icon="lnr-calendar-full" :text="formattedDate"></icon-text>
-                    <icon-text icon="lnr-clock" :text="formattedTime"></icon-text>
+                    <icon-text icon="lnr-clock" :text="concert.time"></icon-text>
                 </el-col>
                 <el-col :span="12">
                     <div class="price-info">
-                        {{ price }} €
+                        {{ concert.price }} {{ concert.currency }}
                     </div>
                 </el-col>
             </el-row>
             <el-row>
-                <icon-text icon="lnr-map-marker" :text="location"></icon-text>
+                <icon-text icon="lnr-map-marker" :text="`${concert.venue} (${concert.city})`"></icon-text>
             </el-row>
         </div>
         <hr>
@@ -46,7 +46,7 @@
         components: {
             IconText
         },
-        props: ["id", "img", "title", "datetime", "location", "price"],
+        props: ['concert'],
         computed: {
             formattedDate(){ return new Date(Number(this.datetime)).toLocaleDateString()},
             formattedTime(){ return new Date(Number(this.datetime)).toLocaleTimeString().slice(0, 5)},
@@ -129,14 +129,6 @@
         >button:hover {
             color: $mainColorLightest;
         }
-    }
-    
-    hr {
-        margin: 0 0 0 5%;
-        width: 90%;
-        height: 1px;
-        border: 0;
-        background-color: $grayLight;
     }
     
     .liked-button {

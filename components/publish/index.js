@@ -1,4 +1,4 @@
-export { default as BasicsForm } from './BasicsForm';
-export { default as LocationForm } from './LocationForm';
-export { default as MusicForm } from './MusicForm';
+export { default as FormBasics } from './FormBasics';
+export { default as FormLocation } from './FormLocation';
+export { default as FormMusic } from './FormMusic';
 export { default as PublishSummary } from './PublishSummary';

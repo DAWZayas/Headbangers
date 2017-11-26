@@ -1,18 +1,15 @@
 <template>
-        <el-form :model="bandForm">
-            <el-form-item label="Name">
-                <el-input v-model="bandForm.name">
-                </el-input>
+        <el-form :model="bandInfo" :rules="rules" @submit.native.prevent>
+            
+            <el-form-item label="Name" prop="name">
+                <el-input v-model="bandInfo.title"></el-input>
             </el-form-item>
-            <el-form-item label="Short Description">
-                <el-input v-model="bandForm.description"></el-input>
+            
+            <el-form-item label="Short Description" prop="description">
+                <el-input v-model="bandInfo.description"></el-input>
             </el-form-item>
-            <el-form-item label="Website / Social">
-                <el-input v-model="bandForm.link"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button @click="cancel">Cancel</el-button>
-                <el-button @click="confirm" type="primary">Confirm</el-button>
+            <el-form-item label="Website / Social" prop="link">
+                <el-input v-model="bandInfo.link"></el-input>
             </el-form-item>
         </el-form>
 </template>
@@ -21,20 +18,23 @@
     export default {
         data() {
             return {
-                bandForm: {
-                    name: "",
-                    description: "",
-                    link: ""
+                bandInfo: {},
+                rules: {
+                    name: [
+                        { required: true, message: 'Please enter band name', trigger: 'blur' }
+                    ],
+                    description: [
+                        { required: true, message: 'Please enter band description', trigger: 'blur' }
+                    ],
+                    link: [
+                        { required: true, message: 'Please enter a website or social network', trigger: 'blur' }
+                    ]
                 }
             }
         },
-        methods: {
-            confirm(){
-                this.$emit('confirm', this.bandForm);
-            },
-            cancel(){
-                this.$emit('cancel')
-            }
+        props: ['band'],
+        created(){
+            this.bandInfo = this.band;
         }
     }
 </script>

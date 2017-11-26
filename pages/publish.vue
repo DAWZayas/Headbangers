@@ -10,85 +10,83 @@
             </el-steps>
         </div>
         <div class="publish-form">
-            <basics-form v-if="currentStep === 0" @done="basicsDone" :data="concert"></basics-form>
-            <location-form v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></location-form>
-            <music-form v-if="currentStep === 2" @done="musicDone" @back="stepDown()"></music-form>       
+            <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
+            <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
+            <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
             <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
+            <div v-if="currentStep === 4">
+                <h3>Done!</h3>
+                <p>
+                    Your concert is published :)
+                </p>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { BasicsForm, LocationForm, MusicForm, PublishSummary} from '~/components/publish'
-    import { mapActions, mapGetters } from 'vuex';
-    
+    import { FormBasics, FormLocation, FormMusic, PublishSummary} from '~/components/publish'
+    import { mapActions, mapGetters, mapMutations } from 'vuex';
+    import { Concert, BasicInfo, Location, Band, ShortConcert} from '~/schemas';
     export default {
         data: () => ({
+            info: new BasicInfo(),
+            location: new Location(),
+            bands: [new Band()],
+            genres: [],
             currentStep: 0,
-            concert: {
-                title: "",
-                date: "",
-                time: "",
-                price: "",
-                currency: "euro",
-                description: "",
-                genres: [],
-                bands: [],
-                location: "",
-                likes: 0,
-                assisting: 0,
-                author: "",
-                slug: "",
-                poster: ""
-            },
-            location: {
-                venue: "",
-                description: "",
-                street: "",
-                number: "",
-                country: "",
-                city: "",
-                code: "",
-                coordinates: ""
-            },
-            bands: []
         }),
         components: {
-            BasicsForm,
-            LocationForm,
-            MusicForm,
+            FormBasics,
+            FormLocation,
+            FormMusic,
             PublishSummary
         },
         computed: {
             ...mapGetters({currentUser: 'getCurrentUser'}),
         },
         methods: {
-            ...mapActions(['addConcert']),
-            basicsDone(concert) {
-                this.concert = { ...concert };
+            ...mapActions(['publishConcert']),
+            ...mapMutations(['setNewConcert']),
+            basicsDone(info) {
+                this.info.populate(info);
                 this.stepUp();
             },
-            locationDone(locationInfo) {
-                this.eventInfo.location = locationInfo;
+            locationDone(location) {
+                this.location.populate(location);
                 this.stepUp();
             },
-            musicDone(musicInfo) {
-                this.eventInfo.bands = musicInfo.bands;
-                this.eventInfo.genres = musicInfo.genres;
+            musicDone({bands, genres}) {
+                this.bands = bands;
+                this.genres = genres;
                 this.stepUp();
+            },
+            publish() {
+                let concert = new Concert({
+                    info: this.info, 
+                    location: this.location, 
+                    bands: this.bands, 
+                    genres: this.genres, 
+                    author: this.currentUser.id
+                }).toObject();
+                let shortConcert = new ShortConcert({
+                    title: this.info.title,
+                    date: this.info.date,
+                    time: this.info.time,
+                    price: this.info.price,
+                    currency: this.info.currency,
+                    venue: this.location.venue,
+                    city: this.location.city,
+                    genres: this.genres,
+                    poster: this.info.poster
+                }).toObject();
+                this.publishConcert({concert, shortConcert});
             },
             stepUp() {
                 this.currentStep++;
             },
             stepDown() {
                 this.currentStep--;
-            },
-            publish() {
-                this.concert.datetime = this.concert.date.getTime() + this.concert.time.getTime();
-                delete this.concert.date;
-                delete this.concert.time;
-                this.concert.author = this.currentUser.id;
-                this.addConcert(this.eventInfo);
             }
         }
     }
