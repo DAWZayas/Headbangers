@@ -5,7 +5,6 @@
                 <div class="square" :style="`background-color: ${genre.color}`">
                     <div class="square-content">
                         <img :src="iconsPath+genre.icon">
-                        <br>
                         {{ genre.text }}
                     </div>
                 </div>
@@ -66,13 +65,16 @@
         width: 100%;
         padding-top: 93%;
         position: relative;
-        transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        transition: all 0.4s ;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
     
     .square:hover {
         cursor: pointer;
         filter: saturate(2);
-        opacity: 0.9;
+        opacity: 0.8;
     }
     
     .square-content {
@@ -80,13 +82,13 @@
         bottom: 0;
         text-align: center;
         width: 100%;
-        padding: 0.5em;
+        padding: 1em;
     }
 
     .square-content img{
         width: 50%;
         display: block;
-        margin: 1em auto 0;
+        margin: 0 auto 1em auto;
     }
 
     @media (min-width: $break-lg){

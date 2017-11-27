@@ -2,7 +2,8 @@
     var slideout = new Slideout({
         'panel': document.querySelector('main'),
         'menu': document.querySelector('#side-menu'),
-        'touch': false
+        'touch': false,
+        'padding': 256
     });
     document.querySelector("#menu-button").onclick = () => slideout.toggle();
     window.innerWidth > 768 && slideout.open();

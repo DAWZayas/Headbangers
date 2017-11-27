@@ -1,8 +1,6 @@
 <template>
     <div class="cards padding">
-        <nuxt-link v-for="(value, key) in concerts" v-bind:key="key" :to="'/concert/'+key" v-if="key !== '.key'">
-            <event-card  :concert="value"></event-card>
-        </nuxt-link>
+        <event-card v-for="(value, key) in concerts" v-if="key !== '.key'" v-bind:key="key" :concert="value" :id="key"></event-card>
     </div>
 </template>
 

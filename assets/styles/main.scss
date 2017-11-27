@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded: 200');
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:200,400,600,700,800,900');
 //@import url('https://fonts.googleapis.com/css?family=Ruda');
 //@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,700,800');
 @import "assets/styles/breakpoints.scss";
@@ -36,6 +36,18 @@ main > *:nth-child(1){
     padding: 1em;
 }
 
+.margin{
+    margin: 1em;
+}
+
+.no-padding{
+    padding: 0;
+}
+
+.no-margin{
+    margin: 0;
+}
+
 .text-left {
     text-align: left;
 }
@@ -68,12 +80,10 @@ main > *:nth-child(1){
 .el-dialog {
     width: 90% !important;
 }
-
-a {
-    color: $mainColorLightest;
+a{
+    color: $gray;
     text-decoration: none;
 }
-
 .page-enter-active,
 .page-leave-active {
     transition: opacity .3s;

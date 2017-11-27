@@ -1,10 +1,10 @@
 <template>
     <div class="footer">
         <div class="logo"><p>Headbangers <span class="year">2018</span></p></div>
-        <div class="footer-links"><a href="">Item1</a></div>
-        <div class="footer-links"><a href="">Help</a></div>
+        <div class="footer-links"><a href="">About</a></div>
         <div class="footer-links"><a href="">Contact</a></div>
-        <div class="footer-links"><a href="">About us</a></div>
+        <div class="footer-links"><a href="">Help</a></div>  
+        <div class="footer-links"><a href="">Legal</a></div>    
         <div class="github-logo"><a href="https://github.com/DAWZayas/Headbangers"><img src="~/static/img/social/github-logo.svg" alt="github"><p>GitHub</p></a></div>
     </div>
 

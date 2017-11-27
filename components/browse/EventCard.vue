@@ -1,35 +1,38 @@
 <template>
     <el-card class="event-card">
-        <div class="event-img full-width" :style="`background-image: url(${concert.poster})`">
-        </div>
-        <h3 class="event-card-title">{{concert.title}}</h3>
-        <div class="event-info">
-            <el-row>
-                <el-col :span="12">
-                    <icon-text icon="lnr-calendar-full" :text="formattedDate"></icon-text>
-                    <icon-text icon="lnr-clock" :text="concert.time"></icon-text>
-                </el-col>
-                <el-col :span="12">
-                    <div class="price-info">
-                        {{ concert.price }} {{ concert.currency }}
-                    </div>
-                </el-col>
-            </el-row>
-            <el-row>
-                <icon-text icon="lnr-map-marker" :text="`${concert.venue} (${concert.city})`"></icon-text>
-            </el-row>
-        </div>
+        <nuxt-link :to="'/concert/'+id">
+            <div style="overflow: hidden;">
+                <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
+            </div>
+            <h3 class="event-card-title no-margin text-center">{{concert.title}}</h3>
+            <div class="event-info padding">
+                <el-row>
+                    <el-col :span="12">
+                        <icon-text icon="lnr-calendar-full" :text="formattedDate"></icon-text>
+                        <icon-text icon="lnr-clock" :text="concert.time"></icon-text>
+                    </el-col>
+                    <el-col :span="12">
+                        <div class="price-info text-center">
+                            {{ concert.price }} {{ concert.currency }}
+                        </div>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <icon-text icon="lnr-map-marker" :text="`${concert.venue} (${concert.city})`"></icon-text>
+                </el-row>
+            </div>
+        </nuxt-link>
         <hr>
         <div class="event-buttons">
-            <button @click="liked = !liked">
+            <div class="full-width text-center" @click="liked = !liked">
                 <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
-            </button>
-            <button @click="saved = !saved">
+            </div>
+            <div class="full-width text-center" @click="saved = !saved">
                 <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
-            </button>
-            <button>
+            </div>
+            <div class="full-width text-center">
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>
-            </button>
+            </div>
         </div>
     </el-card>
 </template>
@@ -47,7 +50,7 @@
         components: {
             IconText
         },
-        props: ['concert'],
+        props: ['concert', 'id'],
         computed: {
             formattedDate(){ return new Date(Number(this.concert.date)).toLocaleDateString()},
             likeClass() {
@@ -71,17 +74,8 @@
     @import "assets/styles/breakpoints.scss";
     .event-card {
         line-height: 2em;
-        transition: box-shadow 0.3s;
+        transition: box-shadow 1s;
         border: 1px solid $grayLighter;
-        .event-img{
-            padding-top: 66%;
-            background-size: cover;
-            background-position: center;
-        }
-        h3 {
-            margin: 0;
-            text-align: center;
-        }
         .lnr {
             color: $gray;
         }
@@ -98,13 +92,22 @@
                 color: $accentColor;
             }
         }
+        .event-img{
+            transform: scale(1.05)
+        }
     }
     
+    .event-img{
+        padding-top: 66%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 1s;
+    }
+
     .event-info {
         color: $grayLight;
-        padding: 1em;
         .lnr {
-            transition: color 0.2s;
+            transition: color 1s;
         }
     }
     
@@ -115,23 +118,17 @@
     .price-info {
         padding-top: .75em;
         font-size: 2em;
-        text-align: center;
         color: $gray;
     }
     
     .event-buttons {
         display: flex;
         padding: 0.5em;
-        >button {
+        >div {
             cursor: pointer;
-            width: 100%;
-            border: none;
-            background-color: transparent;
-            font-size: 0.8em;
-            font-weight: 600;
             color: $grayLight;
         }
-        >button:hover {
+        >div:hover {
             color: $mainColorLightest;
         }
     }
@@ -178,7 +175,7 @@
             font-size: 1.5em;
         }
         .event-buttons {
-            font-size: 1.15em;
+            font-size: 1em;
         }
         .el-col:nth-child(4) .event-card {
             display: none;

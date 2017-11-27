@@ -27,7 +27,7 @@
 
 @media(min-width: 768px) {
     .panel-open .slideout-panel{
-        width: calc(100% - 16em);
+        width: calc(100% - 256px);
     }
 
     .slideout-open,

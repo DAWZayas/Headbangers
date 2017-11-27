@@ -18,7 +18,7 @@
     import HeaderComponent from "~/components/header/HeaderComponent";
     import SideMenu from "~/components/SideMenu";
     import Splash from "~/components/Splash";
-    import FooterComponent from "~/components/index/FooterComponent";
+    import FooterComponent from "~/components/FooterComponent";
     import { mapActions } from 'vuex';
     export default {
         components: {

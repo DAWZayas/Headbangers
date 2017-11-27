@@ -180,7 +180,7 @@ Slideout.prototype._translateXTo = function(translateX) {
  */
 Slideout.prototype._setTransition = function() {
   //this.panel.style[prefix + 'transition'] = this.panel.style.transition = prefix + 'transform ' + this._duration + 'ms ' + this._fx;
-  this.panel.style.transition = 'margin ' + this._duration + 'ms ' + this._fx;
+  this.panel.style.transition = 'margin ' + this._duration + 'ms ' + this._fx + ', width ' + this._duration + 'ms ' + this._fx;
   return this;
 };
 

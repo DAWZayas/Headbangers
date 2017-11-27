@@ -34,7 +34,7 @@
     }
     
     .section-content {
-        color: #fff;
+        color: #ddd;
         height: 50vh;
         font-size: 1.3em;
         z-index: 10;
@@ -60,15 +60,6 @@
     }
     
     @media (min-width: $break-sm) {
-        .section-background {
-            transition: filter 1s, opacity 1s;
-            filter: blur(1px);
-            opacity: 1;
-        }
-        .section:hover .section-background {
-            filter: none;
-            opacity: 0.9;
-        }
         .section-content {
             width: 50%;
             font-size: 1.2em;
