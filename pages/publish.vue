@@ -49,6 +49,7 @@
             ...mapActions(['publishConcert']),
             ...mapMutations(['setNewConcert']),
             basicsDone(info) {
+                info.date = new Date(info.date).getTime();
                 this.info.populate(info);
                 this.stepUp();
             },
@@ -81,6 +82,7 @@
                     poster: this.info.poster
                 }).toObject();
                 this.publishConcert({concert, shortConcert});
+                this.stepUp();
             },
             stepUp() {
                 this.currentStep++;

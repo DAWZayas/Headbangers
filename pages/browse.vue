@@ -35,12 +35,14 @@
             IconText
         },
         methods:{
-            ...mapActions(['bindConcertsList'])
+            ...mapActions(['bindConcertsList', 'unbindConcertsList'])
         },
         created(){    
             this.bindConcertsList();
+        },
+        beforeDestroy(){
+            this.unbindConcertsList();
         }
-
     }
 </script>
 

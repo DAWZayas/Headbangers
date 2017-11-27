@@ -1,6 +1,7 @@
 <template>
     <el-card class="event-card">
-        <img class="full-width" :src="concert.poster">
+        <div class="event-img full-width" :style="`background-image: url(${concert.poster})`">
+        </div>
         <h3 class="event-card-title">{{concert.title}}</h3>
         <div class="event-info">
             <el-row>
@@ -48,8 +49,7 @@
         },
         props: ['concert'],
         computed: {
-            formattedDate(){ return new Date(Number(this.datetime)).toLocaleDateString()},
-            formattedTime(){ return new Date(Number(this.datetime)).toLocaleTimeString().slice(0, 5)},
+            formattedDate(){ return new Date(Number(this.concert.date)).toLocaleDateString()},
             likeClass() {
                 return this.liked && 'liked-button'
             },
@@ -73,6 +73,11 @@
         line-height: 2em;
         transition: box-shadow 0.3s;
         border: 1px solid $grayLighter;
+        .event-img{
+            padding-top: 66%;
+            background-size: cover;
+            background-position: center;
+        }
         h3 {
             margin: 0;
             text-align: center;

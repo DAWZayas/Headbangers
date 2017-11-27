@@ -14,7 +14,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Date" prop="date">
-                        <br><el-date-picker v-model="concert.date" type="date" placeholder="Date"></el-date-picker>
+                        <br><el-date-picker v-model="concert.date" type="date" placeholder="Date" format="dd/MM/yyyy"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="11" :offset="1">
@@ -46,6 +46,7 @@
                         <br>
                         <el-upload action="" accept="image/*" class="full-width" :on-success="fileAdded" :limit="1" >
                             <el-button class="full-width" >Upload Picture <i class="el-icon-upload el-icon-right"></i></el-button>
+                            <div slot="tip" class="el-upload__tip">The best is a 3:2 aspect ratio</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -113,7 +114,8 @@ export default {
             }).catch(function (err) {
                 fileList = [];
             });
-        }
+        },
+        
     }
 };
 </script>

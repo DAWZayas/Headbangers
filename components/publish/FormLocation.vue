@@ -98,11 +98,11 @@
             Object.assign(this.location, this.data)
         },
         computed: {
-            ...mapGetters({ countryList: 'getCountryList', newConcert: 'getNewConcert'}),
+            ...mapGetters({ countryList: 'getCountryList'}),
         },
         methods: {
             done() { 
-                this.$refs["form-location"].validate(valid => valid ? this.$emit('done', location) : false) 
+                this.$refs["form-location"].validate(valid => valid ? this.$emit('done', this.location) : false) 
             },
             back() { 
                 this.$emit("back") 
