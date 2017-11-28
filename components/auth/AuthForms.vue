@@ -1,7 +1,7 @@
 <template>
     <div>
-        <login-form v-if="dialogAction === 'login'" @signup="showSignup"></login-form>
-        <signup-form v-if="dialogAction === 'signup'" @login="showLogin"></signup-form>
+        <login-form v-if="dialogAction === 'login'" @signup="showSignup" @close="closeDialog"></login-form>
+        <signup-form v-if="dialogAction === 'signup'" @login="showLogin" @close="closeDialog"></signup-form>
         <hr class="margin">
         <div class="servicesButtons">
             <button class="loginBtn loginBtn--facebook">Login with Facebook</button>
@@ -20,6 +20,9 @@ export default {
         },
         showSignup(){
             this.$emit('signup');
+        },
+        closeDialog(){
+            this.$emit('close');
         }
     },
     props: ["dialogAction"],

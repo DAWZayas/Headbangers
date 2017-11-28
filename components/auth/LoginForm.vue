@@ -17,17 +17,27 @@
     </div>
 </template>
 <script>
+import firebaseApp from '~/firebaseapp';
 export default {
     data(){
         return{
             email: '',
             password: '',
-            error: 'Wrong password'
+            error: ''
         }
     },
     methods:{
         showSignup(){
             this.$emit('signup');
+        },
+        loginWithEmail(){
+
+        },
+        loginWithGoogle(){
+            
+        },
+        loginWithFacebook(){
+
         }
     }
 }

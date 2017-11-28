@@ -27,7 +27,7 @@
         </el-dropdown-menu>
 
         <el-dialog :title="dialogTitle" :visible.sync="showDialog" :append-to-body="true">
-            <auth-forms :dialogAction="dialogAction" @signup="showSignup" @login="showLogin"></auth-forms>
+            <auth-forms :dialogAction="dialogAction" @signup="showSignup" @login="showLogin" @close="showDialog = false"></auth-forms>
         </el-dialog>
 
     </el-dropdown>
