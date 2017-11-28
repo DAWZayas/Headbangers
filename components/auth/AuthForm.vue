@@ -1,45 +1,54 @@
 <template>
     <div v-if="show == 'login'">
-        <el-form ref="authForm" :model="form">
-            <el-row>
-                <el-col :span="16" :offset="4">
-                    <el-form-item label="Username">
-                        <el-input placeholder=""></el-input>
-                    </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="16" :offset="4">
-                    <el-form-item label="Password">
-                        <el-input placeholder=""></el-input>
-                    </el-form-item>
-                </el-col>
-            </el-row>
+        <el-form ref="authForm" class="padding">
+            <el-form-item label="Email" class="no-margin">
+                <el-input placeholder="" v-model="email"></el-input>
+            </el-form-item>
+            <el-form-item label="Password">
+                <el-input placeholder="" v-model="password"></el-input>
+            </el-form-item>
+            <el-form-item class="full-width text-center no-margin">
+                <el-button type="primary" @click="onSubmit">Login</el-button>
+            </el-form-item>
         </el-form>
-        <el-row type="flex" justify="center">
-                <button class="loginBtn loginBtn--facebook">
-                    Login with Facebook
-                </button>
-                <button class="loginBtn loginBtn--google">
-                    Login with Google
-                </button>
-        </el-row>
+        <hr class="margin">
+        <div class="servicesButtons">
+            <button class="loginBtn loginBtn--facebook">
+                Login with Facebook
+            </button>
+            <button class="loginBtn loginBtn--google">
+                Login with Google
+            </button>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
+        data(){
+            return{
+                email: '',
+                password: '',
+            }
+        },
         props: ["show"]
     }
 </script>
 
 <style>
+
+    .servicesButtons{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
     /* Shared */
     
     .loginBtn {
         box-sizing: border-box;
         position: relative;
-        /* width: 13em;  - apply for fixed size */
+         width: 15em;
         margin: 0.2em;
         padding: 0 15px 0 46px;
         border: none;

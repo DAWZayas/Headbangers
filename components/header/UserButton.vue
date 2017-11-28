@@ -36,7 +36,8 @@
 </template>
 
 <script>
-    import {IconButton, IconText, AuthForm} from "~/components/common";;
+    import {IconButton, IconText} from "~/components/common";
+    import AuthForm from "~/components/auth/AuthForm";
     
     export default {
         name: "user-button",
