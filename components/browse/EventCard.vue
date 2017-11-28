@@ -4,7 +4,7 @@
             <div style="overflow: hidden;">
                 <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
             </div>
-            <h3 class="event-card-title no-margin text-center">{{concert.title}}</h3>
+            <h3 class="event-title no-margin text-center">{{concert.title}}</h3>
             <div class="event-info padding">
                 <el-row>
                     <el-col :span="12">
@@ -104,6 +104,10 @@
         transition: transform 1s;
     }
 
+    .event-title{
+        color: $gray;
+    }
+
     .event-info {
         color: $grayLight;
         .lnr {
@@ -148,7 +152,7 @@
     }
     
     @media (min-width: $break-sm) and (max-width: $break-md) {
-        .event-card-title {
+        .event-title {
             font-size: 1em;
         }
         .event-info {
@@ -164,7 +168,7 @@
     }
     
     @media (min-width: $break-md) and (max-width: $break-lg) {
-        .event-card-title {
+        .event-title {
             font-size: 1.15em;
         }
         .event-info {
@@ -183,7 +187,7 @@
     }
     
     @media (min-width: $break-lg) and (max-width: $break-lg-xl) {
-        .event-card-title {
+        .event-title {
             font-size: 1em;
         }
         .event-info {

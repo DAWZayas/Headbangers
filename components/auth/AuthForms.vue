@@ -1,54 +1,54 @@
 <template>
-    <div v-if="show == 'login'">
-        <el-form ref="authForm" class="padding">
-            <el-form-item label="Email" class="no-margin">
-                <el-input placeholder="" v-model="email"></el-input>
-            </el-form-item>
-            <el-form-item label="Password">
-                <el-input placeholder="" v-model="password"></el-input>
-            </el-form-item>
-            <el-form-item class="full-width text-center no-margin">
-                <el-button type="primary" @click="onSubmit">Login</el-button>
-            </el-form-item>
-        </el-form>
+    <div>
+        <login-form v-if="dialogAction === 'login'" @signup="showSignup"></login-form>
+        <signup-form v-if="dialogAction === 'signup'" @login="showLogin"></signup-form>
         <hr class="margin">
         <div class="servicesButtons">
-            <button class="loginBtn loginBtn--facebook">
-                Login with Facebook
-            </button>
-            <button class="loginBtn loginBtn--google">
-                Login with Google
-            </button>
+            <button class="loginBtn loginBtn--facebook">Login with Facebook</button>
+            <button class="loginBtn loginBtn--google">Login with Google</button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                email: '',
-                password: '',
-            }
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
+export default {
+    methods: {
+        showLogin(){
+            this.$emit('login');
         },
-        props: ["show"]
-    }
+        showSignup(){
+            this.$emit('signup');
+        }
+    },
+    props: ["dialogAction"],
+    components: { LoginForm, SignupForm }
+}
 </script>
 
-<style>
+<style lang="scss">
+    @import "assets/styles/breakpoints.scss";
 
     .servicesButtons{
         display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
     }
 
+    @media(min-width: $break-sm) and (max-width: $break-md){
+        .servicesButtons{
+            flex-wrap: wrap;
+        }
+    }
+    @media(max-width: 560px){
+        .servicesButtons{
+            flex-wrap: wrap;
+        }
+    }
     /* Shared */
     
     .loginBtn {
-        box-sizing: border-box;
         position: relative;
-         width: 15em;
+        width: 98%;
         margin: 0.2em;
         padding: 0 15px 0 46px;
         border: none;
@@ -59,7 +59,9 @@
         font-size: 16px;
         color: #FFF;
     }
-    
+    .loginBtn:hover{
+        cursor:pointer;
+    }
     .loginBtn:before {
         content: "";
         box-sizing: border-box;
@@ -83,9 +85,6 @@
     
     .loginBtn--facebook {
         background-color: #4C69BA;
-        background-image: linear-gradient(#4C69BA, #3B55A0);
-        /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
-        text-shadow: 0 -1px 0 #354C8C;
     }
     
     .loginBtn--facebook:before {
@@ -96,7 +95,6 @@
     .loginBtn--facebook:hover,
     .loginBtn--facebook:focus {
         background-color: #5B7BD5;
-        background-image: linear-gradient(#5B7BD5, #4864B1);
     }
     
     

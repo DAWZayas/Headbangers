@@ -19,37 +19,48 @@
     
         <el-dropdown-menu v-else slot="dropdown">
             <el-dropdown-item>
-                <icon-text icon="lnr-enter" text="Log In" @click.native="showLogin = true"></icon-text>
+                <icon-text icon="lnr-enter" text="Log In" @click.native="showLogin"></icon-text>
             </el-dropdown-item>
             <el-dropdown-item>
-                <icon-text icon="lnr-pencil" text="Sign Up" @click.native="showSignup = true"></icon-text>
+                <icon-text icon="lnr-pencil" text="Sign Up" @click.native="showSignup"></icon-text>
             </el-dropdown-item>
         </el-dropdown-menu>
-    
-        <el-dialog title="Login to your account" :visible.sync="showLogin" :append-to-body="true">
-            <auth-form show="login"></auth-form>
+
+        <el-dialog :title="dialogTitle" :visible.sync="showDialog" :append-to-body="true">
+            <auth-forms :dialogAction="dialogAction" @signup="showSignup" @login="showLogin"></auth-forms>
         </el-dialog>
-        <el-dialog title="Sign up for an account" :visible.sync="showSignup" :append-to-body="true">
-            <auth-form show="signup"></auth-form>
-        </el-dialog>
+
     </el-dropdown>
 </template>
 
 <script>
     import {IconButton, IconText} from "~/components/common";
-    import AuthForm from "~/components/auth/AuthForm";
+    import AuthForms from "~/components/auth/AuthForms";
     
     export default {
         name: "user-button",
         data: () => ({
             isAuthenticated: false,
-            showLogin: false,
-            showSignup: false
+            showDialog: false,
+            dialogAction: ''
         }),
+        computed:{
+            dialogTitle(){ return (this.dialogAction === 'login') ? 'Login to your account' : 'Sign up for an account' }
+        },
+        methods:{
+            showLogin(){
+                this.showDialog = true;
+                this.dialogAction = 'login';
+            },
+            showSignup(){
+                this.showDialog = true;
+                this.dialogAction = 'signup';
+            }
+        },
         components: {
             IconButton,
             IconText,
-            AuthForm
+            AuthForms
         }
     }
 </script>

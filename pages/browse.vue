@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!--
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
@@ -11,7 +12,7 @@
                 <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
             </el-tab-pane>
         </el-tabs>
-
+        -->
         <browse-list :concerts="concerts"></browse-list>
 
     </div>
