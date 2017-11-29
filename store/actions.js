@@ -12,8 +12,14 @@ export default {
     bindConcertsList: firebaseAction(({state, dispatch}) => {
         dispatch('bindFirebaseReference', {reference: state.concertsListRef, toBind: 'concertsList'});
     }),
+    bindConcert: firebaseAction(({state, dispatch}, id) => {
+        dispatch('bindFirebaseReference', {reference: state.concertsFullRef.child(id), toBind: 'concertDetails'});
+    }),
     unbindConcertsList: firebaseAction(({state, dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertsList'});
+    }),
+    unbindConcert: firebaseAction(({state, dispatch}) => {
+        dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'});
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef}, {reference, toBind}) => {
         reference.once('value').then(concerts => concerts.val() && bindFirebaseRef(toBind, reference))
