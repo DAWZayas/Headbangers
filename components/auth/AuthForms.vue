@@ -1,7 +1,8 @@
 <template>
     <div>
-        <login-form v-if="dialogAction === 'login'" @signup="showSignup" @close="closeDialog"></login-form>
-        <signup-form v-if="dialogAction === 'signup'" @login="showLogin" @close="closeDialog"></signup-form>
+        <login-form v-if="dialogAction === 'login'" @signup="showSignup" @close="closeDialog" @error="setError"></login-form>
+        <signup-form v-if="dialogAction === 'signup'" @login="showLogin" @close="closeDialog" @error="setError"></signup-form>
+        <el-alert v-if="error !== ''" :title="error" type="error" class="margin-top" @close="error = ''"></el-alert>
         <hr class="margin">
         <div class="servicesButtons">
             <button class="loginBtn loginBtn--facebook" @click="loginWithFacebook">Login with Facebook</button>
@@ -16,6 +17,11 @@ import firebaseApp from '~/firebaseapp';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 export default {
+    data(){
+        return {
+            error: ''
+        }
+    },
     methods: {
         showLogin(){
             this.$emit('login');
@@ -27,16 +33,20 @@ export default {
             this.$emit('close');
         },
         loginWithFacebook(){
-            let provider = new firebase.auth.FacebookAuthProvider();
-            firebaseApp.auth().signInWithPopup(provider).then(function(result) {
-                console.log(result)
+            firebaseApp.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider());
+            
+            firebaseApp.auth().getRedirectResult().then(function(result) {
+                this.closeDialog();
             }).catch(function(error) {
-                console.log(error)
+                this.error = error;
             });
         },
         loginWithGoogle(){
             
         },
+        setError(error){
+            this.error = error.message;
+        }
     },
     props: ["dialogAction"],
     components: { LoginForm, SignupForm }

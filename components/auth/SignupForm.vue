@@ -9,7 +9,6 @@
         <el-form-item label="Confirm Password" prop="passwordConfirm" class="margin-bottom">
             <el-input type="password" placeholder="" v-model="passwordConfirm"></el-input>
         </el-form-item>
-        <el-alert v-if="error != ''" :title="error" type="error"></el-alert>
         <el-form-item class="full-width text-center margin-top">
             <el-button @click="createAccount" type="primary">Sign up</el-button>
         </el-form-item>
@@ -45,9 +44,9 @@ export default {
         },
         createAccount(){
             if(this.name === '' || this.email === '' || this.password === '' || this.passwordConfirm === ''){
-                this.error = "Please fill all the fields";
+                this.emitError("Please fill all the fields");
             }else if(this.password !== this.passwordConfirm){
-                this.error = "The passwords don't match";
+                this.emitError("The passwords don't match");
             }else{
                 firebaseApp.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .then((user) => {
@@ -58,12 +57,15 @@ export default {
                     });
                 })
                 .catch((error) => {
-                    this.error = error.message;
+                    this.emitError(error.message);
                 })
             }
         },
         passwordsMatch(rule, value, cb){
             this.password === this.passwordConfirm ? cb() : cb('The passwords don\'t match')
+        },
+        emitError(message){
+            this.$emit('error', { message })
         }
     }
 }
