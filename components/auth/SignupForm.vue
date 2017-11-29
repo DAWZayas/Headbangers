@@ -53,7 +53,7 @@ export default {
                 .then((user) => {
                     this.$emit('close');
                     this.$message({
-                        message: 'Account succesfully created',
+                        message: 'Account created succesfully',
                         type: 'success'
                     });
                 })

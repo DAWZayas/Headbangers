@@ -4,13 +4,15 @@
         <signup-form v-if="dialogAction === 'signup'" @login="showLogin" @close="closeDialog"></signup-form>
         <hr class="margin">
         <div class="servicesButtons">
-            <button class="loginBtn loginBtn--facebook">Login with Facebook</button>
-            <button class="loginBtn loginBtn--google">Login with Google</button>
+            <button class="loginBtn loginBtn--facebook" @click="loginWithFacebook">Login with Facebook</button>
+            <button class="loginBtn loginBtn--google" @click="loginWithGoogle">Login with Google</button>
         </div>
     </div>
 </template>
 
 <script>
+import firebase from 'firebase';
+import firebaseApp from '~/firebaseapp';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 export default {
@@ -23,7 +25,18 @@ export default {
         },
         closeDialog(){
             this.$emit('close');
-        }
+        },
+        loginWithFacebook(){
+            let provider = new firebase.auth.FacebookAuthProvider();
+            firebaseApp.auth().signInWithPopup(provider).then(function(result) {
+                console.log(result)
+            }).catch(function(error) {
+                console.log(error)
+            });
+        },
+        loginWithGoogle(){
+            
+        },
     },
     props: ["dialogAction"],
     components: { LoginForm, SignupForm }

@@ -18,7 +18,7 @@
         "generate": "nuxt generate"
     },
     "devDependencies": {
-        "element-ui": "2.0.5",
+        "element-ui": "2.0.1",
         "node-sass": "^4.7.2",
         "nuxt": "^1.0.0-rc9",
         "sass-loader": "^6.0.6",
