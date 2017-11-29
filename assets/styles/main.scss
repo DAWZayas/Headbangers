@@ -3,6 +3,7 @@
 //@import url('https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:400,600,700,800');
 @import "assets/styles/breakpoints.scss";
 @import "assets/styles/colors.scss";
+@import "assets/styles/utils.scss";
 
 :root:before{
     content: url('/img/index/banner.jpg'),
@@ -32,58 +33,19 @@ main > *:nth-child(1){
     min-height: calc(100vh - 60px);
 }
 
-.padding {
-    padding: 1em;
-}
-
-.margin{
-    margin: 1em;
-}
-
-.no-padding{
-    padding: 0;
-}
-
-.no-margin{
-    margin: 0;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.float-right {
-    float: right;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-center{
-    margin: auto;
-}
-
-.full-width {
-    width: 100%;
-    overflow: hidden;
-}
-
 .el-dialog {
     width: 90% !important;
 }
+
 a{
-    color: $gray;
+    color: $mainColorLightest;
     text-decoration: none;
 }
+
+a:hover{
+    cursor: pointer;
+}
+
 .page-enter-active,
 .page-leave-active {
     transition: opacity .3s;
@@ -100,10 +62,4 @@ hr {
     height: 1px;
     border: 0;
     background-color: $grayLight;
-}
-
-@media (min-width: $break-sm) {
-    .el-dialog {
-        width: 50% !important;
-    }
 }

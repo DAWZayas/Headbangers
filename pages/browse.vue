@@ -1,6 +1,7 @@
 <template>
     <div>
-<!--        <el-tabs type="border-card">
+        <!--
+        <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
             </el-tab-pane>
@@ -11,7 +12,7 @@
                 <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
             </el-tab-pane>
         </el-tabs>
--->     
+        -->
         <browse-list :concerts="concerts"></browse-list>
         
         <button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>

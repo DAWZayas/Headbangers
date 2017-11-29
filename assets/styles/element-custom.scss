@@ -1,6 +1,7 @@
 // Material Forms
 
 @import "assets/styles/colors.scss";
+@import "assets/styles/breakpoints.scss";
 
 input.el-input__inner{
     background-color: $grayLighter;
@@ -53,4 +54,14 @@ button.el-button{
 .el-date-editor.el-input, 
 .el-date-editor.el-input__inner{
     width: 100% !important;
+}
+
+.el-dialog__body{
+    padding-top: 0!important;
+}
+
+@media (min-width: $break-sm) {
+    .el-dialog {
+        width: 50% !important;
+    }
 }

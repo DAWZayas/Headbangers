@@ -1,0 +1,56 @@
+.padding {
+    padding: 1em;
+}
+
+.padding-top{
+    padding-top: 1em;
+}
+
+.no-padding{
+    padding: 0;
+}
+
+.margin{
+    margin: 1em;
+}
+
+.margin-top{
+    margin-top: 1em!important;
+}
+
+.margin-bottom{
+    margin-bottom: 1em!important;
+}
+
+.no-margin{
+    margin: 0 !important;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-center{
+    margin: auto;
+}
+
+.full-width {
+    width: 100%;
+    overflow: hidden;
+}

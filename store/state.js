@@ -10,4 +10,5 @@ export default {
     concertsFullRef: '',
     countryList: require('~/static/utils/countries.js').default,
     genreList: require('~/static/utils/genres.js').default,
+    concertDetails: null
 }
