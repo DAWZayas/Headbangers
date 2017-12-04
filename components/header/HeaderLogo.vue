@@ -12,13 +12,14 @@
 
 <style>
     #logo{
+        padding-top: 0.5em;
         width: 10em;
     }    
 @media(min-width: 768px) {
     #logo{
         margin-left: -15px;
         width: 13em;
-
+        padding-top: 0;
     }    
 }
 

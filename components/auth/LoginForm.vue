@@ -34,11 +34,11 @@ export default {
             }else{
                 firebaseApp.auth().signInWithEmailAndPassword(this.email, this.password)
                 .then((user) => {
-                    this.$emit('close');
                     this.$message({
                         message: 'Logged in succesfully',
                         type: 'success'
                     });
+                    this.$router.push('/')
                 })
                 .catch((error) => {
                     if(error.code === 'auth/wrong-password') {

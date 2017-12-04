@@ -1,5 +1,6 @@
 export default {
     currentUser: null,
+    isAuthenticated: null,
     concertsList: null,
     concertsListRef: '',
     concertsFullRef: '',

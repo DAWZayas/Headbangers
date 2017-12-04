@@ -7,7 +7,7 @@
             <header-logo></header-logo>
         </div>
         <div class="separator"></div>
-        <div class="menu-item top-logo">
+        <div class="menu-item search-item">
             <search-box></search-box>
         </div>
         <div class="menu-item">
@@ -55,11 +55,12 @@
         .menu-item {
             text-align: center;
             display: inline-block;
-            padding: 0 5px;
+            padding: 0 0.5em;
             position: relative;
             box-sizing: border-box;
         }
-        .menu-item * {
+        .menu-item > * {
+            padding-top: 0.1em;
             vertical-align: middle;
         }
         .menu-item:hover {
@@ -67,14 +68,22 @@
         }
         .top-logo {
             margin-left: 0;
+            height: 60px;
+            padding: 0;
         }
-        .top-logo:hover {
+        .search-item{
+            display: none;
+        }
+        .top-logo:hover, .search-item:hover {
             background-color: transparent;
         }
         .separator{
            flex-grow: 1;
         }
         @media (min-width: 768px) {
+            .search-item{
+                display: inline-block;
+            }
             .menu-item {
                 padding: 0 15px;
             }

@@ -15,6 +15,7 @@
 import firebase from 'firebase';
 import firebaseApp from '~/firebaseapp';
 import {LoginForm, SignupForm} from '~/components/auth';
+import { mapGetters } from 'vuex';
 export default {
     data(){
         return {
@@ -22,25 +23,35 @@ export default {
             error: ''
         }
     },
+    computed: {
+        ...mapGetters({isAuthenticated: 'isAuthenticated'})
+    },
+    created(){
+        setTimeout((() => {
+            if(this.isAuthenticated){
+                this.$router.push('/')
+            }
+        }).bind(this), 1000)
+    },
     methods: {
         loginWithFacebook(){
             firebaseApp.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider());
-            firebaseApp.auth().getRedirectResult().catch(function(error) {
-                this.error = error;
-            });
+            firebaseApp.auth().getRedirectResult()
+            .then(() => this.$router.push('/'))
+            .catch((error) => this.error = error);
         },
         loginWithGoogle(){
             firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-            firebaseApp.auth().getRedirectResult().catch(function(error) {
-                this.error = error;
-            });
+            firebaseApp.auth().getRedirectResult()
+            .then(() => this.$router.push('/'))
+            .catch((error) => this.error = error);
         },
         setError(error){
             this.error = error.message;
         }
     },
     components: { LoginForm, SignupForm }
-}
+}   
 </script>
 
 <style lang="scss">

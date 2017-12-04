@@ -32,15 +32,18 @@
                 isLoading: true
             }
         },
-        created() {
+        beforeMount(){
             this.setReferences();
+            this.bindAuth();
+        },
+        created() {
             this.isLoading = true;
             setTimeout(() => {
                 this.isLoading = false;
             }, 2000)
         },
         methods: {
-            ...mapActions(['setReferences'])
+            ...mapActions(['setReferences', 'bindAuth'])
         }
     }
 </script>
