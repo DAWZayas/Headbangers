@@ -1,5 +1,6 @@
 <template>
-    <el-form :model="this" ref="signupForm" class="padding" :rules="rules" :show-message="false">
+    <el-form :model="this" ref="signupForm" :rules="rules" :show-message="false">
+        <h4 class="text-center"> Sign up for an account </h4>
         <el-form-item label="Email" prop="email" class="no-margin">
             <el-input placeholder="" v-model="email"></el-input>
         </el-form-item>

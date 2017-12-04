@@ -19,7 +19,7 @@ export default {
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .footer{
-        margin-top: 6.5em;
+       // margin-top: 6.5em;
         padding: 1em;
         background-color: $mainColorDark;
         display: grid;

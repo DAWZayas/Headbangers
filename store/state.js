@@ -1,14 +1,9 @@
 export default {
-    currentUser:{
-        id: "001",
-        name: "Peter Panda",
-        picture: ""
-    },
-    currentCountry: null,
+    currentUser: null,
     concertsList: null,
     concertsListRef: '',
     concertsFullRef: '',
-    countryList: require('~/static/utils/countries.js').default,
-    genreList: require('~/static/utils/genres.js').default,
-    concertDetails: null
+    concertDetails: null,
+    countryList: require('~/static/utils/countries.js'),
+    genreList: require('~/static/utils/genres.js')
 }

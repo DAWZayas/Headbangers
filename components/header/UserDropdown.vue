@@ -18,17 +18,12 @@
         </el-dropdown-menu>
     
         <el-dropdown-menu v-else slot="dropdown">
-            <el-dropdown-item>
-                <icon-text icon="lnr-enter" text="Log In" @click.native="showLogin"></icon-text>
-            </el-dropdown-item>
-            <el-dropdown-item>
-                <icon-text icon="lnr-pencil" text="Sign Up" @click.native="showSignup"></icon-text>
-            </el-dropdown-item>
+            <nuxt-link to="login">
+                <el-dropdown-item>
+                    <icon-text icon="lnr-enter" text="Log In" @click.native="showLogin"></icon-text>
+                </el-dropdown-item>
+            </nuxt-link>
         </el-dropdown-menu>
-
-        <el-dialog :title="dialogTitle" :visible.sync="showDialog" :append-to-body="true">
-            <auth-forms :dialogAction="dialogAction" @signup="showSignup" @login="showLogin" @close="showDialog = false"></auth-forms>
-        </el-dialog>
 
     </el-dropdown>
 </template>

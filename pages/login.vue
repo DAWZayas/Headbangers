@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <login-form v-if="dialogAction === 'login'" @signup="showSignup" @close="closeDialog" @error="setError"></login-form>
-        <signup-form v-if="dialogAction === 'signup'" @login="showLogin" @close="closeDialog" @error="setError"></signup-form>
+    <div class="login-form padding">
+        <login-form v-if="action === 'login'" @signup="action = 'signup'" @error="setError"></login-form>
+        <signup-form v-if="action === 'signup'" @login="action = 'login'" @error="setError"></signup-form>
         <el-alert v-if="error !== ''" :title="error" type="error" class="margin-top" @close="error = ''"></el-alert>
         <hr class="margin-top margin-bottom">
         <div class="servicesButtons">
@@ -14,47 +14,51 @@
 <script>
 import firebase from 'firebase';
 import firebaseApp from '~/firebaseapp';
-import LoginForm from './LoginForm';
-import SignupForm from './SignupForm';
+import {LoginForm, SignupForm} from '~/components/auth';
 export default {
     data(){
         return {
+            action: 'login',
             error: ''
         }
     },
     methods: {
-        showLogin(){
-            this.$emit('login');
-        },
-        showSignup(){
-            this.$emit('signup');
-        },
-        closeDialog(){
-            this.$emit('close');
-        },
         loginWithFacebook(){
             firebaseApp.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider());
-            
-            firebaseApp.auth().getRedirectResult().then(function(result) {
-                this.closeDialog();
-            }).catch(function(error) {
+            firebaseApp.auth().getRedirectResult().catch(function(error) {
                 this.error = error;
             });
         },
         loginWithGoogle(){
-            
+            firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+            firebaseApp.auth().getRedirectResult().catch(function(error) {
+                this.error = error;
+            });
         },
         setError(error){
             this.error = error.message;
         }
     },
-    props: ["dialogAction"],
     components: { LoginForm, SignupForm }
 }
 </script>
 
 <style lang="scss">
     @import "assets/styles/breakpoints.scss";
+
+    @media (min-width: $break-sm) {
+        .login-form {
+            width: 75%;
+            margin: 0 auto;
+        }
+    }
+    
+    @media (min-width: $break-lg) {
+        .login-form {
+            width: 50%;
+            margin: 0 auto;
+        }
+    }
 
     .servicesButtons{
         display: flex;

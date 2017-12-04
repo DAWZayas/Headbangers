@@ -17,7 +17,7 @@
     export default {
         data() {
             return {
-                iconsPath: "/img/genres/",
+                iconsPath: "/img/icons/genres/",
                 genres: [{
                     icon: "acoustic.svg",
                     text: "Acoustic",

@@ -1,4 +1,4 @@
-export default [
+const genres = [
     'Alternative',
     'Blues',
     'Children',
@@ -23,3 +23,5 @@ export default [
     'Vocal',
     'World'
 ];
+
+export { genres };

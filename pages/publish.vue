@@ -29,6 +29,7 @@
     import { mapActions, mapGetters, mapMutations } from 'vuex';
     import { Concert, BasicInfo, Location, Band, ShortConcert} from '~/schemas';
     export default {
+        middleware: 'auth',
         data: () => ({
             info: new BasicInfo(),
             location: new Location(),

@@ -14,7 +14,7 @@
             <icon-button icon="lnr-magnifier"></icon-button>
         </div>
         <div class="menu-item">
-            <user-button></user-button>
+            <user-dropdown></user-dropdown>
         </div>
         </el-menu>
     </header>
@@ -24,7 +24,7 @@
     import HeaderLogo from "./HeaderLogo";
     import MenuButton from "./MenuButton";
     import {IconText, IconButton} from "~/components/common";
-    import UserButton from "./UserButton";
+    import UserDropdown from "./UserDropdown";
     import SearchBox from "./SearchBox";
     export default {
         name: "header-component",
@@ -33,7 +33,7 @@
             HeaderLogo,
             MenuButton,
             IconText,
-            UserButton,
+            UserDropdown,
             SearchBox
         }
     }

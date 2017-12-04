@@ -1,6 +1,6 @@
 <template>
-    <div>
         <el-form ref="authForm">
+            <h4 class="text-center"> Login to your account </h4>
             <el-form-item label="Email" class="no-margin">
                 <el-input placeholder="" v-model="email"></el-input>
             </el-form-item>
@@ -10,10 +10,9 @@
             <el-form-item class="full-width text-center margin-top">
                 <el-button type="primary" @click="loginWithEmail">Login</el-button>
             </el-form-item>
+            <a @click="showSignup">Create an account</a><br>
+            <a>Forgot my password</a>  
         </el-form>
-        <a @click="showSignup">Create an account</a><br>
-        <a>Forgot my password</a>  
-    </div>
 </template>
 <script>
 import firebaseApp from '~/firebaseapp';
