@@ -13,10 +13,10 @@
             </el-tab-pane>
         </el-tabs>
         -->
+        <filters class="filters" v-if="filtersPage" @hide="showFilters(false)"></filters>        
         <browse-list :concerts="concerts"></browse-list>
-        
         <button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
-        <filters v-if="filtersPage" @hide="showFilters(false)"></filters>
+
         
 
 
@@ -57,16 +57,20 @@
         beforeDestroy(){
             this.unbindConcertsList();
         }
-        
     }
 </script>
 
 <style lang="scss">
     @import "assets/styles/colors.scss";
+    .filters {
+        position: fixed;
+        width: calc(100% - 2em);
+        margin: 1em;
+        z-index: 1;
+    }
     #filters-fab{
         background: $accentColor;
         position: sticky;
-        bottom: 3em;
         right: 3em;
         padding: 18px 18px 16px 18px;
         width: 56px;
