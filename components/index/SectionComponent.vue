@@ -11,15 +11,15 @@
 </template>
 
 <script>
-    import IconText from '~/components/common/IconText'
-    import EventCard from '~/components/browse/EventCard'
-        export default {
-            props: ['icon', 'text'],
-            components: {
-                IconText,
-                EventCard
-            },
-        }
+import IconText from '~/components/common/IconText'
+import EventCard from '~/components/browse/EventCard'
+export default {
+    props: ['icon', 'text'],
+    components: {
+        IconText,
+        EventCard
+    }
+}
 </script>
 
 <style lang="scss">

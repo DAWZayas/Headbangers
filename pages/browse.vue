@@ -27,12 +27,12 @@
 </template>
 
 <script>
-    import BrowseList from '~/components/browse/BrowseList';
-    import Filters from "~/components/browse/Filters";
-    import {IconText, IconButton} from '~/components/common';
-    import {mapActions, mapGetters} from 'vuex';
+    import BrowseList from '~/components/browse/BrowseList'
+    import Filters from '~/components/browse/Filters'
+    import {IconText, IconButton} from '~/components/common'
+    import {mapActions, mapGetters} from 'vuex'
     export default {
-        data() {
+        data () {
             return {
                 filtersPage: false,
                 selectedMode: 'list'
@@ -47,15 +47,15 @@
             IconButton,
             Filters
         },
-        methods:{
+        methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-            showFilters($bool){this.filtersPage=$bool;},
+            showFilters ($bool) { this.filtersPage = $bool }
         },
-        created(){    
-            this.bindConcertsList();
+        created () {
+            this.bindConcertsList()
         },
-        beforeDestroy(){
-            this.unbindConcertsList();
+        beforeDestroy () {
+            this.unbindConcertsList()
         }
     }
 </script>

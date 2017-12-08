@@ -25,74 +25,76 @@
 </template>
 
 <script>
-    import { FormBasics, FormLocation, FormMusic, PublishSummary} from '~/components/publish'
-    import { mapActions, mapGetters, mapMutations } from 'vuex';
-    import { Concert, BasicInfo, Location, Band, ShortConcert} from '~/schemas';
-    export default {
-        middleware: 'auth',
-        data: () => ({
+import { FormBasics, FormLocation, FormMusic, PublishSummary } from '~/components/publish'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { Concert, BasicInfo, Location, Band, ShortConcert } from '~/schemas'
+export default {
+    middleware: 'auth',
+    data () {
+        return {
             info: new BasicInfo(),
             location: new Location(),
             bands: [new Band()],
             genres: [],
-            currentStep: 0,
-        }),
-        components: {
-            FormBasics,
-            FormLocation,
-            FormMusic,
-            PublishSummary
+            currentStep: 0
+        }
+    },
+    components: {
+        FormBasics,
+        FormLocation,
+        FormMusic,
+        PublishSummary
+    },
+    computed: {
+        ...mapGetters({currentUser: 'getCurrentUser'})
+    },
+    methods: {
+        ...mapActions(['publishConcert']),
+        ...mapMutations(['setNewConcert']),
+        basicsDone (info) {
+            info.date = new Date(info.date).getTime()
+            this.info.populate(info)
+            this.stepUp()
         },
-        computed: {
-            ...mapGetters({currentUser: 'getCurrentUser'}),
+        locationDone (location) {
+            this.location.populate(location)
+            this.stepUp()
         },
-        methods: {
-            ...mapActions(['publishConcert']),
-            ...mapMutations(['setNewConcert']),
-            basicsDone(info) {
-                info.date = new Date(info.date).getTime();
-                this.info.populate(info);
-                this.stepUp();
-            },
-            locationDone(location) {
-                this.location.populate(location);
-                this.stepUp();
-            },
-            musicDone({bands, genres}) {
-                this.bands = bands;
-                this.genres = genres;
-                this.stepUp();
-            },
-            publish() {
-                let concert = new Concert({
-                    info: this.info, 
-                    location: this.location, 
-                    bands: this.bands, 
-                    genres: this.genres, 
-                    author: this.currentUser.id
-                }).toObject();
-                let shortConcert = new ShortConcert({
-                    title: this.info.title,
-                    date: this.info.date,
-                    time: this.info.time,
-                    price: this.info.price,
-                    currency: this.info.currency,
-                    venue: this.location.venue,
-                    city: this.location.city,
-                    genres: this.genres,
-                    poster: this.info.poster
-                }).toObject();
-                this.publishConcert({concert, shortConcert});
-                this.stepUp();
-            },
-            stepUp() {
-                this.currentStep++;
-            },
-            stepDown() {
-                this.currentStep--;
-            }
+        musicDone ({bands, genres}) {
+            this.bands = bands
+            this.genres = genres
+            this.stepUp()
+        },
+        publish () {
+            let concert = new Concert({
+                info: this.info,
+                location: this.location,
+                bands: this.bands,
+                genres: this.genres,
+                author: this.currentUser.id
+            }).toObject()
+            let shortConcert = new ShortConcert({
+                title: this.info.title,
+                date: this.info.date,
+                time: this.info.time,
+                price: this.info.price,
+                currency: this.info.currency,
+                venue: this.location.venue,
+                city: this.location.city,
+                genres: this.genres,
+                poster: this.info.poster
+            }).toObject()
+            this.publishConcert({concert, shortConcert})
+            this.stepUp()
+        },
+        stepUp () {
+            this.currentStep++
+        },
+        stepDown () {
+            this.currentStep--
         }
     }
+}
 </script>
 
 <style lang="scss">

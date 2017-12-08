@@ -1,4 +1,4 @@
-var SchemaObject = require('schema-object');
+var SchemaObject = require('schema-object')
 var BasicInfo = new SchemaObject({
     title: String,
     date: String,
@@ -6,7 +6,7 @@ var BasicInfo = new SchemaObject({
     price: String,
     currency: String,
     description: String,
-    poster: String,
+    poster: String
 })
 var Location = new SchemaObject({
     venue: String,
@@ -45,7 +45,7 @@ var ShortConcert = new SchemaObject({
     genres: [String],
     likes: {type: Number, default: 0},
     assisting: {type: Number, default: 0},
-    poster: String,
+    poster: String
 })
 var User = new SchemaObject({
     name: String,
@@ -57,7 +57,7 @@ var User = new SchemaObject({
     likes: Number,
     saved: [String],
     published: [String],
-    picture: String,
+    picture: String
 })
 
-export { Concert as Concert, Location as Location , BasicInfo as BasicInfo, Band as Band, ShortConcert as ShortConcert}
+export { Concert, Location, BasicInfo, Band, ShortConcert, User }

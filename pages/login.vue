@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-import firebaseApp from '~/firebaseapp';
-import {LoginForm, SignupForm} from '~/components/auth';
-import { mapGetters } from 'vuex';
+import firebase from 'firebase'
+import firebaseApp from '~/firebaseapp'
+import { LoginForm, SignupForm } from '~/components/auth'
+import { mapGetters } from 'vuex'
 export default {
-    data(){
+    data () {
         return {
             action: 'login',
             error: ''
@@ -26,32 +26,32 @@ export default {
     computed: {
         ...mapGetters({isAuthenticated: 'isAuthenticated'})
     },
-    created(){
-        setTimeout((() => {
-            if(this.isAuthenticated){
+    created () {
+        setTimeout(() => {
+            if (this.isAuthenticated) {
                 this.$router.push('/')
             }
-        }).bind(this), 1000)
+        }, 1000)
     },
     methods: {
-        loginWithFacebook(){
-            firebaseApp.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider());
-            firebaseApp.auth().getRedirectResult()
-            .then(() => this.$router.push('/'))
-            .catch((error) => this.error = error);
+        loginWithFacebook () {
+            this.loginWithProvider(new firebase.auth.FacebookAuthProvider())
         },
-        loginWithGoogle(){
-            firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-            firebaseApp.auth().getRedirectResult()
-            .then(() => this.$router.push('/'))
-            .catch((error) => this.error = error);
+        loginWithGoogle () {
+            this.loginWithProvider(new firebase.auth.GoogleAuthProvider())
         },
-        setError(error){
-            this.error = error.message;
+        loginWithProvider (provider) {
+            firebaseApp.auth().signInWithRedirect(provider)
+            firebaseApp.auth().getRedirectResult()
+                .then(() => this.$router.push('/'))
+                .catch((error) => { this.error = error })
+        },
+        setError (error) {
+            this.error = error.message
         }
     },
     components: { LoginForm, SignupForm }
-}   
+}
 </script>
 
 <style lang="scss">

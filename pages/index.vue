@@ -9,10 +9,10 @@
 </template>
 
 <script>
-    import SectionComponent from "~/components/index/SectionComponent";
-    import { TopGenres, Banner,GradientSection } from "~/components/index";
+    import SectionComponent from '~/components/index/SectionComponent'
+    import { TopGenres, Banner, GradientSection } from '~/components/index'
     export default {
-        data() {
+        data () {
             return {
                 bannerImg: '/img/index/banner.jpg'
             }

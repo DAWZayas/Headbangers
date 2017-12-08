@@ -14,11 +14,12 @@
 <script>
 import IconButton from '~/components/common/IconButton'
 export default {
-    name: "filters",
     data () {
-        sliderPrice: [0, 500]
+        return {
+            sliderPrice: [0, 500]
+        }
     },
-    components:{
+    components: {
         IconButton
     },
     methods: {

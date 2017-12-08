@@ -3,11 +3,6 @@
         <img src="/img/brand/splash-logo.svg">
     </div>
 </template>
-<script>
-export default {
-
-}
-</script>
 <style lang="scss">
     @import "assets/styles/colors.scss";
     .splash{
