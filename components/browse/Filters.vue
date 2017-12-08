@@ -8,15 +8,14 @@
   
 </template>
 <script>
-import IconButton from "~/components/common/IconButton";
+import IconButton from '~/components/common/IconButton'
 export default {
-    name: "filters",
-    components:{
+    components: {
         IconButton
     },
     methods: {
-        hide(){
-            this.$emit("hide")
+        hide () {
+            this.$emit('hide')
         }
     }
 }

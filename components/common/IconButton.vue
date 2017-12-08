@@ -7,9 +7,8 @@
 
 <script>
     export default {
-        name: "icon-button",
-        props: ["icon"]
-    };
+        props: ['icon']
+    }
 </script>
 
 <style lang='scss'>

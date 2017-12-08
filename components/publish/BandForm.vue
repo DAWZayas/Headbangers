@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        data() {
+        data () {
             return {
                 bandInfo: {},
                 rules: {
@@ -33,8 +33,8 @@
             }
         },
         props: ['band'],
-        created(){
-            this.bandInfo = this.band;
+        created () {
+            this.bandInfo = this.band
         }
     }
 </script>

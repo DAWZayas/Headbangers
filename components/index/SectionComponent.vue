@@ -11,11 +11,10 @@
 </template>
 
 <script>
-    import IconText from "~/components/common/IconText";
-    import EventCard from "~/components/browse/EventCard";
+    import IconText from '~/components/common/IconText'
+    import EventCard from '~/components/browse/EventCard'
         export default {
-            name: "section-component",
-            props: ["icon", "text"],
+            props: ['icon', 'text'],
             components: {
                 IconText,
                 EventCard

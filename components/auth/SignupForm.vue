@@ -17,55 +17,55 @@
     </el-form>  
 </template>
 <script>
-import firebaseApp from '~/firebaseapp';
+import firebaseApp from '~/firebaseapp'
 export default {
-    data(){
+    data () {
         return {
             email: '',
             password: '',
             passwordConfirm: '',
             error: '',
             rules: {
-                email:[
-                    { required: true, type: 'email', message: 'Enter a valid email', trigger: 'blur'}
+                email: [
+                    { required: true, type: 'email', message: 'Enter a valid email', trigger: 'blur' }
                 ],
-                password:[
-                    { required: true, min: 6, message: 'Enter a valid password (6 characters)', trigger: 'blur'}
+                password: [
+                    { required: true, min: 6, message: 'Enter a valid password (6 characters)', trigger: 'blur' }
                 ],
-                passwordConfirm:[
-                    { required: true, min: 6, message: 'Enter a confirmation password', trigger: 'blur'},
-                    { validator: this.passwordsMatch, message: 'Passwords don\'t match'}
+                passwordConfirm: [
+                    { required: true, min: 6, message: 'Enter a confirmation password', trigger: 'blur' },
+                    { validator: this.passwordsMatch, message: 'Passwords don\'t match' }
                 ]
             }
         }
     },
     methods: {
-        showLogin(){
-            this.$emit('login');
+        showLogin () {
+            this.$emit('login')
         },
-        createAccount(){
-            if(this.name === '' || this.email === '' || this.password === '' || this.passwordConfirm === ''){
-                this.emitError("Please fill all the fields");
-            }else if(this.password !== this.passwordConfirm){
-                this.emitError("The passwords don't match");
-            }else{
+        createAccount () {
+            if (this.name === '' || this.email === '' || this.password === '' || this.passwordConfirm === '') {
+                this.emitError('Please fill all the fields')
+            } else if (this.password !== this.passwordConfirm) {
+                this.emitError('The passwords don\'t match')
+            } else {
                 firebaseApp.auth().createUserWithEmailAndPassword(this.email, this.password)
-                .then((user) => {
-                    this.$emit('close');
-                    this.$message({
-                        message: 'Account created succesfully',
-                        type: 'success'
-                    });
-                })
-                .catch((error) => {
-                    this.emitError(error.message);
-                })
+                    .then((user) => {
+                        this.$emit('close')
+                        this.$message({
+                            message: 'Account created succesfully',
+                            type: 'success'
+                        })
+                    })
+                    .catch((error) => {
+                        this.emitError(error.message)
+                    })
             }
         },
-        passwordsMatch(rule, value, cb){
-            this.password === this.passwordConfirm ? cb() : cb('The passwords don\'t match')
+        passwordsMatch (rule, value, cb) {
+            this.password === this.passwordConfirm ? cb() : cb(new Error('The passwords don\'t match'))
         },
-        emitError(message){
+        emitError (message) {
             this.$emit('error', { message })
         }
     }

@@ -15,39 +15,39 @@
 
 <script>
     export default {
-        data() {
+        data () {
             return {
-                iconsPath: "/img/icons/genres/",
+                iconsPath: '/img/icons/genres/',
                 genres: [{
-                    icon: "acoustic.svg",
-                    text: "Acoustic",
-                    color: "#506da0"
+                    icon: 'acoustic.svg',
+                    text: 'Acoustic',
+                    color: '#506da0'
                 }, {
-                    icon: "rock.svg",
-                    text: "Rock",
-                    color: "#8ea4cc"
+                    icon: 'rock.svg',
+                    text: 'Rock',
+                    color: '#8ea4cc'
                 }, {
-                    icon: "classic.svg",
-                    text: "Classic",
-                    color: "#5b76a5"
+                    icon: 'classic.svg',
+                    text: 'Classic',
+                    color: '#5b76a5'
                 }, {
-                    icon: "electronic.svg",
-                    text: "Electronic",
-                    color: "#7797ce"
+                    icon: 'electronic.svg',
+                    text: 'Electronic',
+                    color: '#7797ce'
                 }, {
-                    icon: "pop.svg",
-                    text: "Pop",
-                    color: "#607daf"
+                    icon: 'pop.svg',
+                    text: 'Pop',
+                    color: '#607daf'
                 }, {
-                    icon: "rap.svg",
-                    text: "Rap",
-                    color: "#6890d8"
+                    icon: 'rap.svg',
+                    text: 'Rap',
+                    color: '#6890d8'
                 }]
             }
         },
         methods: {
-            randomColor() {
-                return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+            randomColor () {
+                return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')'
             }
         }
     }

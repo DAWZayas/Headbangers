@@ -57,7 +57,6 @@ var User = new SchemaObject({
     likes: Number,
     saved: [String],
     published: [String],
-    preferedgenres: [String],
     picture: String,
 })
 

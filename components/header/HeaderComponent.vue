@@ -21,13 +21,12 @@
 </template>
 
 <script>
-    import HeaderLogo from "./HeaderLogo";
-    import MenuButton from "./MenuButton";
-    import {IconText, IconButton} from "~/components/common";
-    import UserDropdown from "./UserDropdown";
-    import SearchBox from "./SearchBox";
+    import HeaderLogo from './HeaderLogo'
+    import MenuButton from './MenuButton'
+    import {IconText, IconButton} from '~/components/common'
+    import UserDropdown from './UserDropdown'
+    import SearchBox from './SearchBox'
     export default {
-        name: "header-component",
         components: {
             IconButton,
             HeaderLogo,

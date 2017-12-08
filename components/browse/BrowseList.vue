@@ -5,8 +5,7 @@
 </template>
 
 <script>
-    import EventCard from '~/components/browse/EventCard';
-
+    import EventCard from '~/components/browse/EventCard'
     export default {
         components: {
             EventCard

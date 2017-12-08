@@ -4,12 +4,11 @@
 </template>
 
 <script>
-    export default {
-        name: "search-box",
-        data() {
-            return {
+export default {
+    data () {
+        return {
             input: ''
         }
-     }
-    };
+    }
+}
 </script>
