@@ -3,13 +3,6 @@
         <img id="logo" src="/img/brand/header-logo.svg">
     </nuxt-link>
 </template>
-
-<script>
-    export default {
-        name: "header-logo",
-    };
-</script>
-
 <style>
     #logo{
         padding-top: 0.5em;
@@ -22,5 +15,4 @@
         padding-top: 0;
     }    
 }
-
 </style>

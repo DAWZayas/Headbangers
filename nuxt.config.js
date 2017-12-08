@@ -1,6 +1,6 @@
 module.exports = {
     head: {
-        title: "Headbangers",
+        title: 'Headbangers',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -8,14 +8,14 @@ module.exports = {
         ],
         script: [
             { type: 'text/javascript', src: '/slideout/slideout.js' },
-            { type: 'text/javascript', src: '/utils/blob-util.min.js'}
+            { type: 'text/javascript', src: '/utils/blob-util.min.js' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: 'img/brand/favicon.ico' },
-            { rel: 'manifest', href: 'manifest.json', type: "application/manifest+json"}
-          ]
+            { rel: 'manifest', href: 'manifest.json', type: 'application/manifest+json' }
+        ]
     },
-    loading:{
+    loading: {
         height: '2px',
         color: '#5B7BD5'
     },
@@ -26,9 +26,8 @@ module.exports = {
         '~/node_modules/element-ui/lib/theme-chalk/index.css',
         '~/static/slideout/slideout.css'
     ],
-    //modules: ['modules/schemas.js'],
     plugins: [
         'plugins/element-ui.js',
-        {src: 'plugins/slideout.config.js', ssr: false},
+        {src: 'plugins/slideout.config.js', ssr: false}
     ]
 }

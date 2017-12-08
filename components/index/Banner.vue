@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        props: ["background"]
+        props: ['background']
     }
 </script>
 

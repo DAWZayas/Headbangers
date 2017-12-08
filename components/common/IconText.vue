@@ -1,15 +1,14 @@
 <template>
-        <div class="icon-text">
-          <span class="lnr" :class="icon" ></span>
-          <span>{{text}}</span>
-        </div>
+    <div class="icon-text">
+        <span class="lnr" :class="icon" ></span>
+        <span>{{text}}</span>
+    </div>
 </template>
 
 <script>
     export default {
-      name: "icon-text",
-      props: ["icon", "text"]
-    };
+        props: ['icon', 'text']
+    }
 </script>
 
 <style lang='scss'>

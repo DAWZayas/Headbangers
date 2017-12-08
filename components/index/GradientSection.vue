@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        props: ["background", "title", "text", "buttonText", "target", "alignment"]
+        props: ['background', 'title', 'text', 'buttonText', 'target', 'alignment']
     }
 </script>
 

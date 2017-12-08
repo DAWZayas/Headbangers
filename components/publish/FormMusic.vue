@@ -37,42 +37,41 @@
 
 <script>
     import BandForm from './BandForm'
-    import  { mapGetters } from 'vuex';
-    import { Band } from '~/schemas';
+    import { mapGetters } from 'vuex'
+    import { Band } from '~/schemas'
     export default {
-        data() {
+        data () {
             return {
                 bands: [],
                 genres: [],
                 bandRules: {
                     name: [{ required: true, message: 'Please enter the band name' }],
-                    description: [{ required: true, message: 'Please enter band description'}],
+                    description: [{ required: true, message: 'Please enter band description' }],
                     link: [{ required: true, message: 'Please enter a website or social network' }]
                 }
             }
         },
         computed: {
-            ...mapGetters({genreList: 'getGenreList'}),
+            ...mapGetters({ genreList: 'getGenreList' })
         },
         props: ['data'],
         methods: {
-            addBand(){
-                this.bands.push(new Band());
+            addBand () {
+                this.bands.push(new Band())
             },
-            removeBand(band) {
-                this.bands.splice(this.bands.indexOf(band), 1);
+            removeBand (band) {
+                this.bands.splice(this.bands.indexOf(band), 1)
             },
-            done() {
-                this.$refs['genres-form'].validate(valid => valid ? this.$emit("done", { bands: this.bands, genres: this.genres}) : false )
+            done () {
+                this.$refs['genres-form'].validate(valid => valid ? this.$emit('done', { bands: this.bands, genres: this.genres }) : false)
             },
-            back() {
-                this.$emit("back")
+            back () {
+                this.$emit('back')
             }
         },
-        created(){
-            Object.assign(this.genres, this.data.genres);
-            Object.assign(this.bands, this.data.bands);
-
+        created () {
+            Object.assign(this.genres, this.data.genres)
+            Object.assign(this.bands, this.data.bands)
         },
         components: {
             BandForm

@@ -15,10 +15,19 @@
         "dev": "nuxt",
         "build": "nuxt build",
         "start": "nuxt start",
-        "generate": "nuxt generate"
+        "generate": "nuxt generate",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore .",
+        "precommit": "npm run lint"
     },
     "devDependencies": {
+        "babel-eslint": "^8.0.3",
         "element-ui": "2.0.1",
+        "eslint": "^4.12.1",
+        "eslint-config-standard": "^10.2.1",
+        "eslint-plugin-html": "^4.0.1",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-promise": "^3.6.0",
+        "eslint-plugin-standard": "^3.0.1",
         "node-sass": "^4.7.2",
         "nuxt": "^1.0.0-rc9",
         "sass-loader": "^6.0.6",
@@ -28,8 +37,9 @@
     },
     "dependencies": {
         "blob-util": "^1.3.0",
-        "countries-cities": "0.0.11",
+        "eslint-plugin-node": "^5.2.1",
         "firebase": "^4.6.2",
+        "js-beautify": "^1.7.4",
         "schema-object": "^4.0.11",
         "vuexfire": "^2.3.0"
     }

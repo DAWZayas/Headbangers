@@ -20,40 +20,38 @@
                 <icon-text icon="lnr-exit" text="Log Out"></icon-text>
             </el-dropdown-item>
         </el-dropdown-menu>
-    
         <el-dropdown-menu v-else slot="dropdown">
             <el-dropdown-item command="login">
                 <icon-text icon="lnr-enter" text="Log In"></icon-text>
             </el-dropdown-item>
         </el-dropdown-menu>
-
     </el-dropdown>
 </template>
 
 <script>
-    import firebaseApp from '~/firebaseapp';
-    import {IconButton, IconText} from "~/components/common";
-    import {mapGetters} from 'vuex';
+    import firebaseApp from '~/firebaseapp'
+    import {IconButton, IconText} from '~/components/common'
+    import {mapGetters} from 'vuex'
     export default {
         data: () => ({
             showDialog: false,
             dialogAction: ''
         }),
-        computed:{
+        computed: {
             ...mapGetters({isAuthenticated: 'isAuthenticated', userPhoto: 'getUserPhoto'}),
-            dialogTitle(){ return (this.dialogAction === 'login') ? 'Login to your account' : 'Sign up for an account' }
+            dialogTitle () { return (this.dialogAction === 'login') ? 'Login to your account' : 'Sign up for an account' }
         },
-        methods:{
-            handleAction(command){
-                if(command === 'login'){
+        methods: {
+            handleAction (command) {
+                if (command === 'login') {
                     this.$router.push('login')
-                }else if(command === 'logout'){
+                } else if (command === 'logout') {
                     firebaseApp.auth().signOut()
                     this.$message({
                         message: 'Logged out',
                         type: 'info'
-                    });
-                }else{
+                    })
+                } else {
                     this.$router.push(command)
                 }
             }

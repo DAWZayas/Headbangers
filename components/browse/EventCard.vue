@@ -38,10 +38,9 @@
 </template>
 
 <script>
-    import {IconText} from "~/components/common";
+    import {IconText} from '~/components/common'
     export default {
-        name: "event-card",
-        data(){
+        data () {
             return {
                 liked: false,
                 saved: false
@@ -52,19 +51,21 @@
         },
         props: ['concert', 'id'],
         computed: {
-            formattedDate(){ return new Date(Number(this.concert.date)).toLocaleDateString()},
-            likeClass() {
+            formattedDate () {
+                return new Date(Number(this.concert.date)).toLocaleDateString()
+            },
+            likeClass () {
                 return this.liked && 'liked-button'
             },
-            likeText() {
+            likeText () {
                 return (this.liked) ? 'Liked' : 'Like'
             },
-            saveClass() {
+            saveClass () {
                 return this.saved && 'saved-button'
             },
-            saveText() {
+            saveText () {
                 return (this.saved) ? 'Saved' : 'Save'
-            },
+            }
         }
     }
 </script>
