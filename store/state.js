@@ -1,10 +1,13 @@
+import firebaseApp from '~/firebaseapp'
 export default {
-    currentUser: null,
+    userProfile: null,
+    userData: null,
     isAuthenticated: null,
     concertsList: null,
-    concertsListRef: '',
-    concertsFullRef: '',
     concertDetails: null,
-    countryList: require('~/static/utils/countries.js'),
-    genreList: require('~/static/utils/genres.js')
+    concertsListRef: null,
+    concertsFullRef: null,
+    usersRef: null,
+    countryList: require('~/static/utils/countries.js').Countries,
+    genreList: require('~/static/utils/genres.js').Genres
 }

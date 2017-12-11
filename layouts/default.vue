@@ -19,7 +19,7 @@
     import SideMenu from '~/components/SideMenu'
     import Splash from '~/components/Splash'
     import FooterComponent from '~/components/FooterComponent'
-    import { mapActions } from 'vuex'
+    import { mapActions, mapMutations } from 'vuex'
     export default {
         components: {
             HeaderComponent,
@@ -43,7 +43,8 @@
             }, 2000)
         },
         methods: {
-            ...mapActions(['setReferences', 'bindAuth'])
+            ...mapActions(['bindAuth', 'setReferences']),
+            //...mapMutations(['setReferences'])
         }
     }
 </script>

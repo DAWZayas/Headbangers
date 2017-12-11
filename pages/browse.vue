@@ -13,9 +13,16 @@
             </el-tab-pane>
         </el-tabs>
         -->
+<<<<<<< HEAD
         <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" @applyFilters="applyFilters"></filters>        
         <browse-list id="list" :concerts="concerts" :filters="filters" ></browse-list>
         <button v-show="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+=======
+        <filters class="filters" v-if="filtersPage" @hide="showFilters(false)"></filters>        
+        <browse-list :concerts="concerts"></browse-list>
+        <button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+
+>>>>>>> d9f9c804cbdaa9ea003386393558d8b1b57f421f
     </div>
 </template>
 
@@ -43,6 +50,7 @@
         },
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
+<<<<<<< HEAD
             showFilters ($bool) {
                 this.filtersPage = $bool
                 if($bool){
@@ -57,6 +65,11 @@
                 this.filters= info
             },
         created () {
+=======
+            showFilters ($bool) { this.filtersPage = $bool }
+        },
+        mounted () {
+>>>>>>> d9f9c804cbdaa9ea003386393558d8b1b57f421f
             this.bindConcertsList()
         },
         beforeDestroy () {

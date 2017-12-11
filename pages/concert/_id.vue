@@ -1,52 +1,37 @@
 <template>
     <div>
-        <div v-if='concert' >
-            <h3 class='event-title no-margin text-center'>{{concert.info.title}}</h3>
-            <div class='event-img full-width' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div>
-            <div class=''>
-                <el-row>
-                    <el-col :span='24'>
-                        <icon-text icon='lnr-calendar-full' :text='formattedDate'></icon-text>
-                    </el-col>
-                    <el-col :span='24'>
-                        <icon-text icon='lnr-clock' :text='concert.info.time'></icon-text> 
-                    </el-col>
-                    <el-col :span='24'>               
-                        <icon-text icon='lnr-map-marker' :text='`${concert.location.venue} (${concert.location.number}, ${concert.location.street} - ${concert.location.city} - ${concert.location.country})`'></icon-text>
-                    </el-col>                            
-                    <el-col :span='24'>
-                            <p class='full-width'>{{ concert.info.price }} {{ concert.info.currency }}</p>
-                    </el-col>
-                    <el-col :span='24'>
-                            <p class='full-width'>{{ concert.location.descripton }}</p>
-                    </el-col>
-                    <el-col :span='24'>
-                            <p class='full-width'>{{ concert.info.description }}</p>
-                    </el-col>
-                </el-row>
+        <div v-if='concert' class='ma'>
+            <div class='event-title no-margin text-center'>{{concert.info.title}}</div>            
+            <div class='event-img full-width marg2' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div>
+            <div class='container'>
+                <icon-text class = 'pad' icon='lnr-calendar-full':text='formattedDate'></icon-text>
+                <icon-text class = 'pad' icon='lnr-clock':text='concert.info.time'></icon-text>
+                <div class='container4 pad'>
+                    <icon-text icon='lnr-database':text='concert.info.price'></icon-text>
+                    <span class='pad4'> {{ concert.info.currency }}</span>
+                </div>
             </div>
-            <hr>
-            <div v-for='band in concert.bands'>
-                <el-row>
-                    <el-col :span='24'>
-                        <p>Band:</p>
-                        <p>{{band.name}} ({{band.link}})</p>
-                        <p>{{band.description}}</p>
-                    </el-col>
-                </el-row>
+            <icon-text class = 'pad' icon='lnr-map-marker' :text='`${concert.location.venue} (${concert.location.number}, ${concert.location.street} - ${concert.location.city} - ${concert.location.country})`'></icon-text>
+            <div class='full-width pad' >{{ concert.location.descripton }}</div>
+            <hr class='marg1'>
+            <div class='pad'><span class='black'>Bands: </span></div>
+            <div v-for='band in concert.bands'>            
+                <div class='pad pad2'>{{band.name}} ({{band.link}})</div>
+                <div class='pad pad2 pad3'>{{band.description}}</div>
             </div>
-            <hr>
-            <div>
-                <el-row>
-                    <el-col :span='24'
-                        <p>genres: <span v-for='genre in concert.genres'>{{genre}} </span></p>
-                        <p>Assisting: {{concert.assisting}}</p>
-                        <p>autor: {{concert.author}}</p>
-                        <icon-text icon='lnr-heart' :class='liked-button' :text='concert.likes'></icon-text>
-                    </el-col>
-                </el-row>
-            </div>         
-            
+            <hr class='marg1'>
+            <div class='container2'>
+                <span class='pad black'>Genres: </span>        
+                <span class='pad pad4' v-for='genre in concert.genres'> {{genre}} </span>
+            </div>
+            <div class='full-width pad'><span class='black'>Description: </span> {{ concert.info.description }}</div>
+            <hr class='marg1'>
+            <div class='container3'>
+                <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
+                <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
+            </div>
+            <hr class='marg1'>
+            <div class='pad pad3'><span class='black'>Author: </span> {{concert.author}}</div>
         </div>
     </div>
 </template>
@@ -64,8 +49,8 @@
             ...mapGetters({concert: 'getConcertDetails'}),
             formattedDate(){ return new Date(Number(this.concert.info.date)).toLocaleDateString()},
         },
-        created(){
-            this.bindConcert(this.$route.params.id);
+        mounted(){
+            this.bindConcert(this.$route.params.id)
             //firebaseApp.database().ref('/concertsFull').child(this.id).on('value',function(concert){ this.concert = concert.val() }.bind(this))
         },
         beforeDestroy(){
@@ -74,140 +59,93 @@
         methods: {
             ...mapActions(['bindConcert', 'unbindConcert'])
         }
-
     }
 </script>
 
 <style lang='scss'>
     @import 'assets/styles/colors.scss';
     @import 'assets/styles/breakpoints.scss';
-    .event-card {
-        line-height: 2em;
-        transition: box-shadow 1s;
-        border: 1px solid $grayLighter;
-        .lnr {
-            color: $gray;
-        }
-        .el-card__body {
-            padding: 0;
-        }
+        
+    .ma{
+        color: $mainColorLight;
     }
-    
-    .event-card:hover {
-        cursor: pointer;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-        .event-info {
-            .lnr {
-                color: $accentColor;
-            }
-        }
-        .event-img{
-            transform: scale(1.05)
-        }
-    }
-    
     .event-img{
+        margin-top: 3%;
         padding-top: 66%;
         background-size: cover;
         background-position: center;
-        transition: transform 1s;
     }
-
     .event-title{
+        padding-top: 4%;
         color: $gray;
+        font-size: 1.5em;
+        font-weight: bolder;
     }
-
-    .event-info {
-        color: $grayLight;
-        .lnr {
-            transition: color 1s;
-        }
+    .container{
+        display: block;
+        padding-top: 2%;
     }
-    
-    .article-more:hover {
-        background-color: $accentColorLight;
-    }
-    
-    .price-info {
-        padding-top: .75em;
-        font-size: 2em;
-        color: $gray;
-    }
-    
-    .event-buttons {
+    .container2{
         display: flex;
-        padding: 0.5em;
-        >div {
-            cursor: pointer;
-            color: $grayLight;
-        }
-        >div:hover {
-            color: $mainColorLightest;
-        }
+        justify-content: left;
+        padding-top: 2%;
     }
-    
-    .liked-button {
-        color: $mainColorLightest;
-        .lnr {
-            color: $secondaryColor;
-        }
+    .container3{
+        display: block;
+        padding-top: 2%;
     }
-    
-    .saved-button {
-        color: $mainColorLightest;
-        .lnr {
-            color: $green;
-        }
+    .container4{
+        display: flex;
+        justify-content: left;
+        padding-top: 2%;
+    }
+    .pad{
+        padding: 1% 5% 1% 5%;
+    }
+    .pad2{
+        padding-left: 10%;
+    }
+    .pad3{
+        padding-bottom: 5%;
+    }
+    .pad4{
+        padding-left: 1%;
+    }
+    .pad5{
+        padding-left: 30%;
+    }
+    .pad6{
+        padding-top: 5%;
+    }
+    .marg1{
+        margin: 3% 5%;
+    }
+    .marg2{
+        margin-top: 5%;
+    }
+    .black{
+        font-weight: bold;
     }
     
     @media (min-width: $break-sm) and (max-width: $break-md) {
-        .event-title {
-            font-size: 1em;
-        }
-        .event-info {
-            font-size: .9em;
-        }
-        .price-info {
-            padding-top: 1em;
-            font-size: 1.70em;
-        }
-        .event-buttons {
-            font-size: 0.9em;
+        .container{
+            display: flex;
+            justify-content: space-between;
         }
     }
     
     @media (min-width: $break-md) and (max-width: $break-lg) {
-        .event-title {
-            font-size: 1.15em;
-        }
-        .event-info {
-            font-size: 1em;
-        }
-        .price-info {
-            padding-top: .75em;
-            font-size: 1.5em;
-        }
-        .event-buttons {
-            font-size: 1em;
-        }
-        .el-col:nth-child(4) .event-card {
-            display: none;
+        .container{
+            display: flex;
+            justify-content: space-between;
         }
     }
     
     @media (min-width: $break-lg) and (max-width: $break-lg-xl) {
-        .event-title {
-            font-size: 1em;
-        }
-        .event-info {
-            font-size: .9em;
-        }
-        .price-info {
-            padding-top: 1.25em;
-            font-size: 1.5em;
-        }
-        .event-buttons {
-            font-size: .8em;
+        .container{
+            display: flex;
+            justify-content: space-between;
         }
     }
+
 </style>
