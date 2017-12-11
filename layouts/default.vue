@@ -43,8 +43,8 @@
             }, 2000)
         },
         methods: {
-            ...mapActions(['bindAuth']),
-            ...mapMutations(['setReferences'])
+            ...mapActions(['bindAuth', 'setReferences']),
+            //...mapMutations(['setReferences'])
         }
     }
 </script>

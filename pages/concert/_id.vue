@@ -49,8 +49,8 @@
             ...mapGetters({concert: 'getConcertDetails'}),
             formattedDate(){ return new Date(Number(this.concert.info.date)).toLocaleDateString()},
         },
-        created(){
-            this.bindConcert(this.$route.params.id);
+        mounted(){
+            this.bindConcert(this.$route.params.id)
             //firebaseApp.database().ref('/concertsFull').child(this.id).on('value',function(concert){ this.concert = concert.val() }.bind(this))
         },
         beforeDestroy(){

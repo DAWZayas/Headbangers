@@ -17,12 +17,6 @@
         <browse-list :concerts="concerts"></browse-list>
         <button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
 
-        
-
-
-        
-
-
     </div>
 </template>
 
@@ -51,7 +45,7 @@
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
             showFilters ($bool) { this.filtersPage = $bool }
         },
-        created () {
+        mounted () {
             this.bindConcertsList()
         },
         beforeDestroy () {

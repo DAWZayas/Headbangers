@@ -5,16 +5,33 @@ export default {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
     },
-    bindAuth: ({commit}) => {
+    setReferences: ({commit}) => {
+        commit('setReferences')
+    },
+    bindAuth: ({commit, dispatch}) => {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
-                commit('setCurrentUser', user)
+                commit('setUserProfile', user)
                 commit('setAuthenticated', true)
+                dispatch('bindUserData', user.uid)
             } else {
-                commit('setCurrentUser', null)
+                commit('setUserProfile', null)
                 commit('setAuthenticated', false)
+                dispatch('unbindUserData')
             }
         })
+    },
+    bindUserData: firebaseAction(({state, dispatch}, id) => {
+        dispatch('bindFirebaseReference', {reference: state.usersRef.child(id), toBind: 'userData'})
+    }),
+    unbindUserData: firebaseAction(({state, dispatch}) => {
+        dispatch('unbindFirebaseReference', {toUnbind: 'userData'})
+    }),
+    likeConcert: ({state}, concertID) => {
+        state.usersRef.child(state.currentUser.uid).child('liked').push(concertID)
+    },
+    saveConcert: ({state}, concertID) => {
+        state.usersRef.child(state.currentUser.uid).child('saved').push(concertID)
     },
     bindConcertsList: firebaseAction(({state, dispatch}) => {
         dispatch('bindFirebaseReference', {reference: state.concertsListRef, toBind: 'concertsList'})
@@ -22,10 +39,10 @@ export default {
     bindConcert: firebaseAction(({state, dispatch}, id) => {
         dispatch('bindFirebaseReference', {reference: state.concertsFullRef.child(id), toBind: 'concertDetails'})
     }),
-    unbindConcertsList: firebaseAction(({state, dispatch}) => {
+    unbindConcertsList: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertsList'})
     }),
-    unbindConcert: firebaseAction(({state, dispatch}) => {
+    unbindConcert: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'})
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef}, {reference, toBind}) => {
