@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if='concert' class='ma'>
-            <h1 class='event-title no-margin text-center'>{{concert.info.title}}</h1>            
+            <div class='event-title no-margin text-center'>{{concert.info.title}}</div>            
             <div class='event-img full-width marg2' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div>
             <div class='container'>
                 <icon-text class = 'pad' icon='lnr-calendar-full':text='formattedDate'></icon-text>
@@ -59,7 +59,6 @@
         methods: {
             ...mapActions(['bindConcert', 'unbindConcert'])
         }
-
     }
 </script>
 
@@ -70,31 +69,27 @@
     .ma{
         color: $mainColorLight;
     }
-
     .event-img{
         margin-top: 3%;
         padding-top: 66%;
         background-size: cover;
         background-position: center;
     }
-
     .event-title{
         padding-top: 4%;
         color: $gray;
         font-size: 1.5em;
+        font-weight: bolder;
     }
-
     .container{
         display: block;
         padding-top: 2%;
     }
-
     .container2{
         display: flex;
         justify-content: left;
         padding-top: 2%;
     }
-
     .container3{
         display: block;
         padding-top: 2%;
@@ -104,7 +99,6 @@
         justify-content: left;
         padding-top: 2%;
     }
-
     .pad{
         padding: 1% 5% 1% 5%;
     }
@@ -134,41 +128,23 @@
     }
     
     @media (min-width: $break-sm) and (max-width: $break-md) {
-        .event-title {
-            font-size: 1em;
-        }
-        .event-info {
-            font-size: .9em;
-        }
         .container{
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
     }
     
     @media (min-width: $break-md) and (max-width: $break-lg) {
-        .event-title {
-            font-size: 1.15em;
-        }
-        .event-info {
-            font-size: 1em;
-        }
         .container{
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
     }
     
     @media (min-width: $break-lg) and (max-width: $break-lg-xl) {
-        .event-title {
-            font-size: 1em;
-        }
-        .event-info {
-            font-size: .9em;
-        }
         .container{
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
     }
 
