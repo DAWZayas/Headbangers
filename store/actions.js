@@ -1,10 +1,6 @@
 import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
 export default {
-    setReferences: ({state, commit}) => {
-        commit('setConcertsListRef', firebaseApp.database().ref('/concertsList'))
-        commit('setConcertsFullRef', firebaseApp.database().ref('/concertsFull'))
-    },
     publishConcert: ({commit, state}, {concert, shortConcert}) => {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
