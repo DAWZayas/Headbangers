@@ -5,6 +5,6 @@ export default {
     concertsListRef: '',
     concertsFullRef: '',
     concertDetails: null,
-    countryList: require('~/static/utils/countries.js'),
-    genreList: require('~/static/utils/genres.js')
+    countryList: require('~/static/utils/countries.js').countries,
+    genreList: require('~/static/utils/genres.js').genres
 }
