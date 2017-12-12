@@ -25,10 +25,12 @@
         <hr>
         <div class="event-buttons">
             <div class="full-width text-center" @click="like">
-                <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
+                <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
+                <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
             </div>
             <div class="full-width text-center" @click="save">
-                <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
+                <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
+                <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
             </div>
             <div class="full-width text-center">
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>
@@ -46,30 +48,24 @@
         },
         props: ['concert', 'id'],
         computed: {
-            ...mapGetters({liked: 'getUserLiked', saved: 'getUserSaved'}),
+            ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved'}),
+            liked () {
+                return this.likedConcerts && Object.keys(this.likedConcerts).includes(this.id)
+            },
+            saved () {
+                return this.savedConcerts && Object.keys(this.savedConcerts).includes(this.id)
+            },
             formattedDate () {
                 return new Date(Number(this.concert.date)).toLocaleDateString()
-            },
-            likeClass () {
-                return this.liked && this.liked.includes(this.id) && 'liked-button'
-            },
-            likeText () {
-                return (this.liked && this.liked.includes(this.id)) ? 'Liked' : 'Like'
-            },
-            saveClass () {
-                return this.saved && this.saved.includes(this.id) && 'saved-button'
-            },
-            saveText () {
-                return (this.saved && this.saved.includes(this.id)) ? 'Saved' : 'Save'
             }
         },
         methods: {
-            ...mapActions(['likeConcert', 'saveConcert']),
+            ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert']),
             like () {
-                this.likeConcert(this.id)
+                !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)
             },
             save () {
-                this.saveConcert(this.id)
+                !this.saved ? this.saveConcert(this.id) : this.unsaveConcert(this.id)
             }
         }
     }
