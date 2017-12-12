@@ -15,41 +15,41 @@
         </el-form>
 </template>
 <script>
-import firebaseApp from '~/firebaseapp';
+import firebaseApp from '~/firebaseapp'
 export default {
-    data(){
-        return{
+    data () {
+        return {
             email: '',
             password: '',
             error: ''
         }
     },
-    methods:{
-        showSignup(){
-            this.$emit('signup');
+    methods: {
+        showSignup () {
+            this.$emit('signup')
         },
-        loginWithEmail(){
-            if(this.email == '' || this.password == ''){
-                this.emitError('Please enter an email and password');
-            }else{
+        loginWithEmail () {
+            if (this.email === '' || this.password === '') {
+                this.emitError('Please enter an email and password')
+            } else {
                 firebaseApp.auth().signInWithEmailAndPassword(this.email, this.password)
-                .then((user) => {
-                    this.$message({
-                        message: 'Logged in succesfully',
-                        type: 'success'
-                    });
-                    this.$router.push('/')
-                })
-                .catch((error) => {
-                    if(error.code === 'auth/wrong-password') {
-                        this.emitError("Invalid password");
-                    }else{
-                        this.emitError(error.message);
-                    }    
-                })
+                    .then((user) => {
+                        this.$message({
+                            message: 'Logged in succesfully',
+                            type: 'success'
+                        })
+                        this.$router.push('/')
+                    })
+                    .catch((error) => {
+                        if (error.code === 'auth/wrong-password') {
+                            this.emitError('Invalid password')
+                        } else {
+                            this.emitError(error.message)
+                        }
+                    })
             }
         },
-        emitError(message){
+        emitError (message) {
             this.$emit('error', { message })
         }
     }

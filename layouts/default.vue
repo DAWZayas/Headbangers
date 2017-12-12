@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoading">
+        <div v-if='isLoading'>
             <splash></splash>
         </div>
         <div>
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-    import HeaderComponent from "~/components/header/HeaderComponent";
-    import SideMenu from "~/components/SideMenu";
-    import Splash from "~/components/Splash";
-    import FooterComponent from "~/components/FooterComponent";
-    import { mapActions } from 'vuex';
+    import HeaderComponent from '~/components/header/HeaderComponent'
+    import SideMenu from '~/components/SideMenu'
+    import Splash from '~/components/Splash'
+    import FooterComponent from '~/components/FooterComponent'
+    import { mapActions, mapMutations } from 'vuex'
     export default {
         components: {
             HeaderComponent,
@@ -27,23 +27,24 @@
             Splash,
             FooterComponent
         },
-        data() {
+        data () {
             return {
                 isLoading: true
             }
         },
-        beforeMount(){
-            this.setReferences();
-            this.bindAuth();
+        beforeMount () {
+            this.setReferences()
+            this.bindAuth()
         },
-        created() {
-            this.isLoading = true;
+        created () {
+            this.isLoading = true
             setTimeout(() => {
-                this.isLoading = false;
+                this.isLoading = false
             }, 2000)
         },
         methods: {
-            ...mapActions(['setReferences', 'bindAuth'])
+            ...mapActions(['bindAuth', 'setReferences']),
+            //...mapMutations(['setReferences'])
         }
     }
 </script>

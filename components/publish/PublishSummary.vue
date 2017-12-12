@@ -9,17 +9,16 @@
 </template>
 
 <script>
-    export default {
-        name: "publish-summary",
-        methods: {
-                done() {
-                    this.$emit("done");
-                },
-                back() {
-                    this.$emit("back");
-                }
+export default {
+    methods: {
+        done () {
+            this.$emit('done')
+        },
+        back () {
+            this.$emit('back')
         }
-    };
+    }
+}
 </script>
 
 <style lang="scss">

@@ -61,61 +61,62 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
 export default {
-    data() {
+    data () {
         return {
             concert: {},
             rules: {
                 title: [
-                    { required: true, message: "Please, enter an event title.", trigger: "blur" },
-                    { pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: "Title must be alphanumeric.", trigger: "blur" },
+                    { required: true, message: 'Please, enter an event title.', trigger: 'blur' },
+                    { pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Title must be alphanumeric.', trigger: 'blur' }
                 ],
                 date: [
-                    { required: true, type:"date", message: "Please enter a date", trigger: "blur"  }
+                    { required: true, type: 'date', message: 'Please enter a date', trigger: 'blur' }
                 ],
                 time: [
-                    { required: true, message: "Please enter a time", trigger: "blur" }
+                    { required: true, message: 'Please enter a time', trigger: 'blur' }
                 ],
                 description: [
-                    { required: true, message: "Please enter a description.", trigger: "blur"},
-                    { max: 300, message: "Length should be less than 300 characters.", trigger: "blur" }
+                    { required: true, message: 'Please enter a description.', trigger: 'blur' },
+                    { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' }
                 ],
                 price: [
-                    { required: true, message: "Please enter a price.", trigger: "blur" },
-                    { required: true, pattern: /^[0-9]{1,3}([,.][0-9]{2})?$/, message: "Price not valid.", trigger: "blur"},
-                    { validator: this.formatPrice, trigger: "blur"}
+                    { required: true, message: 'Please enter a price.', trigger: 'blur' },
+                    { required: true, pattern: /^[0-9]{1,3}([,.][0-9]{2})?$/, message: 'Price not valid.', trigger: 'blur' },
+                    { validator: this.formatPrice, trigger: 'blur' }
                 ],
                 currency: [
-                    { required: true, trigger: "blur"}
+                    { required: true, trigger: 'blur' }
                 ],
                 poster: [
-                    { required: true, message: "Please upload a poster"}
-            ]}
-    }},
+                    { required: true, message: 'Please upload a poster' }
+                ]}
+        }
+    },
     props: ['data'],
-    created(){
-        Object.assign(this.concert, this.data);
+    created () {
+        Object.assign(this.concert, this.data)
     },
     methods: {
-        done() {
-            this.$refs["form-basics"].validate(valid => valid ? this.$emit('done', this.concert) : false);
+        done () {
+            this.$refs['form-basics'].validate(valid => valid ? this.$emit('done', this.concert) : false)
         },
-        formatPrice(rules, value, callback){
-            if(!value == '' && !value.includes(".") && !value.includes(",")){
-                this.concert.price += ".00";
+        formatPrice (rules, value, callback) {
+            if (!value === '' && !value.includes('.') && !value.includes(',')) {
+                this.concert.price += '.00'
             }
             callback()
         },
-        fileAdded(response, file, fileList){
-            let self = this;
+        fileAdded (response, file, fileList) {
+            let self = this
+            /* global blobUtil */
             blobUtil.blobToBase64String(file.raw).then(function (base64String) {
-                self.concert.poster = 'data:'+file.raw.type+';base64,'+base64String;
+                self.concert.poster = 'data:' + file.raw.type + ';base64,' + base64String
             }).catch(function (err) {
-                fileList = [];
-            });
-        },
-        
+                console.error(err)
+                fileList = []
+            })
+        }
     }
-};
+}
 </script>

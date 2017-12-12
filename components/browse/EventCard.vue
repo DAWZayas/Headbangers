@@ -24,10 +24,10 @@
         </nuxt-link>
         <hr>
         <div class="event-buttons">
-            <div class="full-width text-center" @click="liked = !liked">
+            <div class="full-width text-center" @click="like">
                 <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
             </div>
-            <div class="full-width text-center" @click="saved = !saved">
+            <div class="full-width text-center" @click="save">
                 <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
             </div>
             <div class="full-width text-center">
@@ -38,33 +38,39 @@
 </template>
 
 <script>
-    import {IconText} from "~/components/common";
+    import {IconText} from '~/components/common'
+    import {mapActions, mapGetters} from 'vuex'
     export default {
-        name: "event-card",
-        data(){
-            return {
-                liked: false,
-                saved: false
-            }
-        },
         components: {
             IconText
         },
         props: ['concert', 'id'],
         computed: {
-            formattedDate(){ return new Date(Number(this.concert.date)).toLocaleDateString()},
-            likeClass() {
-                return this.liked && 'liked-button'
+            ...mapGetters({liked: 'getUserLiked', saved: 'getUserSaved'}),
+            formattedDate () {
+                return new Date(Number(this.concert.date)).toLocaleDateString()
             },
-            likeText() {
-                return (this.liked) ? 'Liked' : 'Like'
+            likeClass () {
+                return this.liked && this.liked.includes(this.id) && 'liked-button'
             },
-            saveClass() {
-                return this.saved && 'saved-button'
+            likeText () {
+                return (this.liked && this.liked.includes(this.id)) ? 'Liked' : 'Like'
             },
-            saveText() {
-                return (this.saved) ? 'Saved' : 'Save'
+            saveClass () {
+                return this.saved && this.saved.includes(this.id) && 'saved-button'
             },
+            saveText () {
+                return (this.saved && this.saved.includes(this.id)) ? 'Saved' : 'Save'
+            }
+        },
+        methods: {
+            ...mapActions(['likeConcert', 'saveConcert']),
+            like () {
+                this.likeConcert(this.id)
+            },
+            save () {
+                this.saveConcert(this.id)
+            }
         }
     }
 </script>

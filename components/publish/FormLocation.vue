@@ -49,65 +49,64 @@
 </template>
     
 <script>
-    import { mapMutations, mapGetters } from 'vuex';
-    export default {
-        data() {
-            return {
-                location: {},
-                rules: {
-                    venue: [
-                        { required: true, message: 'Please enter venue name.', trigger: 'blur' },
-                        { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Name must be alphanumeric.', trigger: 'blur' },
-                        { max: 50, message: 'Length must be less than 50 characters.', trigger: 'blur' },
-                    ],
-                    description: [
-                        { required: true, message: 'Please enter a description.', trigger: 'blur' },
-                        { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' },
-                    ],
-                    street: [
-                        { required: true, message: 'Please enter the street name.', trigger: 'blur' },
-                        { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Street name must be alphanumeric.', trigger: 'blur' },
-                        { max: 30, message: 'Lenght must be less than 50 characters', trigger: 'blur' },
+import { mapGetters } from 'vuex'
+export default {
+    data () {
+        return {
+            location: {},
+            rules: {
+                venue: [
+                    { required: true, message: 'Please enter venue name.', trigger: 'blur' },
+                    { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Name must be alphanumeric.', trigger: 'blur' },
+                    { max: 50, message: 'Length must be less than 50 characters.', trigger: 'blur' }
+                ],
+                description: [
+                    { required: true, message: 'Please enter a description.', trigger: 'blur' },
+                    { max: 300, message: 'Length should be less than 300 characters.', trigger: 'blur' }
+                ],
+                street: [
+                    { required: true, message: 'Please enter the street name.', trigger: 'blur' },
+                    { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Street name must be alphanumeric.', trigger: 'blur' },
+                    { max: 30, message: 'Lenght must be less than 50 characters', trigger: 'blur' }
+                ],
+                number: [
+                    { required: true, message: 'Please enter the number', trigger: 'blur' }
+                ],
+                country: [
+                    { required: true, message: 'Please enter the country', trigger: 'blur' },
+                    { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Country name must be alphanumeric.', trigger: 'blur' },
+                    { max: 20, message: 'Lenght must be less than 20 characters', trigger: 'blur' }
 
-                    ],
-                    number: [
-                        { required: true, message: 'Please enter the number', trigger: 'blur' },
-                    ],
-                    country: [
-                        { required: true, message: 'Please enter the country', trigger: 'blur' },
-                        { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Country name must be alphanumeric.', trigger: 'blur' },
-                        { max: 20, message: 'Lenght must be less than 20 characters', trigger: 'blur' },
+                ],
+                city: [
+                    { required: true, message: 'Please enter the city', trigger: 'blur' },
+                    { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'City name must be alphanumeric.', trigger: 'blur' },
+                    { max: 30, message: 'Lenght must be less than 30 characters', trigger: 'blur' }
 
-                    ],
-                    city: [
-                        { required: true, message: 'Please enter the city', trigger: 'blur' },
-                        { required: true, pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'City name must be alphanumeric.', trigger: 'blur' },
-                        { max: 30, message: 'Lenght must be less than 30 characters', trigger: 'blur' },
-
-                    ],
-                    code: [
-                        { required: true, message: 'Please enter Zip Code', trigger: 'blur' },
-                        { required: true, pattern: /^[0-9]+$/, message: 'Please input a number', trigger: 'blur' },
-                        { max: 10, message: 'The zip code must be less or equal than 9999999999', trigger: 'blur' }
-                    ]
-                }
-            };
-        },
-        props: ['data'],
-        created(){
-            Object.assign(this.location, this.data)
-        },
-        computed: {
-            ...mapGetters({ countryList: 'getCountryList'}),
-        },
-        methods: {
-            done() { 
-                this.$refs["form-location"].validate(valid => valid ? this.$emit('done', this.location) : false) 
-            },
-            back() { 
-                this.$emit("back") 
+                ],
+                code: [
+                    { required: true, message: 'Please enter Zip Code', trigger: 'blur' },
+                    { required: true, pattern: /^[0-9]+$/, message: 'Please input a number', trigger: 'blur' },
+                    { max: 10, message: 'The zip code must be less or equal than 9999999999', trigger: 'blur' }
+                ]
             }
         }
-    };
+    },
+    props: ['data'],
+    created () {
+        Object.assign(this.location, this.data)
+    },
+    computed: {
+        ...mapGetters({ countryList: 'getCountryList' })
+    },
+    methods: {
+        done () {
+            this.$refs['form-location'].validate(valid => valid ? this.$emit('done', this.location) : false)
+        },
+        back () {
+            this.$emit('back')
+        }
+    }
+}
 </script>
 

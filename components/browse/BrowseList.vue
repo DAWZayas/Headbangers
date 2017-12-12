@@ -1,12 +1,11 @@
 <template>
     <div class="cards padding">
-        <event-card v-for="(value, key) in concerts" v-if="key !== '.key'" v-bind:key="key" :concert="value" :id="key"></event-card>
+        <event-card v-for="(value, key) in concerts" v-if="key !== '.key'" :key="key" :concert="value" :id="key"></event-card>
     </div>
 </template>
 
 <script>
-    import EventCard from '~/components/browse/EventCard';
-
+    import EventCard from '~/components/browse/EventCard'
     export default {
         components: {
             EventCard

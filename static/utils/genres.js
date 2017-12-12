@@ -1,4 +1,4 @@
-const genres = [
+const Genres = [
     'Alternative',
     'Blues',
     'Children',
@@ -24,4 +24,4 @@ const genres = [
     'World'
 ];
 
-export { genres };
+export { Genres }
