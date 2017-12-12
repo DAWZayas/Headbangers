@@ -8,12 +8,13 @@ export default {
     setReferences: ({commit}) => {
         commit('setReferences')
     },
-    bindAuth: ({commit, dispatch}) => {
+    bindAuth: ({commit, dispatch, state}) => {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
                 commit('setUserProfile', user)
                 commit('setAuthenticated', true)
                 dispatch('bindUserData', user.uid)
+                state.usersRef.child(user.uid).child('exist').set(true)
             } else {
                 commit('setUserProfile', null)
                 commit('setAuthenticated', false)
