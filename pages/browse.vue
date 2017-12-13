@@ -14,14 +14,14 @@
         </el-tabs>
         -->
         <filters class="filters" v-if="filtersPage" @hide="showFilters(false)"></filters>        
-        <browse-list :concerts="concerts"></browse-list>
+        <concerts-list :concerts="concerts"></concerts-list>
         <button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
 
     </div>
 </template>
 
 <script>
-    import BrowseList from '~/components/browse/BrowseList'
+    import ConcertsList from '~/components/browse/ConcertsList'
     import Filters from '~/components/browse/Filters'
     import {IconText, IconButton} from '~/components/common'
     import {mapActions, mapGetters} from 'vuex'
@@ -36,7 +36,7 @@
             ...mapGetters({concerts: 'getConcertsList'})
         },
         components: {
-            BrowseList,
+            ConcertsList,
             IconText,
             IconButton,
             Filters

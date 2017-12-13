@@ -2,6 +2,7 @@
     <el-card class="event-card">
         <nuxt-link :to="'/concert/'+id">
             <div style="overflow: hidden;">
+                <div class="likes-badge"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
                 <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
             </div>
             <h3 class="event-title no-margin text-center">{{concert.title}}</h3>
@@ -48,7 +49,7 @@
         },
         props: ['concert', 'id'],
         computed: {
-            ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved'}),
+            ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
             liked () {
                 return this.likedConcerts && Object.keys(this.likedConcerts).includes(this.id)
             },
@@ -62,10 +63,26 @@
         methods: {
             ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert']),
             like () {
-                !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)
+                if (this.isAuthenticated) {
+                    !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)
+                } else {
+                    this.$notify({
+                        type: 'info',
+                        message: 'You need to login',
+                        duration: 1000
+                    })
+                }   
             },
             save () {
-                !this.saved ? this.saveConcert(this.id) : this.unsaveConcert(this.id)
+                if (this.isAuthenticated) {
+                    !this.saved ? this.saveConcert(this.id) : this.unsaveConcert(this.id)
+                } else {
+                    this.$notify({
+                        type: 'info',
+                        message: 'You need to login',
+                        duration: 1000
+                    })
+                }
             }
         }
     }
@@ -99,6 +116,20 @@
         }
     }
     
+    .likes-badge{
+        color: #fff;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        margin: 0.5em;
+        padding: 0 0.5em;
+        font-size: 0.8em;
+        border-radius: 0.5em;
+        z-index: 5;
+        .lnr{
+            color: #fff;
+        }
+    }
+
     .event-img{
         padding-top: 66%;
         background-size: cover;

@@ -46,7 +46,7 @@ export default {
         PublishSummary
     },
     computed: {
-        ...mapGetters({currentUser: 'getCurrentUser'})
+        ...mapGetters({userProfile: 'getUserProfile'})
     },
     methods: {
         ...mapActions(['publishConcert']),
@@ -71,7 +71,7 @@ export default {
                 location: this.location,
                 bands: this.bands,
                 genres: this.genres,
-                author: this.currentUser.id
+                author: this.userProfile.uid
             }).toObject()
             let shortConcert = new ShortConcert({
                 title: this.info.title,

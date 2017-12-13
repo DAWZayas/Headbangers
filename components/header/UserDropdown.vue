@@ -31,7 +31,7 @@
 <script>
     import firebaseApp from '~/firebaseapp'
     import {IconButton, IconText} from '~/components/common'
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapMutations} from 'vuex'
     export default {
         data: () => ({
             showDialog: false,
@@ -42,14 +42,17 @@
             dialogTitle () { return (this.dialogAction === 'login') ? 'Login to your account' : 'Sign up for an account' }
         },
         methods: {
+            ...mapMutations(['setUserData']),
             handleAction (command) {
                 if (command === 'login') {
-                    this.$router.push('login')
+                    this.$router.push('/login')
                 } else if (command === 'logout') {
                     firebaseApp.auth().signOut()
-                    this.$message({
+                    this.$router.push('/')
+                    this.$notify({
                         message: 'Logged out',
-                        type: 'info'
+                        type: 'info',
+                        duration: 1000
                     })
                 } else {
                     this.$router.push(command)
