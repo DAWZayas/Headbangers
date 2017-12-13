@@ -25,13 +25,13 @@ export default {
     computed: {
         ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', concertsList: 'getConcertsList'}),
         liked () {
-            return this.likedConcerts && Object.keys(this.likedConcerts).reduce((obj, concertKey) => {
+            return this.concertsList && this.likedConcerts && Object.keys(this.likedConcerts).reduce((obj, concertKey) => {
                 obj[concertKey] = this.concertsList[concertKey]
                 return obj
             }, {})
         },
         saved () {
-            return this.savedConcerts && Object.keys(this.savedConcerts).reduce((obj, concertKey) => {
+            return this.concertsList && this.savedConcerts && Object.keys(this.savedConcerts).reduce((obj, concertKey) => {
                 obj[concertKey] = this.concertsList[concertKey]
                 return obj
             }, {})
