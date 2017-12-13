@@ -13,9 +13,9 @@
             </el-tab-pane>
         </el-tabs>
         -->
-        <filters class="filters" v-if="filtersPage" @hide="showFilters(false)"></filters>        
+        <!--<filters class="filters" v-if="filtersPage" @hide="showFilters(false)"></filters>-->   
         <concerts-list :concerts="concerts"></concerts-list>
-        <button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        <!--<button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>-->
 
     </div>
 </template>

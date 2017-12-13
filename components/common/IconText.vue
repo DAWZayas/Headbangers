@@ -15,6 +15,6 @@
   .icon-text > .lnr{
       font-size: 1.5em;
       margin-right: 0.5em;
-      vertical-align: middle;
+      vertical-align: -20%;
   }
 </style>

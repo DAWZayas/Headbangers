@@ -40,6 +40,9 @@ button.el-button{
     border: none !important;
     box-shadow: none !important;
 }
+.el-tabs__content{
+    padding: 0!important;
+}
 .el-button.accent-button {
     background-color: $accentColor;
     color: #fff;
