@@ -14,12 +14,6 @@
             <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
             <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
             <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
-            <div v-if="currentStep === 4">
-                <h3>Done!</h3>
-                <p>
-                    Your concert is published :)
-                </p>
-            </div>
         </div>
     </div>
 </template>
@@ -85,7 +79,11 @@ export default {
                 poster: this.info.poster
             }).toObject()
             this.publishConcert({concert, shortConcert})
-            this.stepUp()
+            this.$notify({
+                type: 'succes',
+                message: 'Concert published'
+            })
+            this.$router.push('/browse')
         },
         stepUp () {
             this.currentStep++

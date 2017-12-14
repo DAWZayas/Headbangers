@@ -2,7 +2,7 @@
     <div class="step-form">
         <h3>Summary</h3>
             <span></span>
-            <p>We got it everything?</p>
+            <p>We have everything?</p>
             <el-button @click="back">No, Go Back</el-button>
             <el-button type="primary" @click="done">Yeah, Publish</el-button>
      </div>
