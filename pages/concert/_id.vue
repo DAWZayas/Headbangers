@@ -80,7 +80,7 @@
         color: $gray;
     }
     .event-img{
-        margin-top: 3%;
+        //margin-top: 3%;
         padding-top: 66%;
         background-size: cover;
         background-position: center;
@@ -136,7 +136,7 @@
         margin: 3% 5%;
     }
     .marg2{
-        margin-top: 5%;
+        //margin-top: 5%;
     }
     .space{
         padding-top: 5%;

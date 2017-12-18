@@ -2,7 +2,7 @@
 
     <div class="filters">
         <div class="header">
-            <button id="back-button" @click="hide"><icon-button icon="lnr-arrow-left"></icon-button></button>
+            <icon-button @click.native="hide" icon="lnr-arrow-left"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
         </div>
         <div class="filters-form">

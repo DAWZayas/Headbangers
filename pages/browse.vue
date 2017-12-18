@@ -14,7 +14,7 @@
         </el-tabs>
         -->
         <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" @applyFilters="applyFilters"></filters>        
-        <browse-list id="list" :concerts="concerts" :filters="filters" ></browse-list>
+        <concerts-list id="list" :concerts="concerts" :filters="filters" ></concerts-list>
         <button v-show="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
     </div>
 </template>
