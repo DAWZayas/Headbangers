@@ -1,7 +1,6 @@
 <template>
     <div class="cards padding">
-        <event-card v-for="(value, key) in filteredList" v-if="key !== '.key'" v-bind:key="key" :concert="value" :id="key"></event-card>
-        {{concerts}}
+        <event-card v-for="(value, key) in concerts" v-if="key !== '.key' && value" :key="key" :concert="value" :id="key"></event-card>
     </div>
 </template>
 

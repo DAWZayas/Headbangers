@@ -2,6 +2,7 @@
     <el-card class="event-card">
         <nuxt-link :to="'/concert/'+id">
             <div style="overflow: hidden;">
+                <div class="likes-badge"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
                 <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
             </div>
             <h3 class="event-title no-margin text-center">{{concert.title}}</h3>
@@ -25,10 +26,12 @@
         <hr>
         <div class="event-buttons">
             <div class="full-width text-center" @click="like">
-                <icon-text icon="lnr-heart" :class="likeClass" :text="likeText"></icon-text>
+                <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
+                <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
             </div>
             <div class="full-width text-center" @click="save">
-                <icon-text icon="lnr-bookmark" :class="saveClass" :text="saveText"></icon-text>
+                <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
+                <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
             </div>
             <div class="full-width text-center">
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>
@@ -46,30 +49,40 @@
         },
         props: ['concert', 'id'],
         computed: {
-            ...mapGetters({liked: 'getUserLiked', saved: 'getUserSaved'}),
+            ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
+            liked () {
+                return this.likedConcerts && Object.keys(this.likedConcerts).includes(this.id)
+            },
+            saved () {
+                return this.savedConcerts && Object.keys(this.savedConcerts).includes(this.id)
+            },
             formattedDate () {
                 return new Date(Number(this.concert.date)).toLocaleDateString()
-            },
-            likeClass () {
-                return this.liked && this.liked.includes(this.id) && 'liked-button'
-            },
-            likeText () {
-                return (this.liked && this.liked.includes(this.id)) ? 'Liked' : 'Like'
-            },
-            saveClass () {
-                return this.saved && this.saved.includes(this.id) && 'saved-button'
-            },
-            saveText () {
-                return (this.saved && this.saved.includes(this.id)) ? 'Saved' : 'Save'
             }
         },
         methods: {
-            ...mapActions(['likeConcert', 'saveConcert']),
+            ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert']),
             like () {
-                this.likeConcert(this.id)
+                if (this.isAuthenticated) {
+                    !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)
+                } else {
+                    this.$notify({
+                        type: 'info',
+                        message: 'You need to login',
+                        duration: 1000
+                    })
+                }   
             },
             save () {
-                this.saveConcert(this.id)
+                if (this.isAuthenticated) {
+                    !this.saved ? this.saveConcert(this.id) : this.unsaveConcert(this.id)
+                } else {
+                    this.$notify({
+                        type: 'info',
+                        message: 'You need to login',
+                        duration: 1000
+                    })
+                }
             }
         }
     }
@@ -103,6 +116,20 @@
         }
     }
     
+    .likes-badge{
+        color: #fff;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        margin: 0.5em;
+        padding: 0 0.5em;
+        font-size: 0.8em;
+        border-radius: 0.5em;
+        z-index: 5;
+        .lnr{
+            color: #fff;
+        }
+    }
+
     .event-img{
         padding-top: 66%;
         background-size: cover;

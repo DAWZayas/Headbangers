@@ -8,14 +8,16 @@ export default {
     setReferences: ({commit}) => {
         commit('setReferences')
     },
-    bindAuth: ({commit, dispatch}) => {
+    bindAuth: ({commit, dispatch, state}) => {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
                 commit('setUserProfile', user)
                 commit('setAuthenticated', true)
                 dispatch('bindUserData', user.uid)
+                state.usersRef.child(user.uid).child('exist').set(true)
             } else {
                 commit('setUserProfile', null)
+                commit('setUserData', null)
                 commit('setAuthenticated', false)
                 dispatch('unbindUserData')
             }
@@ -28,10 +30,20 @@ export default {
         dispatch('unbindFirebaseReference', {toUnbind: 'userData'})
     }),
     likeConcert: ({state}, concertID) => {
-        state.usersRef.child(state.currentUser.uid).child('liked').push(concertID)
+        state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes + 1)
+        state.concertsListRef.child(concertID).child('likes').transaction((likes) => likes + 1)
+        state.usersRef.child(state.userProfile.uid).child('liked').child(concertID).set(true)
     },
     saveConcert: ({state}, concertID) => {
-        state.usersRef.child(state.currentUser.uid).child('saved').push(concertID)
+        state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(true)
+    },
+    unlikeConcert: ({state}, concertID) => {
+        state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes - 1)
+        state.concertsListRef.child(concertID).child('likes').transaction((likes) => likes - 1)
+        state.usersRef.child(state.userProfile.uid).child('liked').child(concertID).set(null)
+    },
+    unsaveConcert: ({state}, concertID) => {
+        state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(null)
     },
     bindConcertsList: firebaseAction(({state, dispatch}) => {
         dispatch('bindFirebaseReference', {reference: state.concertsListRef, toBind: 'concertsList'})
