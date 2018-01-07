@@ -8,7 +8,7 @@
         <div class="filters-form">
             <div id="filter-sort">
                 <h5>Sort by</h5>
-                <el-select v-model="sortValue">
+                <el-select v-model="sortValue" default-first-option>
                     <el-option v-for="option in sorting" :key="option" :value="option" :label="option">
                     </el-option>
                 </el-select>
@@ -28,7 +28,7 @@
             <div id="filter-distance">
                 <h5>Distance</h5>
                 <div class="slider-flex">
-                    <el-slider v-model="sliderDistance" :step="10" :max="1000"></el-slider>
+                    <el-slider v-model="sliderDistance" :step="10" :max="750"></el-slider>
                     <p>{{sliderDistanceString}}</p>
                 </div>
             </div>
@@ -55,7 +55,7 @@ export default {
                         'Cheaper',
                         'People Assisting',
                     ],
-            sortValue: '',
+            sortValue: 'Sooner',
             genreValues: [
                         'rock',
                         'punk',
@@ -74,7 +74,7 @@ export default {
                     'next Year',
                     ],
             sliderDate: [0, 8],
-            sliderDistance: [1,1000],
+            sliderDistance: 25,
             sliderPrice: [0, 500]
         }
     },
@@ -96,13 +96,13 @@ export default {
             return string + ' Km'
         },
         filters: function () {
-            return [{
+            return {
                 sort: this.sortValue,
                 genres: this.selectedGenres,
                 date: this.sliderDate,
                 distance: this.sliderDistance,
                 price: this.sliderPrice
-            }]
+            }
         }
     },
     methods: {
@@ -126,11 +126,10 @@ export default {
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .filters{
+        margin: 0em;
+        height: 100%;
         width: 100%;
-        height: calc(100% - .75em);
-        margin: 0;
         background-color: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         .header{
             background-color: $mainColorLight;
             border-radius: .1em;
@@ -188,11 +187,9 @@ export default {
     }
     @media (min-width: $break-xs-sm){
         .filters{
-            margin: 0;
             width: 35%;
             height: calc(100% + 9em);
             right: 0;
-            border-radius: 0%;
             .header{
                 border-radius: 0;
             }

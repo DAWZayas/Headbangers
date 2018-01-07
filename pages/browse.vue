@@ -14,8 +14,8 @@
         </el-tabs>
         -->
         
-        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)"></filters>
-        <concerts-list :concerts="concerts"></concerts-list>
+        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @applyFilters="applyFilters"></filters>
+        <concerts-list :concerts="filteredList"></concerts-list>
         <div id="fab-container">
             <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
@@ -30,7 +30,9 @@
     export default {
         data () {
             return {
+                filters: {},
                 filtersPage: false,
+                filteredList: {},
                 selectedMode: 'list'
             }
         },
@@ -45,12 +47,41 @@
         },
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-            noscroll() {
-                window.scrollTo( 0, 0 );
-            },
             showFilters ($bool) {
                 this.filtersPage = $bool;
-                $bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
+                //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
+            },
+            applyFilters ($filters) {
+                const arrayConcerts = [];
+                for (const key in this.concerts) {
+                    arrayConcerts.push([key, this.concerts[key]]);
+                        console.log(key);
+                        console.log(this.concerts[key]);
+                }
+
+               const $sorting = $filters.sort.toLowerCase();
+                switch ($sorting) {
+                    case 'likes':
+                        arrayConcerts.sort(function (a, b) {return b[1].likes - a[1].likes});
+                        for (var i = 0; i < arrayConcerts.length; i++){
+                        this.filteredList[arrayConcerts[i][0]] = arrayConcerts[i][1];
+                        }
+                        console.log(this.concerts);
+                        console.log(this.filteredList);
+                        break;
+                    case 'nearer':
+                        console.log('nearer');
+                        break;
+                    case 'cheaper':
+                        console.log('cheaper');
+                        break;
+                    case 'people assisting':
+                        console.log('people assisting');                        
+                        break;
+                    default:
+                        console.log('sooner');
+                        break;
+                }
             }
         },
         mounted () {
