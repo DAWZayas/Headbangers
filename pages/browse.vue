@@ -32,12 +32,12 @@
             return {
                 filters: {},
                 filtersPage: false,
-                filteredList: {},
+                filteredList: this.concerts,
                 selectedMode: 'list'
             }
         },
         computed: {
-            ...mapGetters({concerts: 'getConcertsList'})
+            ...mapGetters({concerts: 'getConcertsList'}),
         },
         components: {
             ConcertsList,
@@ -63,6 +63,7 @@
                 switch ($sorting) {
                     case 'likes':
                         arrayConcerts.sort(function (a, b) {return b[1].likes - a[1].likes});
+                        this.filteredList = {};
                         for (var i = 0; i < arrayConcerts.length; i++){
                         this.filteredList[arrayConcerts[i][0]] = arrayConcerts[i][1];
                         }
@@ -79,6 +80,8 @@
                         console.log('people assisting');                        
                         break;
                     default:
+                        this.filteredList = {};
+                        this.filteredList = this.concerts;
                         console.log('sooner');
                         break;
                 }
