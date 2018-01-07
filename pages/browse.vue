@@ -13,10 +13,12 @@
             </el-tab-pane>
         </el-tabs>
         -->
-        <!--<filters class="filters" v-if="filtersPage" @hide="showFilters(false)"></filters>-->   
+        
+        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)"></filters>
         <concerts-list :concerts="concerts"></concerts-list>
-        <!--<button v-if="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>-->
-
+        <div id="fab-container">
+            <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        </div>
     </div>
 </template>
 
@@ -43,7 +45,13 @@
         },
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-            showFilters ($bool) { this.filtersPage = $bool }
+            noscroll() {
+                window.scrollTo( 0, 0 );
+            },
+            showFilters ($bool) {
+                this.filtersPage = $bool;
+                $bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
+            }
         },
         mounted () {
             this.bindConcertsList()
@@ -60,29 +68,33 @@
         position: fixed;
         width: calc(100% - 2em);
         margin: 1em;
-        z-index: 1;
+        z-index: 6;
     }
-    #filters-fab{
-        background: $accentColor;
-        position: sticky;
-        right: 3em;
-        padding: 18px 18px 16px 18px;
-        width: 56px;
-        height: 56px;
-        float: right;
-        border: none;
-        border-radius: 100%;
-        box-shadow: 0px 2px 2px rgba(0,0,0,.5);
-        
-        img{
-            width: 20px;
+
+    #fab-container{
+        text-align: right;
+        width: 100%;
+        #fab{
+            position: fixed;
+            bottom: 7em;
+            right: 2em;
+            background: $accentColor;
+            padding: 18px 18px 16px 18px;
+            width: 56px;
+            height: 56px;
+            border: none;
+            border-radius: 100%;
+            box-shadow: 0px 2px 2px rgba(0,0,0,.5); 
+            img{
+                width: 20px;
+            }
         }
     }
-        #filters-fab:hover{
+        #fab:hover{
             cursor: pointer;
             background: $accentColorDark;
         }
-        #filters-fab:active{
+        #fab:active{
             cursor: pointer;
             background: $accentColorDark;
         }
