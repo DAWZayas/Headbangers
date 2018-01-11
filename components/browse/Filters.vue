@@ -56,7 +56,11 @@ export default {
                         'People Assisting',
                     ],
             sortValue: 'Sooner',
-            genreValues: this.concerts.genres,
+            genreValues: [
+                        'rock',
+                        'punk',
+                        'metal'
+                        ],
             selectedGenres: [],
             dates: [
                     'today',
