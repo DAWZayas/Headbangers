@@ -2,44 +2,41 @@
 
     <div class="filters">
         <div class="header">
-            <icon-button @click.native="hide" icon="lnr-arrow-left"></icon-button>
+            <button id="back-button" @click="hide"><icon-button icon="lnr-arrow-left"></icon-button></button>
             <button id="apply-button" @click="apply">Apply</button>
         </div>
         <div class="filters-form">
-            <div id="filters-sort">
-                <h3>Sort by:</h3>
-                <el-select v-model="sortValue">
+            <div id="filter-sort">
+                <h5>Sort by</h5>
+                <el-select v-model="sortValue" default-first-option>
                     <el-option v-for="option in sorting" :key="option" :value="option" :label="option">
                     </el-option>
                 </el-select>
             </div>
-            <div id="filters-filter">
-                <h3>Filters:</h3>
-                <div id="filter-genres">
-                    <h5>Genres</h5>
-                    <el-select v-model="selectedGenres" multiple placeholder="All">
-                        <el-option v-for="option in genreValues" :key="option" :label="option" :value="option">
-                        </el-option>
-                    </el-select>
+            <div id="filter-genres">
+                <h5>Genres</h5>
+                <el-select v-model="selectedGenres" multiple placeholder="All">
+                    <el-option v-for="option in genreValues" :key="option" :label="option" :value="option">
+                     </el-option>
+                </el-select>
+            </div>
+            <div id="filter-date">
+                <h5>Date</h5>
+                <el-slider v-model="sliderDate" show-stops :max="8" :format-tooltip="formatDateTooltip" range></el-slider>
+                <p>{{sliderDateString}}</p>
+            </div>
+            <div id="filter-distance">
+                <h5>Distance</h5>
+                <div class="slider-flex">
+                    <el-slider v-model="sliderDistance" :step="10" :max="750"></el-slider>
+                    <p>{{sliderDistanceString}}</p>
                 </div>
-                <div id="filter-date">
-                    <h5>Date</h5>
-                    <el-slider v-model="sliderDate" show-stops :max="8" :format-tooltip="formatDateTooltip" range></el-slider>
-                    <p>{{sliderDateString}}</p>
-                </div>
-                <div id="filter-distance">
-                    <h5>Distance</h5>
-                    <div class="slider-flex">
-                        <el-slider v-model="sliderDistance" :step="10" :max="1000"></el-slider>
-                        <p>{{sliderDistanceString}}</p>
-                    </div>
-                </div>
-                <div id="filter-price">
-                    <h5>Price</h5>
-                    <div class="slider-flex">
-                        <el-slider v-model="sliderPrice" :max="500" range></el-slider>
-                        <p>{{sliderPriceString}}</p>
-                    </div>
+            </div>
+            <div id="filter-price">
+                <h5>Price</h5>
+                <div class="slider-flex">
+                    <el-slider v-model="sliderPrice" :max="500" range></el-slider>
+                    <p>{{sliderPriceString}}</p>
                 </div>
             </div>
         </div>
@@ -58,7 +55,7 @@ export default {
                         'Cheaper',
                         'People Assisting',
                     ],
-            sortValue: '',
+            sortValue: 'Sooner',
             genreValues: [
                         'rock',
                         'punk',
@@ -77,7 +74,7 @@ export default {
                     'next Year',
                     ],
             sliderDate: [0, 8],
-            sliderDistance: [1,1000],
+            sliderDistance: 25,
             sliderPrice: [0, 500]
         }
     },
@@ -99,13 +96,13 @@ export default {
             return string + ' Km'
         },
         filters: function () {
-            return [{
+            return {
                 sort: this.sortValue,
                 genres: this.selectedGenres,
                 date: this.sliderDate,
                 distance: this.sliderDistance,
                 price: this.sliderPrice
-            }]
+            }
         }
     },
     methods: {
@@ -129,9 +126,10 @@ export default {
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .filters{
-        max-height: calc(100% - 5.75em);
+        margin: 0em;
+        height: 100%;
+        width: 100%;
         background-color: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         .header{
             background-color: $mainColorLight;
             border-radius: .1em;
@@ -153,14 +151,47 @@ export default {
         .filters-form{
             height: calc(100% - 5.75em);
             margin: 0em 1em;
-            h3{
-                margin: .5em 0em;
-            }
             .el-slider__bar{
                 background-color: $mainColorLightest;
             }
             .el-slider__button{
                 border-color: $mainColorLighter;
+            }
+            > div{
+                margin: 0em .5em;
+                h5{
+                    margin: 1em 0em .25em 0em;
+                }
+                > *:not(h5){
+                    width: calc(100% - 2em);
+                    margin: 0em 1em;
+                }
+            }
+            #filter-date > p{
+                font-size: .75em
+            }   
+            .slider-flex{
+                display: flex;
+                text-align: center;
+                .el-slider{
+                    width: 65%;
+                }
+                p{  
+                    padding-left: .75em;
+                    margin-top: .5em;
+                    width: 40%;
+                    color: $gray;
+                }
+            }        
+        }
+    }
+    @media (min-width: $break-xs-sm){
+        .filters{
+            width: 35%;
+            height: calc(100% + 9em);
+            right: 0;
+            .header{
+                border-radius: 0;
             }
             #filters-sort > .el-select {
                 width: calc(100% - 1em);

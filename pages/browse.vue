@@ -13,9 +13,12 @@
             </el-tab-pane>
         </el-tabs>
         -->
-        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" @applyFilters="applyFilters"></filters>        
-        <concerts-list id="list" :concerts="concerts" :filters="filters" ></concerts-list>
-        <button v-show="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        
+        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @applyFilters="applyFilters"></filters>
+        <concerts-list :concerts="arrayConcerts"></concerts-list>
+        <div id="fab-container">
+            <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        </div>
     </div>
 </template>
 
@@ -27,13 +30,14 @@
     export default {
         data () {
             return {
+                filters: {},
                 filtersPage: false,
-                selectedMode: 'list',
-                filters: []
+                arrayConcerts: [],
+                selectedMode: 'list'
             }
         },
         computed: {
-            ...mapGetters({concerts: 'getConcertsList'})
+            ...mapGetters({concerts: 'getConcertsList'}),
         },
         components: {
             ConcertsList,
@@ -44,23 +48,52 @@
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
             showFilters ($bool) {
-                this.filtersPage = $bool
-                if($bool){
-                    document.getElementById('list').style.opacity = "0.5"
-                    document.getElementById('list').style.pointerEvents = "none"
-                }else{
-                    document.getElementById('list').style.opacity = "1"
-                    document.getElementById('list').style.pointerEvents = "all"
+                this.filtersPage = $bool;
+                //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
+            },
+            applyFilters ($filters) {
+               const $sorting = $filters.sort.toLowerCase();
+                switch ($sorting) {
+                    case 'likes':
+                        this.sorting('desc', 'likes');
+                        break;
+                    case 'nearer':
+                        navigator.geolocation.getCurrentPosition( this.setLocation );
+                        break;
+                    case 'cheaper':
+                        this.sorting('asc', 'price');
+                        break;
+                    case 'people assisting':
+                        this.sorting('desc', 'assisting');                    
+                        break;
+                    default:
+                        this.sorting('asc', 'date');
+                        break;
                 }
             },
-            applyFilters (info){
-                this.filters= info
+            setLocation (position, error){
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+                console.log(lat + ' , ' + long);
+            },
+            sorting ($order, $subject) {
+                console.log($subject);
+                if ($order == 'asc') {
+                    this.arrayConcerts.sort(function (a, b) {return a[1][$subject] - b[1][$subject]});
+                }else if ($order == 'desc') {
+                    this.arrayConcerts.sort(function (a, b) {return b[1][$subject] - a[1][$subject]});
+                }
+            }
         },
         mounted () {
-            this.bindConcertsList()
+            this.bindConcertsList();
+            for (const key in this.concerts) {
+                    this.arrayConcerts.push([key, this.concerts[key]]);
+            }
+            this.sorting('asc', 'date');
         },
         beforeDestroy () {
-            this.unbindConcertsList()
+            this.unbindConcertsList();
         }
     }
 }
@@ -72,29 +105,33 @@
         position: fixed;
         width: calc(100% - 2em);
         margin: 1em;
-        z-index: 1;
+        z-index: 6;
     }
-    #filters-fab{
-        background: $accentColor;
-        position: sticky;
-        right: 3em;
-        padding: 18px 18px 16px 18px;
-        width: 56px;
-        height: 56px;
-        float: right;
-        border: none;
-        border-radius: 100%;
-        box-shadow: 0px 2px 2px rgba(0,0,0,.5);
-        
-        img{
-            width: 20px;
+
+    #fab-container{
+        text-align: right;
+        width: 100%;
+        #fab{
+            position: fixed;
+            bottom: 7em;
+            right: 2em;
+            background: $accentColor;
+            padding: 18px 18px 16px 18px;
+            width: 56px;
+            height: 56px;
+            border: none;
+            border-radius: 100%;
+            box-shadow: 0px 2px 2px rgba(0,0,0,.5); 
+            img{
+                width: 20px;
+            }
         }
     }
-        #filters-fab:hover{
+        #fab:hover{
             cursor: pointer;
             background: $accentColorDark;
         }
-        #filters-fab:active{
+        #fab:active{
             cursor: pointer;
             background: $accentColorDark;
         }

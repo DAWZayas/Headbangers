@@ -1,6 +1,6 @@
 <template>
     <div class="cards padding">
-        <event-card v-for="(value, key) in concerts" v-if="key !== '.key' && value" :key="key" :concert="value" :id="key"></event-card>
+        <event-card v-for="value in concerts" v-if="value[0] !== '.key' && value[0]" :key="value[0]" :concert="value[1]" :id="value[0]"></event-card>
     </div>
 </template>
 
@@ -25,6 +25,7 @@
         components: {
             EventCard
         },
+        props: ['concerts'],
     }
 </script>
 
