@@ -96,7 +96,7 @@
             this.unbindConcertsList();
         }
     }
-}
+
 </script>
 
 <style lang="scss">
