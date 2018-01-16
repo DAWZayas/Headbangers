@@ -15,7 +15,7 @@
         </div>
         <div class="menu-item">
             <icon-button v-if="!isAuthenticated" icon="lnr-user" @click.native="openPage('/login')"></icon-button>
-            <avatar size="36" v-else :photo="userPhoto" @click.native="openPage('/account')"></avatar>
+            <avatar size="36" v-else :picture="userPhoto" @click.native="openPage('/account')"></avatar>
         </div>
     </header>
 </template>
@@ -66,10 +66,6 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 0.5em;
-        }
-        .menu-item > * {
-            padding-top: 0.1em;
-            vertical-align: middle;
         }
         .menu-item:hover {
             background-color: $mainColorLight;
