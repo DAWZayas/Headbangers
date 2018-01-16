@@ -16,6 +16,19 @@
                 <div class='full-width pad ma adress color padding10' >{{ concert.location.descripton }}</div>
             </div>
             <div class="container0">
+                <div class="item0">       
+                    <div class='pad space padding10'><span class='black'>Description: </span> {{ concert.info.description }}</div>
+                    <hr class='marg1'>
+                    <div class='container3'>
+                        <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
+                        <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
+                    </div>
+                    <hr class='marg1'>
+                    <div class='container2 space2 padding10'>
+                        <span class='pad black gen'>Genres: </span>
+                        <span class='pad7 pad4' v-for='genre in concert.genres' :key="genre.name"><el-tag type="info" hit="true" class="brown"> {{genre}} </el-tag></span>
+                    </div>
+                </div>
                 <div class="item1">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix bands">
@@ -26,20 +39,6 @@
                             <div class="board">{{band.description}}</div>
                         </div>            
                     </el-card>
-                </div>
-                <div class="item0">       
-                    <div class='pad space padding10'><span class='black'>Description: </span> {{ concert.info.description }}</div>
-                    <hr class='marg1'>
-                    <div class='container3'>
-                        <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
-                        <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
-                    </div>
-                    <div class='pad pad3 italic padding10'><span class=''>Author: </span> {{concert.author}}</div>
-                    <hr class='marg1'>
-                    <div class='container2 space2 padding10'>
-                        <span class='pad black gen'>Genres: </span>
-                        <span class='pad7 pad4' v-for='genre in concert.genres' :key="genre.name"><el-tag type="info" hit="true" class="brown"> {{genre}} </el-tag></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -158,7 +157,6 @@
     }
     .box-card {
         width: 100%;
-        margin: 0% 0% 5% 0%;
         border-color: $grayLight;
         border-style: solid;
         background-color: $grayLight;
@@ -171,7 +169,7 @@
         font-weight: bold;
     }
     .color{
-        background-color: $mainColorLight;
+        background-color: $mainColorLighter;
         color: $baseColor;
         //border-bottom: thin $gray solid;
     }
@@ -230,7 +228,7 @@
         }
         .box-card {
             width: auto;
-            margin: 0% 5% 5% 5%;
+            margin: 0% 5% 0% 5%;
         }
         .container{
             display: flex;
