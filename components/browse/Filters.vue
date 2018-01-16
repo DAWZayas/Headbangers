@@ -110,7 +110,7 @@ export default {
             return this.dates[val]
         },
         apply() {
-            this.$emit('applyFilters', this.filters)
+            this.$emit('setFilters', this.filters)
             this.$emit('hide')
         },
         hide () {

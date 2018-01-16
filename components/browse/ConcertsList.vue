@@ -1,6 +1,6 @@
 <template>
     <div class="cards padding">
-        <event-card v-for="value in concerts" v-if="value[0] !== '.key' && value[0]" :key="value[0]" :concert="value[1]" :id="value[0]"></event-card>
+        <event-card v-for="concert in concerts" :key="concert.key" :concert="concert"></event-card>
     </div>
 </template>
 

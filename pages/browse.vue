@@ -14,8 +14,8 @@
         </el-tabs>
         -->
         
-        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @applyFilters="applyFilters"></filters>
-        <concerts-list :concerts="arrayConcerts"></concerts-list>
+        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
+        <concerts-list :concerts="filteredConcerts"></concerts-list>
         <div id="fab-container">
             <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
@@ -32,12 +32,16 @@
             return {
                 filters: {},
                 filtersPage: false,
-                arrayConcerts: [],
                 selectedMode: 'list'
             }
         },
         computed: {
             ...mapGetters({concerts: 'getConcertsList'}),
+            concertsArray: function () { return this.concerts && Object.keys(this.concerts).map(key => ({...this.concerts[key], key})).filter(concert => concert.key !== '.key') },
+            filteredConcerts: function () { 
+                var filters = Object.keys(this.filters).length === 0 ? {sort: 'sooner'} : this.filters;
+                return this.concerts && this.applyFilters(this.concertsArray, filters);
+                }
         },
         components: {
             ConcertsList,
@@ -47,59 +51,64 @@
         },
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-            showFilters ($bool) {
-                this.filtersPage = $bool;
+            showFilters (bool) {
+                this.filtersPage = bool;
                 //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
             },
-            applyFilters ($filters) {
-               const $sorting = $filters.sort.toLowerCase();
-                switch ($sorting) {
+            setFilters (filters) {
+                this.filters = filters;
+            },
+            applyFilters (concertsArray, filters) {
+               const sorting = filters.sort.toLowerCase();
+               var filteredConcerts = [];
+                switch (sorting) {
                     case 'likes':
-                        this.sorting('desc', 'likes');
+                        filteredConcerts = this.sorting(concertsArray, 'desc', 'likes');
                         break;
                     case 'nearer':
                         navigator.geolocation.getCurrentPosition( this.setLocation );
                         break;
                     case 'cheaper':
-                        this.sorting('asc', 'price');
+                        filteredConcerts = this.sorting(concertsArray, 'asc', 'price');
                         break;
                     case 'people assisting':
-                        this.sorting('desc', 'assisting');                    
+                        filteredConcerts = this.sorting(concertsArray, 'desc', 'assisting');                    
+                        break;
+                    case 'sooner':
+                        filteredConcerts = this.sorting(concertsArray,'asc', 'date');
                         break;
                     default:
-                        this.sorting('asc', 'date');
+                        filteredConcerts = concertsArray;
                         break;
                 }
+                return filteredConcerts;
             },
             setLocation (position, error){
                 const lat = position.coords.latitude;
                 const long = position.coords.longitude;
                 console.log(lat + ' , ' + long);
             },
-            sorting ($order, $subject) {
-                console.log($subject);
-                if ($order == 'asc') {
-                    this.arrayConcerts.sort(function (a, b) {return a[1][$subject] - b[1][$subject]});
-                }else if ($order == 'desc') {
-                    this.arrayConcerts.sort(function (a, b) {return b[1][$subject] - a[1][$subject]});
+            sorting (concertsArray, order, subject) {
+                if (order == 'asc') {
+                    concertsArray = concertsArray.sort(function (a, b) {return a[subject] - b[subject]});
+                }else if (order == 'desc') {
+                    concertsArray = concertsArray.sort(function (a, b) {return b[subject] - a[subject]});
                 }
+                return concertsArray;
             }
         },
         mounted () {
             this.bindConcertsList();
-            for (const key in this.concerts) {
-                    this.arrayConcerts.push([key, this.concerts[key]]);
-            }
-            this.sorting('asc', 'date');
         },
         beforeDestroy () {
-            this.unbindConcertsList();
+            this.unbindConcertsList()
         }
     }
 </script>
 
 <style lang="scss">
     @import "assets/styles/colors.scss";
+    @import "assets/styles/breakpoints.scss";
     .filters {
         position: fixed;
         width: calc(100% - 2em);
@@ -112,8 +121,8 @@
         width: 100%;
         #fab{
             position: fixed;
-            bottom: 7em;
-            right: 2em;
+            bottom: 1.5em;
+            right: 1.5em;
             background: $accentColor;
             padding: 18px 18px 16px 18px;
             width: 56px;
@@ -134,4 +143,10 @@
             cursor: pointer;
             background: $accentColorDark;
         }
+    @media (min-width: $break-xs-sm) {
+        #fab{
+            bottom: 3em;
+            right: 3em;
+        }
+    }
 </style>
