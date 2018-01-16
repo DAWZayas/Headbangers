@@ -1,7 +1,10 @@
 .padding {
     padding: 1em;
 }
-
+.space-between{
+    display: flex;
+    justify-content: space-between;
+}
 .padding-top{
     padding-top: 1em;
 }

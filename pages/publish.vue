@@ -9,7 +9,7 @@
                 <el-step title="Music"></el-step>
             </el-steps>
         </div>
-        <div class="publish-form">
+        <div class="form">
             <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
             <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
             <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
@@ -131,18 +131,5 @@ export default {
         }
     }
     
-    @media (min-width: $break-sm) {
-        .publish-form {
-            width: 75%;
-            margin: 0 auto;
-        }
-    }
-    
-    @media (min-width: $break-lg) {
-        .publish-form {
-            width: 50%;
-            margin: 0 auto;
-        }
-    }
 </style>
 
