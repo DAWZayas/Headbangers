@@ -8,7 +8,8 @@
                     <icon-text class = 'pad' icon='lnr-calendar-full':text='formattedDate'></icon-text>
                     <icon-text class = 'pad' icon='lnr-clock':text='concert.info.time'></icon-text>
                     <div class='container4 pad color'>
-                        <icon-text icon='lnr-database':text='concert.info.price'></icon-text>
+                        <img class='picSize' :src="iconMoney">
+                        <icon-text icon='':text='concert.info.price'></icon-text>
                         <span class='pad4'> {{ concert.info.currency }}</span>
                     </div>
                 </div>
@@ -51,6 +52,11 @@
     import {IconText} from '~/components/common';
 
     export default {
+        data () {
+            return {
+                iconMoney: '/img/icons/money.svg'
+            }
+        },
         components: {
             IconText
         },
@@ -120,7 +126,8 @@
         padding-bottom: 5%;
     }
     .pad4{
-        padding-left: 1%;
+        padding-top: 0.7%;
+        padding-left: 2%;
     }
     .pad5{
         padding-left: 30%;
@@ -183,6 +190,11 @@
     .gen{
         display: none;
     }
+    .picSize{
+        width: 1.5em;
+        height: 1.5em;
+        //background-color: pink;
+    }
     
     @media (min-width: $break-sm) {
         // .prueba{
@@ -225,6 +237,10 @@
         }
         .pad{
             padding: 1% 5% 1% 5%;
+        }
+        .pad4{
+            padding-top: 2%;
+            padding-left: 8%;
         }
         .box-card {
             width: auto;
