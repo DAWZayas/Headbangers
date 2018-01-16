@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='prueba'>
         <div v-if='concert'>
             <div class="color">
                 <div class="cent"><div class='event-img full-width marg2 color' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div></div>
@@ -186,13 +186,16 @@
         display: none;
     }
     
-    @media (min-width: $break-sm) and (max-width: $break-md) {
+    @media (min-width: $break-sm) {
+        // .prueba{
+        //     background-color:red;
+        // }
         .event-img{
             width: 60%;
             margin-top:03%;
             padding-top: 30%;
             margin-left: 15%;
-        }
+        }        
         .event-title{
             padding: 2% 0;
         }
@@ -242,124 +245,7 @@
         }
         .gen{
         display: inline;
-    }
-    }
-    
-    @media (min-width: $break-md) and (max-width: $break-lg) {
-        .event-img{
-            width: 60%;
-            margin-top:03%;
-            padding-top: 30%;
-            margin-left: 15%;
-        }
-        .event-title{
-            padding: 2% 0;
-        }        
-        .cent{
-            background-color: $mainColor;
-        }    
-        .container0{
-            display: grid;
-            grid-template-columns: 65% 35%;
-            grid-template-rows: 100%;
-        }
-        .item1 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .item0 {
-            grid-column-start: 1;
-            grid-column-end: 1;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .marg1{
-            margin: 0 5%;
-        }
-        .padding10{
-            margin-bottom: 1%;
-        }
-        .pad{
-            padding: 1% 5% 1% 5%;
-        }
-        .box-card {
-            width: auto;
-            margin: 0% 5% 5% 5%;
-        }
-        .container{
-            display: flex;
-            justify-content: space-between;
-            padding-top: 0%;
-        }
-         .space2{
-            margin-bottom: 1%;
-        }
-        .adress{
-            text-align: center;
-        }
-        .gen{
-        display: inline;
         }
     }
     
-    @media (min-width: $break-lg) and (max-width: $break-lg-xl) {
-        .event-img{
-            width: 60%;
-            margin-top:03%;
-            padding-top: 30%;
-            margin-left: 15%;
-        }
-        .event-title{
-            padding: 2% 0;
-        }        
-        .cent{
-            background-color: $mainColor;
-        }    
-        .container0{
-            display: grid;
-            grid-template-columns: 65% 35%;
-        }
-        .item1 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .item0 {
-            grid-column-start: 1;
-            grid-column-end: 1;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .marg1{
-            margin: 0 5%;
-        }
-        .padding10{
-            margin-bottom: 1%;
-        }
-        .pad{
-            padding: 1% 5% 1% 5%;
-        }
-        .box-card {
-            width: auto;
-            margin: 0% 5% 5% 5%;
-        }
-        .container{
-            display: flex;
-            justify-content: space-between;
-            padding-top: 0%;
-        }
-        .space2{
-            margin-bottom: 1%;
-        }
-        .adress{
-            text-align: center;
-        }
-        .gen{
-        display: inline;
-        }
-    }
-
 </style>
