@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='prueba'>
         <div v-if='concert'>
             <div class="color">
                 <div class="cent"><div class='event-img full-width marg2 color' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div></div>
@@ -16,6 +16,19 @@
                 <div class='full-width pad ma adress color padding10' >{{ concert.location.descripton }}</div>
             </div>
             <div class="container0">
+                <div class="item0">       
+                    <div class='pad space padding10'><span class='black'>Description: </span> {{ concert.info.description }}</div>
+                    <hr class='marg1'>
+                    <div class='container3'>
+                        <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
+                        <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
+                    </div>
+                    <hr class='marg1'>
+                    <div class='container2 space2 padding10'>
+                        <span class='pad black gen'>Genres: </span>
+                        <span class='pad7 pad4' v-for='genre in concert.genres' :key="genre.name"><el-tag type="info" hit="true" class="brown"> {{genre}} </el-tag></span>
+                    </div>
+                </div>
                 <div class="item1">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix bands">
@@ -26,20 +39,6 @@
                             <div class="board">{{band.description}}</div>
                         </div>            
                     </el-card>
-                </div>
-                <div class="item0">       
-                    <div class='pad space padding10'><span class='black'>Description: </span> {{ concert.info.description }}</div>
-                    <hr class='marg1'>
-                    <div class='container3'>
-                        <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
-                        <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
-                    </div>
-                    <div class='pad pad3 italic padding10'><span class=''>Author: </span> {{concert.author}}</div>
-                    <hr class='marg1'>
-                    <div class='container2 space2 padding10'>
-                        <span class='pad black gen'>Genres: </span>
-                        <span class='pad7 pad4' v-for='genre in concert.genres' :key="genre.name"><el-tag type="info" hit="true" class="brown"> {{genre}} </el-tag></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -158,7 +157,6 @@
     }
     .box-card {
         width: 100%;
-        margin: 0% 0% 5% 0%;
         border-color: $grayLight;
         border-style: solid;
         background-color: $grayLight;
@@ -171,7 +169,7 @@
         font-weight: bold;
     }
     .color{
-        background-color: $mainColorLight;
+        background-color: $mainColorLighter;
         color: $baseColor;
         //border-bottom: thin $gray solid;
     }
@@ -186,13 +184,16 @@
         display: none;
     }
     
-    @media (min-width: $break-sm) and (max-width: $break-md) {
+    @media (min-width: $break-sm) {
+        // .prueba{
+        //     background-color:red;
+        // }
         .event-img{
             width: 60%;
             margin-top:03%;
             padding-top: 30%;
             margin-left: 15%;
-        }
+        }        
         .event-title{
             padding: 2% 0;
         }
@@ -227,124 +228,7 @@
         }
         .box-card {
             width: auto;
-            margin: 0% 5% 5% 5%;
-        }
-        .container{
-            display: flex;
-            justify-content: space-between;
-            padding-top: 0%;
-        }
-        .space2{
-            margin-bottom: 1%;
-        }
-        .adress{
-            text-align: center;
-        }
-        .gen{
-        display: inline;
-    }
-    }
-    
-    @media (min-width: $break-md) and (max-width: $break-lg) {
-        .event-img{
-            width: 60%;
-            margin-top:03%;
-            padding-top: 30%;
-            margin-left: 15%;
-        }
-        .event-title{
-            padding: 2% 0;
-        }        
-        .cent{
-            background-color: $mainColor;
-        }    
-        .container0{
-            display: grid;
-            grid-template-columns: 65% 35%;
-            grid-template-rows: 100%;
-        }
-        .item1 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .item0 {
-            grid-column-start: 1;
-            grid-column-end: 1;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .marg1{
-            margin: 0 5%;
-        }
-        .padding10{
-            margin-bottom: 1%;
-        }
-        .pad{
-            padding: 1% 5% 1% 5%;
-        }
-        .box-card {
-            width: auto;
-            margin: 0% 5% 5% 5%;
-        }
-        .container{
-            display: flex;
-            justify-content: space-between;
-            padding-top: 0%;
-        }
-         .space2{
-            margin-bottom: 1%;
-        }
-        .adress{
-            text-align: center;
-        }
-        .gen{
-        display: inline;
-        }
-    }
-    
-    @media (min-width: $break-lg) and (max-width: $break-lg-xl) {
-        .event-img{
-            width: 60%;
-            margin-top:03%;
-            padding-top: 30%;
-            margin-left: 15%;
-        }
-        .event-title{
-            padding: 2% 0;
-        }        
-        .cent{
-            background-color: $mainColor;
-        }    
-        .container0{
-            display: grid;
-            grid-template-columns: 65% 35%;
-        }
-        .item1 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .item0 {
-            grid-column-start: 1;
-            grid-column-end: 1;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
-        .marg1{
-            margin: 0 5%;
-        }
-        .padding10{
-            margin-bottom: 1%;
-        }
-        .pad{
-            padding: 1% 5% 1% 5%;
-        }
-        .box-card {
-            width: auto;
-            margin: 0% 5% 5% 5%;
+            margin: 0% 5% 0% 5%;
         }
         .container{
             display: flex;
@@ -361,5 +245,5 @@
         display: inline;
         }
     }
-
+    
 </style>
