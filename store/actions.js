@@ -29,6 +29,10 @@ export default {
     unbindUserData: firebaseAction(({state, dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'userData'})
     }),
+    uploadImage: ({state}, image) => {
+
+    }
+    ,
     likeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes + 1)
         state.concertsListRef.child(concertID).child('likes').transaction((likes) => likes + 1)

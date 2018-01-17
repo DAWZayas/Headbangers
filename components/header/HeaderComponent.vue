@@ -66,6 +66,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 0.5em;
+            cursor: pointer;
         }
         .menu-item:hover {
             background-color: $mainColorLight;
