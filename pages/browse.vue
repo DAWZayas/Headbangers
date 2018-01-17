@@ -41,7 +41,7 @@
             concertsArray: function () { return this.concerts && Object.keys(this.concerts).map(key => ({...this.concerts[key], key})).filter(concert => concert.key !== '.key') },
             
             filteredConcerts: function () {
-                var filters = Object.keys(this.filters).length === 0 ? [function (concertsArray) { concertsArray.sort(function (a, b) {return a.date - b.date});}] : this.filters;
+                var filters = Object.keys(this.filters).length === 0 ? [function (concertsArray) { return concertsArray.sort(function (a, b) {return a.date - b.date});}] : this.filters;
                 return this.concerts && this.reduce(this.concertsArray, filters);
                 }
         },
@@ -53,6 +53,7 @@
         },
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
+
             showFilters (bool) {
                 this.filtersPage = bool;
                 //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
