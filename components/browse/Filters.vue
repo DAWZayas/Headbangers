@@ -78,7 +78,9 @@ export default {
             sliderPrice: [0, 500]
         }
     },
+
     computed: {
+        
         sliderDateString: function () {
             var string = this.sliderDate + ''
             string = string.split(',');
@@ -87,35 +89,102 @@ export default {
             return 'From ' + string.join(' till ') + '.';
 
         },
-        sliderPriceString: function () {
-            var string = this.sliderPrice + ''
-            return string.split(',').join(' - ') + ' €'
-        },
+
         sliderDistanceString: function () {
             var string = this.sliderDistance + ''
             return string + ' Km'
         },
+
+        sliderPriceString: function () {
+            var string = this.sliderPrice + ''
+            return string.split(',').join(' - ') + ' €'
+        },
+
         filters: function () {
-            return {
-                sort: this.sortValue,
-                genres: this.selectedGenres,
-                date: this.sliderDate,
-                distance: this.sliderDistance,
-                price: this.sliderPrice
-            }
+            var sorting = this.sortingSubject(this.sortValue);
+            return [
+                this.order(sorting[0] , sorting[1]),
+                this.filterByGenres(),
+                this.filterByDate(),
+                this.filterByDistance(),
+                this.filterByPrice()
+            ]
         }
     },
+
     methods: {
+
         formatDateTooltip(val) {
             return this.dates[val]
         },
-        apply() {
-            this.$emit('setFilters', this.filters)
-            this.$emit('hide')
+
+        sortingSubject (subject) {
+             var sorting = subject.toLowerCase();
+                var returnvalue = [];
+                switch (sorting) {
+                    case 'likes':
+                        returnvalue = ['likes', 'desc'];
+                        break;
+                    case 'nearer':
+                        // navigator.geolocation.getCurrentPosition( this.setLocation );
+                        break;
+                    case 'cheaper':
+                        returnvalue = [ 'price', 'asc'];
+                        break;
+                    case 'people assisting':
+                        returnvalue = ['assisting', 'desc'];     
+                        break;
+                    default:
+                        returnvalue = ['sooner', 'asc'];
+                        break;
+                }
+                return returnvalue;
         },
+
+        order(subject, order){
+            return function (concertsArray) {
+                if (order == 'asc') {
+                    concertsArray = concertsArray.sort(function (a, b) {return a[subject] - b[subject]});
+                }else if (order == 'desc') {
+                    concertsArray = concertsArray.sort(function (a, b) {return b[subject] - a[subject]});
+                }
+                return concertsArray;
+            }
+        },
+
+        filterByGenres (genres) {
+            return function (concertsArray) {
+
+            } 
+        },
+        
+        filterByDate (dateInterval) {
+            return function (concertsArray) {
+                
+            } 
+        },
+        
+        filterByDistance (distance) {
+            return function (concertsArray) {
+                
+            } 
+        },
+
+        filterByPrice (priceInterval) {
+            return function (concertsArray) {
+                
+            } 
+        },
+
+        apply() {
+            this.$emit('setFilters', this.filters);
+            this.$emit('hide');
+        },
+
         hide () {
-            this.$emit('hide')
+            this.$emit('hide');
         }
+
     },
     components: {
         IconButton

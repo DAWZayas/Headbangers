@@ -30,17 +30,19 @@
     export default {
         data () {
             return {
-                filters: {},
+                filters: [],
                 filtersPage: false,
                 selectedMode: 'list'
             }
         },
         computed: {
             ...mapGetters({concerts: 'getConcertsList'}),
+
             concertsArray: function () { return this.concerts && Object.keys(this.concerts).map(key => ({...this.concerts[key], key})).filter(concert => concert.key !== '.key') },
-            filteredConcerts: function () { 
-                var filters = Object.keys(this.filters).length === 0 ? {sort: 'sooner'} : this.filters;
-                return this.concerts && this.applyFilters(this.concertsArray, filters);
+            
+            filteredConcerts: function () {
+                var filters = Object.keys(this.filters).length === 0 ? [function (concertsArray) { concertsArray.sort(function (a, b) {return a.date - b.date});}] : this.filters;
+                return this.concerts && this.reduce(this.concertsArray, filters);
                 }
         },
         components: {
@@ -55,47 +57,21 @@
                 this.filtersPage = bool;
                 //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
             },
+
             setFilters (filters) {
                 this.filters = filters;
+                console.log (this.filters);
             },
-            applyFilters (concertsArray, filters) {
-               const sorting = filters.sort.toLowerCase();
-               var filteredConcerts = [];
-                switch (sorting) {
-                    case 'likes':
-                        filteredConcerts = this.sorting(concertsArray, 'desc', 'likes');
-                        break;
-                    case 'nearer':
-                        navigator.geolocation.getCurrentPosition( this.setLocation );
-                        break;
-                    case 'cheaper':
-                        filteredConcerts = this.sorting(concertsArray, 'asc', 'price');
-                        break;
-                    case 'people assisting':
-                        filteredConcerts = this.sorting(concertsArray, 'desc', 'assisting');                    
-                        break;
-                    case 'sooner':
-                        filteredConcerts = this.sorting(concertsArray,'asc', 'date');
-                        break;
-                    default:
-                        filteredConcerts = concertsArray;
-                        break;
+
+            reduce (concertsArray, filters) {
+                console.log(filters);
+                var filteredConcerts = [];
+                for (var i = 0; i < filters.length; i++) {
+                    filteredConcerts = filters[i](concertsArray);
                 }
                 return filteredConcerts;
             },
-            setLocation (position, error){
-                const lat = position.coords.latitude;
-                const long = position.coords.longitude;
-                console.log(lat + ' , ' + long);
-            },
-            sorting (concertsArray, order, subject) {
-                if (order == 'asc') {
-                    concertsArray = concertsArray.sort(function (a, b) {return a[subject] - b[subject]});
-                }else if (order == 'desc') {
-                    concertsArray = concertsArray.sort(function (a, b) {return b[subject] - a[subject]});
-                }
-                return concertsArray;
-            }
+
         },
         mounted () {
             this.bindConcertsList();
