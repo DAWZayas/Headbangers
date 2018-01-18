@@ -29,10 +29,20 @@ export default {
     unbindUserData: firebaseAction(({state, dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'userData'})
     }),
-    uploadImage: ({state}, image) => {
+    uploadImage: ({state}, {image, path}) => {
+        let photoRef = firebaseApp.storage().ref().child(path)
+        photoRef.put(image).then((snapshot) => {
+          firebaseApp.auth().currentUser.updateProfile({
+            photoURL: snapshot.downloadURL
+          }) 
+        })
+    },
+    updateName: ({state}, name) => {
 
-    }
-    ,
+    },
+    updateEmail: ({state}, email) => {
+        
+    },
     likeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes + 1)
         state.concertsListRef.child(concertID).child('likes').transaction((likes) => likes + 1)
