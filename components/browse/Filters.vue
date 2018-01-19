@@ -2,7 +2,7 @@
 
     <div class="filters">
         <div class="header">
-            <button id="back-button" @click="hide"><icon-button icon="lnr-arrow-left"></icon-button></button>
+            <icon-button icon="lnr-arrow-left" id="back-button" @click.native="hide"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
         </div>
         <div class="filters-form">
@@ -154,25 +154,25 @@ export default {
 
         filterByGenres (genres) {
             return function (concertsArray) {
-
+                return concertsArray;
             } 
         },
         
         filterByDate (dateInterval) {
             return function (concertsArray) {
-                
+                return concertsArray;
             } 
         },
         
         filterByDistance (distance) {
             return function (concertsArray) {
-                
+                return concertsArray;
             } 
         },
 
         filterByPrice (priceInterval) {
             return function (concertsArray) {
-                
+                return concertsArray;
             } 
         },
 
@@ -211,7 +211,7 @@ export default {
                 background-color: transparent;
             }
             #apply-button{
-                padding-top: .40em;
+                padding-top: .75em;
                 font-size: 1.25em;
                 font-weight: lighter;
                 float: right;

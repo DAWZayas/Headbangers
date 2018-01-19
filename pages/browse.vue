@@ -14,7 +14,7 @@
         </el-tabs>
         -->
         
-        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
+        <filters ref="filters" class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
         <concerts-list :concerts="filteredConcerts"></concerts-list>
         <div id="fab-container">
             <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
@@ -30,27 +30,35 @@
     export default {
         data () {
             return {
-                filters: [],
+                filters: [((concertsArray) => concertsArray.sort(function (a, b) {return a.date - b.date}))],
                 filtersPage: false,
-                selectedMode: 'list'
+                selectedMode: 'list',
+                filteredConcerts: []
             }
         },
+
         computed: {
             ...mapGetters({concerts: 'getConcertsList'}),
 
             concertsArray: function () { return this.concerts && Object.keys(this.concerts).map(key => ({...this.concerts[key], key})).filter(concert => concert.key !== '.key') },
-            
-            filteredConcerts: function () {
-                var filters = Object.keys(this.filters).length === 0 ? [function (concertsArray) { return concertsArray.sort(function (a, b) {return a.date - b.date});}] : this.filters;
-                return this.concerts && this.reduce(this.concertsArray, filters);
-                }
         },
+
+        watch: {
+            filters () {
+                this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
+            },
+            concertsArray () {
+                this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
+            }
+        },
+
         components: {
             ConcertsList,
             IconText,
             IconButton,
             Filters
         },
+        
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
 
@@ -61,11 +69,9 @@
 
             setFilters (filters) {
                 this.filters = filters;
-                console.log (this.filters);
             },
 
             reduce (concertsArray, filters) {
-                console.log(filters);
                 var filteredConcerts = [];
                 for (var i = 0; i < filters.length; i++) {
                     filteredConcerts = filters[i](concertsArray);

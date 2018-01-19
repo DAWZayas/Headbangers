@@ -1,12 +1,15 @@
 <template>
     <div class="cards padding">
-        <event-card v-for="concert in concerts" :key="concert.key" :concert="concert"></event-card>
+        <event-card v-for="(concert ,i) in concertsList" :key="i" :concert="concert"></event-card>
     </div>
 </template>
 
 <script>
     import EventCard from '~/components/browse/EventCard'
     export default {
+        computed: {
+            concertsList(){ return this.concerts}
+        },
         components: {
             EventCard
         },
