@@ -3,6 +3,7 @@
         <div v-if='concert'>
             <div class="color">
                 <div class="cent"><div class='event-img full-width marg2 color' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div></div>
+                <div class="likes-badge pad8"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
                 <div class='event-title no-margin text-center color'>{{concert.info.title}}</div>
                 <div class='container ma color'>
                     <icon-text class = 'pad' icon='lnr-calendar-full':text='formattedDate'></icon-text>
@@ -17,24 +18,29 @@
                 <div class='full-width pad ma adress color padding10' >{{ concert.location.descripton }}</div>
             </div>
             <div class="container0">
-                <div class="item0">       
+                <div class="item3 container5 container6">
+                        <div class="full-width text-center item21" @click="like">
+                            <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
+                            <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
+                        </div>
+                        <div class="full-width text-center item22" @click="save">
+                            <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
+                            <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
+                        </div>
+                        <div class="full-width text-center item23">
+                            <icon-text icon="lnr-bubble" text="Share"></icon-text>
+                        </div>
+                        <div class="full-width text-center item24">
+                            <icon-text icon="lnr-bubble" text="Assist"></icon-text>
+                        </div>
+                    </div>
+                <div class="item0">                    
                     <div class='pad space padding10'><span class='black'>Description: </span> {{ concert.info.description }}</div>
                     <hr class='marg1'>
                     <div class='container3'>
                         <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
                         <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
-                        <div class="full-width text-center" @click="like">
-                            <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
-                            <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
-                        </div>
-                        <div class="full-width text-center" @click="save">
-                            <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
-                            <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
-                        </div>
-                        <div class="full-width text-center">
-                            <icon-text icon="lnr-bubble" text="Share"></icon-text>
-                        </div>
-                    </div>
+                    </div>                    
                     <hr class='marg1'>
                     <div class='container2 space2 padding10'>
                         <span class='pad black gen'>Genres: </span>
@@ -155,6 +161,12 @@
         justify-content: left;
         padding-top: 2%;
     }
+    .container5{
+        display: flex;
+        justify-content: left;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
     .pad{
         padding: 1% 5% 1% 5%;
     }
@@ -176,6 +188,9 @@
     }
     .pad7{
         padding: 0% 5% 1% 5%;
+    }
+    .pad8{
+        margin: -3% 0 1% 1%;
     }
     .marg1{
         margin: 3% 5%;
@@ -256,17 +271,74 @@
             grid-template-columns: 65% 35%;
             grid-template-rows: 100%;
         }
-        .item1 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-        }
         .item0 {
             grid-column-start: 1;
             grid-column-end: 1;
             grid-row-start: 1;
+            grid-row-end: 3;
+        }
+        .item1 {
+            grid-column-start: 2;
+            grid-column-end: 2;
+            grid-row-start: 2;
+            grid-row-end: 2;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        .item3 {
+            grid-column-start: 2;
+            grid-column-end: 2;
+            grid-row-start: 1;
             grid-row-end: 1;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        .container6 {
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+            grid-template-rows: 1fr; 
+            margin: 5% 5% 5% 5%;
+            //background-color: $grayLighter;
+        }
+        .item21 {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $grayLighter;
+            border-color:darkgoldenrod;
+            border-style: solid;
+            padding: 15% 0 15% 0;
+        }
+        .item22 {
+            grid-column-start: 2;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $grayLighter;
+            border-color:darkgoldenrod;
+            border-style: solid;
+            padding: 15% 0 15% 0;
+        }
+        .item23 {
+            grid-column-start: 3;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $grayLighter;
+            border-color:darkgoldenrod;
+            border-style: solid;
+            padding: 15% 0 15% 0;
+        }
+        .item24 {
+            grid-column-start: 4;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $grayLighter;
+            border-color:darkgoldenrod;
+            border-style: solid;
+            padding: 15% 0 15% 0;
         }
         .marg1{
             margin: 0 5%;
