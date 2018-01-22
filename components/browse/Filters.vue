@@ -22,7 +22,7 @@
             </div>
             <div id="filter-date">
                 <h5>Date</h5>
-                <el-slider v-model="sliderDate" show-stops :max="8" :format-tooltip="formatDateTooltip" range></el-slider>
+                <el-slider v-model="sliderDate" show-stops :max="4" :format-tooltip="formatDateTooltip" range></el-slider>
                 <p>{{sliderDateString}}</p>
             </div>
             <div id="filter-distance">
@@ -45,6 +45,7 @@
 </template>
 <script>
 import IconButton from '~/components/common/IconButton'
+import {mapGetters} from 'vuex'
 export default {
     data () {
         return {
@@ -56,31 +57,23 @@ export default {
                         'People Assisting',
                     ],
             sortValue: 'Sooner',
-            genreValues: [
-                        'rock',
-                        'punk',
-                        'metal'
-                        ],
             selectedGenres: [],
             dates: [
                     'today',
-                    'this Week',
                     'next Week',
-                    'this Month',
                     'next Month',
-                    'the next three months',
                     'the next six months',
-                    'this Year',
                     'next Year',
                     ],
-            sliderDate: [0, 8],
+            sliderDate: [0, 4],
             sliderDistance: 25,
             sliderPrice: [0, 500]
         }
     },
 
     computed: {
-        
+        ...mapGetters({genreValues: 'getGenreList'}),
+
         sliderDateString: function () {
             var string = this.sliderDate + ''
             string = string.split(',');
@@ -104,8 +97,8 @@ export default {
             var sorting = this.sortingSubject(this.sortValue);
             return [
                 this.order(sorting[0] , sorting[1]),
-                this.filterByGenres(),
-                this.filterByDate(),
+                this.filterByGenres(this.selectedGenres),
+                this.filterByDate(this.sliderDate),
                 this.filterByDistance(),
                 this.filterByPrice()
             ]
@@ -114,31 +107,66 @@ export default {
 
     methods: {
 
-        formatDateTooltip(val) {
+        apply() {
+            this.$emit('setFilters', this.filters);
+            this.$emit('hide');
+        },
+
+        hide () {
+            this.$emit('hide');
+        },
+
+         formatDateTooltip(val) {
             return this.dates[val]
         },
 
         sortingSubject (subject) {
-             var sorting = subject.toLowerCase();
-                var returnvalue = [];
-                switch (sorting) {
-                    case 'likes':
-                        returnvalue = ['likes', 'desc'];
-                        break;
-                    case 'nearer':
-                        // navigator.geolocation.getCurrentPosition( this.setLocation );
-                        break;
-                    case 'cheaper':
-                        returnvalue = [ 'price', 'asc'];
-                        break;
-                    case 'people assisting':
-                        returnvalue = ['assisting', 'desc'];     
-                        break;
-                    default:
-                        returnvalue = ['sooner', 'asc'];
-                        break;
-                }
-                return returnvalue;
+            var sorting = subject.toLowerCase();
+            var returnvalue = [];
+            switch (sorting) {
+                case 'likes':
+                    returnvalue = ['likes', 'desc'];
+                    break;
+                case 'nearer':
+                    // navigator.geolocation.getCurrentPosition( this.setLocation );
+                    break;
+                case 'cheaper':
+                    returnvalue = [ 'price', 'asc'];
+                    break;
+                case 'people assisting':
+                    returnvalue = ['assisting', 'desc'];     
+                    break;
+                default:
+                    returnvalue = ['sooner', 'asc'];
+                    break;
+            }
+            return returnvalue;
+        },
+
+        dateToMiliseconds (date) {
+            var today = new Date();
+            today = today.getTime();
+            var dayOfTheWeek = new Date();
+            dayOfTheWeek = dayOfTheWeek.getDay();
+            var dayOfTheMonth = new Date ();
+            dayOfTheMonth = dayOfTheMonth.getDate();
+            switch (date) {
+                case 0:
+                    return today;
+                    break;
+                case 1:
+                    return today + 1209600000 - (dayOfTheWeek * 86400000);
+                    break;
+                case 2:
+                    return today + 5259500000 - (dayOfTheMonth * 86400000);
+                    break;
+                case 3:
+                    return today + 15778500000 - (dayOfTheMonth * 86400000);
+                    break;
+                case 4:
+                    return today + 31557000000 - (dayOfTheMonth * 86400000);
+                    break;
+            }
         },
 
         order(subject, order){
@@ -152,16 +180,30 @@ export default {
             }
         },
 
-        filterByGenres (genres) {
+        filterByGenres (selectedGenres) {
             return function (concertsArray) {
-                return concertsArray;
+                return concertsArray.filter ( (currentValue) => {
+                    var returnValue = selectedGenres.length == 0 ? true : false;
+                    for (var i = 0; i < selectedGenres.length; i++) {
+                        if (currentValue['genres'].includes(selectedGenres[i])) {
+                            returnValue = true;
+                        }else{
+                            returnValue = false;
+                        }
+                    }
+                    return returnValue;
+                } );
             } 
         },
         
         filterByDate (dateInterval) {
-            return function (concertsArray) {
-                return concertsArray;
-            } 
+           return function (concertsArray) {
+               var date1 = dateInterval[0];
+               var date2 = dateInterval[1];
+                return concertsArray.filter ( (currentValue) => {
+                        return currentValue['date'] > this.dateToMiliseconds(date1) && currentValue['date'] < this.dateToMiliseconds(date2);
+                } );
+            }  
         },
         
         filterByDistance (distance) {
@@ -174,15 +216,6 @@ export default {
             return function (concertsArray) {
                 return concertsArray;
             } 
-        },
-
-        apply() {
-            this.$emit('setFilters', this.filters);
-            this.$emit('hide');
-        },
-
-        hide () {
-            this.$emit('hide');
         }
 
     },

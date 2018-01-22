@@ -47,6 +47,7 @@
             filters () {
                 this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
             },
+            
             concertsArray () {
                 this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
             }
@@ -68,7 +69,7 @@
             },
 
             setFilters (filters) {
-                this.filters = filters;
+                this.filters = filters;           
             },
 
             reduce (concertsArray, filters) {
