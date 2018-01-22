@@ -27,6 +27,10 @@
                             <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
                             <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
                         </div>
+                        <div class="full-width text-center" @click="save">
+                            <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
+                            <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
+                        </div>
                     </div>
                     <hr class='marg1'>
                     <div class='container2 space2 padding10'>
@@ -70,6 +74,9 @@
             liked () {
                 return this.likedConcerts && Object.keys(this.likedConcerts).includes(this.id)
             },
+            saved () {
+                return this.savedConcerts && Object.keys(this.savedConcerts).includes(this.id)
+            },
         },        
         mounted(){
             this.bindConcert(this.$route.params.id)
@@ -91,6 +98,17 @@
                     })
                 }   
             },
+            save () {
+                if (this.isAuthenticated) {
+                    !this.saved ? this.saveConcert(this.id) : this.unsaveConcert(this.id)
+                } else {
+                    this.$notify({
+                        type: 'info',
+                        message: 'You need to login',
+                        duration: 1000
+                    })
+                }
+            }
         }
     }
 </script>
