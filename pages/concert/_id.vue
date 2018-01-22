@@ -31,6 +31,9 @@
                             <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
                             <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
                         </div>
+                        <div class="full-width text-center">
+                            <icon-text icon="lnr-bubble" text="Share"></icon-text>
+                        </div>
                     </div>
                     <hr class='marg1'>
                     <div class='container2 space2 padding10'>
