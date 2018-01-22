@@ -22,7 +22,7 @@
             </div>
             <div id="filter-date">
                 <h5>Date</h5>
-                <el-slider v-model="sliderDate" show-stops :max="4" :format-tooltip="formatDateTooltip" range></el-slider>
+                <el-slider v-model="sliderDate" show-stops :max="5" :format-tooltip="formatDateTooltip" range></el-slider>
                 <p>{{sliderDateString}}</p>
             </div>
             <div id="filter-distance">
@@ -63,9 +63,10 @@ export default {
                     'next Week',
                     'next Month',
                     'the next six months',
+                    'this year',
                     'next Year',
                     ],
-            sliderDate: [0, 4],
+            sliderDate: [0, 5],
             sliderDistance: 25,
             sliderPrice: [0, 500]
         }
@@ -73,6 +74,10 @@ export default {
 
     computed: {
         ...mapGetters({genreValues: 'getGenreList'}),
+        
+        dateMiliseconds: function () {
+            return [this.transformToMs(this.sliderDate[0]), this.transformToMs(this.sliderDate[1])]
+        },
 
         sliderDateString: function () {
             var string = this.sliderDate + ''
@@ -98,9 +103,9 @@ export default {
             return [
                 this.order(sorting[0] , sorting[1]),
                 this.filterByGenres(this.selectedGenres),
-                this.filterByDate(this.sliderDate),
+                this.filterByDate(this.dateMiliseconds),
                 this.filterByDistance(),
-                this.filterByPrice()
+                this.filterByPrice(this.sliderPrice)
             ]
         }
     },
@@ -116,8 +121,35 @@ export default {
             this.$emit('hide');
         },
 
-         formatDateTooltip(val) {
+        formatDateTooltip(val) {
             return this.dates[val]
+        },
+
+        transformToMs (date) {
+            var today = new Date().getTime();
+            var dayOfTheWeek = new Date().getDay();
+            var dayOfTheMonth = new Date ().getDate();
+            var dayOfTheYear = Math.round(((today - new Date(new Date().getFullYear(), 0, 1)) / 86400000) + .5, 0);
+            switch (date) {
+                case 0:
+                    return today;
+                    break;
+                case 1:
+                    return today + 1209600000 - (dayOfTheWeek * 86400000);
+                    break;
+                case 2:
+                    return today + 5259500000 - (dayOfTheMonth * 86400000);
+                    break;
+                case 3:
+                    return today + 15778500000 - (dayOfTheMonth * 86400000);
+                    break;
+                case 4:
+                    return today + 31557000000 - (dayOfTheYear * 86400000);
+                    break;
+                case 5:
+                    return today + 63113904000 - (dayOfTheYear * 86400000);
+                    break;
+            }
         },
 
         sortingSubject (subject) {
@@ -141,32 +173,6 @@ export default {
                     break;
             }
             return returnvalue;
-        },
-
-        dateToMiliseconds (date) {
-            var today = new Date();
-            today = today.getTime();
-            var dayOfTheWeek = new Date();
-            dayOfTheWeek = dayOfTheWeek.getDay();
-            var dayOfTheMonth = new Date ();
-            dayOfTheMonth = dayOfTheMonth.getDate();
-            switch (date) {
-                case 0:
-                    return today;
-                    break;
-                case 1:
-                    return today + 1209600000 - (dayOfTheWeek * 86400000);
-                    break;
-                case 2:
-                    return today + 5259500000 - (dayOfTheMonth * 86400000);
-                    break;
-                case 3:
-                    return today + 15778500000 - (dayOfTheMonth * 86400000);
-                    break;
-                case 4:
-                    return today + 31557000000 - (dayOfTheMonth * 86400000);
-                    break;
-            }
         },
 
         order(subject, order){
@@ -196,12 +202,10 @@ export default {
             } 
         },
         
-        filterByDate (dateInterval) {
+        filterByDate (date) {
            return function (concertsArray) {
-               var date1 = dateInterval[0];
-               var date2 = dateInterval[1];
                 return concertsArray.filter ( (currentValue) => {
-                        return currentValue['date'] > this.dateToMiliseconds(date1) && currentValue['date'] < this.dateToMiliseconds(date2);
+                        return currentValue['date'] > date[0] && currentValue['date'] < date[1];
                 } );
             }  
         },
@@ -214,8 +218,10 @@ export default {
 
         filterByPrice (priceInterval) {
             return function (concertsArray) {
-                return concertsArray;
-            } 
+                return concertsArray.filter ( (currentValue) => {
+                   return currentValue['price'] > priceInterval[0] && currentValue['price'] < priceInterval[1];
+                } ); 
+            }
         }
 
     },
