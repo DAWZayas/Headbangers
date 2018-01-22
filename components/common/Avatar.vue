@@ -12,7 +12,6 @@ export default {
     .avatar{
         overflow: hidden;
         border: 1px solid #ccc;
-        cursor: pointer;
         margin: auto;
     }
 

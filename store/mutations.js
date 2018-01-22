@@ -1,7 +1,7 @@
 import firebaseApp from '~/firebaseapp'
 export default {
     addConcert: (state, concert) => { state.concerts[concert.id] = concert },
-    setUserProfile: (state, profile) => { state.userProfile = profile },
+    setUserProfile: (state, profile) => { state.userProfile = profile;},
     setUserData: (state, data) => { state.userData = data },
     setAuthenticated: (state, authenticated) => { state.isAuthenticated = authenticated },
     setConcerts: (state, concerts) => { state.concerts = concerts },
