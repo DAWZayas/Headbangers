@@ -23,6 +23,10 @@
                     <div class='container3'>
                         <div class='pad'><span class='black'>Assisting: </span>{{concert.assisting}}</div>
                         <div class='pad'><span class='black'>Likes: </span>{{concert.likes}}</div>
+                        <div class="full-width text-center" @click="like">
+                            <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
+                            <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
+                        </div>
                     </div>
                     <hr class='marg1'>
                     <div class='container2 space2 padding10'>
@@ -61,9 +65,12 @@
             IconText
         },
         computed:{
-            ...mapGetters({concert: 'getConcertDetails'}),
+            ...mapGetters({concert: 'getConcertDetails', likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
             formattedDate(){ return new Date(Number(this.concert.info.date)).toLocaleDateString()},
-        },
+            liked () {
+                return this.likedConcerts && Object.keys(this.likedConcerts).includes(this.id)
+            },
+        },        
         mounted(){
             this.bindConcert(this.$route.params.id)
             //firebaseApp.database().ref('/concertsFull').child(this.id).on('value',function(concert){ this.concert = concert.val() }.bind(this))
@@ -72,7 +79,18 @@
             this.unbindConcert();
         },
         methods: {
-            ...mapActions(['bindConcert', 'unbindConcert'])
+            ...mapActions(['bindConcert', 'unbindConcert']),
+            like () {
+                if (this.isAuthenticated) {
+                    !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)
+                } else {
+                    this.$notify({
+                        type: 'info',
+                        message: 'You need to login',
+                        duration: 1000
+                    })
+                }   
+            },
         }
     }
 </script>
