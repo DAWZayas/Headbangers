@@ -295,50 +295,61 @@
         }
         .container6 {
             display: grid;
-            grid-template-columns: 25% 25% 25% 25%;
-            grid-template-rows: 1fr; 
+            grid-template-columns: 49% 1% 49%;
+            grid-template-rows: 2fr; 
             margin: 5% 5% 5% 5%;
-            //background-color: $grayLighter;
         }
         .item21 {
             grid-column-start: 1;
             grid-column-end: 1;
             grid-row-start: 1;
             grid-row-end: 1;
-            background-color: $grayLighter;
-            border-color:darkgoldenrod;
-            border-style: solid;
-            padding: 15% 0 15% 0;
+            background-color: $yellowLighter;
+            //background-color: $accentColorDark;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+            border-radius: 5px;
+            margin: 1.5px;
         }
         .item22 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-            background-color: $grayLighter;
-            border-color:darkgoldenrod;
-            border-style: solid;
-            padding: 15% 0 15% 0;
-        }
-        .item23 {
             grid-column-start: 3;
             grid-column-end: 3;
             grid-row-start: 1;
             grid-row-end: 1;
-            background-color: $grayLighter;
-            border-color:darkgoldenrod;
-            border-style: solid;
-            padding: 15% 0 15% 0;
+            background-color: $yellowLighter;
+            //background-color: $mainColorLightest;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+            border-radius: 5px;
+            margin: 1.5px;
+        }
+        .item23 {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 2;
+            grid-row-end: 2;
+            background-color: $yellowLighter;
+            //background-color: $mainColorLightestLight;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+            border-radius: 5px;
+            margin: 1.5px;
         }
         .item24 {
-            grid-column-start: 4;
-            grid-column-end: 4;
-            grid-row-start: 1;
-            grid-row-end: 1;
-            background-color: $grayLighter;
-            border-color:darkgoldenrod;
-            border-style: solid;
-            padding: 15% 0 15% 0;
+            grid-column-start: 3;
+            grid-column-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 2;
+            background-color: $yellowLighter;
+            //background-color: $brownLight;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+            border-radius: 5px;
+            margin: 1.5px;
         }
         .marg1{
             margin: 0 5%;
@@ -370,6 +381,55 @@
         }
         .gen{
         display: inline;
+        }
+    }
+
+    @media (min-width: $break-md) {
+        .container6 {
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+            grid-template-rows: 1fr; 
+            margin: 5% 5% 5% 5%;
+        }
+        .item21 {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $yellowLighter;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+        }
+        .item22 {
+            grid-column-start: 2;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $yellowLighter;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+        }
+        .item23 {
+            grid-column-start: 3;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $yellowLighter;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+        }
+        .item24 {
+            grid-column-start: 4;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $yellowLighter;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
         }
     }
     
