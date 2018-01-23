@@ -5,7 +5,7 @@
 </template>
 <style>
     #logo{
-        padding-top: 0.5em;
+        margin-top: 0.4em;
         width: 10em;
     }    
 @media(min-width: 768px) {

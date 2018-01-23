@@ -1,8 +1,8 @@
 <template>
     <div class="login-form padding">
+        <el-alert v-if="error !== ''" :title="error" type="error" class="margin-bottom" @close="error = ''"></el-alert>
         <login-form v-if="action === 'login'" @signup="action = 'signup'" @error="setError"></login-form>
         <signup-form v-if="action === 'signup'" @login="action = 'login'" @error="setError"></signup-form>
-        <el-alert v-if="error !== ''" :title="error" type="error" class="margin-top" @close="error = ''"></el-alert>
         <hr class="margin-top margin-bottom">
         <div class="servicesButtons">
             <button class="loginBtn loginBtn--facebook" @click="loginWithFacebook">Login with Facebook</button>

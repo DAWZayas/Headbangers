@@ -1,10 +1,8 @@
 <template>
     <el-dropdown class="user-dropdown" @command="handleAction">
         <div>
-            <icon-button v-if="!userPhoto" icon="lnr-user"></icon-button>
-            <div class="avatar" v-else >
-                <img :src="userPhoto">
-            </div>
+            <icon-button v-if="!isAuthenticated" icon="lnr-user"></icon-button>
+            <avatar size="36" v-else :photo="userPhoto"></avatar>
         </div>
         <el-dropdown-menu v-if="isAuthenticated" slot="dropdown">
             <el-dropdown-item command="account">
@@ -30,7 +28,7 @@
 
 <script>
     import firebaseApp from '~/firebaseapp'
-    import {IconButton, IconText} from '~/components/common'
+    import {IconButton, IconText, Avatar} from '~/components/common'
     import {mapGetters, mapMutations} from 'vuex'
     export default {
         data: () => ({
@@ -61,7 +59,8 @@
         },
         components: {
             IconButton,
-            IconText
+            IconText,
+            Avatar
         }
     }
 </script>
@@ -75,17 +74,4 @@
         padding-top: 0.5em;
     }
 
-    .avatar{
-        width: 36px;
-        height: 36px;
-        border-radius: 18px;
-        overflow: hidden;
-        border: 1px solid #ccc;
-        cursor: pointer;
-    }
-
-    .avatar img{
-        width: 36px;
-        margin-bottom: 0.5em;
-    }
 </style>

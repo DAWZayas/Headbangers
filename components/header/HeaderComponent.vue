@@ -14,22 +14,32 @@
             <icon-button icon="lnr-magnifier"></icon-button>
         </div>
         <div class="menu-item">
-            <user-dropdown></user-dropdown>
+            <icon-button v-if="!isAuthenticated" icon="lnr-user" @click.native="openPage('/login')"></icon-button>
+            <avatar size="36" v-else :picture="userPhoto" @click.native="openPage('/account')"></avatar>
         </div>
-        </el-menu>
     </header>
 </template>
 
 <script>
     import HeaderLogo from './HeaderLogo'
     import MenuButton from './MenuButton'
-    import {IconText, IconButton} from '~/components/common'
+    import {IconText, IconButton, Avatar} from '~/components/common'
     import UserDropdown from './UserDropdown'
     import SearchBox from './SearchBox'
+    import {mapGetters} from 'vuex'
     export default {
+        computed: {
+            ...mapGetters({isAuthenticated: 'isAuthenticated', userPhoto: 'getUserPhoto'}),
+        },
+        methods: {
+            openPage(page){
+                this.$router.push(page)
+            }
+        },
         components: {
             IconButton,
             HeaderLogo,
+            Avatar,
             MenuButton,
             IconText,
             UserDropdown,
@@ -48,19 +58,15 @@
         z-index: 10;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
         height: 60px;
-        line-height: 60px;
         display: flex;
         justify-content: space-between;
-        .menu-item {
-            text-align: center;
-            display: inline-block;
+
+        .menu-item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding: 0 0.5em;
-            position: relative;
-            box-sizing: border-box;
-        }
-        .menu-item > * {
-            padding-top: 0.1em;
-            vertical-align: middle;
+            cursor: pointer;
         }
         .menu-item:hover {
             background-color: $mainColorLight;
@@ -82,6 +88,8 @@
         @media (min-width: 768px) {
             .search-item{
                 display: inline-block;
+                height: 60px;
+                line-height: 60px;
             }
             .menu-item {
                 padding: 0 15px;

@@ -63,3 +63,17 @@ hr {
     border: 0;
     background-color: $grayLight;
 }
+
+@media (min-width: $break-sm) {
+    .form {
+        width: 75%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: $break-lg) {
+    .form {
+        width: 50%;
+        margin: 0 auto;
+    }
+}

@@ -59,12 +59,16 @@ button.el-button{
     width: 100% !important;
 }
 
+.el-message-box {
+  width: 75% !important;
+}
+
 .el-dialog__body{
     padding-top: 0!important;
 }
 
 @media (min-width: $break-sm) {
-    .el-dialog {
+    .el-dialog, .el-message-box{
         width: 50% !important;
     }
 }

@@ -56,6 +56,7 @@ export default {
                             message: 'Account created succesfully',
                             type: 'success'
                         })
+                        this.$router.push('/account')
                     })
                     .catch((error) => {
                         this.emitError(error.message)
