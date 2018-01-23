@@ -13,51 +13,76 @@
             </el-tab-pane>
         </el-tabs>
         -->
-        <filters class="filters" v-show="filtersPage" @hide="showFilters(false)" @applyFilters="applyFilters"></filters>        
-        <browse-list id="list" :concerts="concerts" :filters="filters" ></browse-list>
-        <button v-show="!filtersPage" @click="showFilters(true)" id="filters-fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        
+        <filters ref="filters" class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
+        <concerts-list :concerts="filteredConcerts"></concerts-list>
+        <div id="fab-container">
+            <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        </div>
     </div>
 </template>
 
 <script>
-    import BrowseList from '~/components/browse/BrowseList'
+    import ConcertsList from '~/components/browse/ConcertsList'
     import Filters from '~/components/browse/Filters'
     import {IconText, IconButton} from '~/components/common'
     import {mapActions, mapGetters} from 'vuex'
     export default {
         data () {
             return {
+                filters: [((concertsArray) => concertsArray.sort(function (a, b) {return a.date - b.date}))],
                 filtersPage: false,
                 selectedMode: 'list',
-                filters: []
+                filteredConcerts: []
             }
         },
+
         computed: {
-            ...mapGetters({concerts: 'getConcertsList'})
+            ...mapGetters({concerts: 'getConcertsList'}),
+
+            concertsArray: function () { return this.concerts && Object.keys(this.concerts).map(key => ({...this.concerts[key], key})).filter(concert => concert.key !== '.key') },
         },
+
+        watch: {
+            filters () {
+                this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
+            },
+            
+            concertsArray () {
+                this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
+            }
+        },
+
         components: {
-            BrowseList,
+            ConcertsList,
             IconText,
             IconButton,
             Filters
         },
+        
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-            showFilters ($bool) {
-                this.filtersPage = $bool
-                if($bool){
-                    document.getElementById('list').style.opacity = "0.5"
-                    document.getElementById('list').style.pointerEvents = "none"
-                }else{
-                    document.getElementById('list').style.opacity = "1"
-                    document.getElementById('list').style.pointerEvents = "all"
-                }
+
+            showFilters (bool) {
+                this.filtersPage = bool;
+                //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
             },
-            applyFilters (info){
-                this.filters= info
+
+            setFilters (filters) {
+                this.filters = filters;           
+            },
+
+            reduce (concertsArray, filters) {
+                var filteredConcerts = [];
+                for (var i = 0; i < filters.length; i++) {
+                    filteredConcerts = filters[i](concertsArray);
+                }
+                return filteredConcerts;
+            },
+
         },
         mounted () {
-            this.bindConcertsList()
+            this.bindConcertsList();
         },
         beforeDestroy () {
             this.unbindConcertsList()
@@ -68,34 +93,45 @@
 
 <style lang="scss">
     @import "assets/styles/colors.scss";
+    @import "assets/styles/breakpoints.scss";
     .filters {
         position: fixed;
         width: calc(100% - 2em);
         margin: 1em;
-        z-index: 1;
+        z-index: 6;
     }
-    #filters-fab{
-        background: $accentColor;
-        position: sticky;
-        right: 3em;
-        padding: 18px 18px 16px 18px;
-        width: 56px;
-        height: 56px;
-        float: right;
-        border: none;
-        border-radius: 100%;
-        box-shadow: 0px 2px 2px rgba(0,0,0,.5);
-        
-        img{
-            width: 20px;
+
+    #fab-container{
+        text-align: right;
+        width: 100%;
+        #fab{
+            position: fixed;
+            bottom: 1.5em;
+            right: 1.5em;
+            background: $accentColor;
+            padding: 18px 18px 16px 18px;
+            width: 56px;
+            height: 56px;
+            border: none;
+            border-radius: 100%;
+            box-shadow: 0px 2px 2px rgba(0,0,0,.5); 
+            img{
+                width: 20px;
+            }
         }
     }
-        #filters-fab:hover{
+        #fab:hover{
             cursor: pointer;
             background: $accentColorDark;
         }
-        #filters-fab:active{
+        #fab:active{
             cursor: pointer;
             background: $accentColorDark;
         }
+    @media (min-width: $break-xs-sm) {
+        #fab{
+            bottom: 3em;
+            right: 3em;
+        }
+    }
 </style>
