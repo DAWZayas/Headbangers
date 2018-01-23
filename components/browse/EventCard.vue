@@ -1,6 +1,6 @@
 <template>
     <el-card class="event-card">
-        <nuxt-link :to="'/concert/'+id">
+        <nuxt-link :to="'/concert/'+concert.key">
             <div style="overflow: hidden;">
                 <div class="likes-badge"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
                 <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
@@ -47,7 +47,7 @@
         components: {
             IconText
         },
-        props: ['concert', 'id'],
+        props: ['concert'],
         computed: {
             ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
             liked () {

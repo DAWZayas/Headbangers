@@ -2,7 +2,7 @@
 
     <div class="filters">
         <div class="header">
-            <button id="back-button" @click="hide"><icon-button icon="lnr-arrow-left"></icon-button></button>
+            <icon-button icon="lnr-arrow-left" id="back-button" @click.native="hide"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
         </div>
         <div class="filters-form">
@@ -22,7 +22,7 @@
             </div>
             <div id="filter-date">
                 <h5>Date</h5>
-                <el-slider v-model="sliderDate" show-stops :max="8" :format-tooltip="formatDateTooltip" range></el-slider>
+                <el-slider v-model="sliderDate" show-stops :max="5" :format-tooltip="formatDateTooltip" range></el-slider>
                 <p>{{sliderDateString}}</p>
             </div>
             <div id="filter-distance">
@@ -45,6 +45,7 @@
 </template>
 <script>
 import IconButton from '~/components/common/IconButton'
+import {mapGetters} from 'vuex'
 export default {
     data () {
         return {
@@ -56,29 +57,28 @@ export default {
                         'People Assisting',
                     ],
             sortValue: 'Sooner',
-            genreValues: [
-                        'rock',
-                        'punk',
-                        'metal'
-                        ],
             selectedGenres: [],
             dates: [
                     'today',
-                    'this Week',
                     'next Week',
-                    'this Month',
                     'next Month',
-                    'the next three months',
                     'the next six months',
-                    'this Year',
+                    'this year',
                     'next Year',
                     ],
-            sliderDate: [0, 8],
+            sliderDate: [0, 5],
             sliderDistance: 25,
             sliderPrice: [0, 500]
         }
     },
+
     computed: {
+        ...mapGetters({genreValues: 'getGenreList'}),
+        
+        dateMiliseconds: function () {
+            return [this.transformToMs(this.sliderDate[0]), this.transformToMs(this.sliderDate[1])]
+        },
+
         sliderDateString: function () {
             var string = this.sliderDate + ''
             string = string.split(',');
@@ -87,34 +87,140 @@ export default {
             return 'From ' + string.join(' till ') + '.';
 
         },
-        sliderPriceString: function () {
-            var string = this.sliderPrice + ''
-            return string.split(',').join(' - ') + ' €'
-        },
         sliderDistanceString: function () {
             var string = this.sliderDistance + ''
             return string + ' Km'
         },
+
+        sliderPriceString: function () {
+            var string = this.sliderPrice + ''
+            return string.split(',').join(' - ') + ' €'
+        },
+
         filters: function () {
-            return {
-                sort: this.sortValue,
-                genres: this.selectedGenres,
-                date: this.sliderDate,
-                distance: this.sliderDistance,
-                price: this.sliderPrice
-            }
+            var sorting = this.sortingSubject(this.sortValue);
+            return [
+                this.order(sorting[0] , sorting[1]),
+                this.filterByGenres(this.selectedGenres),
+                this.filterByDate(this.dateMiliseconds),
+                this.filterByDistance(),
+                this.filterByPrice(this.sliderPrice)
+            ]
         }
     },
+
     methods: {
+
+        apply() {
+            this.$emit('setFilters', this.filters);
+            this.$emit('hide');
+        },
+
+        hide () {
+            this.$emit('hide');
+        },
+
         formatDateTooltip(val) {
             return this.dates[val]
         },
-        apply() {
-            this.$emit('applyFilters', this.filters)
-            this.$emit('hide')
+
+        transformToMs (date) {
+            var today = new Date().getTime();
+            var dayOfTheWeek = new Date().getDay();
+            var dayOfTheMonth = new Date ().getDate();
+            var dayOfTheYear = Math.round(((today - new Date(new Date().getFullYear(), 0, 1)) / 86400000) + .5, 0);
+            switch (date) {
+                case 0:
+                    return today;
+                    break;
+                case 1:
+                    return today + 1209600000 - (dayOfTheWeek * 86400000);
+                    break;
+                case 2:
+                    return today + 5259500000 - (dayOfTheMonth * 86400000);
+                    break;
+                case 3:
+                    return today + 15778500000 - (dayOfTheMonth * 86400000);
+                    break;
+                case 4:
+                    return today + 31557000000 - (dayOfTheYear * 86400000);
+                    break;
+                case 5:
+                    return today + 63113904000 - (dayOfTheYear * 86400000);
+                    break;
+            }
         },
-        hide () {
-            this.$emit('hide')
+
+        sortingSubject (subject) {
+            var sorting = subject.toLowerCase();
+            var returnvalue = [];
+            switch (sorting) {
+                case 'likes':
+                    returnvalue = ['likes', 'desc'];
+                    break;
+                case 'nearer':
+                    // navigator.geolocation.getCurrentPosition( this.setLocation );
+                    break;
+                case 'cheaper':
+                    returnvalue = [ 'price', 'asc'];
+                    break;
+                case 'people assisting':
+                    returnvalue = ['assisting', 'desc'];     
+                    break;
+                default:
+                    returnvalue = ['sooner', 'asc'];
+                    break;
+            }
+            return returnvalue;
+        },
+
+        order(subject, order){
+            return function (concertsArray) {
+                if (order == 'asc') {
+                    concertsArray = concertsArray.sort(function (a, b) {return a[subject] - b[subject]});
+                }else if (order == 'desc') {
+                    concertsArray = concertsArray.sort(function (a, b) {return b[subject] - a[subject]});
+                }
+                return concertsArray;
+            }
+        },
+
+        filterByGenres (selectedGenres) {
+            return function (concertsArray) {
+                return concertsArray.filter ( (currentValue) => {
+                    var returnValue = selectedGenres.length == 0 ? true : false;
+                    for (var i = 0; i < selectedGenres.length; i++) {
+                        if (currentValue['genres'].includes(selectedGenres[i])) {
+                            returnValue = true;
+                        }else{
+                            returnValue = false;
+                        }
+                    }
+                    return returnValue;
+                } );
+            } 
+        },
+        
+        filterByDate (date) {
+           return function (concertsArray) {
+                return concertsArray.filter ( (currentValue) => {
+                        return currentValue['date'] > date[0] && currentValue['date'] < date[1];
+                } );
+            }  
+        },
+        
+        filterByDistance (distance) {
+            return function (concertsArray) {
+                return concertsArray;
+            } 
+        },
+
+        filterByPrice (priceInterval) {
+            return function (concertsArray) {
+                return concertsArray.filter ( (currentValue) => {
+                   return currentValue['price'] > priceInterval[0] && currentValue['price'] < priceInterval[1];
+                } ); 
+            }
         }
     },
     components: {
@@ -142,7 +248,7 @@ export default {
                 background-color: transparent;
             }
             #apply-button{
-                padding-top: .40em;
+                padding-top: .75em;
                 font-size: 1.25em;
                 font-weight: lighter;
                 float: right;
