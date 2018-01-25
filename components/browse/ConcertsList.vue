@@ -1,26 +1,14 @@
 <template>
     <div class="cards padding">
-        <event-card v-for="value in concerts" v-if="value[0] !== '.key' && value[0]" :key="value[0]" :concert="value[1]" :id="value[0]"></event-card>
+        <event-card v-for="(concert ,i) in concertsList" :key="i" :concert="concert"></event-card>
     </div>
 </template>
 
 <script>
     import EventCard from '~/components/browse/EventCard'
     export default {
-        props: ['concerts', 'filters'],
         computed: {
-            filteredList: function () {
-                return this.concerts
-            }
-           /* filteredList: function () {
-                var concertsDrained = [];
-                for (var i = 0; i < this.concerts.length; i++){
-                    if(filters.price[0] < this.concerts.price && this.concerts.price < filters.price[1]){
-                        concertsDrained.push(this.concerts[i]);
-                    }
-                }
-                return concertsDrained;
-            } */
+            concertsList(){ return this.concerts}
         },
         components: {
             EventCard
