@@ -26,6 +26,7 @@ export default {
     computed: {
         ...mapGetters({isAuthenticated: 'isAuthenticated'})
     },
+    /*
     created () {
         setTimeout(() => {
             if (this.isAuthenticated) {
@@ -33,6 +34,7 @@ export default {
             }
         }, 1000)
     },
+    */
     methods: {
         loginWithFacebook () {
             this.loginWithProvider(new firebase.auth.FacebookAuthProvider())

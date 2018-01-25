@@ -15,6 +15,9 @@ module.exports = {
             { rel: 'manifest', href: 'manifest.json', type: 'application/manifest+json' }
         ]
     },
+    env: {
+        authNeeded: ['publish', 'account']
+    },
     loading: {
         height: '2px',
         color: '#5B7BD5'

@@ -38,11 +38,16 @@ main > *:nth-child(1){
 }
 
 a{
-    color: $mainColorLightest;
     text-decoration: none;
 }
 
-a:hover{
+.link{
+    color: $mainColorLightest;
+    font-size: 1em;
+    line-height: 2em;
+}
+
+.link:hover{
     cursor: pointer;
 }
 

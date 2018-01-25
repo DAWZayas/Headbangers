@@ -5,7 +5,7 @@
 import {ProfileForm} from '@/components/auth'
 import {mapGetters} from 'vuex'
 export default {
-   // middleware: 'auth',
+    middleware: 'auth',
     computed:{
         ...mapGetters({profile: 'getUserProfile'})
     },

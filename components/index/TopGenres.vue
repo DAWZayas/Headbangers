@@ -72,7 +72,7 @@
     }
     
     .square:hover {
-        cursor: pointer;
+        /*cursor: pointer;*/
         filter: saturate(2);
         opacity: 0.8;
     }

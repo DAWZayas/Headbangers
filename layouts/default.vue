@@ -19,13 +19,16 @@
     import SideMenu from '~/components/SideMenu'
     import Splash from '~/components/Splash'
     import FooterComponent from '~/components/FooterComponent'
-    import { mapActions, mapMutations } from 'vuex'
+    import { mapActions, mapMutations, mapGetters } from 'vuex'
     export default {
         components: {
             HeaderComponent,
             SideMenu,
             Splash,
             FooterComponent
+        },
+        computed: {
+            ...mapGetters({isAuthenticated: 'isAuthenticated'})
         },
         data () {
             return {
@@ -34,17 +37,22 @@
         },
         beforeMount () {
             this.setReferences()
-            this.bindAuth()
         },
         created () {
-            this.isLoading = true
-            setTimeout(() => {
-                this.isLoading = false
-            }, 2000)
+            setTimeout(() => this.isLoading = false, 2000)
+            if (process.browser) {
+                window.onNuxtReady((app) => {
+                    this.bindAuth()
+                    if(process.env.authNeeded.includes(this.$route.name) && !this.isAuthenticated){
+                        this.$route.push('login')
+                    }else if(page == 'login' && this.isAuthenticated){
+                        this.$route.push('/')
+                    }
+                })
+            }
         },
         methods: {
             ...mapActions(['bindAuth', 'setReferences']),
-            //...mapMutations(['setReferences'])
         }
     }
 </script>
