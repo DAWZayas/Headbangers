@@ -16,7 +16,7 @@ module.exports = {
         ]
     },
     env: {
-        authNeeded: ['publish', 'account']
+        authNeeded: ['publish', 'account', 'myevents']
     },
     loading: {
         height: '2px',

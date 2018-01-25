@@ -45,7 +45,7 @@
                     this.bindAuth()
                     if(process.env.authNeeded.includes(this.$route.name) && !this.isAuthenticated){
                         this.$route.push('login')
-                    }else if(page == 'login' && this.isAuthenticated){
+                    }else if(this.$route.name == 'login' && this.isAuthenticated){
                         this.$route.push('/')
                     }
                 })
