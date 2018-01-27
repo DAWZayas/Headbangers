@@ -36,7 +36,7 @@
             }
         },
         beforeMount () {
-            this.setReferences()
+            this.setAllReferences()
         },
         created () {
             setTimeout(() => this.isLoading = false, 2000)
@@ -52,7 +52,7 @@
             }
         },
         methods: {
-            ...mapActions(['bindAuth', 'setReferences']),
+            ...mapActions(['bindAuth', 'setAllReferences']),
         }
     }
 </script>

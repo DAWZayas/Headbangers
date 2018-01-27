@@ -5,8 +5,10 @@ export default {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
     },
-    setReferences: ({commit}) => {
-        commit('setReferences')
+    setAllReferences: ({commit}) => {
+        commit('setConcertsListRef')
+        commit('setConcertsFullRef')
+        commit('setUsersRef')
     },
     bindAuth: ({commit, dispatch, state}) => {
         

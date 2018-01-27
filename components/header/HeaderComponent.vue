@@ -82,9 +82,6 @@
         .top-logo:hover, .search-item:hover {
             background-color: transparent;
         }
-        .separator{
-           flex-grow: 1;
-        }
         @media (min-width: 768px) {
             .search-item{
                 display: inline-block;

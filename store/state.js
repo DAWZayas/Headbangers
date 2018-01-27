@@ -9,5 +9,10 @@ export default {
     concertsFullRef: null,
     usersRef: null,
     countryList: require('~/static/utils/countries.js').Countries,
-    genreList: require('~/static/utils/genres.js').Genres
+    genreList: require('~/static/utils/genres.js').Genres,
+    clientPageSize: 6,
+    serverPageSize: 50,
+    serverCurrentPage: 1,
+    orderBy: 'date',
+    lastPageValue: 0
 }

@@ -15,7 +15,7 @@
         -->
         
         <filters ref="filters" class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
-        <concerts-list :concerts="filteredConcerts"></concerts-list>
+        <concerts-list ref="list" :concerts="filteredConcerts"></concerts-list>
         <div id="fab-container">
             <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
@@ -69,7 +69,8 @@
             },
 
             setFilters (filters) {
-                this.filters = filters;           
+                this.filters = filters;    
+                this.$refs.list.resetPage()       
             },
 
             reduce (concertsArray, filters) {

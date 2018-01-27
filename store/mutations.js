@@ -5,11 +5,15 @@ export default {
     setUserData: (state, data) => { state.userData = data },
     setAuthenticated: (state, authenticated) => { state.isAuthenticated = authenticated },
     setConcerts: (state, concerts) => { state.concerts = concerts },
-    setReferences: (state) => {
+    setServerItemsLength: (state, length) =>{ state.serverItemsLength = length },
+    setConcertsListRef: (state) => { 
         state.concertsListRef = firebaseApp.database().ref('/concertsList')
-        state.concertsFullRef = firebaseApp.database().ref('/concertsFull')
-        state.usersRef = firebaseApp.database().ref('/users')
+        //.orderByChild(state.orderBy).limitToFirst(state.pageSize).startAt(state.lastPageValue)
     },
-    setConcertsListRef: (state, ref) => { state.concertsListRef = ref },
-    setConcertsFullRef: (state, ref) => { state.concertsFullRef = ref }
+    setConcertsFullRef: (state) => { 
+        state.concertsFullRef = firebaseApp.database().ref('/concertsFull')
+    },
+    setUsersRef: (state) => {
+        state.usersRef = firebaseApp.database().ref('/users')
+    }
 }

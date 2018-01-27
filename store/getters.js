@@ -7,5 +7,6 @@ export default{
     isAuthenticated: state => state.isAuthenticated,
     getCountryList: state => state.countryList,
     getGenreList: state => state.genreList,
-    getConcertDetails: state => state.concertDetails
+    getConcertDetails: state => state.concertDetails,
+    getClientPageSize: state => state.clientPageSize
 }
