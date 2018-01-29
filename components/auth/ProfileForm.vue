@@ -48,7 +48,7 @@ export default {
         saveProfile () {
             let changes = []
             if(this.profileModel.photoURL != this.profile.photoURL){
-                changes.push(this.updatePicture({picture: this.files[0].raw, path: `profilePictures/${this.profile.uid}.${this.files[0].name.split('.')[1]}`}))
+                changes.push(this.updatePicture({file: this.files[0].raw, path: `profilePictures/${this.profile.uid}.${this.files[0].name.split('.')[1]}`}))
             }
             if(this.profileModel.displayName != this.profile.displayName){
                 changes.push(this.updateName(this.profileModel.displayName))

@@ -1,9 +1,10 @@
 import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
 export default {
-    publishConcert: ({commit, state}, {concert, shortConcert}) => {
+    publishConcert: ({state}, {concert, shortConcert}) => {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
+        state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
     },
     setReferences: ({commit}) => {
         commit('setReferences')
@@ -37,11 +38,11 @@ export default {
     signOut: ({state}) => {
         return firebaseApp.auth().signOut()
     },
-    uploadFile: ({file, path}) => {
+    uploadFile: ({}, {file, path}) => {
         return firebaseApp.storage().ref().child(path).put(file)
     },
-    updatePicture: ({dispatch}, {picture, path}) => {
-        return dispatch('uploadFile', {picture, path}).then((snapshot) => {
+    updatePicture: ({dispatch}, {file, path}) => {
+        return dispatch('uploadFile', {file, path}).then((snapshot) => {
             return firebaseApp.auth().currentUser.updateProfile({
                 photoURL: snapshot.downloadURL
             })
