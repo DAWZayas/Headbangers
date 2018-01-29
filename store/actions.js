@@ -1,9 +1,10 @@
 import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
 export default {
-    publishConcert: ({commit, state}, {concert, shortConcert}) => {
+    publishConcert: ({state}, {concert, shortConcert}) => {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
+        state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
     },
     setAllReferences: ({commit}) => {
         commit('setConcertsListRef')
@@ -11,7 +12,6 @@ export default {
         commit('setUsersRef')
     },
     bindAuth: ({commit, dispatch, state}) => {
-        
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
                 window.localStorage['authenticated'] = "true";
@@ -26,7 +26,6 @@ export default {
                 commit('setAuthenticated', false)
                 dispatch('unbindUserData')
             }
-            
         })
     },
     bindUserData: firebaseAction(({state, dispatch}, id) => {
@@ -41,9 +40,11 @@ export default {
     signOut: ({state}) => {
         return firebaseApp.auth().signOut()
     },
-    updatePicture: ({state}, {picture, path}) => {
-        let photoRef = firebaseApp.storage().ref().child(path)
-        return photoRef.put(picture).then((snapshot) => {
+    uploadFile: ({}, {file, path}) => {
+        return firebaseApp.storage().ref().child(path).put(file)
+    },
+    updatePicture: ({dispatch}, {file, path}) => {
+        return dispatch('uploadFile', {file, path}).then((snapshot) => {
             return firebaseApp.auth().currentUser.updateProfile({
                 photoURL: snapshot.downloadURL
             })

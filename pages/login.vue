@@ -26,15 +26,6 @@ export default {
     computed: {
         ...mapGetters({isAuthenticated: 'isAuthenticated'})
     },
-    /*
-    created () {
-        setTimeout(() => {
-            if (this.isAuthenticated) {
-                this.$router.push('/')
-            }
-        }, 1000)
-    },
-    */
     methods: {
         loginWithFacebook () {
             this.loginWithProvider(new firebase.auth.FacebookAuthProvider())
