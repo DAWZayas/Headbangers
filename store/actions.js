@@ -9,7 +9,6 @@ export default {
         commit('setReferences')
     },
     bindAuth: ({commit, dispatch, state}) => {
-        
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
                 window.localStorage['authenticated'] = "true";
@@ -24,7 +23,6 @@ export default {
                 commit('setAuthenticated', false)
                 dispatch('unbindUserData')
             }
-            
         })
     },
     bindUserData: firebaseAction(({state, dispatch}, id) => {
@@ -39,9 +37,11 @@ export default {
     signOut: ({state}) => {
         return firebaseApp.auth().signOut()
     },
-    updatePicture: ({state}, {picture, path}) => {
-        let photoRef = firebaseApp.storage().ref().child(path)
-        return photoRef.put(picture).then((snapshot) => {
+    uploadFile: ({file, path}) => {
+        return firebaseApp.storage().ref().child(path).put(file)
+    },
+    updatePicture: ({dispatch}, {picture, path}) => {
+        return dispatch('uploadFile', {picture, path}).then((snapshot) => {
             return firebaseApp.auth().currentUser.updateProfile({
                 photoURL: snapshot.downloadURL
             })
