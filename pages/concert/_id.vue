@@ -59,6 +59,8 @@
                 <div class="item1">
                                 
                 </div>
+                    <gmap-map :center="{lat:10, lng:10}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px" ></gmap-map>
+                </div>
                 <div class="item4">
                     <p class='align' >Location: </p>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3034.9308697911406!2d-3.859885548799181!3d40.47679435980638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd41846582414961%3A0xe082b3d047b02889!2sCalle+Romero%2C+2%2C+28221+Majadahonda%2C+Madrid!5e0!3m2!1ses!2ses!4v1516783608414" width="95%" height="95%" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -72,6 +74,7 @@
     import firebaseApp from '~/firebaseapp';
     import {mapActions, mapGetters} from 'vuex';
     import {IconText} from '~/components/common';
+    import * as VueGoogleMaps from '~/node_modules/vue2-google-maps/src/main';
 
     export default {
         data () {

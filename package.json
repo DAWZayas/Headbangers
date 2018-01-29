@@ -42,6 +42,7 @@
         "firebase": "^4.6.2",
         "js-beautify": "^1.7.4",
         "schema-object": "^4.0.11",
+        "vue2-google-maps": "^0.8.4",
         "vuexfire": "^2.3.0"
     }
 }
