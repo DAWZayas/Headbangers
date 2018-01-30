@@ -14,11 +14,11 @@
         </el-tabs>
         -->
         
-        <filters ref="filters" class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
-        <concerts-list ref="list" :concerts="filteredConcerts"></concerts-list>
-        <div id="fab-container">
-            <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
-        </div>
+        <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters"></filters>
+                <concerts-list ref="list" :concerts="filteredConcerts"></concerts-list>
+                <div id="fab-container">
+                    <button v-show="showFab" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+                </div>
     </div>
 </template>
 
@@ -31,7 +31,7 @@
         data () {
             return {
                 filters: [((concerts) => concerts.sort((a, b) => a.date - b.date))],
-                filtersPage: false,
+                showFab: true,
                 selectedMode: 'list',
                 filteredConcerts: []
             }
@@ -59,15 +59,33 @@
             applyFilters(){
                 this.filteredConcerts =  this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
             },
-            showFilters (bool) {
-                this.filtersPage = bool;
-            },
+
             setFilters (filters) {
                 this.filters = filters;           
+            },
+
+            prepareSlideout(){
+                var slideout = new Slideout({
+                    'panel': document.querySelector('concerts-list'),
+                    'menu': document.querySelector('filters'),
+                    'touch': false,
+                    'side': 'right',
+                    'padding': 256
+                })
+                document.querySelector('#fab').onclick = () => slideout.toggle()
+                window.innerWidth > 768 && slideout.open(), this.showFab = false
+                document.querySelectorAll('#back-button, #apply-button').forEach((item) => { item.onclick = () => { window.innerWidth < 768 && slideout.close(), this.showFab = true } })
             }
         },
         mounted () {
             this.bindConcertsList();
+        },
+        created () {
+            if (process.browser) {
+                window.onNuxtReady((app) => {
+                    this.prepareSlideout()
+                })
+            }
         },
         beforeDestroy () {
             this.unbindConcertsList()
@@ -98,7 +116,7 @@
             height: 56px;
             border: none;
             border-radius: 100%;
-            box-shadow: 0px 2px 2px rgba(0,0,0,.5); 
+            box-shadow: 0px 2px 2px rgba(0,0,0,.5);
             img{
                 width: 20px;
             }
