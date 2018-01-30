@@ -48,11 +48,17 @@
                     }else if(this.$route.name == 'login' && this.isAuthenticated){
                         this.$route.push('/')
                     }
+                    this.loadScripts()
                 })
             }
         },
         methods: {
             ...mapActions(['bindAuth', 'setAllReferences']),
+            loadScripts(){
+                let script = document.createElement('script')
+                script.setAttribute('src', '/slideout/slideout.config.js')
+                document.body.appendChild(script)
+            }
         }
     }
 </script>

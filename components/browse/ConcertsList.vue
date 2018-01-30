@@ -5,7 +5,7 @@
         </div>
         <div class="separator"></div>
         <div class="full-width text-center margin-bottom">
-            <el-pagination background layout="prev, pager, next" :page-size="pageSize" :total="concerts.length" :current-page.sync="currentPage"></el-pagination>
+            <el-pagination background layout="prev, pager, next" :page-size="pageSize" :total="concerts && concerts.length" :current-page.sync="currentPage"></el-pagination>
         </div>
     </div>
 </template>
@@ -21,7 +21,7 @@
         },
         computed: {
             ...mapGetters ({pageSize: 'getClientPageSize'}),
-            paginatedConcerts () { return this.concerts.slice((this.currentPage-1) * this.pageSize, (this.currentPage-1) * this.pageSize + this.pageSize) }
+            paginatedConcerts () { return this.concerts && this.concerts.slice((this.currentPage-1) * this.pageSize, (this.currentPage-1) * this.pageSize + this.pageSize) }
         },
         components: {
             EventCard

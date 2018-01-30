@@ -31,7 +31,6 @@ module.exports = {
         '@/static/slideout/slideout.css'
     ],
     plugins: [
-        'plugins/element-ui.js',
-        {src: 'plugins/slideout.config.js', ssr: false}
+        'plugins/element-ui.js'
     ]
 }
