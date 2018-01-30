@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div v-if='isLoading'>
+        <div v-if='showSplash'>
             <splash></splash>
         </div>
         <div>
             <header-component></header-component>
             <side-menu></side-menu>
             <main>
-                <nuxt/>
+                <nuxt v-loading="loading" />
                 <footer-component></footer-component>
             </main>
         </div>
@@ -32,14 +32,23 @@
         },
         data () {
             return {
-                isLoading: true
+                showSplash: true
             }
         },
+        computed: {
+            ...mapGetters({loading: 'getLoading'})
+        },
+        methods: {
+            ...mapActions(['bindAuth', 'setReferences']),
+            //...mapMutations(['setReferences'])
+        },
+
         beforeMount () {
             this.setAllReferences()
         },
+
         created () {
-            setTimeout(() => this.isLoading = false, 2000)
+            setTimeout(() => this.showSplash = false, 2000)
             if (process.browser) {
                 window.onNuxtReady((app) => {
                     this.bindAuth()

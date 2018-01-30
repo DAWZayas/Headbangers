@@ -13,7 +13,8 @@ export default {
     setConcertsFullRef: (state) => { 
         state.concertsFullRef = firebaseApp.database().ref('/concertsFull')
     },
-    setUsersRef: (state) => {
-        state.usersRef = firebaseApp.database().ref('/users')
-    }
+    setUsersRef: (state) => { state.usersRef = firebaseApp.database().ref('/users') },
+    setConcertsListRef: (state, ref) => { state.concertsListRef = ref },
+    setConcertsFullRef: (state, ref) => { state.concertsFullRef = ref },
+    setLoading: (state, loading) => { console.log(loading);state.loading = loading }
 }
