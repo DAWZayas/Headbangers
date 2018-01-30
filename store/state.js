@@ -9,5 +9,6 @@ export default {
     concertsFullRef: null,
     usersRef: null,
     countryList: require('~/static/utils/countries.js').Countries,
-    genreList: require('~/static/utils/genres.js').Genres
+    genreList: require('~/static/utils/genres.js').Genres,
+    loading: false
 }

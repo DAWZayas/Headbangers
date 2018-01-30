@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div v-if='isLoading'>
+        <div v-if='showSplash'>
             <splash></splash>
         </div>
         <div>
             <header-component></header-component>
             <side-menu></side-menu>
             <main>
-                <nuxt/>
+                <nuxt v-loading="loading" />
                 <footer-component></footer-component>
             </main>
         </div>
@@ -19,7 +19,7 @@
     import SideMenu from '~/components/SideMenu'
     import Splash from '~/components/Splash'
     import FooterComponent from '~/components/FooterComponent'
-    import { mapActions, mapMutations } from 'vuex'
+    import { mapActions, mapMutations, mapGetters } from 'vuex'
     export default {
         components: {
             HeaderComponent,
@@ -29,22 +29,27 @@
         },
         data () {
             return {
-                isLoading: true
+                showSplash: true
             }
         },
-        beforeMount () {
-            this.setReferences()
-            this.bindAuth()
-        },
-        created () {
-            this.isLoading = true
-            setTimeout(() => {
-                this.isLoading = false
-            }, 2000)
+        computed: {
+            ...mapGetters({loading: 'getLoading'})
         },
         methods: {
             ...mapActions(['bindAuth', 'setReferences']),
             //...mapMutations(['setReferences'])
+        },
+
+        beforeMount () {
+            this.setReferences()
+            this.bindAuth()
+        },
+
+        created () {
+            this.showSplash = true
+            setTimeout(() => {
+                this.showSplash = false
+            }, 2000)
         }
     }
 </script>

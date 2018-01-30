@@ -5,7 +5,7 @@ export default {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
     },
-    setReferences: ({commit}) => {
+    setReferences: ({commit, state}, concertsList) => {
         commit('setReferences')
     },
     bindAuth: ({commit, dispatch, state}) => {
@@ -71,13 +71,17 @@ export default {
     unbindConcert: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'})
     }),
-    bindFirebaseReference: firebaseAction(({bindFirebaseRef}, {reference, toBind}) => {
-        reference.once('value').then(concerts => concerts.val() && bindFirebaseRef(toBind, reference))
+    bindFirebaseReference: firebaseAction(({bindFirebaseRef, commit}, {reference, toBind}) => {
+        commit('setLoading', true)
+        reference.once('value').then(concerts => {concerts.val() && bindFirebaseRef(toBind, reference, {readyCallback: (() => commit('setLoading', false)), wait: true})})
     }),
     unbindFirebaseReference: firebaseAction(({unbindFirebaseRef}, {toUnbind}) => {
         try {
             unbindFirebaseRef(toUnbind)
         } catch (error) {
         }
-    })
+    }),
+    setLoading ({commit}, loading) {
+        commit('setLoading', loading);
+    }
 }

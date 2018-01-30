@@ -11,5 +11,6 @@ export default {
         state.usersRef = firebaseApp.database().ref('/users')
     },
     setConcertsListRef: (state, ref) => { state.concertsListRef = ref },
-    setConcertsFullRef: (state, ref) => { state.concertsFullRef = ref }
+    setConcertsFullRef: (state, ref) => { state.concertsFullRef = ref },
+    setLoading: (state, loading) => { console.log(loading);state.loading = loading }
 }
