@@ -12,7 +12,7 @@ module.exports = {
             { type: 'text/javascript', src: '/utils/utils.js' }
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: 'img/brand/favicon.ico' },
+            { rel: 'icon', type: 'image/x-icon', href: '/img/brand/favicon.ico' },
             { rel: 'manifest', href: 'manifest.json', type: 'application/manifest+json' }
         ]
     },
@@ -24,11 +24,11 @@ module.exports = {
         color: '#5B7BD5'
     },
     css: [
-        '~/assets/styles/main.scss',
-        '~/assets/styles/element-custom.scss',
-        '~/assets/styles/linearicons/style.css',
-        '~/node_modules/element-ui/lib/theme-chalk/index.css',
-        '~/static/slideout/slideout.css'
+        '@/assets/styles/main.scss',
+        '@/assets/styles/element-custom.scss',
+        '@/assets/styles/linearicons/style.css',
+        '@/node_modules/element-ui/lib/theme-chalk/index.css',
+        '@/static/slideout/slideout.css'
     ],
     plugins: [
         'plugins/element-ui.js',

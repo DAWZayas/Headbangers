@@ -16,9 +16,12 @@
         "build": "nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore .",
-        "precommit": "npm run lint"
+        "deploy": "",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore ."
     },
+    "precommit": [
+        "lint"
+    ],
     "devDependencies": {
         "babel-eslint": "^8.0.3",
         "element-ui": "2.0.1",
