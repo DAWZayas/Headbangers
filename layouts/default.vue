@@ -39,7 +39,7 @@
             ...mapGetters({loading: 'getLoading'})
         },
         methods: {
-            ...mapActions(['bindAuth', 'setReferences']),
+            ...mapActions(['bindAuth', 'setAllReferences']),
             //...mapMutations(['setReferences'])
         },
 

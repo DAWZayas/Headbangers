@@ -10,6 +10,6 @@ export default{
     getCountryList: state => state.countryList,
     getGenreList: state => state.genreList,
     getConcertDetails: state => state.concertDetails,
-    getClientPageSize: state => state.clientPageSize,
+    getPageSize: state => state.pageSize,
     getLoading: state => state.loading
 }
