@@ -14,10 +14,10 @@
         </el-tabs>
         -->
         
-        <filters ref="filters" class="filters" v-show="filtersPage" @hide="showFilters(false)" :data="filters" @setFilters="setFilters"></filters>
+        <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters"></filters>
         <concerts-list :concerts="filteredConcerts"></concerts-list>
         <div id="fab-container">
-            <button v-show="!filtersPage" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+            <button v-show="showFab" @click="showFilters(true)" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
     </div>
 </template>
@@ -31,7 +31,7 @@
         data () {
             return {
                 filters: [((concertsArray) => concertsArray.sort(function (a, b) {return a.date - b.date}))],
-                filtersPage: false,
+                showFab: true,
                 selectedMode: 'list',
                 filteredConcerts: []
             }
@@ -63,11 +63,6 @@
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
 
-            showFilters (bool) {
-                this.filtersPage = bool;
-                //$bool ? document.body.style.overflow="hidden" : document.body.style.overflow="scroll";
-            },
-
             setFilters (filters) {
                 this.filters = filters;           
             },
@@ -95,9 +90,10 @@
     @import "assets/styles/breakpoints.scss";
     .filters {
         position: fixed;
-        width: calc(100% - 2em);
-        margin: 1em;
+        height: 100%;
         z-index: 6;
+        background-color: #293352;
+        overflow: hidden;
     }
 
     #fab-container{
