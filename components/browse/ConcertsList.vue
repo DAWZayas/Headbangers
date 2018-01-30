@@ -21,7 +21,7 @@
         },
         computed: {
             ...mapGetters ({pageSize: 'getPageSize'}),
-            paginatedConcerts () { return this.concerts.slice((this.currentPage-1) * this.pageSize, (this.currentPage-1) * this.pageSize + this.pageSize) }
+            paginatedConcerts () { return this.concerts && this.concerts.slice((this.currentPage-1) * this.pageSize, (this.currentPage-1) * this.pageSize + this.pageSize) }
         },
         components: {
             EventCard

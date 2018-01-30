@@ -16,7 +16,7 @@
         "build": "nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate",
-        "deploy": "",
+        "deploy": "firebase deploy",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore ."
     },
     "precommit": [
