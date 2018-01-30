@@ -48,16 +48,22 @@
                     }else if(this.$route.name == 'login' && this.isAuthenticated){
                         this.$route.push('/')
                     }
-                    this.loadScripts()
+                    this.prepareSlideout()
                 })
             }
         },
         methods: {
             ...mapActions(['bindAuth', 'setAllReferences']),
-            loadScripts(){
-                let script = document.createElement('script')
-                script.setAttribute('src', '/slideout/slideout.config.js')
-                document.body.appendChild(script)
+            prepareSlideout(){
+                var slideout = new Slideout({
+                    'panel': document.querySelector('main'),
+                    'menu': document.querySelector('#side-menu'),
+                    'touch': false,
+                    'padding': 256
+                })
+                document.querySelector('#menu-button').onclick = () => slideout.toggle()
+                window.innerWidth > 768 && slideout.open()
+                document.querySelectorAll('#side-menu .el-menu-item').forEach((item) => { item.onclick = () => { window.innerWidth < 768 && slideout.close() } })
             }
         }
     }
