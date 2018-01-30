@@ -56,8 +56,11 @@
                         </div>                        
                     </el-card>        
                 </div>
-                <div class="item4">
+                <!-- <div class="item4">
                     <gmap-map ref="map" :center="{lat:lat, lng:10}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px" ></gmap-map>
+                </div> -->
+                <div class="item4">
+                    <gmap-map :center="{lat:lat, lng:10}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px" ></gmap-map>
                 </div>
                 <!--<div class="item4">
                     <p class='align' >Location: </p>
