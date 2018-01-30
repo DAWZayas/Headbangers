@@ -36,23 +36,17 @@
                 filteredConcerts: []
             }
         },
-
         computed: {
             ...mapGetters({concerts: 'getConcertsList'}),
-
-            concertsArray: function () { return this.concerts && Object.keys(this.concerts).map(key => ({...this.concerts[key], key})).filter(concert => concert.key !== '.key') },
         },
-
         watch: {
             filters () {
-                this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
+                this.applyFilters()
             },
-            
-            concertsArray () {
-                this.filteredConcerts =  this.concertsArray && this.filters.reduce((acc, func) => func(acc), this.concertsArray)
+            concerts () {
+                this.applyFilters()
             }
         },
-
         components: {
             ConcertsList,
             IconText,
@@ -62,19 +56,15 @@
         
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-
+            applyFilters(){
+                this.filteredConcerts =  this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
+            },
+            showFilters (bool) {
+                this.filtersPage = bool;
+            },
             setFilters (filters) {
                 this.filters = filters;           
-            },
-
-            reduce (concertsArray, filters) {
-                var filteredConcerts = [];
-                for (var i = 0; i < filters.length; i++) {
-                    filteredConcerts = filters[i](concertsArray);
-                }
-                return filteredConcerts;
-            },
-
+            }
         },
         mounted () {
             this.bindConcertsList();

@@ -13,7 +13,7 @@
         <el-form-item class="full-width text-center margin-top">
             <el-button @click="createAccount" type="primary">Sign up</el-button>
         </el-form-item>
-        <a @click="showLogin">Login to an existing account</a><br>
+        <a class="link" @click="showLogin">Login to an existing account</a><br>
     </el-form>  
 </template>
 <script>

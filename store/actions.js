@@ -1,21 +1,26 @@
 import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
 export default {
-    publishConcert: ({commit, state}, {concert, shortConcert}) => {
+    publishConcert: ({state}, {concert, shortConcert}) => {
         let concertKey = state.concertsFullRef.push(concert).key
         state.concertsListRef.child(concertKey).set(shortConcert)
+        state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
     },
-    setReferences: ({commit, state}, concertsList) => {
-        commit('setReferences')
+    setAllReferences: ({commit}) => {
+        commit('setConcertsListRef')
+        commit('setConcertsFullRef')
+        commit('setUsersRef')
     },
     bindAuth: ({commit, dispatch, state}) => {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
+                window.localStorage['authenticated'] = "true";
                 commit('setUserProfile', user)
                 commit('setAuthenticated', true)
                 dispatch('bindUserData', user.uid)
                 state.usersRef.child(user.uid).child('exist').set(true)
             } else {
+                window.localStorage['authenticated'] = "false";
                 commit('setUserProfile', null)
                 commit('setUserData', null)
                 commit('setAuthenticated', false)
@@ -29,19 +34,37 @@ export default {
     unbindUserData: firebaseAction(({state, dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'userData'})
     }),
-    uploadImage: ({state}, {image, path}) => {
-        let photoRef = firebaseApp.storage().ref().child(path)
-        photoRef.put(image).then((snapshot) => {
-          firebaseApp.auth().currentUser.updateProfile({
-            photoURL: snapshot.downloadURL
-          }) 
+    signIn: ({state}, {email, password}) => {
+        return firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    },
+    signOut: ({state}) => {
+        return firebaseApp.auth().signOut()
+    },
+    uploadFile: ({}, {file, path}) => {
+        return firebaseApp.storage().ref().child(path).put(file)
+    },
+    updatePicture: ({dispatch}, {file, path}) => {
+        return dispatch('uploadFile', {file, path}).then((snapshot) => {
+            return firebaseApp.auth().currentUser.updateProfile({
+                photoURL: snapshot.downloadURL
+            })
         })
     },
-    updateName: ({state}, name) => {
-
+    updateName: ({state}, displayName) => {
+        return firebaseApp.auth().currentUser.updateProfile({displayName})
     },
-    updateEmail: ({state}, email) => {
-        
+    updateEmail: ({state}, {newEmail, currentEmail, currentPassword}) => {
+        return firebaseApp.auth().signInWithEmailAndPassword(currentEmail, currentPassword).then((user) => {
+            return firebaseApp.auth().currentUser.updateEmail(newEmail)
+        })
+    },
+    updatePassword: ({state}, {currentEmail, currentPassword, newPassword}) => {
+        return firebaseApp.auth().signInWithEmailAndPassword(currentEmail, currentPassword).then((user) => {
+            return firebaseApp.auth().currentUser.updatePassword(newPassword)
+        })
+    },
+    sendPasswordEmail: ({state}, email) => {
+        return firebaseApp.auth().sendPasswordResetEmail(email)
     },
     likeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes + 1)

@@ -10,5 +10,6 @@ export default {
     usersRef: null,
     countryList: require('~/static/utils/countries.js').Countries,
     genreList: require('~/static/utils/genres.js').Genres,
-    loading: false
+    loading: false,
+    pageSize: 6
 }

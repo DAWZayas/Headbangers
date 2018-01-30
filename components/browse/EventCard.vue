@@ -51,10 +51,10 @@
         computed: {
             ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
             liked () {
-                return this.likedConcerts && Object.keys(this.likedConcerts).includes(this.id)
+                return this.likedConcerts && this.likedConcerts.includes(this.concert.key)
             },
             saved () {
-                return this.savedConcerts && Object.keys(this.savedConcerts).includes(this.id)
+                return this.savedConcerts && this.savedConcerts.includes(this.concert.key)
             },
             formattedDate () {
                 return new Date(Number(this.concert.date)).toLocaleDateString()
@@ -64,7 +64,7 @@
             ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert']),
             like () {
                 if (this.isAuthenticated) {
-                    !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)
+                    !this.liked ? this.likeConcert(this.concert.key) : this.unlikeConcert(this.concert.key)
                 } else {
                     this.$notify({
                         type: 'info',
@@ -75,7 +75,7 @@
             },
             save () {
                 if (this.isAuthenticated) {
-                    !this.saved ? this.saveConcert(this.id) : this.unsaveConcert(this.id)
+                    !this.saved ? this.saveConcert(this.concert.key) : this.unsaveConcert(this.concert.key)
                 } else {
                     this.$notify({
                         type: 'info',

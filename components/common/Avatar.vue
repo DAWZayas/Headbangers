@@ -13,6 +13,7 @@ export default {
         overflow: hidden;
         border: 1px solid #ccc;
         margin: auto;
+        background-color: #fff;
     }
 
     .avatar img{

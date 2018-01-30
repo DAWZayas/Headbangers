@@ -2,15 +2,15 @@
     <div class='prueba'>
         <div v-if='concert'>
             <div class="color">
-                <div class="cent"><div class='event-img full-width marg2 color' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div></div>
-                <div class="likes-badge pad8"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
+                <div class="cent"><div class='event-img' :style='`background-image: url(${concert.info.poster})`' alt='imagen'></div></div>
+                <div class="likes"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
                 <div class='event-title no-margin text-center color'>{{concert.info.title}}</div>
                 <div class='container ma color'>
-                    <icon-text class = 'pad' icon='lnr-calendar-full':text='formattedDate'></icon-text>
-                    <icon-text class = 'pad' icon='lnr-clock':text='concert.info.time'></icon-text>
+                    <icon-text class = 'pad' icon='lnr-calendar-full' :text='formattedDate'></icon-text>
+                    <icon-text class = 'pad' icon='lnr-clock' :text='concert.info.time'></icon-text>
                     <div class='container4 pad color'>
                         <img class='picSize' :src="iconMoney">
-                        <icon-text icon='':text='concert.info.price'></icon-text>
+                        <icon-text icon='' :text='concert.info.price'></icon-text>
                         <span class='pad4'> {{ concert.info.currency }}</span>
                     </div>
                 </div>
@@ -46,17 +46,22 @@
                         <span class='pad black gen'>Genres: </span>
                         <span class='pad7 pad4' v-for='genre in concert.genres' :key="genre.name"><el-tag type="info" hit="true" class="brown"> {{genre}} </el-tag></span>
                     </div>
-                </div>
-                <div class="item1">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix bands">
                             <span class='bands'>Bands:</span>
                         </div>
                         <div v-for="band in concert.bands" :key="band.name" class="text item">
                             <div class="board">{{band.name}} ({{band.link}})</div>
-                            <div class="board">{{band.description}}</div>
-                        </div>            
-                    </el-card>
+                            <div class="board">{{band.description}}</div>   
+                        </div>                        
+                    </el-card>        
+                </div>
+                <div class="item1">
+                                
+                </div>
+                <div class="item4">
+                    <p class='align' >Location: </p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3034.9308697911406!2d-3.859885548799181!3d40.47679435980638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd41846582414961%3A0xe082b3d047b02889!2sCalle+Romero%2C+2%2C+28221+Majadahonda%2C+Madrid!5e0!3m2!1ses!2ses!4v1516783608414" width="95%" height="95%" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -130,7 +135,6 @@
         color: $gray;
     }
     .event-img{
-        //margin-top: 3%;
         padding-top: 66%;
         background-size: cover;
         background-position: center;
@@ -167,6 +171,16 @@
         padding-top: 2%;
         padding-bottom: 2%;
     }
+    .item4{
+            margin: 3%;
+            text-align: center;
+    }
+    .align{
+        margin-left: 3%;
+        margin-bottom: 0%;
+        text-align: left;
+        font-weight: bold;
+    }
     .pad{
         padding: 1% 5% 1% 5%;
     }
@@ -189,14 +203,12 @@
     .pad7{
         padding: 0% 5% 1% 5%;
     }
-    .pad8{
+    .likes{
         margin: -3% 0 1% 1%;
+        background-color: transparent;
     }
     .marg1{
         margin: 3% 5%;
-    }
-    .marg2{
-        //margin-top: 5%;
     }
     .space{
         padding-top: 5%;
@@ -278,10 +290,10 @@
             grid-row-end: 3;
         }
         .item1 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 2;
-            grid-row-end: 2;
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 3;
+            grid-row-end: 3;
             padding-top: 2%;
             padding-bottom: 2%;
         }
@@ -292,6 +304,15 @@
             grid-row-end: 1;
             padding-top: 2%;
             padding-bottom: 2%;
+        }
+        .item4 {
+            grid-column-start: 2;
+            grid-column-end: 2;
+            grid-row-start: 2;
+            grid-row-end: 2;
+            margin: 3%;
+            //background-color:yellow;
+            text-align: center;
         }
         .container6 {
             display: grid;
@@ -364,6 +385,9 @@
             padding-top: 2%;
             padding-left: 8%;
         }
+        .likes{
+        margin: -3% 0 1% 1%;
+        }
         .box-card {
             width: auto;
             margin: 0% 5% 0% 5%;
@@ -387,7 +411,7 @@
     @media (min-width: $break-md) {
         .container6 {
             display: grid;
-            grid-template-columns: 25% 25% 25% 25%;
+            grid-template-columns: 24.5% 1% 24.5% 1% 24.5% 1% 24.5%;
             grid-template-rows: 1fr; 
             margin: 5% 5% 5% 5%;
         }
@@ -402,16 +426,6 @@
             padding: 8% 0 8% 0;
         }
         .item22 {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 1;
-            background-color: $yellowLighter;
-            //border-style: solid;
-            border-width: thin;
-            padding: 8% 0 8% 0;
-        }
-        .item23 {
             grid-column-start: 3;
             grid-column-end: 3;
             grid-row-start: 1;
@@ -421,9 +435,19 @@
             border-width: thin;
             padding: 8% 0 8% 0;
         }
+        .item23 {
+            grid-column-start: 5;
+            grid-column-end: 5;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color: $yellowLighter;
+            //border-style: solid;
+            border-width: thin;
+            padding: 8% 0 8% 0;
+        }
         .item24 {
-            grid-column-start: 4;
-            grid-column-end: 4;
+            grid-column-start: 7;
+            grid-column-end: 7;
             grid-row-start: 1;
             grid-row-end: 1;
             background-color: $yellowLighter;
@@ -432,5 +456,5 @@
             padding: 8% 0 8% 0;
         }
     }
-    
+
 </style>

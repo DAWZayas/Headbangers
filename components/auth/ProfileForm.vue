@@ -16,7 +16,7 @@
                 <el-input :readonly="!editable" placeholder="" v-model="profileModel.email"></el-input>
             </el-form-item>
             <div v-if="editable" class="space-between margin-top padding-top">
-                <el-button >Change Password</el-button>
+                <el-button @click="changePassword">Change Password</el-button>
                 <el-button type="primary" @click="saveProfile">Save</el-button>
             </div>
         </el-form>
@@ -28,6 +28,7 @@
 <script>
 import firebaseApp from '~/firebaseapp'
 import {Avatar} from '@/components/common'
+import {mapActions} from 'vuex'
 export default {
     data () {
         return {
@@ -39,48 +40,58 @@ export default {
       this.profileModel = {...this.profile}
     },
     methods:{
-      fileAdded (file) {
-        this.files = [file]
-        this.profileModel.photoURL = URL.createObjectURL(file.raw);
-      },
-      saveProfile () {
-        if(this.profileModel.photoURL != this.profile.photoURL){
-          let photoRef = firebaseApp.storage().ref().child('profilePhotos/' + this.profile.uid + '.' + this.files[0].name.split('.')[1])
-          photoRef.put(this.files[0].raw).then((snapshot) => {
-            firebaseApp.auth().currentUser.updateProfile({
-              photoURL: snapshot.downloadURL
-            }) 
-          })
-        }
-        if(this.profileModel.displayName != this.profile.displayName){
-            firebaseApp.auth().currentUser.updateProfile({
-              displayName: this.profileModel.displayName
-            }) 
-        }
-        if(this.profileModel.email != this.profile.email){
-            this.$prompt('Please enter your password', 'Change email', {
-              confirmButtonText: 'OK',
-              cancelButtonText: 'Cancel',
-              inputErrorMessage: 'Invalid Password',
-              inputType: 'password'
-            }).then(value => {
-              firebaseApp.auth().signInWithEmailAndPassword(this.profile.email, value)
-                .then((user) => {
-                  firebaseApp.auth().currentUser.updateEmail(this.profileModel.email) 
+        ...mapActions(['updatePicture', 'updateName', 'updateEmail', 'updatePassword', 'signOut']),
+        fileAdded (file) {
+            this.files = [file]
+            this.profileModel.photoURL = URL.createObjectURL(file.raw);
+        },
+        saveProfile () {
+            let changes = []
+            if(this.profileModel.photoURL != this.profile.photoURL){
+                changes.push(this.updatePicture({file: this.files[0].raw, path: `profilePictures/${this.profile.uid}.${this.files[0].name.split('.')[1]}`}))
+            }
+            if(this.profileModel.displayName != this.profile.displayName){
+                changes.push(this.updateName(this.profileModel.displayName))
+            }
+            if(this.profileModel.email != this.profile.email){
+                changes.push(this.askPassword('Change email').then(({value}) => {
+                        return this.updateEmail({newEmail: this.profileModel.email, currentEmail: this.profile.email, currentPassword: value})
+                    })
+                )
+            }
+            if(changes.length !== 0){
+                Promise.all(changes)
+                .then(() => { this.$notify({message: 'Profile updated', type: 'success', duration: 2000})})
+                .catch((error) => { this.$notify({message: error.message, type: 'error', duration: 5000})})
+            }
+        },
+        changePassword(){
+            let currentPassword
+            this.askPassword('Change password').then((pass) => {
+                currentPassword = pass.value
+                return this.askPassword('New password', true)
+            }).then(({value}) => this.updatePassword({currentEmail: this.profile.email, currentPassword, newPassword: value}))
+            .then(() => this.$notify({message: 'Password changed', type: 'success', duration: 2000}))
+            .catch((error) => error && this.$notify({message: error.message, type: 'error', duration: 5000}))
+        },
+        askPassword(title, isNew){
+            return this.$prompt(`Please enter your${isNew ? ' new ' : ' '}password`, title, {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                inputErrorMessage: 'Invalid Password',
+                inputType: 'password'
+            })
+        },
+        logOut () {
+            this.$router.push('/')
+            this.signOut().then(() => {
+                this.$notify({
+                    message: 'Logged out',
+                    type: 'info',
+                    duration: 2000
                 })
-            }).catch(err => err)
-            //firebaseApp.auth().currentUser.updateEmail(this.profileModel.email) 
+            })
         }
-      },
-      logOut () {
-          firebaseApp.auth().signOut()
-          this.$router.push('/')
-          this.$notify({
-              message: 'Logged out',
-              type: 'info',
-              duration: 1000
-          })
-      }
     },
     props: ['profile', 'editable'],
     components: {Avatar}
