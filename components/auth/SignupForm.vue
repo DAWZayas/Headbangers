@@ -1,10 +1,13 @@
 <template>
-    <el-form :model="this" ref="signupForm" :rules="rules" :show-message="false">
+    <el-form :model="this" ref="signupForm" :rules="rules">
         <h4 class="text-center"> Sign up for an account </h4>
-        <el-form-item label="Email" prop="email" class="no-margin">
+        <el-form-item label="Full Name" prop="name" class="margin-bottom">
+            <el-input placeholder="" v-model="name"></el-input>
+        </el-form-item>
+        <el-form-item label="Email" prop="email" class="margin-bottom">
             <el-input placeholder="" v-model="email"></el-input>
         </el-form-item>
-        <el-form-item label="Password" prop="password" class="no-margin">
+        <el-form-item label="Password" prop="password" class="margin-bottom">
             <el-input type="password" placeholder="" v-model="password"></el-input>
         </el-form-item>
         <el-form-item label="Confirm Password" prop="passwordConfirm" class="margin-bottom">
@@ -21,11 +24,15 @@ import firebaseApp from '~/firebaseapp'
 export default {
     data () {
         return {
+            name: '',
             email: '',
             password: '',
             passwordConfirm: '',
             error: '',
             rules: {
+                name: [
+                    { required: true, min: 6, message: 'Enter a valid name', trigger: 'blur' }
+                ],
                 email: [
                     { required: true, type: 'email', message: 'Enter a valid email', trigger: 'blur' }
                 ],
@@ -33,7 +40,7 @@ export default {
                     { required: true, min: 6, message: 'Enter a valid password (6 characters)', trigger: 'blur' }
                 ],
                 passwordConfirm: [
-                    { required: true, min: 6, message: 'Enter a confirmation password', trigger: 'blur' },
+                    //{ required: true, min: 6, message: 'Enter a confirmation password', trigger: 'blur' },
                     { validator: this.passwordsMatch, message: 'Passwords don\'t match' }
                 ]
             }
@@ -51,7 +58,7 @@ export default {
             } else {
                 firebaseApp.auth().createUserWithEmailAndPassword(this.email, this.password)
                     .then((user) => {
-                        this.$emit('close')
+                        user.updateProfile({displayName: this.name})
                         this.$message({
                             message: 'Account created succesfully',
                             type: 'success'

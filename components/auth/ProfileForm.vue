@@ -83,13 +83,13 @@ export default {
             })
         },
         logOut () {
-            this.$router.push('/')
             this.signOut().then(() => {
                 this.$notify({
                     message: 'Logged out',
                     type: 'info',
                     duration: 2000
                 })
+                this.$router.push('/')
             })
         }
     },

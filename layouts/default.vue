@@ -33,7 +33,7 @@
             }
         },
         computed: {
-            ...mapGetters({loading: 'getLoading', isAuthenticated: 'isAuthenticated'})
+            ...mapGetters({loading: 'getLoading'})
         },
         beforeMount () {
             this.configGeolocator()
@@ -44,8 +44,15 @@
         created () {
             setTimeout(() => this.showSplash = false, 2000)
             if (process.browser) {
-                window.onNuxtReady((app) => {
-                    this.init()
+                window.onNuxtReady((app) => { 
+                    this.bindAuth().then((isAuth) =>{
+                        if(process.env.authNeeded.includes(this.$route.name) && !isAuth){
+                            this.$router.push('login')
+                        }else if(this.$route.name == 'login' && isAuth){
+                            this.$router.push('/')
+                        }
+                    })
+                    this.setSlideout()
                 })
             }
 
@@ -53,18 +60,6 @@
         methods: {
             ...mapActions(['bindAuth', 'setUsersRef', 'setUserCountry']),
             ...mapMutations(['setUsersRef', 'setConcertsListRef']),
-            init () {
-                this.bindAuth()
-                this.setSlideout()
-                this.checkRoute()
-            },
-            checkRoute () {
-                if(process.env.authNeeded.includes(this.$route.name) && !this.isAuthenticated){
-                    this.$route.push('login')
-                }else if(this.$route.name == 'login' && this.isAuthenticated){
-                    this.$route.push('/')
-                }
-            },
             setSlideout () {
                 var slideout = new Slideout({
                     'panel': document.querySelector('main'),

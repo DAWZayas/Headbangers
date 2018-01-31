@@ -1,5 +1,6 @@
 import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
+import { WSAEHOSTUNREACH } from 'constants';
 export default {
     publishConcert: ({state}, {concert, shortConcert}) => {
         let concertKey = state.concertsFullRef.push(concert).key
@@ -20,20 +21,24 @@ export default {
         }) 
     },
     bindAuth: ({commit, dispatch, state}) => {
-        firebaseApp.auth().onAuthStateChanged(user => {
-            if (user) {
-                window.localStorage['authenticated'] = "true";
-                commit('setUserProfile', user)
-                commit('setAuthenticated', true)
-                dispatch('bindUserData', user.uid)
-                state.usersRef.child(user.uid).child('exist').set(true)
-            } else {
-                window.localStorage['authenticated'] = "false";
-                commit('setUserProfile', null)
-                commit('setUserData', null)
-                commit('setAuthenticated', false)
-                dispatch('unbindUserData')
-            }
+        return new Promise(resolve => {
+            firebaseApp.auth().onAuthStateChanged(user => {
+                if (user) {
+                    window.localStorage['authenticated'] = "true";
+                    commit('setUserProfile', user)
+                    commit('setAuthenticated', true)
+                    dispatch('bindUserData', user.uid)
+                    state.usersRef.child(user.uid).child('exist').set(true)
+                    resolve(true)
+                } else {
+                    window.localStorage['authenticated'] = "false";
+                    commit('setUserProfile', null)
+                    commit('setUserData', null)
+                    commit('setAuthenticated', false)
+                    dispatch('unbindUserData')
+                    resolve(false)
+                }
+            })
         })
     },
     bindUserData: firebaseAction(({state, dispatch}, id) => {
