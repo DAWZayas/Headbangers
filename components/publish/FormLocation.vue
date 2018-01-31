@@ -1,9 +1,9 @@
 <template>
     <div class="step-form">
         <h3>Location Info</h3>
-        <el-form ref="form-location" :model="location" :rules="rules">
+        <el-form ref="form-location" :model="location" :rules="rules" action="javascript:void(0)">
             <el-form-item label="Venue Name" prop="venue">
-                <el-input placeholder="The Cavern" v-model="location.venue"></el-input>
+                <el-input placeholder="The Cavern" v-model="location.venue" :autofocus="true"></el-input>
             </el-form-item>
 
             <el-form-item label="Description" prop="description">
@@ -38,13 +38,11 @@
                     </el-form-item>
                 </el-col>
             </el-row>
+                <div class="form-buttons">
+                    <el-button @click="back">Back</el-button>
+                    <el-button type="primary" native-type="submit" @click="done">Next</el-button>
+                </div>
         </el-form>
-
-        <div class="form-buttons">
-            <el-button @click="back">Back</el-button>
-            <el-button type="primary" @click="done">Next</el-button>
-        </div>
-
     </div>
 </template>
     

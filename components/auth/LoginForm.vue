@@ -1,14 +1,14 @@
 <template>
-        <el-form ref="authForm">
+        <el-form ref="authForm" action="javascript:void(0)">
             <h4 class="text-center"> Login to your account </h4>
             <el-form-item label="Email" class="no-margin">
-                <el-input placeholder="" v-model="email"></el-input>
+                <el-input placeholder="" v-model="email" :autofocus="true"></el-input>
             </el-form-item>
             <el-form-item label="Password" class="margin-bottom">
                 <el-input type="password" placeholder="" v-model="password"></el-input>
             </el-form-item>
             <el-form-item class="full-width text-center margin-top">
-                <el-button type="primary" @click="loginWithEmail">Login</el-button>
+                <el-button type="primary" native-type="submit" @click="loginWithEmail">Login</el-button>
             </el-form-item>
             <a class="link" @click="showSignup">Create an account</a><br>
             <a class="link" @click="restorePassword">Forgot my password</a>  
@@ -53,10 +53,11 @@ export default {
         },
         restorePassword () {
             this.$prompt('Please enter your email', 'Password recovery')
-            .then(({value}) => this.sendPasswordEmail(value)
-                            .then(() => this.$alert('An email was sent to you with instructions to restore your password', 'Email sent'))
-                            .catch((error) => error && this.$notify({message: error.message, type: 'error', duration: 5000}))
-            ) 
+            .then(({value}) => 
+                this.sendPasswordEmail(value)
+                .then(() => this.$alert('An email was sent to you with instructions to restore your password', 'Email sent'))
+                .catch((error) => error && this.$notify({message: error.message, type: 'error', duration: 5000}))
+            ).catch(err=>err)
         },
         emitError (message) {
             this.$emit('error', { message })

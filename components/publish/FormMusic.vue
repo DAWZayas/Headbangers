@@ -7,7 +7,7 @@
                 <el-card class="band-card">
                     <el-button type="text" icon="el-icon-close" class="close-button" @click="removeBand(band)"></el-button>
                     <el-form-item label="Band Name" prop="name">
-                        <el-input v-model="band.name"></el-input>
+                        <el-input v-model="band.name" :autofocus="true"></el-input>
                     </el-form-item>
                     <el-form-item label="Short Description" prop="description">
                         <el-input v-model="band.description"></el-input >

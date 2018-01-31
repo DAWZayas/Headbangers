@@ -1,10 +1,10 @@
 <template>
     <div class="step-form">
         <h3>Basic Info</h3>
-        <el-form v-if="concert" ref="form-basics" :model="concert" :rules="rules">
+        <el-form v-if="concert" ref="form-basics" :model="concert" :rules="rules" action="javascript:void(0)">
 
             <el-form-item label="Event title" prop="title">
-                <el-input placeholder="Rock 'n' Roll Party" v-model="concert.title"></el-input>
+                <el-input placeholder="Rock 'n' Roll Party" v-model="concert.title" :autofocus="true"></el-input>
             </el-form-item>
 
             <el-form-item label="Description" prop="description">
@@ -49,7 +49,7 @@
             </el-row>
     
             <div class="form-buttons">
-                <el-button type="primary" @click="done">Next</el-button>
+                <el-button type="primary" native-type="submit"  @click="done">Next</el-button>
             </div>
     
         </el-form>
