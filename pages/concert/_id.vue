@@ -70,7 +70,7 @@
 <script>
 
     import firebaseApp from '~/firebaseapp';
-    import {mapActions, mapGetters} from 'vuex';
+    import {mapActions, mapGetters, mapMutations} from 'vuex';
     import {IconText} from '~/components/common';
 
     export default {
@@ -93,6 +93,7 @@
             },
         },        
         mounted(){
+            this.setConcertsFullRef()
             this.bindConcert(this.$route.params.id)
             //firebaseApp.database().ref('/concertsFull').child(this.id).on('value',function(concert){ this.concert = concert.val() }.bind(this))
         },
@@ -101,6 +102,7 @@
         },
         methods: {
             ...mapActions(['bindConcert', 'unbindConcert']),
+            ...mapMutations(['setConcertsFullRef']),
             like () {
                 if (this.isAuthenticated) {
                     !this.liked ? this.likeConcert(this.id) : this.unlikeConcert(this.id)

@@ -37,9 +37,8 @@
         },
         beforeMount () {
             this.configGeolocator()
-            this.setUserCountry().then(() => {
-                this.setAllReferences()
-            })
+            this.setUserCountry()
+            this.setUsersRef()
         },
         created () {
             setTimeout(() => this.isLoading = false, 2000)
@@ -51,6 +50,7 @@
         },
         methods: {
             ...mapActions(['bindAuth', 'setAllReferences', 'setUserCountry']),
+            ...mapMutations(['setUsersRef']),
             init () {
                 this.bindAuth()
                 this.setSlideout()

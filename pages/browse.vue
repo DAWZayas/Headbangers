@@ -26,7 +26,7 @@
     import ConcertsList from '~/components/browse/ConcertsList'
     import Filters from '~/components/browse/Filters'
     import {IconText, IconButton} from '~/components/common'
-    import {mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters, mapMutations} from 'vuex'
     export default {
         data () {
             return {
@@ -55,7 +55,8 @@
         },
         
         methods: {
-            ...mapActions(['bindConcertsList', 'unbindConcertsList']),
+            ...mapActions(['bindConcertsList', 'unbindConcertsList', 'setUserCountry']),
+            ...mapMutations(['setConcertsListRef']),
             applyFilters(){
                 this.filteredConcerts =  this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
             },
@@ -78,7 +79,10 @@
             }
         },
         mounted () {
-            this.bindConcertsList();
+            this.setUserCountry().then(() => {
+                this.setConcertsListRef()
+                this.bindConcertsList()
+            })
         },
         created () {
             if (process.browser) {
