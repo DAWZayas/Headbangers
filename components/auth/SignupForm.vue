@@ -2,7 +2,7 @@
     <el-form :model="this" ref="signupForm" :rules="rules" action="javascript:void(0)">
         <h4 class="text-center"> Sign up for an account </h4>
         <el-form-item label="Full Name" prop="name" class="margin-bottom">
-            <el-input placeholder="" v-model="name"></el-input>
+            <el-input placeholder="" v-model="name" :autofocus="true"></el-input>
         </el-form-item>
         <el-form-item label="Email" prop="email" class="margin-bottom">
             <el-input placeholder="" v-model="email"></el-input>

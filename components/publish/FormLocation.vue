@@ -3,7 +3,7 @@
         <h3>Location Info</h3>
         <el-form ref="form-location" :model="location" :rules="rules" action="javascript:void(0)">
             <el-form-item label="Venue Name" prop="venue">
-                <el-input placeholder="The Cavern" v-model="location.venue" :autofocus="true"></el-input>
+                <el-input placeholder="The Cavern" v-model="location.venue"></el-input>
             </el-form-item>
 
             <el-form-item label="Description" prop="description">
