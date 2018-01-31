@@ -39,6 +39,7 @@
             this.configGeolocator()
             this.setUserCountry()
             this.setUsersRef()
+            this.setConcertsListRef()
         },
         created () {
             setTimeout(() => this.showSplash = false, 2000)
@@ -51,12 +52,11 @@
         },
         methods: {
             ...mapActions(['bindAuth', 'setUsersRef', 'setUserCountry']),
-            ...mapMutations(['setUsersRef', 'setConcertsListRef', 'setInitialized']),
+            ...mapMutations(['setUsersRef', 'setConcertsListRef']),
             init () {
                 this.bindAuth()
                 this.setSlideout()
                 this.checkRoute()
-                this.setInitialized(true)
             },
             checkRoute () {
                 if(process.env.authNeeded.includes(this.$route.name) && !this.isAuthenticated){

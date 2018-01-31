@@ -15,7 +15,7 @@
                     <el-form-item label="Country" prop="country">
                         <br>
                         <el-select placeholder="Select" v-model="location.country" filterable class="full-width">
-                            <el-option v-for="country in countryList" :key="country.alpha2" :value="country.alpha2" :label="country.name"></el-option>
+                            <el-option v-for="country in countryList.all" :key="country.alpha2" :value="country.alpha2" :label="country.name"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>

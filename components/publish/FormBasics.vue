@@ -34,11 +34,7 @@
                 <el-col :span="4">
                     <el-form-item prop="currency">
                         <br>
-                        <el-select v-model="concert.currency" placeholder="€">
-                            <el-option value="€"></el-option>
-                            <el-option value="$"></el-option>
-                            <el-option value="£"></el-option>
-                        </el-select>
+                        <el-input :value="concert.currency" readonly></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="11" :offset="1">
@@ -61,7 +57,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
         return {
@@ -95,14 +91,21 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencyList', userCountry: 'getUserCountry'})
+        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies', userCountry: 'getUserCountry'})
     },
     props: ['data'],
     created () {
         Object.assign(this.concert, this.data)
-        this.concert.currency = this.countryList[this.userCountry].currency.code
+        if(!this.userCountry){
+            this.setUserCountry().then(() => {
+                this.concert.currency = this.currencyList[this.countryList[this.userCountry].currencies[0]].symbol
+            })
+        }else{
+            this.concert.currency = this.currencyList[this.countryList[this.userCountry].currencies[0]].symbol
+        }
     },
     methods: {
+        ...mapActions(['setUserCountry']),
         done () {
             this.$refs['form-basics'].validate(valid => valid ? this.$emit('done', this.concert) : false)
         },

@@ -37,7 +37,7 @@
             }
         },
         computed: {
-            ...mapGetters({concerts: 'getConcertsList', initialized: 'isInitialized'}),
+            ...mapGetters({concerts: 'getConcertsList', userCountry: 'getUserCountry'}),
         },
         watch: {
             filters () {
@@ -76,7 +76,7 @@
             }
         },
         mounted () {
-            if(!this.initialized){
+            if(!this.userCountry){
                 this.setUserCountry().then(() => {
                     this.setConcertsListRef()
                     this.bindConcertsList()

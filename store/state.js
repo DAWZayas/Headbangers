@@ -1,6 +1,5 @@
 import firebaseApp from '~/firebaseapp'
 export default {
-    initialized: false,
     userProfile: null,
     userData: null,
     isAuthenticated: null,
@@ -10,7 +9,7 @@ export default {
     concertsFullRef: null,
     usersRef: null,
     countries: require('country-data').countries,
-    currenencies: require('country-data').currencies,
+    currencies: require('country-data').currencies,
     genreList: require('~/static/utils/genres.js').Genres,
     pageSize: 6,
     userCountry: null,
