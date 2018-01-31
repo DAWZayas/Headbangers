@@ -70,7 +70,7 @@
                     'panel': document.querySelector('main'),
                     'menu': document.querySelector('#side-menu'),
                     'touch': false,
-                    'padding': 256
+                    'padding': 256,
                 })
                 document.querySelector('#menu-button').onclick = () => slideout.toggle()
                 window.innerWidth > 768 && slideout.open()

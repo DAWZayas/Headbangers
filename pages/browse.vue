@@ -14,11 +14,11 @@
         </el-tabs>
         -->
         
-        <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters"></filters>
-                <concerts-list ref="list" :concerts="filteredConcerts"></concerts-list>
-                <div id="fab-container">
-                    <button v-show="showFab" id="fab"><img src="~/static/img/icons/basic_mixer2.svg"></button>
-                </div>
+        <filters ref="filters" id="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
+        <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+        <div id="fab-container">
+            <button v-show="showFab" id="fab" @click="showFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        </div>
     </div>
 </template>
 
@@ -65,17 +65,14 @@
                 this.filters = filters;           
             },
 
-            prepareSlideout(){
-                var slideout = new Slideout({
-                    'panel': document.querySelector('concerts-list'),
-                    'menu': document.querySelector('filters'),
-                    'touch': false,
-                    'side': 'right',
-                    'padding': 256
-                })
-                document.querySelector('#fab').onclick = () => slideout.toggle()
-                window.innerWidth > 768 && slideout.open(), this.showFab = false
-                document.querySelectorAll('#back-button, #apply-button').forEach((item) => { item.onclick = () => { window.innerWidth < 768 && slideout.close(), this.showFab = true } })
+            showFilters(bool){
+                if (bool) {
+                    document.getElementById("filters").style.transitionProperty = "right";
+                    document.getElementById("filters").style.right = 0;
+                }else {
+                    document.getElementById("filters").style.transitionProperty = "right";
+                    document.getElementById("filters").style.right = '-25%';
+                }
             }
         },
         mounted () {
@@ -89,13 +86,6 @@
                 this.bindConcertsList()
             }
         },
-        created () {
-            if (process.browser) {
-                window.onNuxtReady((app) => {
-                    this.prepareSlideout()
-                })
-            }
-        },
         beforeDestroy () {
             this.unbindConcertsList()
         }
@@ -106,16 +96,14 @@
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .filters {
-        position: fixed;
-        width: calc(100% - 2em);
-        margin: 1em;
-        z-index: 6;
+        right: -25%;
+        transition: all .5s;
     }
-
-    #fab-container{
+    #fab-container {
         text-align: right;
         width: 100%;
-        #fab{
+        z-index: 1;
+        #fab {
             position: fixed;
             bottom: 1.5em;
             right: 1.5em;
@@ -126,21 +114,18 @@
             border: none;
             border-radius: 100%;
             box-shadow: 0px 2px 2px rgba(0,0,0,.5);
-            img{
+            img {
                 width: 20px;
             }
         }
     }
-        #fab:hover{
-            cursor: pointer;
-            background: $accentColorDark;
-        }
-        #fab:active{
-            cursor: pointer;
-            background: $accentColorDark;
-        }
+    #fab:hover {
+        cursor: pointer;
+        background: $accentColorDark;
+    }
+
     @media (min-width: $break-xs-sm) {
-        #fab{
+        #fab {
             bottom: 3em;
             right: 3em;
         }
