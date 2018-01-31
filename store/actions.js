@@ -102,13 +102,17 @@ export default {
     unbindConcert: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'})
     }),
-    bindFirebaseReference: firebaseAction(({bindFirebaseRef}, {reference, toBind}) => {
-        reference.once('value').then(concerts => concerts.val() && bindFirebaseRef(toBind, reference))
+    bindFirebaseReference: firebaseAction(({bindFirebaseRef, commit}, {reference, toBind}) => {
+        commit('setLoading', true)
+        reference.once('value').then(concerts => {concerts.val() && bindFirebaseRef(toBind, reference, {readyCallback: (() => commit('setLoading', false)), wait: true})})
     }),
     unbindFirebaseReference: firebaseAction(({unbindFirebaseRef}, {toUnbind}) => {
         try {
             unbindFirebaseRef(toUnbind)
         } catch (error) {
         }
-    })
+    }),
+    setLoading ({commit}, loading) {
+        commit('setLoading', loading);
+    }
 }

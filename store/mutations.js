@@ -9,5 +9,6 @@ export default {
     setConcertsListRef: (state) => state.concertsListRef = firebaseApp.database().ref('/concertsList').orderByChild('country').equalTo(state.userCountry),
     setConcertsFullRef: (state) => state.concertsFullRef = firebaseApp.database().ref('/concertsFull'),
     setUsersRef: (state) => state.usersRef = firebaseApp.database().ref('/users'),
-    setUserCountry: (state, country) => state.userCountry = country
+    setUserCountry: (state, country) => state.userCountry = country,
+    setLoading: (state, loading) => { state.loading = loading }
 }

@@ -11,5 +11,6 @@ export default{
     getGenreList: state => state.genreList,
     getConcertDetails: state => state.concertDetails,
     getPageSize: state => state.pageSize,
-    getUserCountry: state => state.userCountry
+    getUserCountry: state => state.userCountry,
+    getLoading: state => state.loading
 }
