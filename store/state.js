@@ -8,7 +8,8 @@ export default {
     concertsListRef: null,
     concertsFullRef: null,
     usersRef: null,
-    countryList: require('~/static/utils/countries.js').Countries,
+    countryList: require('country-data').countries.all,
     genreList: require('~/static/utils/genres.js').Genres,
-    pageSize: 6
+    pageSize: 6,
+    userCountry: null
 }

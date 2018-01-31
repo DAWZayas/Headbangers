@@ -11,6 +11,9 @@ export default {
         commit('setConcertsFullRef')
         commit('setUsersRef')
     },
+    setUserCountry: ({commit}) => {
+        geolocator.locateByIP({addressLookup: true}, (_,location) => commit('setUserCountry', location.address.countryCode))
+    },
     bindAuth: ({commit, dispatch, state}) => {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {

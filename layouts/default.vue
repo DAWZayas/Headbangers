@@ -49,11 +49,18 @@
                         this.$route.push('/')
                     }
                     this.prepareSlideout()
+                    geolocator.config({
+                        google: {
+                            version: "3",
+                            key: "AIzaSyB0BavoaQqF9ViPldtHAp4kj2FJ7CHAFRI"
+                        }
+                    });
+                    this.setUserCountry()
                 })
             }
         },
         methods: {
-            ...mapActions(['bindAuth', 'setAllReferences']),
+            ...mapActions(['bindAuth', 'setAllReferences', 'setUserCountry']),
             prepareSlideout(){
                 var slideout = new Slideout({
                     'panel': document.querySelector('main'),

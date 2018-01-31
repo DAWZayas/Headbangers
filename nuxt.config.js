@@ -9,7 +9,8 @@ module.exports = {
         script: [
             { type: 'text/javascript', src: '/slideout/slideout.js' },
             { type: 'text/javascript', src: '/utils/blob-util.min.js' },
-            { type: 'text/javascript', src: '/utils/utils.js' }
+            { type: 'text/javascript', src: '/utils/utils.js' },
+            { type: 'text/javascript', src: '/utils/geolocator.min.js' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/img/brand/favicon.ico' },

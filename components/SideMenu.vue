@@ -14,14 +14,16 @@
                 <icon-text icon="lnr-bullhorn" text="Publish"></icon-text>
             </el-menu-item>
         </el-menu>
+        <country-selector></country-selector>
     </div>
 </template>
 
 <script>
-    import IconText from '~/components/common/IconText'
+    import {IconText, CountrySelector} from '~/components/common'
     export default {
         components: {
-            IconText
+            IconText,
+            CountrySelector
         }
     }
 </script>
@@ -36,6 +38,11 @@
         z-index: 1;
         background-color: #293352;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 256px;
+
         a {
             text-decoration: none;
         }
