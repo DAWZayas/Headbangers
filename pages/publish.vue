@@ -75,6 +75,7 @@ export default {
                 currency: this.info.currency,
                 venue: this.location.venue,
                 city: this.location.city,
+                country: this.location.country,
                 genres: this.genres,
                 poster: this.info.poster
             }).toObject()

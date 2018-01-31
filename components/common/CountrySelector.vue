@@ -1,7 +1,7 @@
 <template>
     <div class="country-select">
         <label>Country:</label>
-        <el-select v-model="userCountry" filterable placeholder="Country">
+        <el-select v-model="userCountry" filterable placeholder="Select">
             <el-option v-for="country in countries" :key="country.alpha2" :label="country.name" :value="country.alpha2"></el-option>
         </el-select>
     </div>

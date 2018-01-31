@@ -12,7 +12,12 @@ export default {
         commit('setUsersRef')
     },
     setUserCountry: ({commit}) => {
-        geolocator.locateByIP({addressLookup: true}, (_,location) => commit('setUserCountry', location.address.countryCode))
+        return new Promise(resolve => {
+            geolocator.locateByIP({addressLookup: true}, (_,location) => {
+                commit('setUserCountry', location.address.countryCode)
+                resolve()
+            })
+        }) 
     },
     bindAuth: ({commit, dispatch, state}) => {
         firebaseApp.auth().onAuthStateChanged(user => {

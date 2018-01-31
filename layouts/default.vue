@@ -36,7 +36,9 @@
             }
         },
         beforeMount () {
-            this.setAllReferences()
+            this.setUserCountry().then(() => {
+                this.setAllReferences()
+            })
         },
         created () {
             setTimeout(() => this.isLoading = false, 2000)
@@ -55,7 +57,6 @@
                             key: "AIzaSyB0BavoaQqF9ViPldtHAp4kj2FJ7CHAFRI"
                         }
                     });
-                    this.setUserCountry()
                 })
             }
         },
