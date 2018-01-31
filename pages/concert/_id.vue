@@ -60,7 +60,7 @@
                     <gmap-map ref="map" :center="{lat:lat, lng:10}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px" ></gmap-map>
                 </div> -->
                 <div class="item4">
-                    <gmap-map :center="{lat:lat, lng:10}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px" ></gmap-map>
+                    <gmap-map :center="{lat:10, lng:10}" :zoom="7" map-type-id="terrain" style="width: 500px; height: 300px" ></gmap-map>
                 </div>
                 <!--<div class="item4">
                     <p class='align' >Location: </p>
@@ -80,8 +80,7 @@
     export default {
         data () {
             return {
-                iconMoney: '/img/icons/money.svg',
-                lat: 10
+                iconMoney: '/img/icons/money.svg'
             }
         },
         components: {
