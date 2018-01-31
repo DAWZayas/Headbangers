@@ -33,11 +33,11 @@ export default {
     align-items: baseline;
     padding: 0.5em;
     label{
-        color: $gray;
+        color: $grayLight;
     }
     .el-input__inner{
         font-size: 1.1em;
-        color: $grayLight;
+        color: #fff;
         background-color: transparent;
         border-bottom: none;
     }
