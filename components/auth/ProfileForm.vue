@@ -19,10 +19,10 @@
                 <el-button @click="changePassword">Change Password</el-button>
                 <el-button type="primary" @click="saveProfile">Save</el-button>
             </div>
+            <div class="margin-top padding-top text-center">
+                <el-button @click="logOut">Log Out</el-button>
+            </div>
         </el-form>
-        <div class="margin-top padding-top text-center">
-            <el-button @click="logOut()">Log Out</el-button>
-        </div>
     </div>
 </template>
 <script>
@@ -83,7 +83,8 @@ export default {
             })
         },
         logOut () {
-            this.signOut().then(() => {
+            
+            firebaseApp.auth().signOut().then(() => {
                 this.$notify({
                     message: 'Logged out',
                     type: 'info',

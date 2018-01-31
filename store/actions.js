@@ -24,14 +24,12 @@ export default {
         return new Promise(resolve => {
             firebaseApp.auth().onAuthStateChanged(user => {
                 if (user) {
-                    window.localStorage['authenticated'] = "true";
                     commit('setUserProfile', user)
                     commit('setAuthenticated', true)
                     dispatch('bindUserData', user.uid)
                     state.usersRef.child(user.uid).child('exist').set(true)
                     resolve(true)
                 } else {
-                    window.localStorage['authenticated'] = "false";
                     commit('setUserProfile', null)
                     commit('setUserData', null)
                     commit('setAuthenticated', false)
