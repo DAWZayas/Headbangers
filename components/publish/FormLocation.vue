@@ -95,9 +95,10 @@ export default {
     props: ['data'],
     created () {
         Object.assign(this.location, this.data)
+        this.location.country = this.userCountry
     },
     computed: {
-        ...mapGetters({ countryList: 'getCountryList' })
+        ...mapGetters({ countryList: 'getCountries' , userCountry: 'getUserCountry'})
     },
     methods: {
         done () {

@@ -44,6 +44,7 @@
         "country-data": "0.0.31",
         "eslint-plugin-node": "^5.2.1",
         "firebase": "^4.6.2",
+        "firebase-functions": "^0.8.1",
         "js-beautify": "^1.7.4",
         "precommit": "^1.2.2",
         "schema-object": "^4.0.11",

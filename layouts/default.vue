@@ -82,7 +82,7 @@
                         version: "3",
                         key: "AIzaSyB0BavoaQqF9ViPldtHAp4kj2FJ7CHAFRI"
                     }
-                });
+                })
             }
         }
     }

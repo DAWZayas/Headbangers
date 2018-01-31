@@ -104,7 +104,7 @@ export default {
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef, commit}, {reference, toBind}) => {
         commit('setLoading', true)
-        reference.once('value').then(concerts => {concerts.val() && bindFirebaseRef(toBind, reference, {readyCallback: (() => commit('setLoading', false)), wait: true})})
+        reference.once('value').then(concerts => {concerts.val() && bindFirebaseRef(toBind, reference, {readyCallback: (() => commit('setLoading', false))})})
     }),
     unbindFirebaseReference: firebaseAction(({unbindFirebaseRef}, {toUnbind}) => {
         try {

@@ -22,7 +22,7 @@ export default {
                 }
             }
         },
-        ...mapGetters({countries: 'getCountryList', getUserCountry: 'getUserCountry'})
+        ...mapGetters({countries: 'getCountries', getUserCountry: 'getUserCountry'})
     },
     methods: {
         ...mapActions(['bindConcertsList']),

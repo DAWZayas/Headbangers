@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
@@ -93,9 +94,13 @@ export default {
                 ]}
         }
     },
+    computed: {
+        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencyList', userCountry: 'getUserCountry'})
+    },
     props: ['data'],
     created () {
         Object.assign(this.concert, this.data)
+        this.concert.currency = this.countryList[this.userCountry].currency.code
     },
     methods: {
         done () {
