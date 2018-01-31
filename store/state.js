@@ -1,5 +1,6 @@
 import firebaseApp from '~/firebaseapp'
 export default {
+    initialized: false,
     userProfile: null,
     userData: null,
     isAuthenticated: null,

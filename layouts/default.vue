@@ -27,28 +27,19 @@
             Splash,
             FooterComponent
         },
-        computed: {
-            ...mapGetters({isAuthenticated: 'isAuthenticated'})
-        },
         data () {
             return {
                 showSplash: true
             }
         },
         computed: {
-            ...mapGetters({loading: 'getLoading'})
+            ...mapGetters({loading: 'getLoading', isAuthenticated: 'isAuthenticated'})
         },
-        methods: {
-            ...mapActions(['bindAuth', 'setAllReferences']),
-            //...mapMutations(['setReferences'])
-        },
-
         beforeMount () {
             this.configGeolocator()
             this.setUserCountry()
             this.setUsersRef()
         },
-
         created () {
             setTimeout(() => this.showSplash = false, 2000)
             if (process.browser) {
@@ -56,14 +47,16 @@
                     this.init()
                 })
             }
+
         },
         methods: {
-            ...mapActions(['bindAuth', 'setAllReferences', 'setUserCountry']),
-            ...mapMutations(['setUsersRef']),
+            ...mapActions(['bindAuth', 'setUsersRef', 'setUserCountry']),
+            ...mapMutations(['setUsersRef', 'setConcertsListRef', 'setInitialized']),
             init () {
                 this.bindAuth()
                 this.setSlideout()
                 this.checkRoute()
+                this.setInitialized(true)
             },
             checkRoute () {
                 if(process.env.authNeeded.includes(this.$route.name) && !this.isAuthenticated){

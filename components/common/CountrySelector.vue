@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
     computed: {
         userCountry: {
@@ -16,12 +16,17 @@ export default {
             },
             set (country) {
                 this.setUserCountry(country)
+                this.setConcertsListRef()
+                if(this.$route.name == 'browse'){
+                    this.bindConcertsList()
+                }
             }
         },
         ...mapGetters({countries: 'getCountryList', getUserCountry: 'getUserCountry'})
     },
     methods: {
-        ...mapMutations(['setUserCountry'])
+        ...mapActions(['bindConcertsList']),
+        ...mapMutations(['setUserCountry', 'setConcertsListRef'])
     }
 }
 </script>
