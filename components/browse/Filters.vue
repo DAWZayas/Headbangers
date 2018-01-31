@@ -2,7 +2,7 @@
 
     <div class="filters">
         <div class="header">
-            <icon-button icon="lnr-arrow-right" id="back-button"></icon-button>
+            <icon-button icon="lnr-arrow-right" id="back-button" @click.native="hide"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
         </div>
         <div class="filters-form">
@@ -113,8 +113,11 @@ export default {
 
         apply() {
             this.$emit('setFilters', this.filters);
+            this.hide();
         },
-
+        hide() {
+            this.$emit('hide');
+        },
         formatDateTooltip(val) {
             return this.dates[val]
         },
@@ -227,10 +230,12 @@ export default {
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .filters{
-        margin: 0em;
+        position: fixed;
+        width: 25%;
+        z-index: 5;
         height: 100%;
-        width: 100%;
         background-color: white;
+        overflow: hidden;
         .header{
             background-color: $mainColorLight;
             border-radius: .1em;
@@ -288,8 +293,7 @@ export default {
     }
     @media (min-width: $break-xs-sm){
         .filters{
-            width: 45%;
-            right: 0;
+            width: 25%;
             .header{
                 border-radius: 0;
             }
