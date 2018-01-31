@@ -47,6 +47,8 @@
         "js-beautify": "^1.7.4",
         "precommit": "^1.2.2",
         "schema-object": "^4.0.11",
+        "vue-google-maps": "^0.1.21",
+        "vue2-google-maps": "^0.8.4",
         "vuexfire": "^2.3.0"
     }
 }

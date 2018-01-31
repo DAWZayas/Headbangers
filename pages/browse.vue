@@ -37,7 +37,7 @@
             }
         },
         computed: {
-            ...mapGetters({concerts: 'getConcertsList'}),
+            ...mapGetters({concerts: 'getConcertsList', initialized: 'isInitialized'}),
         },
         watch: {
             filters () {
@@ -76,10 +76,15 @@
             }
         },
         mounted () {
-            this.setUserCountry().then(() => {
+            if(!this.initialized){
+                this.setUserCountry().then(() => {
+                    this.setConcertsListRef()
+                    this.bindConcertsList()
+                })
+            }else{
                 this.setConcertsListRef()
                 this.bindConcertsList()
-            })
+            }
         },
         beforeDestroy () {
             this.unbindConcertsList()

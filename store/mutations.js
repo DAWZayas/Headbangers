@@ -1,5 +1,6 @@
 import firebaseApp from '~/firebaseapp'
 export default {
+    setInitialized: (state) => state.initialized = true,
     addConcert: (state, concert) => state.concerts[concert.id] = concert ,
     setUserProfile: (state, profile) => state.userProfile = profile,
     setUserData: (state, data) => state.userData = data ,
@@ -10,5 +11,5 @@ export default {
     setConcertsFullRef: (state) => state.concertsFullRef = firebaseApp.database().ref('/concertsFull'),
     setUsersRef: (state) => state.usersRef = firebaseApp.database().ref('/users'),
     setUserCountry: (state, country) => state.userCountry = country,
-    setLoading: (state, loading) => { state.loading = loading }
+    setLoading: (state, loading) => state.loading = loading
 }

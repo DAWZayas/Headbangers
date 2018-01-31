@@ -32,6 +32,7 @@ module.exports = {
         '@/static/slideout/slideout.css'
     ],
     plugins: [
-        'plugins/element-ui.js'
+        'plugins/element-ui.js',
+        'plugins/google-maps.js'
     ]
 }
