@@ -1,5 +1,6 @@
 <template>
     <div class="form padding">
+        <nuxt v-loading="loading" />
         <el-form :model="profileModel" >
             <div class="text-center">
               <el-form-item prop="poster">
@@ -28,7 +29,7 @@
 <script>
 import firebaseApp from '~/firebaseapp'
 import {Avatar} from '@/components/common'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
     data () {
         return {
@@ -38,6 +39,9 @@ export default {
     },
     created () {
       this.profileModel = {...this.profile}
+    },
+    computed:{
+            ...mapGetters({loading: 'getLoading'}),
     },
     methods:{
         ...mapActions(['updatePicture', 'updateName', 'updateEmail', 'updatePassword', 'signOut']),

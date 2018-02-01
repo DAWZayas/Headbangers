@@ -40,7 +40,7 @@ export default {
         PublishSummary
     },
     computed: {
-        ...mapGetters({userProfile: 'getUserProfile'})
+        ...mapGetters({userProfile: 'getUserProfile', loading: 'getLoading'})
     },
     methods: {
         ...mapActions(['publishConcert']),
