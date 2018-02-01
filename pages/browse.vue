@@ -1,23 +1,25 @@
 <template>
     <div>
-        <!--
-        <el-tabs type="border-card">
-            <el-tab-pane>
-                <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
-            </el-tab-pane>
-            <el-tab-pane label="Config">
-                <span slot="label"><icon-text icon="lnr-map" text="Map"></icon-text></span>
-            </el-tab-pane>
-            <el-tab-pane label="Role">
-                <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
-            </el-tab-pane>
-        </el-tabs>
-        -->
-        
-        <filters ref="filters" id="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
-        <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
-        <div id="fab-container">
-            <button v-show="showFab" id="fab" @click="showFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+        <nuxt v-loading="loading" />
+        <div>
+            <!--
+            <el-tabs type="border-card">
+                <el-tab-pane>
+                    <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
+                </el-tab-pane>
+                <el-tab-pane label="Config">
+                    <span slot="label"><icon-text icon="lnr-map" text="Map"></icon-text></span>
+                </el-tab-pane>
+                <el-tab-pane label="Role">
+                    <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
+                </el-tab-pane>
+            </el-tabs>
+            -->
+            <filters ref="filters" id="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
+            <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+            <div id="fab-container">
+                <button v-show="showFab" id="fab" @click="showFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+            </div>
         </div>
     </div>
 </template>
@@ -37,7 +39,7 @@
             }
         },
         computed: {
-            ...mapGetters({concerts: 'getConcertsList', userCountry: 'getUserCountry'}),
+            ...mapGetters({concerts: 'getConcertsList', userCountry: 'getUserCountry', loading: 'getLoading'}),
         },
         watch: {
             filters () {
