@@ -15,7 +15,6 @@ var Location = new SchemaObject({
     city: String,
     country: String,
     code: Number,
-    description: String,
     pictures: [String],
     coordinates: String
 })

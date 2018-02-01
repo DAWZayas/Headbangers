@@ -12,13 +12,38 @@ export default {
         commit('setConcertsFullRef')
         commit('setUsersRef')
     },
-    setUserCountry: ({commit}) => {
-        return new Promise(resolve => {
-            geolocator.locateByIP({addressLookup: true}, (_,location) => {
-                commit('setUserCountry', location.address.countryCode)
-                resolve()
-            })
+    setUserCountry: ({commit, state}) => {
+        return new Promise((resolve, reject) => {
+            if(state.userCountry){
+                resolve(state.userCountry)
+            }else{
+                geolocator.locateByIP({addressLookup: true}, (err, location) => {
+                    if(err){
+                        reject(err)
+                    }else{
+                        commit('setUserCountry', location.address.countryCode)
+                        resolve(location.address.countryCode)
+                    }
+                })
+            }
         }) 
+    },
+    askUserLocation: ({commit, state}) => {
+        return new Promise((resolve, reject) =>{ 
+            if(state.location){
+                resolve(state.location)
+            }
+            else{
+                geolocator.locate({fallbackToIP: true, addressLookup: true}, (err, location) => {
+                    if(err){
+                        reject(err)
+                    }else{
+                        commit('setUserLocation', {...location.address, coords: location.coords})
+                        resolve({...location.address, coords: location.coords})
+                    }
+                })
+            }
+        })
     },
     bindAuth: ({commit, dispatch, state}) => {
         return new Promise(resolve => {
