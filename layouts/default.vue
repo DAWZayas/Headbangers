@@ -7,7 +7,7 @@
             <header-component></header-component>
             <side-menu></side-menu>
             <main>
-                <nuxt v-loading="loading" />
+                <nuxt />
                 <footer-component></footer-component>
             </main>
         </div>

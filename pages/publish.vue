@@ -1,19 +1,21 @@
 <template>
-    <div class="padding">
-        <!--    <div v-if="isAuthenticated"> -->
-        <div class="steps-wrapper">
-            
-            <el-steps :active="currentStep" finish-status="success" align-center>
-                <el-step title="Basics"></el-step>
-                <el-step title="Location"></el-step>
-                <el-step title="Music"></el-step>
-            </el-steps>
-        </div>
-        <div class="form">
-            <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
-            <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
-            <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
-            <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
+    <div>
+        <nuxt v-loading="loading" />
+        <div class="padding">
+            <!--    <div v-if="isAuthenticated"> -->
+            <div class="steps-wrapper">            
+                <el-steps :active="currentStep" finish-status="success" align-center>
+                    <el-step title="Basics"></el-step>
+                    <el-step title="Location"></el-step>
+                    <el-step title="Music"></el-step>
+                </el-steps>
+            </div>
+            <div class="form">
+                <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
+                <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
+                <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
+                <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
+            </div>
         </div>
     </div>
 </template>
@@ -40,7 +42,7 @@ export default {
         PublishSummary
     },
     computed: {
-        ...mapGetters({userProfile: 'getUserProfile'})
+        ...mapGetters({userProfile: 'getUserProfile', loading: 'getLoading'})
     },
     methods: {
         ...mapActions(['publishConcert']),
