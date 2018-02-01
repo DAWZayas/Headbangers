@@ -231,9 +231,9 @@ export default {
     @import "assets/styles/breakpoints.scss";
     .filters{
         position: fixed;
-        width: 25%;
-        z-index: 5;
+        width: 100%;
         height: 100%;
+        z-index: 10;
         background-color: white;
         overflow: hidden;
         .header{
@@ -289,47 +289,6 @@ export default {
                     color: $gray;
                 }
             }        
-        }
-    }
-    @media (min-width: $break-xs-sm){
-        .filters{
-            width: 25%;
-            .header{
-                border-radius: 0;
-            }
-            #filters-sort > .el-select {
-                width: calc(100% - 1em);
-                margin: 0em .5em;
-            }
-            #filters-filter{
-                > div{
-                    margin: 0em .5em;
-                    h5{
-                        margin: .5em 0em .25em 0em;
-                    }
-                    > *:not(h5){
-                        width: calc(100% - 2em);
-                        margin: 0em 1em;
-                    }
-                }
-                #filter-date > p{
-                    font-size: .75em
-                }   
-                .slider-flex{
-                    display: flex;
-                    text-align: center;
-                    .el-slider{
-                        width: 65%;
-                    }
-                    p{  
-                        padding-left: .75em;
-                        margin-top: .5em;
-                        width: 40%;
-                        color: $gray;
-                    }
-                }
-            }
-        
         }
     }
 </style>

@@ -15,7 +15,7 @@
         -->
         
         <filters ref="filters" id="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
-        <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+        <concerts-list id="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
         <div id="fab-container">
             <button v-show="showFab" id="fab" @click="showFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
@@ -33,20 +33,47 @@
                 filters: [((concerts) => concerts.sort((a, b) => a.date - b.date))],
                 showFab: true,
                 selectedMode: 'list',
+                windowWidth: 0,
                 filteredConcerts: []
             }
         },
+
         computed: {
             ...mapGetters({concerts: 'getConcertsList', userCountry: 'getUserCountry'}),
+            fixFilters: () => {
+                    console.log(window.innerWidth);
+            }
         },
+
         watch: {
             filters () {
                 this.applyFilters()
             },
             concerts () {
                 this.applyFilters()
+            },
+            windowWidth () {
+                var right, width, backButton = "visible", content = "100"
+                
+                if (this.windowWidth < 678) {
+                    right = "-100"
+                    width = "100"
+                }else if (this.windowWidth < 1500) {
+                    right = "-45"
+                    width = "45"
+                }else {
+                    right = "0"
+                    width = "25"
+                    content = "75"
+                    backButton = "hidden"
+                }
+                document.getElementById("concerts-list").style.width = content + '%'
+                document.getElementById("back-button").style.visibility = backButton
+                document.getElementById("filters").style.width = width + '%'
+                document.getElementById("filters").style.right = right + '%'
             }
         },
+
         components: {
             ConcertsList,
             IconText,
@@ -66,26 +93,43 @@
             },
 
             showFilters(bool){
-                if (bool) {
-                    document.getElementById("filters").style.transitionProperty = "right";
-                    document.getElementById("filters").style.right = 0;
-                }else {
-                    document.getElementById("filters").style.transitionProperty = "right";
-                    document.getElementById("filters").style.right = '-25%';
+                if (this.windowWidth < 768) {
+                    
+                    if (bool) {
+                        document.getElementById("filters").style.right = 0;
+                    }else{
+                        document.getElementById("filters").style.right = "-100%";
+                    }
+
+                }else if (this.windowWidth < 1500) {
+
+                    if (bool) {
+                        document.getElementById("filters").style.right = 0;
+                    }else {
+                        document.getElementById("filters").style.right = '-45%';
+                    }
+
                 }
             }
         },
+
         mounted () {
-            if(!this.userCountry){
-                this.setUserCountry().then(() => {
+                if(!this.userCountry){
+                    this.setUserCountry().then(() => {
                     this.setConcertsListRef()
                     this.bindConcertsList()
+                    })
+                }else{
+                    this.setConcertsListRef()
+                    this.bindConcertsList()
+                }
+                var that = this
+                that.windowWidth = window.innerWidth
+                window.addEventListener('resize', function(e) {
+                    that.windowWidth = window.innerWidth
                 })
-            }else{
-                this.setConcertsListRef()
-                this.bindConcertsList()
-            }
         },
+
         beforeDestroy () {
             this.unbindConcertsList()
         }
@@ -96,7 +140,7 @@
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .filters {
-        right: -25%;
+        right: -100%;
         transition: all .5s;
     }
     #fab-container {
@@ -105,8 +149,8 @@
         z-index: 1;
         #fab {
             position: fixed;
-            bottom: 1.5em;
-            right: 1.5em;
+            bottom: 2.5em;
+            right: 2em;
             background: $accentColor;
             padding: 18px 18px 16px 18px;
             width: 56px;
