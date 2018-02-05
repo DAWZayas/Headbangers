@@ -15,7 +15,7 @@
                 </el-tab-pane>
             </el-tabs>
             -->
-            <filters ref="filters" id="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
+            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
             <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
             <div id="fab-container">
                 <button v-show="showFab" id="fab" @click="showFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
@@ -54,22 +54,25 @@
             windowWidth () {
                 var right, width, backButton = "visible", content = "100"
                 
-                if (this.windowWidth < 678) {
+                if (this.windowWidth < 768) {
                     right = "-100"
                     width = "100"
-                }else if (this.windowWidth < 1500) {
+                }else if (this.windowWidth < 1050) {
                     right = "-45"
                     width = "45"
+                }else if (this.windowWidth < 1500) {
+                    right = "-35"
+                    width = "35"
                 }else {
                     right = "0"
                     width = "25"
                     content = "75"
                     backButton = "hidden"
                 }
-                document.getElementById("concerts-list").style.width = content + '%'
-                document.getElementById("back-button").style.visibility = backButton
-                document.getElementById("filters").style.width = width + '%'
-                document.getElementById("filters").style.right = right + '%'
+                document.querySelector(".concerts-list").style.width = content + '%'
+                document.querySelector("#back-button").style.visibility = backButton
+                document.querySelector(".filters").style.width = width + '%'
+                document.querySelector(".filters").style.right = right + '%'
             }
         },
 
@@ -84,7 +87,7 @@
             ...mapActions(['bindConcertsList', 'unbindConcertsList', 'setUserCountry']),
             ...mapMutations(['setConcertsListRef']),
             applyFilters(){
-                this.filteredConcerts =  this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
+                this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
             },
 
             setFilters (filters) {
@@ -94,19 +97,15 @@
             showFilters(bool){
                 if (this.windowWidth < 768) {
                     
-                    if (bool) {
-                        document.getElementById("filters").style.right = 0;
-                    }else{
-                        document.getElementById("filters").style.right = "-100%";
-                    }
+                    bool ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = "-100%"
+
+                }else if (this.windowWidth < 1050) {
+
+                    bool ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-45%'
 
                 }else if (this.windowWidth < 1500) {
 
-                    if (bool) {
-                        document.getElementById("filters").style.right = 0;
-                    }else {
-                        document.getElementById("filters").style.right = '-45%';
-                    }
+                    bool ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-35%'
 
                 }
             }
@@ -122,11 +121,11 @@
                     this.setConcertsListRef()
                     this.bindConcertsList()
                 }
-                var that = this
-                that.windowWidth = window.innerWidth
-                window.addEventListener('resize', function(e) {
-                    that.windowWidth = window.innerWidth
+                this.windowWidth = window.innerWidth
+                window.addEventListener('resize', (e) => {
+                    this.windowWidth = window.innerWidth
                 })
+                
         },
 
         beforeDestroy () {
@@ -151,9 +150,7 @@
             bottom: 2.5em;
             right: 2em;
             background: $accentColor;
-            padding: 18px 18px 16px 18px;
-            width: 56px;
-            height: 56px;
+            padding: 18px 18px 15px 18px;
             border: none;
             border-radius: 100%;
             box-shadow: 0px 2px 2px rgba(0,0,0,.5);
