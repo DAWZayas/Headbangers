@@ -4,7 +4,7 @@
             <event-card v-for="(concert ,i) in paginatedConcerts" :key="i" :concert="concert"></event-card>
         </div>
         <div class="separator"></div>
-        <div class="full-width text-center margin-bottom">
+        <div class="full-width text-center margin-bottom margin-top">
             <el-pagination background layout="prev, pager, next" :page-size="pageSize" :total="concerts && concerts.length" :current-page.sync="currentPage"></el-pagination>
         </div>
     </div>

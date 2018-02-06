@@ -14,8 +14,8 @@
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .footer{
-        position: sticky;
-        z-index: 20;
+        position: relative;
+        z-index: 25;
         bottom: 0;
         padding: 1em;
         background-color: $mainColorDark;

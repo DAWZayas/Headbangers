@@ -233,9 +233,8 @@ export default {
         position: fixed;
         width: 100%;
         height: 100%;
-        z-index: 10;
+        z-index: 20;
         background-color: white;
-        overflow: hidden;
         .header{
             background-color: $mainColorLight;
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

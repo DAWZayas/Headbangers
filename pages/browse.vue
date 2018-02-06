@@ -15,10 +15,10 @@
                 </el-tab-pane>
             </el-tabs>
             -->
-            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="showFilters(false)"></filters>
+            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
             <div id="fab-container">
-                <button v-show="showFab" id="fab" @click="showFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
+                <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
             </div>
         </div>
     </div>
@@ -34,8 +34,9 @@
             return {
                 filters: [((concerts) => concerts.sort((a, b) => a.date - b.date))],
                 showFab: true,
-                selectedMode: 'list',
+                fabPosition: 0,
                 windowWidth: 0,
+                selectedMode: 'list',
                 filteredConcerts: []
             }
         },
@@ -86,7 +87,7 @@
         methods: {
             ...mapActions(['bindConcertsList', 'unbindConcertsList', 'setUserCountry']),
             ...mapMutations(['setConcertsListRef']),
-            applyFilters(){
+            applyFilters () {
                 this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
             },
 
@@ -94,18 +95,19 @@
                 this.filters = filters;           
             },
 
-            showFilters(bool){
+            toggleFilters (show) {
                 if (this.windowWidth < 768) {
                     
-                    bool ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = "-100%"
+                    show ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = "-100%"
+                    show ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll"
 
                 }else if (this.windowWidth < 1050) {
 
-                    bool ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-45%'
+                    show ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-45%'
 
                 }else if (this.windowWidth < 1500) {
 
-                    bool ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-35%'
+                    show ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-35%'
 
                 }
             }
@@ -126,6 +128,19 @@
                     this.windowWidth = window.innerWidth
                 })
                 
+                const fab = document.querySelector("#fab-container");
+                const footer = document.querySelector(".footer");
+
+                window.addEventListener('scroll', (i) => {
+                    var fabDist = fab.getBoundingClientRect().top
+                    var footerDist = footer.getBoundingClientRect().top
+                        if ((fabDist + document.body.scrollTop) + fab.offsetHeight >= (footerDist + document.body.scrollTop) - 20) {
+                            fab.style.position = 'relative'
+                        }else if (document.body.scrollTop + window.innerHeight < (footerDist + document.body.scrollTop)) {
+                            fab.style.position = 'fixed'
+                        }
+                })
+                
         },
 
         beforeDestroy () {
@@ -139,16 +154,17 @@
     @import "assets/styles/breakpoints.scss";
     .filters {
         right: -100%;
-        transition: all .5s;
+        transition: all .45s;
     }
     #fab-container {
-        text-align: right;
+        position: fixed;
+        margin-top: -49px;
+        right: 25px;
+        bottom: 25px;
         width: 100%;
+        text-align: right;
         z-index: 1;
         #fab {
-            position: fixed;
-            bottom: 2.5em;
-            right: 2em;
             background: $accentColor;
             padding: 18px 18px 15px 18px;
             border: none;
@@ -162,12 +178,5 @@
     #fab:hover {
         cursor: pointer;
         background: $accentColorDark;
-    }
-
-    @media (min-width: $break-xs-sm) {
-        #fab {
-            bottom: 3em;
-            right: 3em;
-        }
     }
 </style>
