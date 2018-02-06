@@ -3,7 +3,7 @@
         <div style="margin-top:-4em">
             <p>Find the best concerts around you</p>
             <div id="search-bar">
-                <input type="text" placeholder="Band, location, genre...">
+                <input type="text" placeholder="Band, location, genre..." @click="goBanner">
                 <button>
                     <span class="lnr lnr-magnifier"></span>
                 </button>
@@ -16,6 +16,11 @@
     export default {
         props: ['background']
     }
+    methods: {
+        goBanner () {
+            this.$emit('')
+        }
+    }    
 </script>
 
 <style lang="scss">
