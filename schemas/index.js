@@ -9,14 +9,17 @@ var BasicInfo = new SchemaObject({
     poster: String
 })
 var Location = new SchemaObject({
-    venue: String,
+    name: String,
     street: String,
     number: Number,
     city: String,
     country: String,
     code: Number,
     pictures: [String],
-    coordinates: String
+    coords: {
+        lat: Number,
+        lng: Number
+    }
 })
 var Band = new SchemaObject({
     name: String,
