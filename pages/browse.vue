@@ -1,6 +1,5 @@
 <template>
     <div>
-        <nuxt v-loading="loading" />
         <div>
             <!--
             <el-tabs type="border-card">
@@ -16,7 +15,7 @@
             </el-tabs>
             -->
             <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
-            <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+            <concerts-list v-loading="loading" class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
             <div id="fab-container">
                 <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
             </div>

@@ -2,53 +2,56 @@
     <div class="step-form">
         <h3>Location Info</h3>
         <el-form ref="form-location" :model="location" :rules="rules" action="javascript:void(0)">
-            <el-form-item label="Place" prop="venue">
-                <gmap-autocomplete v-if="!placed" placeholder="Search a place or enter the name" class="el-input__inner" :types="['establishment']" @place_changed="setPlace"></gmap-autocomplete>
-                <div class="place-name" v-if="placed" >
-                    <br>
-                    <el-input :readonly="true" v-model="location.venue">
-                        <el-button slot="append" icon="el-icon-close" @click="reset"></el-button>
-                    </el-input>
-                </div>
-            </el-form-item>
-            <!--
-            <el-form-item label="Venue Name" prop="venue">
-                <el-input placeholder="The Cavern" v-model="location.venue"></el-input>
-            </el-form-item>
-            -->
+            <div v-if="!manual" v-loading="!location">
+                <el-form-item label="Place" prop="venue">
+                    <gmap-autocomplete placeholder="Enter the name or address of the place" class="el-input__inner" :componentRestrictions="{country: 'es'}" @place_changed="setPlace"></gmap-autocomplete>
+                </el-form-item>
 
-            <el-row>
-                <el-col :span="11">
-                    <el-form-item label="Country" prop="country">
-                        <br>
-                        <el-select placeholder="Select" v-model="location.country" filterable class="full-width" :readonly="placed">
-                            <el-option v-for="country in countryList.all" :key="country.alpha2" :value="country.alpha2" :label="country.name"></el-option>
-                        </el-select>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12" :offset="1">
-                    <el-form-item label="City" prop="city">
-                        <el-input placeholder="Liverpool" v-model="location.city" :readonly="placed"></el-input>
-                    </el-form-item>
-                </el-col>
-            </el-row>
+                <gmap-map :center="{lat: location.coords.latitude, lng: location.coords.longitude}" :zoom="15"  style="width: 100%; height: 300px">
+                    <gmap-marker v-if="marker" :position="{lat: location.coords.latitude, lng: location.coords.longitude}"></gmap-marker>
+                </gmap-map>
 
-            <el-row>
-                <el-col :span="18">
-                    <el-form-item label="Street" prop="street">
-                        <el-input placeholder="Mathew Street" v-model="location.street" :readonly="placed"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col  :span="5" :offset="1">
-                    <el-form-item label="Number" prop="number">
-                        <el-input placeholder="10" v-model="location.number" :readonly="placed"></el-input>
-                    </el-form-item>
-                </el-col>
-            </el-row>
-                <div class="form-buttons">
-                    <el-button @click="back">Back</el-button>
-                    <el-button type="primary" native-type="submit" @click="done">Next</el-button>
-                </div>
+                <a class="link" @click="manual = true">Can´t find the place? Enter it manually</a><br>
+            </div>
+            <div v-if="manual">                
+                <el-form-item label="Venue Name" prop="venue">
+                    <el-input placeholder="The Cavern" v-model="location.venue"></el-input>
+                </el-form-item>
+                <el-row>
+                    <el-col :span="11">
+                        <el-form-item label="Country" prop="country">
+                            <br>
+                            <el-select placeholder="Select" v-model="location.country" filterable class="full-width">
+                                <el-option v-for="country in countryList.all" :key="country.alpha2" :value="country.alpha2" :label="country.name"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12" :offset="1">
+                        <el-form-item label="City" prop="city">
+                            <el-input placeholder="Liverpool" v-model="location.city"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="18">
+                        <el-form-item label="Street" prop="street">
+                            <el-input placeholder="Mathew Street" v-model="location.street"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col  :span="5" :offset="1">
+                        <el-form-item label="Number" prop="number">
+                            <el-input placeholder="10" v-model="location.number" ></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <a class="link" @click="manual = false">Search the place in google</a><br>
+            </div>
+
+            <div class="form-buttons">
+                <el-button @click="back">Back</el-button>
+                <el-button type="primary" native-type="submit" @click="done">Next</el-button>
+            </div>
         </el-form>
     </div>
 </template>
@@ -60,8 +63,15 @@ export default {
     components: { IconButton },
     data () {
         return {
-            placed: false,
-            location: {},
+            manual: false,
+            location: {
+                country: "",
+                coords: {
+                    latitude: 40.4168,
+                    longitude: -3.7038
+                },
+                marker: false
+            },
             rules: {
                 venue: [
                     { required: true, message: 'Please enter venue name.', trigger: 'blur' },
@@ -101,8 +111,16 @@ export default {
         Object.assign(this.location, this.data)
         this.setUserCountry().then((country) => {
             this.location.country = country
-        }).catch(err => this.$notify)
-        this.askUserLocation()
+        }).catch(err => this.$notify({
+                type: 'error',
+                message: err
+            })
+        )
+        
+        this.askUserLocation()/*.then((userLocation) => {
+            this.location.coords = userLocation.coords
+        })
+        */
     },
     computed: {
         ...mapGetters({ countryList: 'getCountries' , userCountry: 'getUserCountry', userLocation: 'getUserLocation'})
@@ -110,6 +128,9 @@ export default {
     methods: {
         ...mapActions(['setUserCountry', 'askUserLocation']),
         setPlace(place){
+            this.location.coords.latitude = place.geometry.location.lat()
+            this.location.coords.longitude = place.geometry.location.lng()
+            this.marker = true
             if(place && place.address_components){
                 this.placed = true
                 this.location.venue = place.name

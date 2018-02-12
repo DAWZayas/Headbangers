@@ -13,5 +13,6 @@ export default {
     genreList: require('~/static/utils/genres.js').Genres,
     pageSize: 6,
     userCountry: null,
+    location: null,
     loading: false
 }
