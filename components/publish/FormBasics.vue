@@ -42,7 +42,6 @@
                         <br>
                         <el-upload action="" accept="image/*" class="full-width" :on-success="fileAdded" :limit="1" >
                             <el-button class="full-width" >Upload Picture <i class="el-icon-upload el-icon-right"></i></el-button>
-                            <div slot="tip" class="el-upload__tip">The best is a 3:2 aspect ratio</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -110,7 +109,7 @@ export default {
             this.$refs['form-basics'].validate(valid => valid ? this.$emit('done', this.concert) : false)
         },
         formatPrice (rules, value, callback) {
-            if (!value === '' && !value.includes('.') && !value.includes(',')) {
+            if (value !== '' && !value.includes('.') && !value.includes(',')) {
                 this.concert.price += '.00'
             }
             callback()

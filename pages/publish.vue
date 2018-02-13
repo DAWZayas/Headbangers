@@ -22,6 +22,7 @@
 import { FormBasics, FormLocation, FormMusic, PublishSummary } from '~/components/publish'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { Concert, BasicInfo, Location, Band, ShortConcert } from '~/schemas'
+import { strictEqual } from 'assert';
 export default {
     middleware: 'auth',
     data () {
@@ -88,9 +89,11 @@ export default {
         },
         stepUp () {
             this.currentStep++
+            window.scrollTo(0,0);  
         },
         stepDown () {
             this.currentStep--
+            window.scrollTo(0,0)
         }
     }
 }

@@ -22,6 +22,11 @@ export default {
         }
     },
     props: ['data'],
+    created () {
+        if(process.BROWSER_BUILD){
+            window.scrollTo(0,0);
+        }
+    },
     methods: {
         done (location) {
             this.$emit('done', location)

@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="form-google" :rules="rules" :model="this" action="javascript:void(0)">
+    <el-form ref="form-google" :rules="rules" :model="form" action="javascript:void(0)">
 
         <el-form-item v-if="!placeSelected" label="Place" prop="place">
             <gmap-autocomplete placeholder="Enter the name of the place" class="el-input__inner" :types="['establishment']" :componentRestrictions="{country: location.country}" @place_changed="setPlace"></gmap-autocomplete>
@@ -29,7 +29,9 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
         return{
-            place: '',
+            form:{
+                place: ''
+            },
             location: {
                 coords: {
                     lat: 0,
@@ -61,7 +63,7 @@ export default {
                 country: this.location.country
             }
             try{
-                this.place = place.formatted_address
+                this.form.place = place.formatted_address
                 this.location.name = place.name
                 this.location.street = place.address_components.filter(comp => comp.types.includes('route'))[0].long_name
                 this.location.number = place.address_components.filter(comp => comp.types.includes('street_number'))[0].long_name
@@ -82,7 +84,7 @@ export default {
             this.$refs['form-google'].validate(valid => valid && this.$emit('done', this.location))
         },
         reset () {
-            this.place = ''
+            this.form.place = ''
             this.placeSelected = false
             this.location = {
                 coords: {
