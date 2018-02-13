@@ -32,7 +32,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="4">
-                    <el-form-item prop="currency">
+                    <el-form-item>
                         <br>
                         <el-input :value="concert.currency" readonly></el-input>
                     </el-form-item>
@@ -40,8 +40,8 @@
                 <el-col :span="11" :offset="1">
                     <el-form-item label="Poster" prop="poster">
                         <br>
-                        <el-upload action="" accept="image/*" class="full-width" :on-success="fileAdded" :limit="1" >
-                            <el-button class="full-width" >Upload Picture <i class="el-icon-upload el-icon-right"></i></el-button>
+                        <el-upload action="" accept="image/*" :file-list="files" :on-change="fileAdded" :on-exceed="fileAdded" :on-remove="fileRemoved" :auto-upload="false" :limit="1">
+                            <el-button>Upload <i class="el-icon-upload el-icon-right"></i></el-button>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -61,6 +61,7 @@ export default {
     data () {
         return {
             concert: {},
+            files: [],
             rules: {
                 title: [
                     { required: true, message: 'Please, enter an event title.', trigger: 'blur' },
@@ -80,9 +81,6 @@ export default {
                     { required: true, message: 'Please enter a price.', trigger: 'blur' },
                     { required: true, pattern: /^[0-9]{1,3}([,.][0-9]{2})?$/, message: 'Price not valid.', trigger: 'blur' },
                     { validator: this.formatPrice, trigger: 'blur' }
-                ],
-                currency: [
-                    { required: true, trigger: 'blur' }
                 ],
                 poster: [
                     { required: true, message: 'Please upload a poster' }
@@ -114,15 +112,13 @@ export default {
             }
             callback()
         },
-        fileAdded (response, file, fileList) {
-            let self = this
-            /* global blobUtil */
-            blobUtil.blobToBase64String(file.raw).then(function (base64String) {
-                self.concert.poster = 'data:' + file.raw.type + ';base64,' + base64String
-            }).catch(function (err) {
-                console.error(err)
-                fileList = []
-            })
+        fileAdded (file) {
+            this.files = file.length ? [file[0]] : [file]
+            this.concert.poster = file
+        },
+        fileRemoved () {
+            this.files = []
+            this.concert.poster = ''
         }
     }
 }

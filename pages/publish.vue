@@ -2,7 +2,6 @@
     <div class="padding">
         <!--    <div v-if="isAuthenticated"> -->
         <div class="steps-wrapper">
-            
             <el-steps :active="currentStep" finish-status="success" align-center>
                 <el-step title="Basics"></el-step>
                 <el-step title="Location"></el-step>

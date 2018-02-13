@@ -6,7 +6,7 @@
         </el-form-item>
 
         <el-form-item v-else label="Place" prop="place">
-            <el-input v-model="place" :readonly="true">
+            <el-input v-model="form.place" :readonly="true">
                 <el-button @click="reset" slot="append" size="medium" icon="el-icon-close"></el-button>
             </el-input>
         </el-form-item>
