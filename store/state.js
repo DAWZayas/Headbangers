@@ -6,6 +6,7 @@ export default {
     concertsList: null,
     concertDetails: null,
     concertsListRef: null,
+    allConcertsListRef: null,
     concertsFullRef: null,
     usersRef: null,
     countries: require('country-data').countries,

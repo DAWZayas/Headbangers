@@ -77,6 +77,7 @@
             padding: 0;
         }
         .search-item{
+            width: 100%;
             display: none;
         }
         .top-logo:hover, .search-item:hover {
@@ -92,7 +93,7 @@
                 padding: 0 15px;
             }
             .separator {
-                flex-grow: 2;
+                flex-grow: 1;
             }
         }
     }

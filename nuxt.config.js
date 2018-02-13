@@ -18,7 +18,8 @@ module.exports = {
         ]
     },
     env: {
-        authNeeded: ['publish', 'account', 'myevents']
+        authNeeded: ['publish', 'account', 'myevents'],
+        googleMapsKey: 'AIzaSyB0BavoaQqF9ViPldtHAp4kj2FJ7CHAFRI'
     },
     loading: {
         height: '2px',

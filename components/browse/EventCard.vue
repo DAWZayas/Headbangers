@@ -26,12 +26,10 @@
         <hr>
         <div class="event-buttons">
             <div class="full-width text-center" @click="like">
-                <icon-text v-if="!liked" icon="lnr-heart" text="Like"></icon-text>
-                <icon-text v-else icon="lnr-heart" class="liked-button" text="Liked"></icon-text>
+                <icon-text icon="lnr-heart" :class="liked && 'liked-button'" text="Like"></icon-text>
             </div>
             <div class="full-width text-center" @click="save">
-                <icon-text v-if="!saved" icon="lnr-bookmark" text="Save"></icon-text>
-                <icon-text v-else icon="lnr-bookmark" class="saved-button" text="Saved"></icon-text>
+                <icon-text icon="lnr-bookmark" :class=" saved && 'saved-button'" text="Save"></icon-text>
             </div>
             <div class="full-width text-center">
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>

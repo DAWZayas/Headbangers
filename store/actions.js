@@ -104,7 +104,7 @@ export default {
     },
     likeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes + 1)
-        state.concertsListRef.child(concertID).child('likes').transaction((likes) => likes + 1)
+        state.allConcertsListRef.child(concertID).child('likes').transaction((likes) => likes + 1)
         state.usersRef.child(state.userProfile.uid).child('liked').child(concertID).set(true)
     },
     saveConcert: ({state}, concertID) => {
@@ -112,7 +112,7 @@ export default {
     },
     unlikeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes - 1)
-        state.concertsListRef.child(concertID).child('likes').transaction((likes) => likes - 1)
+        state.allConcertsListRef.child(concertID).child('likes').transaction((likes) => likes - 1)
         state.usersRef.child(state.userProfile.uid).child('liked').child(concertID).set(null)
     },
     unsaveConcert: ({state}, concertID) => {

@@ -8,8 +8,14 @@ input.el-input__inner{
     padding: .25em 0em 0em .5em;
 
     border: none;
-    border-radius: 0em;
+    border-radius: 0;
     border-bottom: 2px solid $grayLight;
+}
+.el-input-group__append{
+    background-color: $grayLighter!important;
+    border: none!important;
+    border-bottom: 2px solid $grayLight !important;
+    border-radius: 0!important;
 }
 input.el-input__inner:focus {
     border-color: $mainColorLightest;

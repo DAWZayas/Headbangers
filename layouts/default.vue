@@ -40,6 +40,8 @@
             this.setUserCountry()
             this.setUsersRef()
             this.setConcertsListRef()
+            this.setConcertsFullRef()
+            this.setAllConcertsListRef()
         },
         created () {
             setTimeout(() => this.showSplash = false, 2000)
@@ -59,7 +61,7 @@
         },
         methods: {
             ...mapActions(['bindAuth', 'setUsersRef', 'setUserCountry']),
-            ...mapMutations(['setUsersRef', 'setConcertsListRef']),
+            ...mapMutations(['setUsersRef', 'setConcertsListRef', 'setConcertsFullRef', 'setAllConcertsListRef']),
             setSlideout () {
                 var slideout = new Slideout({
                     'panel': document.querySelector('main'),
@@ -75,7 +77,7 @@
                 geolocator.config({
                     google: {
                         version: "3",
-                        key: "AIzaSyB0BavoaQqF9ViPldtHAp4kj2FJ7CHAFRI"
+                        key: process.env.googleMapsKey
                     }
                 })
             }
