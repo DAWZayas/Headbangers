@@ -37,7 +37,7 @@
                         <el-input :value="concert.currency" readonly></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="11" :offset="1">
+                <el-col :span="11" :offset="1" class="text-center">
                     <el-form-item label="Poster" prop="poster">
                         <br>
                         <el-upload action="" accept="image/*" :file-list="files" :on-change="fileAdded" :on-exceed="fileAdded" :on-remove="fileRemoved" :auto-upload="false" :limit="1">

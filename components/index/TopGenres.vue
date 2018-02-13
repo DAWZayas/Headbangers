@@ -66,9 +66,6 @@
         padding-top: 93%;
         position: relative;
         transition: all 0.4s ;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
     }
     
     .square:hover {
@@ -83,12 +80,16 @@
         text-align: center;
         width: 100%;
         padding: 1em;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
     }
 
     .square-content img{
         width: 50%;
         display: block;
-        margin: 0 auto 1em auto;
     }
 
     @media (min-width: $break-lg){
