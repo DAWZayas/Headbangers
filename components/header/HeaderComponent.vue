@@ -79,6 +79,7 @@
         .search-item{
             width: 100%;
             display: none;
+            max-width: 256px;
         }
         .top-logo:hover, .search-item:hover {
             background-color: transparent;
