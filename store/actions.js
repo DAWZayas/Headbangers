@@ -2,10 +2,15 @@ import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
 import { WSAEHOSTUNREACH } from 'constants';
 export default {
-    publishConcert: ({state}, {concert, shortConcert}) => {
-        let concertKey = state.concertsFullRef.push(concert).key
-        state.concertsListRef.child(concertKey).set(shortConcert)
-        state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
+    publishConcert: ({state, dispatch}, {concert, shortConcert}) => {
+        return dispatch('uploadFile', {file: concert.info.poster, path: '/posters/'+concert.poster.name}).then((snapshot) => {
+            concert.info.poster = snapshot.downloadURL
+            shortConcert.poster = snapshot.downloadURL
+            let concertKey = state.concertsFullRef.push(concert).key
+            state.concertsListRef.child(concertKey).set(shortConcert)
+            state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
+            return new Promise()
+        })
     },
     setAllReferences: ({commit}) => {
         commit('setConcertsListRef')

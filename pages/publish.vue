@@ -79,12 +79,18 @@ export default {
                 genres: this.genres,
                 poster: this.info.poster
             }).toObject()
-            this.publishConcert({concert, shortConcert})
-            this.$notify({
-                type: 'succes',
-                message: 'Concert published'
+            this.publishConcert({concert, shortConcert}).then(() => {
+                this.$notify({
+                    type: 'succes',
+                    message: 'Concert published'
+                })
+                this.$router.push('/browse')
+            }).catch((error) => {
+                this.$notify({
+                    type: 'error',
+                    message: 'Error publishing, please try again later'
+                })        
             })
-            this.$router.push('/browse')
         },
         stepUp () {
             this.currentStep++

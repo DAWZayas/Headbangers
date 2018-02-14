@@ -93,6 +93,7 @@ export default {
     props: ['data'],
     created () {
         Object.assign(this.concert, this.data)
+        if(this.data.poster.name) this.files = [this.data.poster]
         if(!this.userCountry){
             this.setUserCountry().then(() => {
                 this.concert.currency = this.currencyList[this.countryList[this.userCountry].currencies[0]].symbol
