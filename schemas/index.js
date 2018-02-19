@@ -27,7 +27,7 @@ var Band = new SchemaObject({
     link: String
 })
 var Concert = new SchemaObject({
-    info: BasicInfo,
+    info: Object,
     location: Location,
     genres: [String],
     bands: [Band],
@@ -44,6 +44,7 @@ var ShortConcert = new SchemaObject({
     venue: String,
     city: String,
     coordinates: String,
+    country: String,
     genres: [String],
     likes: {type: Number, default: 0},
     assisting: {type: Number, default: 0},

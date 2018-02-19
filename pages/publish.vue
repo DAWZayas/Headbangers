@@ -1,5 +1,5 @@
 <template>
-    <div class="padding">
+    <div class="padding" v-loading="loading">
         <!--    <div v-if="isAuthenticated"> -->
         <div class="steps-wrapper">
             <el-steps :active="currentStep" finish-status="success" align-center>
@@ -12,13 +12,13 @@
             <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
             <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
             <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
-            <publish-summary v-if="currentStep === 3" @done="publish()" @back="stepDown()"></publish-summary>
+            <publish-success :key="this.key" v-if="currentStep === 3"></publish-success>
         </div>
     </div>
 </template>
 
 <script>
-import { FormBasics, FormLocation, FormMusic, PublishSummary } from '~/components/publish'
+import { FormBasics, FormLocation, FormMusic, PublishSuccess } from '~/components/publish'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { Concert, BasicInfo, Location, Band, ShortConcert } from '~/schemas'
 import { strictEqual } from 'assert';
@@ -28,16 +28,17 @@ export default {
         return {
             info: new BasicInfo(),
             location: new Location(),
-            bands: [new Band()],
+            bands: [],
             genres: [],
-            currentStep: 0
+            currentStep: 0,
+            key: ''
         }
     },
     components: {
         FormBasics,
         FormLocation,
         FormMusic,
-        PublishSummary
+        PublishSuccess
     },
     computed: {
         ...mapGetters({userProfile: 'getUserProfile', loading: 'getLoading'})
@@ -46,7 +47,7 @@ export default {
         ...mapActions(['publishConcert']),
         ...mapMutations(['setNewConcert']),
         basicsDone (info) {
-            info.date = new Date(info.date).getTime()
+            info.date = new Date(info.date)
             this.info.populate(info)
             this.stepUp()
         },
@@ -57,7 +58,7 @@ export default {
         musicDone ({bands, genres}) {
             this.bands = bands
             this.genres = genres
-            this.stepUp()
+            this.publish()
         },
         publish () {
             let concert = new Concert({
@@ -79,13 +80,11 @@ export default {
                 genres: this.genres,
                 poster: this.info.poster
             }).toObject()
-            this.publishConcert({concert, shortConcert}).then(() => {
-                this.$notify({
-                    type: 'succes',
-                    message: 'Concert published'
-                })
-                this.$router.push('/browse')
+            this.publishConcert({concert, shortConcert}).then((key) => {
+                this.key = key
+                this.stepUp()
             }).catch((error) => {
+                console.log(error)
                 this.$notify({
                     type: 'error',
                     message: 'Error publishing, please try again later'

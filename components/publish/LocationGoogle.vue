@@ -2,7 +2,7 @@
     <el-form ref="form-google" :rules="rules" :model="form" action="javascript:void(0)">
 
         <el-form-item v-if="!placeSelected" label="Place" prop="place">
-            <gmap-autocomplete placeholder="Enter the name of the place" class="el-input__inner" :types="['establishment']" :componentRestrictions="{country: location.country}" @place_changed="setPlace"></gmap-autocomplete>
+            <gmap-autocomplete placeholder="Enter the name of the place" class="el-input__inner" :types="['establishment']" @place_changed="setPlace"></gmap-autocomplete>
         </el-form-item>
 
         <el-form-item v-else label="Place" prop="place">

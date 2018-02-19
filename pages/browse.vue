@@ -14,8 +14,8 @@
                 </el-tab-pane>
             </el-tabs>
             -->
-            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <concerts-list v-loading="loading" class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <div id="fab-container">
                 <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
             </div>
@@ -133,11 +133,11 @@
                 window.addEventListener('scroll', (i) => {
                     var fabDist = fab.getBoundingClientRect().top
                     var footerDist = footer.getBoundingClientRect().top
-                        if ((fabDist + document.body.scrollTop) + fab.offsetHeight >= (footerDist + document.body.scrollTop) - 20) {
-                            fab.style.position = 'relative'
-                        }else if (document.body.scrollTop + window.innerHeight < (footerDist + document.body.scrollTop)) {
-                            fab.style.position = 'fixed'
-                        }
+                    if ((fabDist + document.body.scrollTop) + fab.offsetHeight >= (footerDist + document.body.scrollTop) - 20) {
+                        fab.style.position = 'relative'
+                    }else if (document.body.scrollTop + window.innerHeight < (footerDist + document.body.scrollTop)) {
+                        fab.style.position = 'fixed'
+                    }
                 })
                 
         },
@@ -160,7 +160,6 @@
         margin-top: -49px;
         right: 25px;
         bottom: 25px;
-        width: 100%;
         text-align: right;
         z-index: 1;
         #fab {

@@ -36,6 +36,8 @@
             ...mapGetters({loading: 'getLoading'})
         },
         beforeMount () {
+            this.configGeolocator()
+            this.setUserCountry()
             this.setUsersRef()
             this.setConcertsListRef()
             this.setConcertsFullRef()
@@ -53,8 +55,6 @@
                         }
                     })
                     this.setSlideout()
-                    this.configGeolocator()
-                    this.setUserCountry()
                 })
             }
 
