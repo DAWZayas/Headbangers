@@ -1,7 +1,7 @@
 var SchemaObject = require('schema-object')
 var BasicInfo = new SchemaObject({
     title: String,
-    date: Date,
+    date: Number,
     time: String,
     price: String,
     currency: String,
@@ -9,7 +9,7 @@ var BasicInfo = new SchemaObject({
     poster: Object
 })
 var Location = new SchemaObject({
-    name: String,
+    venue: String,
     street: String,
     number: Number,
     city: String,
@@ -37,7 +37,7 @@ var Concert = new SchemaObject({
 })
 var ShortConcert = new SchemaObject({
     title: String,
-    date: Date,
+    date: Number,
     time: String,
     price: String,
     currency: String,

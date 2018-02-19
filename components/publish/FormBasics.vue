@@ -96,6 +96,7 @@ export default {
     created () {
         Object.assign(this.concert, this.data)
         if(this.data.poster.name) this.files = [this.data.poster]
+        if(this.data.date) this.concert.date = new Date(this.data.date)
         this.setUserCountry().then((country) => {
             this.concert.currency = this.currencyList[this.countryList[country].currencies[0]].symbol
         }).catch(console.error)

@@ -39,12 +39,12 @@ export default {
                 },
                 country: ''
             },
-            placeSelected: false,
+            placeSelected: false,   
             mapZoom: 1,
             rules: {
                 place: [
                     { required: true, message: 'Please enter the place.', trigger: 'blur' },
-                    { validator: (rule, value, cb) => this.location.name && this.location.street && this.location.number && this.location.city && this.location.coords.lat !== 0 && this.location.coords.lng !== 0 ? cb() : cb(new Error("Wrong place, select other or enter manually"))}
+                    { validator: (rule, value, cb) => this.location.venue && this.location.street && this.location.number && this.location.city && this.location.coords.lat !== 0 && this.location.coords.lng !== 0 ? cb() : cb(new Error("Wrong place, select other or enter manually"))}
                 ],
             }
         }
@@ -64,7 +64,7 @@ export default {
             }
             try{
                 this.form.place = place.formatted_address
-                this.location.name = place.name
+                this.location.venue = place.name
                 this.location.street = place.address_components.filter(comp => comp.types.includes('route'))[0].long_name
                 this.location.number = place.address_components.filter(comp => comp.types.includes('street_number'))[0].long_name
                 this.location.city = place.address_components.filter(comp => comp.types.includes('locality'))[0].long_name

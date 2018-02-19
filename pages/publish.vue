@@ -12,7 +12,7 @@
             <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
             <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
             <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
-            <publish-success :key="this.key" v-if="currentStep === 3"></publish-success>
+            <publish-success :concertKey="key" v-if="currentStep === 3"></publish-success>
         </div>
     </div>
 </template>
@@ -47,7 +47,7 @@ export default {
         ...mapActions(['publishConcert']),
         ...mapMutations(['setNewConcert']),
         basicsDone (info) {
-            info.date = new Date(info.date)
+            info.date = new Date(info.date).getTime()
             this.info.populate(info)
             this.stepUp()
         },
