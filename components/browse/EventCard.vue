@@ -36,10 +36,10 @@
             </div>
         </div>
         <div v-if="editable" class="event-buttons">
-            <el-button class="full-width text-center" @click="edit">
+            <el-button class="full-width text-center" @click="editConcert">
                 Edit
             </el-button>
-            <el-button type="danger" class="full-width text-center" @click="edit">
+            <el-button type="danger" class="full-width text-center" @click="deleteConcert">
                 Delete
             </el-button>
         </div>
@@ -67,7 +67,7 @@
             }
         },
         methods: {
-            ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert']),
+            ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert', 'removeConcert']),
             like () {
                 if (this.isAuthenticated) {
                     !this.liked ? this.likeConcert(this.concert.key) : this.unlikeConcert(this.concert.key)
@@ -90,11 +90,22 @@
                     })
                 }
             },
-            edit () {
+            editConcert () {
 
             },
-            delete () {
-
+            deleteConcert () {
+                this.$confirm('This will permanently delete the concert. Continue?', 'Warning', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(() => {
+                    this.removeConcert(this.concert.key).then(() => {
+                        this.$notify({
+                            type: 'success',
+                            message: 'Concert deleted'
+                        });
+                    })
+                })
             }
         }
     }

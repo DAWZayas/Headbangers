@@ -14,6 +14,16 @@ export default {
             return Promise.resolve(concertKey)
         })
     },
+    removeConcert: ({state, dispatch, commit}, concertKey) => {
+        return Promise.all([
+            state.concertsFullRef.child(concertKey).remove(),
+            state.allConcertsRef.child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('liked').child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('saved').child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('assisting').child(concertKey).remove()
+        ])
+    },
     setAllReferences: ({commit}) => {
         commit('setAllConcertsRef')
         commit('setCountryConcertsRef')
