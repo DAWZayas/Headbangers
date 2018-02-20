@@ -1,7 +1,7 @@
 <template>
     <div class="list-container">
         <div class="cards padding">
-            <event-card v-for="(concert ,i) in paginatedConcerts" :key="i" :concert="concert"></event-card>
+            <event-card :editable="editable" v-for="(concert ,i) in paginatedConcerts" :key="i" :concert="concert"></event-card>
         </div>
         <div class="separator"></div>
         <div class="full-width text-center margin-bottom margin-top">
@@ -31,7 +31,7 @@
                 this.currentPage = 1
             }
         },
-        props: ['concerts'],
+        props: ['concerts', 'editable'],
     }
 </script>
 
