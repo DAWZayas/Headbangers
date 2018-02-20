@@ -37,11 +37,11 @@
         },
         beforeMount () {
             this.configGeolocator()
-            this.setUserCountry()
+            this.getUserCountry()
             this.setUsersRef()
-            this.setConcertsListRef()
+            this.setAllConcertsRef()
+            this.setCountryConcertsRef()
             this.setConcertsFullRef()
-            this.setAllConcertsListRef()
         },
         created () {
             setTimeout(() => this.showSplash = false, 2000)
@@ -60,8 +60,8 @@
 
         },
         methods: {
-            ...mapActions(['bindAuth', 'setUsersRef', 'setUserCountry']),
-            ...mapMutations(['setUsersRef', 'setConcertsListRef', 'setConcertsFullRef', 'setAllConcertsListRef']),
+            ...mapActions(['bindAuth', 'setUsersRef', 'getUserCountry']),
+            ...mapMutations(['setUsersRef', 'setCountryConcertsRef', 'setConcertsFullRef', 'setAllConcertsRef']),
             setSlideout () {
                 var slideout = new Slideout({
                     'panel': document.querySelector('main'),

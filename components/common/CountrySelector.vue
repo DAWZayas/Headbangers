@@ -16,17 +16,17 @@ export default {
             },
             set (country) {
                 this.setUserCountry(country)
-                this.setConcertsListRef()
+                this.setCountryConcertsRef()
                 if(this.$route.name == 'browse'){
-                    this.bindConcertsList()
+                    this.bindCountryConcerts()
                 }
             }
         },
         ...mapGetters({countries: 'getCountries', getUserCountry: 'getUserCountry'})
     },
     methods: {
-        ...mapActions(['bindConcertsList']),
-        ...mapMutations(['setUserCountry', 'setConcertsListRef'])
+        ...mapActions(['bindCountryConcerts']),
+        ...mapMutations(['setUserCountry', 'setCountryConcertsRef'])
     }
 }
 </script>

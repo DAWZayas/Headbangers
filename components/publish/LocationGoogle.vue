@@ -50,12 +50,12 @@ export default {
         }
     },
     mounted () {
-        this.setUserCountry().then(country => {
+        this.getUserCountry().then(country => {
             this.location.country = country
         })
     },
     methods: {
-        ...mapActions(['setUserCountry']),
+        ...mapActions(['getUserCountry']),
         setPlace(place){
             this.location= {
                 coords: {

@@ -41,7 +41,7 @@
         },
 
         computed: {
-            ...mapGetters({concerts: 'getConcertsList', userCountry: 'getUserCountry', loading: 'getLoading'}),
+            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', loading: 'getLoading'}),
         },
 
         watch: {
@@ -84,8 +84,8 @@
         },
         
         methods: {
-            ...mapActions(['bindConcertsList', 'unbindConcertsList', 'setUserCountry']),
-            ...mapMutations(['setConcertsListRef']),
+            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'getUserCountry']),
+            ...mapMutations(['setCountryConcertsRef']),
             applyFilters () {
                 this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
             },
@@ -113,15 +113,10 @@
         },
 
         mounted () {
-                if(!this.userCountry){
-                    this.setUserCountry().then(() => {
-                    this.setConcertsListRef()
-                    this.bindConcertsList()
-                    })
-                }else{
-                    this.setConcertsListRef()
-                    this.bindConcertsList()
-                }
+                this.getUserCountry().then((country) => {
+                    this.setCountryConcertsRef()
+                    this.bindCountryConcerts()
+                })
                 this.windowWidth = window.innerWidth
                 window.addEventListener('resize', (e) => {
                     this.windowWidth = window.innerWidth
@@ -143,7 +138,7 @@
         },
 
         beforeDestroy () {
-            this.unbindConcertsList()
+            this.unbindCountryConcerts()
         }
     }
 </script>

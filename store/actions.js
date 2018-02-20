@@ -15,11 +15,12 @@ export default {
         })
     },
     setAllReferences: ({commit}) => {
-        commit('setConcertsListRef')
+        commit('setAllConcertsRef')
+        commit('setCountryConcertsRef')
         commit('setConcertsFullRef')
         commit('setUsersRef')
     },
-    setUserCountry: ({commit, state}) => {
+    getUserCountry: ({commit, state}) => {
         return new Promise((resolve, reject) => {
             if(state.userCountry){
                 resolve(state.userCountry)
@@ -28,7 +29,7 @@ export default {
                     if(err){
                         reject(err)
                     }else{
-                        commit('setUserCountry', location.address.countryCode)
+                        state.userCountry = location.address.countryCode
                         resolve(location.address.countryCode)
                     }
                 })
@@ -125,14 +126,20 @@ export default {
     unsaveConcert: ({state}, concertID) => {
         state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(null)
     },
-    bindConcertsList: firebaseAction(({state, dispatch}) => {
-        dispatch('bindFirebaseReference', {reference: state.concertsListRef, toBind: 'concertsList'})
+    bindAllConcerts: firebaseAction(({state, dispatch}) => {
+        dispatch('bindFirebaseReference', {reference: state.allConcertsRef, toBind: 'allConcerts'})
+    }),
+    bindCountryConcerts: firebaseAction(({state, dispatch}) => {
+        dispatch('bindFirebaseReference', {reference: state.countryConcertsRef, toBind: 'countryConcerts'})
     }),
     bindConcert: firebaseAction(({state, dispatch}, id) => {
         dispatch('bindFirebaseReference', {reference: state.concertsFullRef.child(id), toBind: 'concertDetails'})
     }),
-    unbindConcertsList: firebaseAction(({dispatch}) => {
-        dispatch('unbindFirebaseReference', {toUnbind: 'concertsList'})
+    unbindAllConcerts: firebaseAction(({dispatch}) => {
+        dispatch('unbindFirebaseReference', {toUnbind: 'allConcerts'})
+    }),
+    unbindCountryConcerts: firebaseAction(({dispatch}) => {
+        dispatch('unbindFirebaseReference', {toUnbind: 'countryConcerts'})
     }),
     unbindConcert: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'})

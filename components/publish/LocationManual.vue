@@ -86,10 +86,10 @@ export default {
         ...mapGetters({ countryList: 'getCountries'})
     },
     created () {
-        this.setUserCountry().then(country => this.location.country = country)
+        this.getUserCountry().then(country => this.location.country = country)
     },
     methods: {
-        ...mapActions(['setUserCountry']),
+        ...mapActions(['getUserCountry']),
         done () {
             geolocator.geocode({'address': `${this.location.street} ${this.location.number} ${this.location.city} ${this.location.country}`}, (err, location) => {
                 this.$refs['form-location'].validate(valid => {

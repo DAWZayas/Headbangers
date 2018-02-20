@@ -90,19 +90,19 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies', userCountry: 'getUserCountry'})
+        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies'})
     },
     props: ['data'],
     created () {
         Object.assign(this.concert, this.data)
         if(this.data.poster.name) this.files = [this.data.poster]
         if(this.data.date) this.concert.date = new Date(this.data.date)
-        this.setUserCountry().then((country) => {
+        this.getUserCountry().then((country) => {
             this.concert.currency = this.currencyList[this.countryList[country].currencies[0]].symbol
         }).catch(console.error)
     },
     methods: {
-        ...mapActions(['setUserCountry']),
+        ...mapActions(['getUserCountry']),
         done () {
             this.$refs['form-basics'].validate(valid => valid ? this.$emit('done', this.concert) : false)
         },
