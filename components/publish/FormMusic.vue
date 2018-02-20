@@ -30,7 +30,7 @@
 
             <div class="form-buttons">
                 <el-button @click="back">Back</el-button>
-                <el-button type="primary" @click="done">Next</el-button>
+                <el-button type="primary" @click="done">Publish</el-button>
             </div>  
     </div>
 </template>

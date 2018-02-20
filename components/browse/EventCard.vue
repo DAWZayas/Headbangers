@@ -36,10 +36,10 @@
             </div>
         </div>
         <div v-if="editable" class="event-buttons">
-            <el-button class="full-width text-center" @click="save">
+            <el-button class="full-width text-center" @click="edit">
                 Edit
             </el-button>
-            <el-button type="danger" class="full-width text-center">
+            <el-button type="danger" class="full-width text-center" @click="edit">
                 Delete
             </el-button>
         </div>
@@ -89,6 +89,12 @@
                         duration: 1000
                     })
                 }
+            },
+            edit () {
+
+            },
+            delete () {
+
             }
         }
     }

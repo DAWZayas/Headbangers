@@ -1,19 +1,6 @@
 <template>
     <div>
         <div>
-            <!--
-            <el-tabs type="border-card">
-                <el-tab-pane>
-                    <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
-                </el-tab-pane>
-                <el-tab-pane label="Config">
-                    <span slot="label"><icon-text icon="lnr-map" text="Map"></icon-text></span>
-                </el-tab-pane>
-                <el-tab-pane label="Role">
-                    <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
-                </el-tab-pane>
-            </el-tabs>
-            -->
             <concerts-list v-loading="loading" class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
             <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <div id="fab-container">

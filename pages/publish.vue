@@ -44,7 +44,7 @@ export default {
         ...mapGetters({userProfile: 'getUserProfile', loading: 'getLoading'})
     },
     methods: {
-        ...mapActions(['publishConcert']),
+        ...mapActions(['publishConcert', 'setLoading']),
         ...mapMutations(['setNewConcert']),
         basicsDone (info) {
             info.date = new Date(info.date).getTime()
@@ -89,6 +89,7 @@ export default {
                     type: 'error',
                     message: 'Error publishing, please try again later'
                 })        
+                this.setLoading(false)
             })
         },
         stepUp () {

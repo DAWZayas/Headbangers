@@ -8,7 +8,7 @@ export default {
             concert.info.poster = snapshot.downloadURL
             shortConcert.poster = snapshot.downloadURL
             let concertKey = state.concertsFullRef.push(concert).key
-            state.allConcertsListRef.child(concertKey).set(shortConcert)
+            state.allConcertsRef.child(concertKey).set(shortConcert)
             state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
             commit('setLoading', false)
             return Promise.resolve(concertKey)
