@@ -60,14 +60,14 @@
                 var right;
                     if (this.windowWidth < 768) {
                         right = show ? 0 : "-100%"
-                        show ? window.scrollTo(0, 0) : false;
+                        show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
                         document.body.style.overflowY = show ? "hidden" : "scroll"
                     }else if (this.windowWidth < 1050) {
                         right = show ? 0 : "-45%"
-                        show ? window.scrollTo(0, 0) : false
+                         show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
                     }else if (this.windowWidth < 1500) {
                         right = show ?  0 : "-35%"
-                        show ? window.scrollTo(0, 0) : false
+                         show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
                     }
                 document.querySelector(".filters").style.right = right;
             }

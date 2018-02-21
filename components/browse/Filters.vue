@@ -231,9 +231,10 @@ export default {
     @import "assets/styles/breakpoints.scss";
     .filters{
         position: absolute;
-        right: -100%;
         width: 100%;
         height: 100%;
+        right: -100%;
+        top: 0;
         transition: ease-out .50s;
         z-index: 20;
         background-color: white;
@@ -293,14 +294,14 @@ export default {
     }
 @media (min-width: $break-sm) {
     .filters {
-        right: -45%;
         width: 45%;
+        right: -45%;
     }
 }
 @media (min-width: $break-md-lg) {
     .filters {
-        right: -35%;
         width: 35%;
+        right: -35%;
     }
 }
 @media (min-width: $break-lg-xl) {
@@ -308,8 +309,8 @@ export default {
         overflow-y: scroll;
     }
     .filters {
-        right: 0;
         width: 25%;
+        right: 0;
     }
     .concerts-list {
         width: 75%;
