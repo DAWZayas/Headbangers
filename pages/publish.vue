@@ -90,7 +90,6 @@ export default {
             this.stepDown()
         },
         publish () {
-            debugger
             let concert = {
                 info: this.info,
                 location: this.location,
@@ -108,7 +107,8 @@ export default {
                 city: this.location.city,
                 country: this.location.country,
                 genres: this.genres,
-                poster: this.info.poster
+                poster: this.info.poster,
+                coords: this.location.coords
             }
             this.publishConcert({concert, shortConcert}).then((key) => {
                 this.key = key
