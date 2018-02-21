@@ -26,7 +26,7 @@
         },
 
         computed: {
-            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', loading: 'getLoading'}),
+            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', loading: 'getLoading', userLocation: 'getUserLocation'}),
         },
 
         watch: {
@@ -46,7 +46,7 @@
         },
         
         methods: {
-            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'getUserCountry']),
+            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'getUserCountry', 'askUserLocation']),
             ...mapMutations(['setCountryConcertsRef']),
             applyFilters () {
                 this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
@@ -78,6 +78,18 @@
                     this.setCountryConcertsRef()
                     this.bindCountryConcerts()
                 })
+
+                if(!this.userLocation) {
+                    this.$notify.info({
+                        title: 'Info',
+                        message: 'Para que puedas filtrar conciertos por cercanía, necesitamos conocer tu ubicacion.',
+                        duration: 3500,
+                        offset: 60,
+                        onClose: () => {this.askUserLocation()},
+                        onClick: () => {this.askUserLocation()}
+                    }); 
+                }
+                
                 this.windowWidth = window.innerWidth
                 window.addEventListener('resize', (e) => {
                     this.windowWidth = window.innerWidth

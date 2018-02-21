@@ -50,8 +50,7 @@ export default {
         return new Promise((resolve, reject) =>{ 
             if(state.location){
                 resolve(state.location)
-            }
-            else{
+            } else {
                 geolocator.locate({fallbackToIP: true, addressLookup: true}, (err, location) => {
                     if(err){
                         reject(err)

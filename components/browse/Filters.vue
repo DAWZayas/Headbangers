@@ -73,7 +73,7 @@ export default {
     },
 
     computed: {
-        ...mapGetters({genreValues: 'getGenreList'}),
+        ...mapGetters({genreValues: 'getGenreList', usrLocation: 'getUserLocation'}),
         
         dateMiliseconds: function () {
             return [this.transformToMs(this.sliderDate[0]), this.transformToMs(this.sliderDate[1])]
@@ -209,7 +209,21 @@ export default {
         
         filterByDistance (distance) {
             return function (concertsArray) {
-                return concertsArray;
+                return concertsArray.filter ( (currentValue) => {
+                    var distance = geolocator.calcDistance({
+                        from: {
+                            latitude: userLocation.coords.latitude,
+                            longitude: userLocation.coords.longitude
+                        },
+                        to: {
+                            latitude: currentValue.coords.lat,
+                            longitude: currentValue.coords.lng
+                        },
+                        formula: geolocator.DistanceFormula.HAVERSINE,
+                        unitSystem: geolocator.UnitSystem.METRIC
+                    });
+                    return distance < sliderDistance;
+                });
             } 
         },
 
