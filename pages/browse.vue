@@ -26,7 +26,7 @@
         },
 
         computed: {
-            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', userLocation: 'getUserLocation'}),
+            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', usrLocation: 'getUserLocation'}),
         },
 
         watch: {
@@ -77,18 +77,19 @@
                 this.getUserCountry().then((country) => {
                     this.setCountryConcertsRef()
                     this.bindCountryConcerts()
+                    setTimeout(function(){
+                        if(!this.usrLocation) {
+                            this.$notify.info({
+                                title: 'Info',
+                                message: 'Para que puedas filtrar conciertos por cercanía, necesitamos conocer tu ubicacion.',
+                                duration: 2500,
+                                offset: 60,
+                                onClose: () => {this.askUserLocation()},
+                                onClick: () => {this.askUserLocation()}
+                            });
+                        }
+                    }, 1500);
                 })
-
-                if(!this.userLocation) {
-                    this.$notify.info({
-                        title: 'Info',
-                        message: 'Para que puedas filtrar conciertos por cercanía, necesitamos conocer tu ubicacion.',
-                        duration: 3500,
-                        offset: 60,
-                        onClose: () => {this.askUserLocation()},
-                        onClick: () => {this.askUserLocation()}
-                    }); 
-                }
                 
                 this.windowWidth = window.innerWidth
                 window.addEventListener('resize', (e) => {

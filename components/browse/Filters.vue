@@ -28,14 +28,14 @@
             <div id="filter-distance">
                 <h5>Distance</h5>
                 <div class="slider-flex">
-                    <el-slider v-model="sliderDistance" :step="10" :max="750"></el-slider>
+                    <el-slider v-model="sliderDistance" :step="1" :max="11" :show-tooltip=false></el-slider>
                     <p>{{sliderDistanceString}}</p>
                 </div>
             </div>
             <div id="filter-price">
                 <h5>Price</h5>
                 <div class="slider-flex">
-                    <el-slider v-model="sliderPrice" :max="500" range></el-slider>
+                    <el-slider v-model="sliderPrice" :max="22" range></el-slider>
                     <p>{{sliderPriceString}}</p>
                 </div>
             </div>
@@ -67,8 +67,10 @@ export default {
                     'next Year',
                     ],
             sliderDate: [0, 5],
-            sliderDistance: 25,
-            sliderPrice: [0, 500]
+            sliderDistance: 11,
+            distances: [1, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1000, undefined],
+            sliderPrice: [0, 22],
+            prices: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 100, 200, 300, 400, 500, undefined]
         }
     },
 
@@ -87,14 +89,22 @@ export default {
             return 'From ' + string.join(' till ') + '.';
 
         },
+
         sliderDistanceString: function () {
-            var string = this.sliderDistance + ''
-            return string + ' Km'
+            var distance = this.distances[this.sliderDistance]
+            distance = distance !== undefined ? distance + ' Km' : 'ilimitado' 
+            return distance
         },
 
         sliderPriceString: function () {
-            var string = this.sliderPrice + ''
-            return string.split(',').join(' - ') + ' €'
+            var price = [this.prices[this.sliderPrice[0]], this.prices[this.sliderPrice[1]]] 
+            price[0] = price[0] !== undefined ? price[0] : 1000
+            price[1] = price[1] !== undefined ? price[1] : 'ilimitado'
+            return price[0] + ' - ' + price[1] + ' €'
+        },
+
+        distanceSteps: function () {
+            return this.distances[this.sliderDistance]
         },
 
         filters: function () {
@@ -103,8 +113,8 @@ export default {
                 this.order(sorting[0] , sorting[1]),
                 this.filterByGenres(this.selectedGenres),
                 this.filterByDate(this.dateMiliseconds),
-                this.filterByDistance(),
-                this.filterByPrice(this.sliderPrice)
+                this.filterByDistance(this.distances[this.sliderDistance]),
+                this.filterByPrice(this.prices[this.sliderPrice[0]], this.prices[this.sliderPrice[1]])
             ]
         }
     },
@@ -157,10 +167,9 @@ export default {
                     returnvalue = ['likes', 'desc'];
                     break;
                 case 'nearer':
-                    // navigator.geolocation.getCurrentPosition( this.setLocation );
                     break;
                 case 'cheaper':
-                    returnvalue = [ 'price', 'asc'];
+                    returnvalue = ['price', 'asc'];
                     break;
                 case 'people assisting':
                     returnvalue = ['assisting', 'desc'];     
@@ -207,31 +216,34 @@ export default {
             }  
         },
         
-        filterByDistance (distance) {
+        filterByDistance (distanceMax) {
+            var usrLoc = this.usrLocation
+            distanceMax = distanceMax !== undefined ? distanceMax : Infinity
             return function (concertsArray) {
                 return concertsArray.filter ( (currentValue) => {
                     var distance = geolocator.calcDistance({
                         from: {
-                            latitude: userLocation.coords.latitude,
-                            longitude: userLocation.coords.longitude
+                            latitude: usrLoc['coords']['latitude'],
+                            longitude: usrLoc['coords']['longitude']
                         },
                         to: {
-                            latitude: currentValue.coords.lat,
-                            longitude: currentValue.coords.lng
+                            latitude: currentValue['coords']['lat'],
+                            longitude: currentValue['coords']['lng']
                         },
                         formula: geolocator.DistanceFormula.HAVERSINE,
                         unitSystem: geolocator.UnitSystem.METRIC
                     });
-                    return distance < sliderDistance;
+                    return distance < distanceMax;
                 });
             } 
         },
 
-        filterByPrice (priceInterval) {
+        filterByPrice (priceMin, priceMax) {
+            priceMax = priceMax !== undefined ? priceMax : Infinity
             return function (concertsArray) {
                 return concertsArray.filter ( (currentValue) => {
-                   return currentValue['price'] > priceInterval[0] && currentValue['price'] < priceInterval[1];
-                } ); 
+                   return currentValue['price'] > priceMin && currentValue['price'] < priceMax
+                }); 
             }
         }
     },
@@ -295,7 +307,7 @@ export default {
                 display: flex;
                 text-align: center;
                 .el-slider{
-                    width: 65%;
+                    width: 45%;
                 }
                 p{  
                     padding-left: .75em;
