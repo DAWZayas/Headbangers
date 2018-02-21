@@ -82,10 +82,12 @@ export default {
             }
         }
     },
+    props: ['data'],
     computed: {
         ...mapGetters({ countryList: 'getCountries'})
     },
     created () {
+        Object.assign(this.location, this.data)
         this.getUserCountry().then(country => this.location.country = country)
     },
     methods: {
@@ -103,7 +105,7 @@ export default {
             })
         },
         back () {
-            this.$emit('back')
+            this.$emit('back', this.location)
         }
     }
 }

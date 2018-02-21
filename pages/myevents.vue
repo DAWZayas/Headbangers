@@ -3,7 +3,7 @@
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-bookmark" text="Saved"></icon-text></span>
-                <concerts-list v-loading="loading" v-if="saved" :concerts="saved"></concerts-list>
+                <concerts-list v-if="saved" :concerts="saved"></concerts-list>
             </el-tab-pane>
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-checkmark-circle" text="Going"></icon-text></span>
@@ -24,7 +24,7 @@ export default {
     middleware: 'auth',
     components: {ConcertsList, IconText},
     computed: {
-        ...mapGetters({concertsList: 'getAllConcerts', savedConcerts: 'getUserSaved', assistingConcerts: 'getUserAssisting', publishedConcerts: 'getUserPublished', loading: 'getLoading'}),
+        ...mapGetters({concertsList: 'getAllConcerts', savedConcerts: 'getUserSaved', assistingConcerts: 'getUserAssisting', publishedConcerts: 'getUserPublished'}),
         saved () { return this.filterConcertsByKey(this.concertsList, this.savedConcerts) },
         assisting () { return this.filterConcertsByKey(this.concertsList, this.assistingConcerts) },
         published () { return this.filterConcertsByKey(this.concertsList, this.publishedConcerts) }

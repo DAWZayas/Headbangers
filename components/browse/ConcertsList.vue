@@ -1,5 +1,5 @@
 <template>
-    <div class="list-container">
+    <div class="list-container" v-loading="loading">
         <div class="cards padding">
             <event-card :editable="editable" v-for="(concert ,i) in paginatedConcerts" :key="i" :concert="concert"></event-card>
         </div>
@@ -20,7 +20,7 @@
             }
         },
         computed: {
-            ...mapGetters ({pageSize: 'getPageSize'}),
+            ...mapGetters ({pageSize: 'getPageSize', loading: 'getLoading'}),
             paginatedConcerts () { return this.concerts && this.concerts.slice((this.currentPage-1) * this.pageSize, (this.currentPage-1) * this.pageSize + this.pageSize) }
         },
         components: {

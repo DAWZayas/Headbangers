@@ -24,12 +24,6 @@ export default {
             state.usersRef.child(state.userProfile.uid).child('assisting').child(concertKey).remove()
         ])
     },
-    setAllReferences: ({commit}) => {
-        commit('setAllConcertsRef')
-        commit('setCountryConcertsRef')
-        commit('setConcertsFullRef')
-        commit('setUsersRef')
-    },
     getUserCountry: ({commit, state}) => {
         return new Promise((resolve, reject) => {
             if(state.userCountry){

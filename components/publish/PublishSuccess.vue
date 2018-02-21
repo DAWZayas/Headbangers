@@ -4,7 +4,7 @@
             <div>
                 <span class="lnr lnr-checkmark-circle"></span>
                 <p>The concert was published succesfully!</p>
-                <el-button type="primary" @click="$router.push('concert/'+concertKey)">Show</el-button>
+                <el-button type="primary" @click="$router.push('/concert/'+concertKey)">Show</el-button>
             </div>
         </div>
      </div>

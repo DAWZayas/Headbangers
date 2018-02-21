@@ -1,7 +1,7 @@
 <template>
     <div class="text-center">
         <h1 v-if="error.statusCode === 404">Page not found</h1>
-        <h1 v-else>An error occurred: {{error}}</h1>
+        <h1 v-else>An error occurred: {{error.statusCode}}</h1>
         <a class="link" href="/">Home page</a>
     </div>
 </template>
