@@ -94,7 +94,7 @@ export default {
     },
     props: ['data'],
     created () {
-        Object.assign(this.concert, this.data)
+        this.concert = {...this.data}
         if(this.data.poster.name) this.files = [this.data.poster]
         if(this.data.date) this.concert.date = new Date(this.data.date)
         this.getUserCountry().then((country) => {

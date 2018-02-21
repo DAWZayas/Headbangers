@@ -10,8 +10,8 @@
         </div>
         <div class="form">
             <form-basics v-if="currentStep === 0" @done="basicsDone" :data="info"></form-basics>
-            <form-location v-if="currentStep === 1" @done="locationDone" :data="location" @back="stepDown()"></form-location>
-            <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>       
+            <form-location v-if="currentStep === 1" :data="location" :manual="manualLocation" @done="locationDone"  @back="locationBack" @toggleManual="manualLocation = !manualLocation"></form-location>
+            <form-music v-if="currentStep === 2" @done="musicDone" @back="stepDown()" :data="{bands, genres}"></form-music>  
             <publish-success :concertKey="key" v-if="currentStep === 3"></publish-success>
         </div>
     </div>
@@ -26,12 +26,31 @@ export default {
     middleware: 'auth',
     data () {
         return {
-            info: new BasicInfo(),
-            location: new Location(),
+            info: {
+                title: '',
+                date: '',
+                time: '',
+                price: '',
+                currency: '',
+                description: '',
+                poster: ''
+            },
+            location: {
+                    venue: '',
+                    street: '',
+                    number: '',
+                    city: '',
+                    country: '',
+                    coords: {
+                        lat: Number,
+                        lng: Number
+                    }
+            },
             bands: [],
             genres: [],
             currentStep: 0,
-            key: ''
+            key: '',
+            manualLocation: false
         }
     },
     components: {
@@ -48,27 +67,38 @@ export default {
         ...mapMutations(['setNewConcert']),
         basicsDone (info) {
             info.date = new Date(info.date).getTime()
-            this.info.populate(info)
+            Object.assign(this.info, info)
             this.stepUp()
         },
         locationDone (location) {
-            this.location.populate(location)
+            Object.assign(this.location, location)
             this.stepUp()
+        },
+        locationBack (location) {
+            console.log(location)
+            Object.assign(this.location, location)
+            this.stepDown()
         },
         musicDone ({bands, genres}) {
             this.bands = bands
             this.genres = genres
             this.publish()
         },
+        musicBack ({bands, genres}) {
+            this.bands = bands
+            this.genres = genres
+            this.stepDown()
+        },
         publish () {
-            let concert = new Concert({
+            debugger
+            let concert = {
                 info: this.info,
                 location: this.location,
                 bands: this.bands,
                 genres: this.genres,
                 author: this.userProfile.uid
-            }).toObject()
-            let shortConcert = new ShortConcert({
+            }
+            let shortConcert = {
                 title: this.info.title,
                 date: this.info.date,
                 time: this.info.time,
@@ -79,12 +109,12 @@ export default {
                 country: this.location.country,
                 genres: this.genres,
                 poster: this.info.poster
-            }).toObject()
+            }
             this.publishConcert({concert, shortConcert}).then((key) => {
                 this.key = key
                 this.stepUp()
             }).catch((error) => {
-                console.log(error)
+                console.error(error)
                 this.$notify({
                     type: 'error',
                     message: 'Error publishing, please try again later'

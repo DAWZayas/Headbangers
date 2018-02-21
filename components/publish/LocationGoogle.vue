@@ -49,7 +49,14 @@ export default {
             }
         }
     },
-    mounted () {
+    props: ['data'],
+    created () {
+        if(this.data.venue){
+            this.location = {...this.data}
+            this.form.place = this.data.venue
+            this.placeSelected = true
+            this.mapZoom = 16;
+        }
         this.getUserCountry().then(country => {
             this.location.country = country
         })
@@ -80,7 +87,7 @@ export default {
             }
         },
         back () {
-            this.$emit('back')
+            this.$emit('back', this.location)
         },
         done () {
             this.$refs['form-google'].validate(valid => valid && this.$emit('done', this.location))

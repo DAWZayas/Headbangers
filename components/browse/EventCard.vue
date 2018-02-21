@@ -91,7 +91,7 @@
                 }
             },
             editConcert () {
-
+                this.$router.push('/edit/'+this.concert.key)
             },
             deleteConcert () {
                 this.$confirm('This will permanently delete the concert. Continue?', 'Warning', {

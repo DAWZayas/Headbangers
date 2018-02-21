@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <concerts-list v-loading="loading" class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+            <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
             <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <div id="fab-container">
                 <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
@@ -28,7 +28,7 @@
         },
 
         computed: {
-            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', loading: 'getLoading'}),
+            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry'}),
         },
 
         watch: {

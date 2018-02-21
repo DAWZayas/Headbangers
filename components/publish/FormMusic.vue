@@ -57,7 +57,11 @@
         props: ['data'],
         methods: {
             addBand () {
-                this.bands.push(new Band())
+                this.bands.push({
+                    name: '',
+                    description: '',
+                    link: ''
+                })
             },
             removeBand (band) {
                 this.bands.splice(this.bands.indexOf(band), 1)
