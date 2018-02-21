@@ -1,6 +1,6 @@
 <template>
 
-    <div class="filters">
+    <div>
         <div class="header">
             <icon-button icon="lnr-arrow-right" id="back-button" @click.native="hide"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
@@ -230,9 +230,11 @@ export default {
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
     .filters{
-        position: fixed;
+        position: absolute;
+        right: -100%;
         width: 100%;
         height: 100%;
+        transition: ease-out .50s;
         z-index: 20;
         background-color: white;
         .header{
@@ -289,5 +291,32 @@ export default {
             }        
         }
     }
+@media (min-width: $break-sm) {
+    .filters {
+        right: -45%;
+        width: 45%;
+    }
+}
+@media (min-width: $break-md-lg) {
+    .filters {
+        right: -35%;
+        width: 35%;
+    }
+}
+@media (min-width: $break-lg-xl) {
+    body {
+        overflow-y: scroll;
+    }
+    .filters {
+        right: 0;
+        width: 25%;
+    }
+    .concerts-list {
+        width: 75%;
+    }
+    #back-button {
+        visibility: hidden;
+    }
+}
 </style>
 
