@@ -1,6 +1,7 @@
 export default{
     isInitialized: state => state.initialized,
-    getConcertsList: state => state.concertsList && objectToArray(state.concertsList).filter(concert => concert.key !== '.key'),
+    getCountryConcerts: state => state.countryConcerts && objectToArray(state.countryConcerts).filter(concert => concert.key !== '.key'),
+    getAllConcerts: state => state.allConcerts && objectToArray(state.allConcerts).filter(concert => concert.key !== '.key'),
     getUserProfile: state => state.userProfile,
     getUserLiked: state => state.userData && state.userData.liked && objectToArray(state.userData.liked).map(({key}) => key),
     getUserSaved: state => state.userData && state.userData.saved && objectToArray(state.userData.saved).map(({key}) => key),

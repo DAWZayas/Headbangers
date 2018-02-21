@@ -1,7 +1,7 @@
 <template>
     <el-form ref="form-location" :model="location" :rules="rules" action="javascript:void(0)">
-        <el-form-item label="Place Name" prop="name">
-            <el-input placeholder="The Cavern" v-model="location.name"></el-input>
+        <el-form-item label="Place Name" prop="venue">
+            <el-input placeholder="The Cavern" v-model="location.venue"></el-input>
         </el-form-item>
 
         <el-row>
@@ -47,14 +47,14 @@ export default {
     data () {
         return {
             location: {
-                name: '',
+                venue: '',
                 street: '',
                 country: '',
                 number: '',
                 city: ''
             },
             rules: {
-                name: [
+                venue: [
                     { required: true, message: 'Please enter venue name.', trigger: 'blur' },
                     { pattern: /^[-a-zA-Z0-9_'\\&_/' ]*$/, message: 'Name must be alphanumeric.', trigger: 'blur' },
                     { max: 50, message: 'Length must be less than 50 characters.', trigger: 'blur' }
@@ -86,10 +86,10 @@ export default {
         ...mapGetters({ countryList: 'getCountries'})
     },
     created () {
-        this.setUserCountry().then(country => this.location.country = country)
+        this.getUserCountry().then(country => this.location.country = country)
     },
     methods: {
-        ...mapActions(['setUserCountry']),
+        ...mapActions(['getUserCountry']),
         done () {
             geolocator.geocode({'address': `${this.location.street} ${this.location.number} ${this.location.city} ${this.location.country}`}, (err, location) => {
                 this.$refs['form-location'].validate(valid => {

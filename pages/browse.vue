@@ -1,21 +1,8 @@
 <template>
     <div>
         <div>
-            <!--
-            <el-tabs type="border-card">
-                <el-tab-pane>
-                    <span slot="label"><icon-text icon="lnr-list" text="List"></icon-text></span>
-                </el-tab-pane>
-                <el-tab-pane label="Config">
-                    <span slot="label"><icon-text icon="lnr-map" text="Map"></icon-text></span>
-                </el-tab-pane>
-                <el-tab-pane label="Role">
-                    <span slot="label"><icon-text icon="lnr-calendar-full" text="Calendar"></icon-text></span>
-                </el-tab-pane>
-            </el-tabs>
-            -->
-            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <concerts-list v-loading="loading" class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
+            <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
             <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
     </div>
@@ -39,7 +26,7 @@
         },
 
         computed: {
-            ...mapGetters({concerts: 'getConcertsList', userCountry: 'getUserCountry', loading: 'getLoading'}),
+            ...mapGetters({concerts: 'getCountryConcerts', userCountry: 'getUserCountry', loading: 'getLoading'}),
         },
 
         watch: {
@@ -59,8 +46,8 @@
         },
         
         methods: {
-            ...mapActions(['bindConcertsList', 'unbindConcertsList', 'setUserCountry']),
-            ...mapMutations(['setConcertsListRef']),
+            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'getUserCountry']),
+            ...mapMutations(['setCountryConcertsRef']),
             applyFilters () {
                 this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
             },
@@ -87,16 +74,10 @@
         },
 
         mounted () {
-                if(!this.userCountry){
-                    this.setUserCountry().then(() => {
-                    this.setConcertsListRef()
-                    this.bindConcertsList()
-                    })
-                }else{
-                    this.setConcertsListRef()
-                    this.bindConcertsList()
-                }
-                
+                this.getUserCountry().then((country) => {
+                    this.setCountryConcertsRef()
+                    this.bindCountryConcerts()
+                })
                 this.windowWidth = window.innerWidth
                 window.addEventListener('resize', (e) => {
                     this.windowWidth = window.innerWidth
@@ -120,7 +101,7 @@
         },
 
         beforeDestroy () {
-            this.unbindConcertsList()
+            this.unbindCountryConcerts()
         }
     }
 </script>

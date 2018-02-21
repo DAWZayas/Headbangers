@@ -24,16 +24,24 @@
             </div>
         </nuxt-link>
         <hr>
-        <div class="event-buttons">
-            <div class="full-width text-center" @click="like">
+        <div v-if="!editable" class="event-buttons">
+            <div class="full-width text-center event-button" @click="like">
                 <icon-text icon="lnr-heart" :class="liked && 'liked-button'" text="Like"></icon-text>
             </div>
-            <div class="full-width text-center" @click="save">
-                <icon-text icon="lnr-bookmark" :class=" saved && 'saved-button'" text="Save"></icon-text>
+            <div class="full-width text-center event-button" @click="save">
+                <icon-text icon="lnr-bookmark" :class="saved && 'saved-button'" text="Save"></icon-text>
             </div>
-            <div class="full-width text-center">
+            <div class="full-width text-center event-button">
                 <icon-text icon="lnr-bubble" text="Share"></icon-text>
             </div>
+        </div>
+        <div v-if="editable" class="event-buttons">
+            <el-button class="full-width text-center" @click="editConcert">
+                Edit
+            </el-button>
+            <el-button type="danger" class="full-width text-center" @click="deleteConcert">
+                Delete
+            </el-button>
         </div>
     </el-card>
 </template>
@@ -45,7 +53,7 @@
         components: {
             IconText
         },
-        props: ['concert'],
+        props: ['concert', 'editable'],
         computed: {
             ...mapGetters({likedConcerts: 'getUserLiked', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
             liked () {
@@ -59,7 +67,7 @@
             }
         },
         methods: {
-            ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert']),
+            ...mapActions(['likeConcert', 'saveConcert', 'unlikeConcert', 'unsaveConcert', 'removeConcert']),
             like () {
                 if (this.isAuthenticated) {
                     !this.liked ? this.likeConcert(this.concert.key) : this.unlikeConcert(this.concert.key)
@@ -81,6 +89,23 @@
                         duration: 1000
                     })
                 }
+            },
+            editConcert () {
+
+            },
+            deleteConcert () {
+                this.$confirm('This will permanently delete the concert. Continue?', 'Warning', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(() => {
+                    this.removeConcert(this.concert.key).then(() => {
+                        this.$notify({
+                            type: 'success',
+                            message: 'Concert deleted'
+                        });
+                    })
+                })
             }
         }
     }
@@ -159,12 +184,15 @@
     .event-buttons {
         display: flex;
         padding: 0.5em;
-        >div {
+        > .event-button {
             cursor: pointer;
             color: $grayLight;
         }
-        >div:hover {
+        > .event-button :hover {
             color: $mainColorLightest;
+        }
+        .icon-text{
+            transition: color 1s;
         }
     }
     

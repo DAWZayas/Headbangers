@@ -3,15 +3,15 @@
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-bookmark" text="Saved"></icon-text></span>
-                <concerts-list :concerts="filterConcerts(savedConcerts)"></concerts-list>
+                <concerts-list v-loading="loading" v-if="saved" :concerts="saved"></concerts-list>
             </el-tab-pane>
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-checkmark-circle" text="Going"></icon-text></span>
-                <concerts-list :concerts="filterConcerts(assistingConcerts)"></concerts-list>
+                <concerts-list v-if="assisting" :concerts="assisitng"></concerts-list>
             </el-tab-pane>
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-bullhorn" text="Published"></icon-text></span>
-                <concerts-list :concerts="filterConcerts(publishedConcerts)"></concerts-list>
+                <concerts-list v-if="published" :editable="true" :concerts="published"></concerts-list>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -24,19 +24,23 @@ export default {
     middleware: 'auth',
     components: {ConcertsList, IconText},
     computed: {
-        ...mapGetters({concertsList: 'getConcertsList', savedConcerts: 'getUserSaved', assistingConcerts: 'getUserAssisting', publishedConcerts: 'getUserPublished'}),
+        ...mapGetters({concertsList: 'getAllConcerts', savedConcerts: 'getUserSaved', assistingConcerts: 'getUserAssisting', publishedConcerts: 'getUserPublished', loading: 'getLoading'}),
+        saved () { return this.filterConcertsByKey(this.concertsList, this.savedConcerts) },
+        assisting () { return this.filterConcertsByKey(this.concertsList, this.assistingConcerts) },
+        published () { return this.filterConcertsByKey(this.concertsList, this.publishedConcerts) }
     },
     methods: {
-        ...mapActions(['bindConcertsList', 'unbindConcertsList']),
-        filterConcerts(keys) {
-            return this.concertsList && keys && this.concertsList.filter(({key}) => keys.includes(key)).sort((a,b) => a.date - b.date)
-        }
+        ...mapActions(['bindAllConcerts', 'unbindAllConcerts']),
+        filterConcertsByKey: (concerts, keys) => {
+            return concerts && keys && concerts.filter(({key}) => keys.includes(key)).sort(this.sortByDate)
+        },
+        sortByDate: (a, b) => a.date - b.date
     },
     mounted () {
-        this.bindConcertsList()
+        this.bindAllConcerts()
     },
     beforeDestroy () {
-        this.unbindConcertsList()
+        this.unbindAllConcerts()
     }
 }
 </script>

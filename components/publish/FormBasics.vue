@@ -14,7 +14,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="Date" prop="date">
-                        <br><el-date-picker v-model="concert.date" type="date" placeholder="Date" format="dd/MM/yyyy"></el-date-picker>
+                        <br><el-date-picker v-model="concert.date" type="date" placeholder="Date" format="dd/MM/yyyy" :picker-options="{firstDayOfWeek: 1}"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="11" :offset="1">
@@ -60,7 +60,9 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
         return {
-            concert: {},
+            concert: {
+                currency: ''
+            },
             files: [],
             rules: {
                 title: [
@@ -88,22 +90,19 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies', userCountry: 'getUserCountry'})
+        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies'})
     },
     props: ['data'],
     created () {
         Object.assign(this.concert, this.data)
         if(this.data.poster.name) this.files = [this.data.poster]
-        if(!this.userCountry){
-            this.setUserCountry().then(() => {
-                this.concert.currency = this.currencyList[this.countryList[this.userCountry].currencies[0]].symbol
-            })
-        }else{
-            this.concert.currency = this.currencyList[this.countryList[this.userCountry].currencies[0]].symbol
-        }
+        if(this.data.date) this.concert.date = new Date(this.data.date)
+        this.getUserCountry().then((country) => {
+            this.concert.currency = this.currencyList[this.countryList[country].currencies[0]].symbol
+        }).catch(console.error)
     },
     methods: {
-        ...mapActions(['setUserCountry']),
+        ...mapActions(['getUserCountry']),
         done () {
             this.$refs['form-basics'].validate(valid => valid ? this.$emit('done', this.concert) : false)
         },

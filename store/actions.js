@@ -2,22 +2,35 @@ import { firebaseAction } from 'vuexfire'
 import firebaseApp from '~/firebaseapp'
 import { WSAEHOSTUNREACH } from 'constants';
 export default {
-    publishConcert: ({state, dispatch}, {concert, shortConcert}) => {
-        return dispatch('uploadFile', {file: concert.info.poster, path: '/posters/'+concert.poster.name}).then((snapshot) => {
+    publishConcert: ({state, dispatch, commit}, {concert, shortConcert}) => {
+        commit('setLoading', true)
+        return dispatch('uploadFile', {file: concert.info.poster.raw, path: '/posters/'+concert.author+concert.info.poster.name}).then((snapshot) => {
             concert.info.poster = snapshot.downloadURL
             shortConcert.poster = snapshot.downloadURL
             let concertKey = state.concertsFullRef.push(concert).key
-            state.concertsListRef.child(concertKey).set(shortConcert)
+            state.allConcertsRef.child(concertKey).set(shortConcert)
             state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).set(true)
-            return new Promise()
+            commit('setLoading', false)
+            return Promise.resolve(concertKey)
         })
     },
+    removeConcert: ({state, dispatch, commit}, concertKey) => {
+        return Promise.all([
+            state.concertsFullRef.child(concertKey).remove(),
+            state.allConcertsRef.child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('liked').child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('saved').child(concertKey).remove(),
+            state.usersRef.child(state.userProfile.uid).child('assisting').child(concertKey).remove()
+        ])
+    },
     setAllReferences: ({commit}) => {
-        commit('setConcertsListRef')
+        commit('setAllConcertsRef')
+        commit('setCountryConcertsRef')
         commit('setConcertsFullRef')
         commit('setUsersRef')
     },
-    setUserCountry: ({commit, state}) => {
+    getUserCountry: ({commit, state}) => {
         return new Promise((resolve, reject) => {
             if(state.userCountry){
                 resolve(state.userCountry)
@@ -26,7 +39,7 @@ export default {
                     if(err){
                         reject(err)
                     }else{
-                        commit('setUserCountry', location.address.countryCode)
+                        state.userCountry = location.address.countryCode
                         resolve(location.address.countryCode)
                     }
                 })
@@ -109,7 +122,7 @@ export default {
     },
     likeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes + 1)
-        state.allConcertsListRef.child(concertID).child('likes').transaction((likes) => likes + 1)
+        state.allConcertsRef.child(concertID).child('likes').transaction((likes) => likes + 1)
         state.usersRef.child(state.userProfile.uid).child('liked').child(concertID).set(true)
     },
     saveConcert: ({state}, concertID) => {
@@ -117,20 +130,26 @@ export default {
     },
     unlikeConcert: ({state}, concertID) => {
         state.concertsFullRef.child(concertID).child('likes').transaction((likes) => likes - 1)
-        state.allConcertsListRef.child(concertID).child('likes').transaction((likes) => likes - 1)
+        state.allConcertsRef.child(concertID).child('likes').transaction((likes) => likes - 1)
         state.usersRef.child(state.userProfile.uid).child('liked').child(concertID).set(null)
     },
     unsaveConcert: ({state}, concertID) => {
         state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(null)
     },
-    bindConcertsList: firebaseAction(({state, dispatch}) => {
-        dispatch('bindFirebaseReference', {reference: state.concertsListRef, toBind: 'concertsList'})
+    bindAllConcerts: firebaseAction(({state, dispatch}) => {
+        dispatch('bindFirebaseReference', {reference: state.allConcertsRef, toBind: 'allConcerts'})
+    }),
+    bindCountryConcerts: firebaseAction(({state, dispatch}) => {
+        dispatch('bindFirebaseReference', {reference: state.countryConcertsRef, toBind: 'countryConcerts'})
     }),
     bindConcert: firebaseAction(({state, dispatch}, id) => {
         dispatch('bindFirebaseReference', {reference: state.concertsFullRef.child(id), toBind: 'concertDetails'})
     }),
-    unbindConcertsList: firebaseAction(({dispatch}) => {
-        dispatch('unbindFirebaseReference', {toUnbind: 'concertsList'})
+    unbindAllConcerts: firebaseAction(({dispatch}) => {
+        dispatch('unbindFirebaseReference', {toUnbind: 'allConcerts'})
+    }),
+    unbindCountryConcerts: firebaseAction(({dispatch}) => {
+        dispatch('unbindFirebaseReference', {toUnbind: 'countryConcerts'})
     }),
     unbindConcert: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'})
