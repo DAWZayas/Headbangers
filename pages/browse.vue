@@ -3,9 +3,7 @@
         <div>
             <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
             <filters ref="filters" class="filters" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filters>
-            <div id="fab-container">
-                <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
-            </div>
+            <button v-show="showFab" id="fab" @click="toggleFilters(true)"><img src="~/static/img/icons/basic_mixer2.svg"></button>
         </div>
     </div>
 </template>
@@ -38,29 +36,6 @@
             concerts () {
                 this.applyFilters()
             },
-            windowWidth () {
-                var right, width, backButton = "visible", content = "100"
-                
-                if (this.windowWidth < 768) {
-                    right = "-100"
-                    width = "100"
-                }else if (this.windowWidth < 1050) {
-                    right = "-45"
-                    width = "45"
-                }else if (this.windowWidth < 1500) {
-                    right = "-35"
-                    width = "35"
-                }else {
-                    right = "0"
-                    width = "25"
-                    content = "75"
-                    backButton = "hidden"
-                }
-                document.querySelector(".concerts-list").style.width = content + '%'
-                document.querySelector("#back-button").style.visibility = backButton
-                document.querySelector(".filters").style.width = width + '%'
-                document.querySelector(".filters").style.right = right + '%'
-            }
         },
 
         components: {
@@ -82,20 +57,19 @@
             },
 
             toggleFilters (show) {
-                if (this.windowWidth < 768) {
-                    
-                    show ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = "-100%"
-                    show ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll"
-
-                }else if (this.windowWidth < 1050) {
-
-                    show ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-45%'
-
-                }else if (this.windowWidth < 1500) {
-
-                    show ? document.querySelector(".filters").style.right = 0 : document.querySelector(".filters").style.right = '-35%'
-
-                }
+                var right;
+                    if (this.windowWidth < 768) {
+                        right = show ? 0 : "-100%"
+                        show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
+                        document.body.style.overflowY = show ? "hidden" : "scroll"
+                    }else if (this.windowWidth < 1050) {
+                        right = show ? 0 : "-45%"
+                         show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
+                    }else if (this.windowWidth < 1500) {
+                        right = show ?  0 : "-35%"
+                         show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
+                    }
+                document.querySelector(".filters").style.right = right;
             }
         },
 
@@ -108,18 +82,20 @@
                 window.addEventListener('resize', (e) => {
                     this.windowWidth = window.innerWidth
                 })
-                
-                const fab = document.querySelector("#fab-container");
+
+                const fab = document.querySelector("#fab");
                 const footer = document.querySelector(".footer");
 
                 window.addEventListener('scroll', (i) => {
                     var fabDist = fab.getBoundingClientRect().top
                     var footerDist = footer.getBoundingClientRect().top
-                    if ((fabDist + document.body.scrollTop) + fab.offsetHeight >= (footerDist + document.body.scrollTop) - 20) {
-                        fab.style.position = 'relative'
-                    }else if (document.body.scrollTop + window.innerHeight < (footerDist + document.body.scrollTop)) {
-                        fab.style.position = 'fixed'
-                    }
+                        if (window.innerHeight < (footerDist + 15)) {
+                            fab.style.position = 'fixed'
+                            fab.style.bottom = '25px'
+                        }else if (fabDist + fab.offsetHeight >= footerDist - 15) {
+                            fab.style.position = 'absolute'
+                            fab.style.bottom = (document.querySelector(".footer").offsetHeight + 13) + 'px'
+                        }
                 })
                 
         },
@@ -133,27 +109,23 @@
 <style lang="scss">
     @import "assets/styles/colors.scss";
     @import "assets/styles/breakpoints.scss";
-    .filters {
-        right: -100%;
-        transition: all .45s;
+    
+    body {
+        overflow-x: hidden;
     }
-    #fab-container {
+    #fab {
         position: fixed;
-        margin-top: -49px;
         right: 25px;
         bottom: 25px;
-        text-align: right;
         z-index: 1;
-        #fab {
-            background: $accentColor;
-            padding: 18px 18px 15px 18px;
-            border: none;
-            border-radius: 100%;
-            box-shadow: 0px 2px 2px rgba(0,0,0,.5);
+        background: $accentColor;
+        padding: 18px 18px 15px 18px;
+        border: none;
+        border-radius: 100%;
+        box-shadow: 0px 2px 2px rgba(0,0,0,.5);
             img {
                 width: 20px;
             }
-        }
     }
     #fab:hover {
         cursor: pointer;
