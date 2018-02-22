@@ -1,5 +1,5 @@
 <template>
-    <div class="step-form">
+    <div class="step-form" v-loading="loading">
         <h3>Music Info</h3>
         
             <p>Playing bands</p>
@@ -52,7 +52,7 @@
             }
         },
         computed: {
-            ...mapGetters({ genreList: 'getGenreList' })
+            ...mapGetters({ genreList: 'getGenreList', loading: 'getLoading'})
         },
         props: ['data'],
         methods: {

@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
     head: {
         title: 'Headbangers',
@@ -18,7 +19,7 @@ module.exports = {
         ]
     },
     env: {
-        authNeeded: ['publish', 'account', 'myevents'],
+        authNeeded: ['publish', 'account', 'myevents', 'edit'],
         googleMapsKey: 'AIzaSyB0BavoaQqF9ViPldtHAp4kj2FJ7CHAFRI'
     },
     loading: {
@@ -35,5 +36,20 @@ module.exports = {
     plugins: [
         'plugins/element-ui.js',
         'plugins/google-maps.js'
-    ]
+    ],
+    build: {
+        extend (config, ctx) {
+          /* your original config here */
+    
+          /* add the following */
+          config.module.rules.splice(0, 0, {
+            test: /\.js$/,
+            include: [path.resolve(__dirname, './node_modules/vue2-google-maps')],
+            loader: 'babel-loader',
+          })
+        }
+    },
+    generate: {
+        routes: ['404']
+    }
 }

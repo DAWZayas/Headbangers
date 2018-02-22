@@ -1,5 +1,5 @@
 <template>
-    <div class="padding" v-loading="loading">
+    <div class="padding">
         <!--    <div v-if="isAuthenticated"> -->
         <div class="steps-wrapper">
             <el-steps :active="currentStep" finish-status="success" align-center>
@@ -60,7 +60,7 @@ export default {
         PublishSuccess
     },
     computed: {
-        ...mapGetters({userProfile: 'getUserProfile', loading: 'getLoading'})
+        ...mapGetters({userProfile: 'getUserProfile'})
     },
     methods: {
         ...mapActions(['publishConcert', 'setLoading']),

@@ -60,7 +60,7 @@ export default {
         return new Promise(resolve => {
             firebaseApp.auth().onAuthStateChanged(user => {
                 if (user) {
-                    commit('setUserProfile', user)
+                    commit('setUserProfile', {uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL})
                     commit('setAuthenticated', true)
                     dispatch('bindUserData', user.uid)
                     state.usersRef.child(user.uid).child('exist').set(true)
@@ -74,6 +74,17 @@ export default {
                 }
             })
         })
+    },
+    configSlideout () {
+        var slideout = new Slideout({
+            'panel': document.querySelector('main'),
+            'menu': document.querySelector('#side-menu'),
+            'touch': false,
+            'padding': 256,
+        })
+        document.querySelector('#menu-button').onclick = () => slideout.toggle()
+        window.innerWidth > 768 && slideout.open()
+        document.querySelectorAll('#side-menu .el-menu-item').forEach((item) => { item.onclick = () => { window.innerWidth < 768 && slideout.close() } })
     },
     bindUserData: firebaseAction(({state, dispatch}, id) => {
         dispatch('bindFirebaseReference', {reference: state.usersRef.child(id), toBind: 'userData'})
@@ -130,13 +141,16 @@ export default {
         state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(null)
     },
     bindAllConcerts: firebaseAction(({state, dispatch}) => {
-        dispatch('bindFirebaseReference', {reference: state.allConcertsRef, toBind: 'allConcerts'})
+        return dispatch('bindFirebaseReference', {reference: state.allConcertsRef, toBind: 'allConcerts'})
     }),
     bindCountryConcerts: firebaseAction(({state, dispatch}) => {
-        dispatch('bindFirebaseReference', {reference: state.countryConcertsRef, toBind: 'countryConcerts'})
+        return dispatch('bindFirebaseReference', {reference: state.countryConcertsRef, toBind: 'countryConcerts'})
     }),
-    bindConcert: firebaseAction(({state, dispatch}, id) => {
-        dispatch('bindFirebaseReference', {reference: state.concertsFullRef.child(id), toBind: 'concertDetails'})
+    bindConcert: firebaseAction(({state, dispatch, commit}, id) => {
+        if(!state.concertsFullRef){
+            commit('setConcertsFullRef')
+        }
+        return dispatch('bindFirebaseReference', {reference: state.concertsFullRef.child(id), toBind: 'concertDetails'})
     }),
     unbindAllConcerts: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'allConcerts'})
@@ -149,7 +163,15 @@ export default {
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef, commit}, {reference, toBind}) => {
         commit('setLoading', true)
-        reference.once('value').then(concerts => {concerts.val() && bindFirebaseRef(toBind, reference, {readyCallback: (() => commit('setLoading', false))})})
+        reference.once('value').then(snapshot => {
+            snapshot.val() && bindFirebaseRef(toBind, reference, {
+                readyCallback: (() => {
+                    commit('setLoading', false)
+                }),
+                errorCallback: ()=>console.log('no'),
+                cancelCallback: ()=>console.log('no')
+            })
+        })
     }),
     unbindFirebaseReference: firebaseAction(({unbindFirebaseRef}, {toUnbind}) => {
         try {
