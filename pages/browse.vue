@@ -78,13 +78,13 @@
                     this.bindCountryConcerts()
                 })
                 setTimeout( () => {
-                        if(!this.usrLocation) {
+                        if(!this.userLocation) {
                             this.$notify.info({
                                 title: 'Info',
                                 message: 'We need to know your location so you can filter the gigs by nearness.',
                                 offset: 50
                             });
-                            this.askUserLocation().then(console.log)
+                            this.askUserLocation()
                         }
                     }, 3500);                
         },

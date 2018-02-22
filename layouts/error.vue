@@ -1,22 +1,26 @@
 <template>
-    <div class="text-center">
-        <h1 v-if="error.statusCode === 404">Page not found</h1>
-        <h1 v-else>An error occurred: {{error.statusCode}}</h1>
-        <a class="link" href="/">Home page</a>
+    <div class="error-page">
+        <div class="text-center">
+            <h1>{{error.statusCode}}</h1>
+            <h2>{{error.message}}</h2>
+            <a class="link" href="/">Home page</a>
+        </div>
     </div>
 </template>
 
 <script>
-import HeaderComponent from '~/components/header/HeaderComponent'
-import SideMenu from '~/components/SideMenu'
-import FooterComponent from '~/components/FooterComponent'
 export default {
-    layout: 'default',
-    components: {
-        HeaderComponent,
-        SideMenu,
-        FooterComponent
-    },
-    props: ['error']
+    props: ['error'],
 }
 </script>
+<style lang="scss">
+    @import "assets/styles/colors.scss";
+    .error-page{
+        color: #fff;
+        background-color: $mainColorLight;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+    }    
+</style>
