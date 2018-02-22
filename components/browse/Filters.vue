@@ -167,6 +167,7 @@ export default {
                     returnvalue = ['likes', 'desc'];
                     break;
                 case 'nearer':
+                    returnvalue = ['distance', 'asc'];
                     break;
                 case 'cheaper':
                     returnvalue = ['price', 'asc'];
