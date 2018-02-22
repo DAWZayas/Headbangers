@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="filters">
         <div class="header">
             <icon-button icon="lnr-arrow-right" id="back-button" @click.native="hide"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
@@ -22,21 +22,23 @@
             </div>
             <div id="filter-date">
                 <h5>Date</h5>
-                <el-slider v-model="sliderDate" show-stops :max="5" :format-tooltip="formatDateTooltip" range></el-slider>
-                <p>{{sliderDateString}}</p>
+                <el-select v-model="date">
+                    <el-option v-for="(option, index) in dates" :key="index" :value="index" :label="option">
+                    </el-option>
+                </el-select>
             </div>
             <div id="filter-distance">
                 <h5>Distance</h5>
                 <div class="slider-flex">
-                    <el-slider v-model="sliderDistance" :step="1" :max="11" :show-tooltip=false></el-slider>
+                    <el-slider v-model="sliderDistance" :step="1" :max="13" :show-tooltip=false></el-slider>
                     <p>{{sliderDistanceString}}</p>
                 </div>
             </div>
             <div id="filter-price">
                 <h5>Price</h5>
-                <div class="slider-flex">
-                    <el-slider v-model="sliderPrice" :max="22" range></el-slider>
-                    <p>{{sliderPriceString}}</p>
+                <div class="input-range">
+                    <p>From</p><el-input-number :controls=false v-model="priceRange[0]"></el-input-number>
+                    <p>to</p><el-input-number :controls=false v-model="priceRange[1]"></el-input-number><p>€</p>
                 </div>
             </div>
         </div>
@@ -52,54 +54,51 @@ export default {
             sorting: [
                         'Sooner',
                         'Likes',
-                        'Nearer',
                         'Cheaper',
                         'People Assisting',
                     ],
             sortValue: 'Sooner',
             selectedGenres: [],
             dates: [
-                    'today',
-                    'next Week',
-                    'next Month',
-                    'the next six months',
-                    'this year',
-                    'next Year',
+                    'Today',
+                    'This Week',
+                    'This Month',
+                    'Next Six Months',
+                    'This Year',
+                    'Next Year',
                     ],
-            sliderDate: [0, 5],
+            date: 5,
+            distances: [1, 5, 10, 15, 20, 25, 50, 75, 100, 250, 500, 750, 1000, undefined],
             sliderDistance: 11,
-            distances: [1, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1000, undefined],
-            sliderPrice: [0, 22],
-            prices: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 100, 200, 300, 400, 500, undefined]
+            priceRange: [0, 999],
+        }
+    },
+
+    watch: {
+        userLocation()  {
+            if (this.userLocation) {
+                this.sorting.splice(1, 0, 'Nearer')
+            }
         }
     },
 
     computed: {
-        ...mapGetters({genreValues: 'getGenreList', usrLocation: 'getUserLocation'}),
+        ...mapGetters({genreValues: 'getGenreList', userLocation: 'getUserLocation'}),
         
         dateMiliseconds: function () {
-            return [this.transformToMs(this.sliderDate[0]), this.transformToMs(this.sliderDate[1])]
-        },
-
-        sliderDateString: function () {
-            var string = this.sliderDate + ''
-            string = string.split(',');
-            string[0] = this.dates[string[0]];
-            string[1] = this.dates[string[1]];
-            return 'From ' + string.join(' till ') + '.';
-
+            return this.transformToMs(this.date)
         },
 
         sliderDistanceString: function () {
             var distance = this.distances[this.sliderDistance]
-            distance = distance !== undefined ? distance + ' Km' : 'ilimitado' 
+            distance = distance !== undefined ? distance + ' Km' : 'unlimited' 
             return distance
         },
 
         sliderPriceString: function () {
             var price = [this.prices[this.sliderPrice[0]], this.prices[this.sliderPrice[1]]] 
             price[0] = price[0] !== undefined ? price[0] : 1000
-            price[1] = price[1] !== undefined ? price[1] : 'ilimitado'
+            price[1] = price[1] !== undefined ? price[1] : 'unlimited'
             return price[0] + ' - ' + price[1] + ' €'
         },
 
@@ -114,7 +113,7 @@ export default {
                 this.filterByGenres(this.selectedGenres),
                 this.filterByDate(this.dateMiliseconds),
                 this.filterByDistance(this.distances[this.sliderDistance]),
-                this.filterByPrice(this.prices[this.sliderPrice[0]], this.prices[this.sliderPrice[1]])
+                this.filterByPrice(this.priceRange[0], this.priceRange[1])
             ]
         }
     },
@@ -142,16 +141,16 @@ export default {
                     return today;
                     break;
                 case 1:
-                    return today + 1209600000 - (dayOfTheWeek * 86400000);
+                    return today + 604800000 - (dayOfTheWeek * 86400000);
                     break;
                 case 2:
-                    return today + 5259500000 - (dayOfTheMonth * 86400000);
+                    return today + 2629746000 - (dayOfTheMonth * 86400000);
                     break;
                 case 3:
-                    return today + 15778500000 - (dayOfTheMonth * 86400000);
+                    return today + 15778476000 - (dayOfTheMonth * 86400000);
                     break;
                 case 4:
-                    return today + 31557000000 - (dayOfTheYear * 86400000);
+                    return today + 31556952000 - (dayOfTheYear * 86400000);
                     break;
                 case 5:
                     return today + 63113904000 - (dayOfTheYear * 86400000);
@@ -212,38 +211,43 @@ export default {
         filterByDate (date) {
            return function (concertsArray) {
                 return concertsArray.filter ( (currentValue) => {
-                        return currentValue['date'] > date[0] && currentValue['date'] < date[1];
+                        return currentValue['date'] <= date;
                 } );
             }  
         },
         
         filterByDistance (distanceMax) {
-            var usrLoc = this.usrLocation
-            distanceMax = distanceMax !== undefined ? distanceMax : Infinity
-            return function (concertsArray) {
-                return concertsArray.filter ( (currentValue) => {
-                    var distance = geolocator.calcDistance({
-                        from: {
-                            latitude: usrLoc['coords']['latitude'],
-                            longitude: usrLoc['coords']['longitude']
-                        },
-                        to: {
-                            latitude: currentValue['coords']['lat'],
-                            longitude: currentValue['coords']['lng']
-                        },
-                        formula: geolocator.DistanceFormula.HAVERSINE,
-                        unitSystem: geolocator.UnitSystem.METRIC
+            if (this.userLocation) {
+                var usrLoc = this.userLocation
+                distanceMax = distanceMax !== undefined ? distanceMax : Infinity
+                return (concertsArray) => {
+                    return concertsArray.filter ( (currentValue) => {
+                        var distance = geolocator.calcDistance({
+                            from: {
+                                latitude: usrLoc['coords']['latitude'],
+                                longitude: usrLoc['coords']['longitude']
+                            },
+                            to: {
+                                latitude: currentValue['coords']['lat'],
+                                longitude: currentValue['coords']['lng']
+                            },
+                            formula: geolocator.DistanceFormula.HAVERSINE,
+                            unitSystem: geolocator.UnitSystem.METRIC
+                        });
+                        return distance <= distanceMax
                     });
-                    return distance < distanceMax;
-                });
-            } 
+                }
+            } else {
+                return (concertsArray) => {
+                    return concertsArray
+                }
+            }
         },
 
         filterByPrice (priceMin, priceMax) {
-            priceMax = priceMax !== undefined ? priceMax : Infinity
             return function (concertsArray) {
                 return concertsArray.filter ( (currentValue) => {
-                   return currentValue['price'] > priceMin && currentValue['price'] < priceMax
+                   return currentValue['price'] >= priceMin && currentValue['price'] <= priceMax
                 }); 
             }
         }
@@ -265,58 +269,69 @@ export default {
         transition: ease-out .50s;
         z-index: 20;
         background-color: white;
-        .header{
-            background-color: $mainColorLight;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            > * {
-                cursor: pointer;
-                padding: .5em 1em;
-                border: none;
-                color: white;
-                background-color: transparent;
+            .header{
+                background-color: $mainColorLight;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                    > * {
+                        cursor: pointer;
+                        padding: .5em 1em;
+                        border: none;
+                        color: white;
+                        background-color: transparent;
+                    }
+                    #apply-button{
+                        padding-top: .75em;
+                        font-size: 1.25em;
+                        font-weight: lighter;
+                        float: right;
+                    }
             }
-            #apply-button{
-                padding-top: .75em;
-                font-size: 1.25em;
-                font-weight: lighter;
-                float: right;
-            }
-        }
         .filters-form{
             height: calc(100% - 5.75em);
             margin: 0em 1em;
-            .el-slider__bar{
-                background-color: $mainColorLightest;
-            }
-            .el-slider__button{
-                border-color: $mainColorLighter;
-            }
-            > div{
-                margin: 0em .5em;
-                h5{
-                    margin: 1em 0em .25em 0em;
+                .el-slider__bar {
+                    background-color: $mainColorLightest;
                 }
-                > *:not(h5){
-                    width: calc(100% - 2em);
-                    margin: 0em 1em;
+                
+                .el-slider__button {
+                    border-color: $mainColorLighter;
                 }
-            }
-            #filter-date > p{
-                font-size: .75em
-            }   
-            .slider-flex{
-                display: flex;
-                text-align: center;
-                .el-slider{
-                    width: 45%;
+
+                > div {
+                    margin: 0em .5em;
+                        h5 {
+                            margin: 1em 0em .25em 0em;
+                        }
+                        > *:not(h5) {
+                            width: calc(100% - 2em);
+                            margin: 0em 1em;
+                        }
                 }
-                p{  
-                    padding-left: .75em;
-                    margin-top: .5em;
-                    width: 40%;
-                    color: $gray;
-                }
-            }        
+                #filter-date > p {
+                    font-size: .75em
+                }   
+                .slider-flex {
+                    display: flex;
+                    text-align: center;
+                        .el-slider {
+                            width: 65%;
+                        }
+                        p {  
+                            padding-left: .75em;
+                            margin-top: .5em;
+                            width: 40%;
+                            color: $gray;
+                        }
+                }  
+                .input-range {
+                    display: flex;
+                    width: 77%;
+                    justify-content: space-around;
+                        .el-input-number {
+                            text-align: center;
+                            width: 25%;
+                        }
+                }      
         }
     }
 @media (min-width: $break-sm) {
