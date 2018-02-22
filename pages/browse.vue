@@ -49,11 +49,26 @@
             ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'getUserCountry', 'askUserLocation']),
             ...mapMutations(['setCountryConcertsRef']),
             applyFilters () {
-                this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts)
+                this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts.map(this.getConcertDistance))
             },
 
             setFilters (filters) {
                 this.filters = filters;           
+            },
+
+            getConcertDistance(concert){
+                return {...concert, distance: geolocator.calcDistance({
+                        from: {
+                            latitude: this.userLocation && this.userLocation.coords.latitude,
+                            longitude: this.userLocation && this.userLocation.coords.longitude
+                        },
+                        to: {
+                            latitude: concert.coords.lat,
+                            longitude: concert.coords.lng
+                        },
+                        formula: geolocator.DistanceFormula.HAVERSINE,
+                        unitSystem: geolocator.UnitSystem.METRIC
+                    })}
             },
 
             toggleFilters (show) {
@@ -77,19 +92,18 @@
                 this.getUserCountry().then((country) => {
                     this.setCountryConcertsRef()
                     this.bindCountryConcerts()
-                    setTimeout(function(){
+                })
+                setTimeout( () => {
                         if(!this.userLocation) {
-                            this.$notify({
+                            this.$notify.info({
                                 title: 'Info',
                                 message: 'Para que puedas filtrar conciertos por cercanía, necesitamos conocer tu ubicacion.',
                                 duration: 2500,
-                                offset: 60,
-                                onClose: () => {this.askUserLocation()},
-                                onClick: () => {this.askUserLocation()}
-                            })
+                                offset: 60
+                            });
+                            this.askUserLocation()
                         }
-                    }, 1500);
-                })
+                    }, 2500);
                 
                 this.windowWidth = window.innerWidth
                 window.addEventListener('resize', (e) => {
