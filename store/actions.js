@@ -140,6 +140,13 @@ export default {
     unsaveConcert: ({state}, concertID) => {
         state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(null)
     },
+    concertExists: ({state}, key) => {
+        return new Promise(resolve => {
+            state.allConcertsRef.child(key).once('value').then(data => {
+                resolve(data.val() !== null)
+            })
+        })
+    },
     bindAllConcerts: firebaseAction(({state, dispatch}) => {
         return dispatch('bindFirebaseReference', {reference: state.allConcertsRef, toBind: 'allConcerts'})
     }),
@@ -163,13 +170,18 @@ export default {
     }),
     bindFirebaseReference: firebaseAction(({bindFirebaseRef, commit}, {reference, toBind}) => {
         commit('setLoading', true)
-        reference.once('value').then(snapshot => {
-            snapshot.val() && bindFirebaseRef(toBind, reference, {
-                readyCallback: (() => {
-                    commit('setLoading', false)
-                }),
-                errorCallback: ()=>console.log('no'),
-                cancelCallback: ()=>console.log('no')
+        return new Promise(resolve => {
+            reference.once('value').then(snapshot => {
+                if(snapshot.val()){
+                    bindFirebaseRef(toBind, reference, {
+                        readyCallback: (() => {
+                            commit('setLoading', false)
+                            resolve(true)
+                        })
+                    })
+                } else {
+                    resolve(false)
+                }
             })
         })
     }),

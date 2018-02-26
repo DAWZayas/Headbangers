@@ -34,11 +34,16 @@ export default {
     data () {
         return {
             files: [],
-            profileModel: {}
+            profileModel: {
+                displayName: '',
+                email: '',
+                photoURL: '',
+                uid: ''
+            }
         }
     },
-    created () {
-      this.profileModel = {...this.profile}
+    mounted () {
+        this.profileModel = {...this.profile}
     },
     computed:{
             ...mapGetters({loading: 'getLoading'}),

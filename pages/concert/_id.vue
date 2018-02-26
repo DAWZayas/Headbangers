@@ -94,7 +94,7 @@
         },        
         mounted(){
             this.setConcertsFullRef()
-            this.bindConcert(this.$route.params.id)
+            this.bindConcert(this.$route.params.id).then(exists => !exists && this.$router.push('/error'))
             //firebaseApp.database().ref('/concertsFull').child(this.id).on('value',function(concert){ this.concert = concert.val() }.bind(this))
         },
         beforeDestroy(){

@@ -41,6 +41,7 @@
                     <el-form-item label="Poster" prop="poster">
                         <br>
                         <el-upload action="" accept="image/*" :file-list="files" :on-change="fileAdded" :on-exceed="fileAdded" :on-remove="fileRemoved" :auto-upload="false" :limit="1">
+                            <img v-if="imageUrl" :src="concert.posterURL"> 
                             <el-button>Upload <i class="el-icon-upload el-icon-right"></i></el-button>
                         </el-upload>
                     </el-form-item>
