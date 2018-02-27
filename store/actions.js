@@ -168,7 +168,7 @@ export default {
     unbindConcert: firebaseAction(({dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'concertDetails'})
     }),
-    bindFirebaseReference: firebaseAction(({bindFirebaseRef, commit}, {reference, toBind}) => {
+    bindFirebaseReference: firebaseAction(({bindFirebaseRef, state, commit}, {reference, toBind}) => {
         commit('setLoading', true)
         return new Promise(resolve => {
             reference.once('value').then(snapshot => {
@@ -180,6 +180,8 @@ export default {
                         })
                     })
                 } else {
+                    commit('setLoading', false)
+                    state.countryConcerts = {}
                     resolve(false)
                 }
             })

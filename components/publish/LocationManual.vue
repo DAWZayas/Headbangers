@@ -84,14 +84,18 @@ export default {
     },
     props: ['data'],
     computed: {
-        ...mapGetters({ countryList: 'getCountries'})
+        ...mapGetters({ countryList: 'getCountries', userCountry: 'getUserCountry'})
     },
+    watch: {
+        userCountry (country) {
+            this.location.country = country
+        }
+    }, 
     created () {
         Object.assign(this.location, this.data)
-        this.getUserCountry().then(country => this.location.country = country)
+        this.location.country = this.userCountry
     },
     methods: {
-        ...mapActions(['getUserCountry']),
         done () {
             geolocator.geocode({'address': `${this.location.street} ${this.location.number} ${this.location.city} ${this.location.country}`}, (err, location) => {
                 this.$refs['form-location'].validate(valid => {

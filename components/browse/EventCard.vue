@@ -2,7 +2,7 @@
     <el-card class="event-card">
         <nuxt-link :to="'/concert/'+concert.key">
             <div style="overflow: hidden;">
-                <div class="likes-badge"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
+                <div class="likes-badge" v-if="concert.likes"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
                 <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
             </div>
             <h3 class="event-title no-margin text-center">{{concert.title}}</h3>

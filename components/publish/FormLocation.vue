@@ -15,11 +15,6 @@ import LocationManual from './LocationManual'
 import LocationGoogle from './LocationGoogle'
 export default {
     components: { LocationManual, LocationGoogle },
-    data () {
-        return {
-            country: ''
-        }
-    },
     props: ['data', 'manual'],
     created () {
         if(process.BROWSER_BUILD){
