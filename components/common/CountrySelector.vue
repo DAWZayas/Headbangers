@@ -17,9 +17,6 @@ export default {
             set (country) {
                 this.setUserCountry(country)
                 this.setCountryConcertsRef()
-                if(this.$route.name == 'browse'){
-                    this.bindCountryConcerts()
-                }
             }
         },
         ...mapGetters({countries: 'getCountries', getUserCountry: 'getUserCountry'})

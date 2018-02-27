@@ -9,5 +9,6 @@ export default {
     setConcertsFullRef: (state) => state.concertsFullRef = firebaseApp.database().ref('/concertsFull'),
     setUsersRef: (state) => state.usersRef = firebaseApp.database().ref('/users'),
     setLoading: (state, loading) => state.loading = loading,
-    setUserLocation: (state, location) => state.location = location
+    setUserLocation: (state, location) => state.location = location,
+    setUserCountry: (state, country) => state.userCountry = country
 }

@@ -34,15 +34,17 @@
                 <el-col :span="4">
                     <el-form-item>
                         <br>
-                        <el-input :value="concert.currency" readonly></el-input>
+                        <el-select placeholder="Currency" v-model="concert.currency" filterable class="full-width">
+                            <el-option v-for="currency in currencyList.all" :key="currency.code" :value="currency.symbol" :label="currency.code"></el-option>
+                        </el-select>
                     </el-form-item>
                 </el-col>
                 <el-col :span="11" :offset="1" class="text-center">
-                    <el-form-item label="Poster" prop="poster">
+                    <el-form-item label="Poster (3:2 ratio)" prop="poster">
                         <br>
-                        <el-upload action="" accept="image/*" :file-list="files" :on-change="fileAdded" :on-exceed="fileAdded" :on-remove="fileRemoved" :auto-upload="false" :limit="1">
-                            <img v-if="imageUrl" :src="concert.posterURL"> 
-                            <el-button>Upload <i class="el-icon-upload el-icon-right"></i></el-button>
+                        <el-upload action="" accept="image/*" :on-change="fileAdded" :show-file-list="false" :auto-upload="false">
+                            <el-button>{{ concert.poster ? 'Change' : 'Upload'}} <i class="el-icon-upload el-icon-right"></i></el-button>
+                            <img class="poster-preview" v-if="concert.poster" :src="typeof concert.poster == 'string' ? concert.poster : concert.poster.url"> 
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -64,7 +66,6 @@ export default {
             concert: {
                 currency: ''
             },
-            files: [],
             rules: {
                 title: [
                     { required: true, message: 'Please, enter an event title.', trigger: 'blur' },
@@ -91,19 +92,20 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies'})
+        ...mapGetters({countryList: 'getCountries', currencyList: 'getCurrencies', userCountry: 'getUserCountry'})
+    },
+    watch: {
+        userCountry (country) {
+            this.concert.currency = this.currencyList[this.countryList[country].currencies[0]].symbol
+        }
     },
     props: ['data'],
     created () {
         this.concert = {...this.data}
-        if(this.data.poster.name) this.files = [this.data.poster]
         if(this.data.date) this.concert.date = new Date(this.data.date)
-        this.getUserCountry().then((country) => {
-            this.concert.currency = this.currencyList[this.countryList[country].currencies[0]].symbol
-        }).catch(console.error)
+        this.concert.currency = this.userCountry && this.currencyList[this.countryList[this.userCountry].currencies[0]].symbol
     },
     methods: {
-        ...mapActions(['getUserCountry']),
         done () {
             this.$refs['form-basics'].validate(valid => valid ? this.$emit('done', this.concert) : false)
         },
@@ -114,13 +116,14 @@ export default {
             callback()
         },
         fileAdded (file) {
-            this.files = file.length ? [file[0]] : [file]
             this.concert.poster = file
-        },
-        fileRemoved () {
-            this.files = []
-            this.concert.poster = ''
         }
     }
 }
 </script>
+<style>
+.poster-preview{
+    width: 100%;
+    margin-top: 0.5em;
+}
+</style>

@@ -1,8 +1,8 @@
 <template>
     <div>
-            <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts"></concerts-list>
-            <filter-slideout class="slide-filters" ref="slideout" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filter-slideout>
-            <filters class="big-filters" ref="filters" :data="filters" @setFilters="setFilters" ></filters>
+        <concerts-list class="concerts-list" ref="list" :concerts="filteredConcerts" empty-message="No results"></concerts-list>
+        <filter-slideout class="slide-filters" ref="slideout" :data="filters" @setFilters="setFilters" @hide="toggleFilters(false)"></filter-slideout>
+        <filters class="big-filters" ref="filters" :data="filters" @setFilters="setFilters" ></filters>
     </div>
 </template>
 
@@ -35,6 +35,9 @@
             concerts () {
                 this.applyFilters()
             },
+            userCountry () {
+                this.bindCountryConcerts()
+            }
         },
 
         components: {
@@ -46,7 +49,7 @@
         },
         
         methods: {
-            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'getUserCountry', 'askUserLocation']),
+            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'askUserLocation']),
             ...mapMutations(['setCountryConcertsRef']),
             applyFilters () {
                 this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts.map(this.getConcertDistance))
@@ -73,20 +76,17 @@
         },
 
         mounted () {
-                this.getUserCountry().then((country) => {
-                    this.setCountryConcertsRef()
-                    this.bindCountryConcerts()
-                })
-                setTimeout( () => {
-                        if(!this.userLocation) {
-                            this.$notify.info({
-                                title: 'Info',
-                                message: 'We need to know your location so you can filter the gigs by nearness.',
-                                offset: 50
-                            });
-                            this.askUserLocation()
-                        }
-                    }, 3500);                
+            this.bindCountryConcerts()
+            setTimeout( () => {
+                    if(!this.userLocation) {
+                        this.$notify.info({
+                            title: 'Info',
+                            message: 'We need your location so you can filter the gigs by distance.',
+                            offset: 50
+                        });
+                        this.askUserLocation()
+                    }
+                }, 3500);                
         },
 
         beforeDestroy () {

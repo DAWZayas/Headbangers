@@ -3,15 +3,15 @@
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-bookmark" text="Saved"></icon-text></span>
-                <concerts-list v-if="saved" :concerts="saved"></concerts-list>
+                <concerts-list empty-message="You don't have saved concerts" :concerts="saved"></concerts-list>
             </el-tab-pane>
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-checkmark-circle" text="Going"></icon-text></span>
-                <concerts-list v-if="assisting" :concerts="assisitng"></concerts-list>
+                <concerts-list empty-message="You're not going to any concert" :concerts="assisting"></concerts-list>
             </el-tab-pane>
             <el-tab-pane>
                 <span slot="label"><icon-text icon="lnr-bullhorn" text="Published"></icon-text></span>
-                <concerts-list v-if="published" :editable="true" :concerts="published"></concerts-list>
+                <concerts-list empty-message="You have no published concerts" :editable="true" :concerts="published"></concerts-list>
             </el-tab-pane>
         </el-tabs>
     </div>

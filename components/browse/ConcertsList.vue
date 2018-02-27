@@ -1,6 +1,9 @@
 <template>
     <div class="list-container" v-loading="loading">
-        <div class="cards padding">
+        <div v-if="(!concerts || concerts.length == 0) && !loading" class="text-center padding top">
+            {{emptyMessage}}
+        </div>
+        <div v-if="paginatedConcerts" class="cards padding">
             <event-card :editable="editable" v-for="(concert ,i) in paginatedConcerts" :key="i" :concert="concert"></event-card>
         </div>
         <div class="separator"></div>
@@ -31,7 +34,7 @@
                 this.currentPage = 1
             }
         },
-        props: ['concerts', 'editable'],
+        props: ['concerts', 'editable', 'emptyMessage'],
     }
 </script>
 

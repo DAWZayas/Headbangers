@@ -49,6 +49,14 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapGetters({userCountry: 'getUserCountry'})
+    },
+    watch: {
+        userCountry (country) {
+            this.location.country = country
+        }
+    },
     props: ['data'],
     created () {
         if(this.data.venue){
@@ -57,12 +65,9 @@ export default {
             this.placeSelected = true
             this.mapZoom = 16;
         }
-        this.getUserCountry().then(country => {
-            this.location.country = country
-        })
+        this.location.country = this.userCountry
     },
     methods: {
-        ...mapActions(['getUserCountry']),
         setPlace(place){
             this.location= {
                 coords: {
