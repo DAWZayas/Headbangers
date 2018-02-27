@@ -224,12 +224,12 @@ export default {
                     return concertsArray.filter ( (currentValue) => {
                         var distance = geolocator.calcDistance({
                             from: {
-                                latitude: usrLoc['coords']['latitude'],
-                                longitude: usrLoc['coords']['longitude']
+                                latitude: usrLoc.coords.latitude,
+                                longitude: usrLoc.coords.longitude
                             },
                             to: {
-                                latitude: currentValue['coords']['lat'],
-                                longitude: currentValue['coords']['lng']
+                                latitude: currentValue.coords.lat,
+                                longitude: currentValue.coords.lng
                             },
                             formula: geolocator.DistanceFormula.HAVERSINE,
                             unitSystem: geolocator.UnitSystem.METRIC
@@ -262,33 +262,32 @@ export default {
     @import "assets/styles/breakpoints.scss";
     .filters{
         position: absolute;
-        width: 100%;
         height: 100%;
-        right: -100%;
+        right: 0;
         top: 0;
-        transition: ease-out .50s;
+        transition: ease-out .5s;
         z-index: 20;
         background-color: white;
             .header{
+                display: flex;
+                justify-content: space-between;
+                padding: .5em 1em;
                 background-color: $mainColorLight;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-                    > * {
+                    button {
                         cursor: pointer;
-                        padding: .5em 1em;
-                        border: none;
-                        color: white;
-                        background-color: transparent;
                     }
-                    #apply-button{
-                        padding-top: .75em;
+                    #apply-button {
+                        margin-top: -2px;
+                        border: none;
                         font-size: 1.25em;
                         font-weight: lighter;
-                        float: right;
+                        color: white;
+                        background: transparent;
                     }
             }
         .filters-form{
-            height: calc(100% - 5.75em);
-            margin: 0em 1em;
+            padding: 0em 1.25em;
                 .el-slider__bar {
                     background-color: $mainColorLightest;
                 }
@@ -298,18 +297,15 @@ export default {
                 }
 
                 > div {
-                    margin: 0em .5em;
                         h5 {
-                            margin: 1em 0em .25em 0em;
+                            margin-top: 1em;
+                            margin-bottom: .25em;
                         }
                         > *:not(h5) {
                             width: calc(100% - 2em);
                             margin: 0em 1em;
                         }
-                }
-                #filter-date > p {
-                    font-size: .75em
-                }   
+                } 
                 .slider-flex {
                     display: flex;
                     text-align: center;
@@ -319,37 +315,45 @@ export default {
                         p {  
                             padding-left: .75em;
                             margin-top: .5em;
-                            width: 40%;
+                            width: 35%;
                             color: $gray;
                         }
                 }  
                 .input-range {
                     display: flex;
-                    width: 77%;
                     justify-content: space-around;
                         .el-input-number {
-                            text-align: center;
                             width: 25%;
                         }
                 }      
         }
     }
+@media (min-width: $break-xs) {
+    .filters {
+        width: 70%;
+    }
+}
+@media (min-width: $break-xs-sm) {
+    .filters {
+        width: 55%;
+    }
+}
 @media (min-width: $break-sm) {
     .filters {
         width: 45%;
-        right: -45%;
+    }
+}
+@media (min-width: $break-sm-md) {
+    .filters {
+        width: 35%;
     }
 }
 @media (min-width: $break-md-lg) {
     .filters {
-        width: 35%;
-        right: -35%;
+        width: 30%;
     }
 }
 @media (min-width: $break-lg-xl) {
-    body {
-        overflow-y: scroll;
-    }
     .filters {
         width: 25%;
         right: 0;

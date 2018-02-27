@@ -19,7 +19,6 @@
                 showFab: true,
                 fabPosition: 0,
                 windowWidth: 0,
-                selectedMode: 'list',
                 filteredConcerts: []
             }
         },

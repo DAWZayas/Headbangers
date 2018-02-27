@@ -14,25 +14,35 @@
                 windowWidth: 0
             }
         },
+
         components: {
             Filters
         },
+
         methods: {
+
             toggleFilters (show) {
-                var right;
-                    if (this.windowWidth < 768) {
-                        right = show ? 0 : "-100%"
-                        show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
-                        document.body.style.overflowY = show ? "hidden" : "scroll"
+                var right = 0
+                    if (this.windowWidth < 400) {
+                        var scroll = "hidden"
+                        if (!show) right = "-100%", scroll = "scroll"
+                        document.body.style.overflowY = scroll
+                    }else if (this.windowWidth < 600) {
+                        if (!show) right = "-70%"
+                    }else if (this.windowWidth < 768) {
+                        if (!show) right = "-55%"
+                    }else if (this.windowWidth < 852) {
+                        if (!show) right = "-45%"
                     }else if (this.windowWidth < 1050) {
-                        right = show ? 0 : "-45%"
-                         show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
+                        if (!show) right = "-35%"
                     }else if (this.windowWidth < 1500) {
-                        right = show ?  0 : "-35%"
-                         show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
+                        if (!show) right = "-30%"
                     }
-                document.querySelector(".filters").style.right = right;
+                show ? window.scroll({top:0, left: 0, behavior: 'smooth'}) : false;
+                document.querySelector(".filters").style.right = right
+                document.querySelector(".filters").style.display = show ? "initial" : "none"
             },
+
             setFilters(filters) {
                 this.filters = filters;
                 this.$emit('setFilters', this.filters);
@@ -40,6 +50,8 @@
         },
 
         mounted() {
+            document.querySelector(".filters").style.display= "none"
+
             this.windowWidth = window.innerWidth
                 window.addEventListener('resize', (e) => {
                     this.windowWidth = window.innerWidth
