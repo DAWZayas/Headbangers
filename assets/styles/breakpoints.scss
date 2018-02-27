@@ -1,12 +1,15 @@
 
 //Extra Small: from 0 to 400px.
-$break-xs: 0px;
+$break-xs: 400px;
 
 //Extra Small - Small: from 668 to 768px.
-$break-xs-sm: 668px;
+$break-xs-sm: 600px;
 
-//Small: from 768px to 992px.
+//Small: from 768px to 852px.
 $break-sm: 768px;
+
+//Small - Medium: from 852px to 992px.
+$break-sm-md: 852px;
 
 //Medium: from 992px to 1200px.
 $break-md: 992px;
