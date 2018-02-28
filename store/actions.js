@@ -171,7 +171,7 @@ export default {
     bindFirebaseReference: firebaseAction(({bindFirebaseRef, state, commit}, {reference, toBind}) => {
         commit('setLoading', true)
         return new Promise(resolve => {
-            reference.once('value').then(snapshot => {
+            reference && reference.once('value').then(snapshot => {
                 if(snapshot.val()){
                     bindFirebaseRef(toBind, reference, {
                         readyCallback: (() => {

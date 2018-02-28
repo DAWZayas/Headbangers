@@ -5,7 +5,7 @@ export default {
     setUserData: (state, data) => state.userData = data ,
     setAuthenticated: (state, authenticated) => state.isAuthenticated = authenticated ,
     setAllConcertsRef: (state) => state.allConcertsRef = firebaseApp.database().ref('/concertsList'),
-    setCountryConcertsRef: (state) => state.countryConcertsRef = firebaseApp.database().ref('/concertsList').orderByChild('country').equalTo(state.userCountry),
+    setCountryConcertsRef: (state, country) => state.countryConcertsRef = firebaseApp.database().ref('/concertsList').orderByChild('country').equalTo(country),
     setConcertsFullRef: (state) => state.concertsFullRef = firebaseApp.database().ref('/concertsFull'),
     setUsersRef: (state) => state.usersRef = firebaseApp.database().ref('/users'),
     setLoading: (state, loading) => state.loading = loading,

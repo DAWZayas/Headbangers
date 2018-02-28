@@ -37,10 +37,9 @@
         },
         beforeMount () {
             this.configGeolocator()
-            this.getUserCountry()
+            this.getUserCountry().then(country => this.setCountryConcertsRef(country))
             this.setUsersRef()
             this.setAllConcertsRef()
-            this.setCountryConcertsRef()
             this.setConcertsFullRef()
         },
         created () {

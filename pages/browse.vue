@@ -48,7 +48,7 @@
         },
         
         methods: {
-            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'askUserLocation']),
+            ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts', 'askUserLocation', 'getUserCountry']),
             ...mapMutations(['setCountryConcertsRef']),
             applyFilters () {
                 this.filteredConcerts = this.concerts && this.filters.reduce((acc, func) => func(acc), this.concerts.map(this.getConcertDistance))
@@ -75,7 +75,10 @@
         },
 
         mounted () {
-            this.bindCountryConcerts()
+            this.getUserCountry().then(country => {
+                this.setCountryConcertsRef(country)
+                this.bindCountryConcerts()
+            })
             setTimeout( () => {
                     if(!this.userLocation) {
                         this.$notify.info({
