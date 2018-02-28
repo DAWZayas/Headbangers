@@ -1,58 +1,60 @@
 <template>
-    <div class="concert-page" v-if="concert" v-loading="loading">
-        <div class="concert-img" :style="`background-image: url(${concert.info.poster})`"></div>
-        <div class="concert-data">
-            <div class="actions">
-                <div class="likes" @click="like">
-                    <icon-text :class="liked && 'liked-button'" icon="lnr-heart" :text="concert.likes"></icon-text>
+    <div>
+        <div class="concert-page" v-if="concert" v-loading="loading">
+            <div class="concert-img" :style="`background-image: url(${concert.info.poster})`"></div>
+            <div class="concert-data">
+                <div class="actions">
+                    <div class="likes" @click="like">
+                        <icon-text :class="liked && 'liked-button'" icon="lnr-heart" :text="concert.likes"></icon-text>
+                    </div>
+                    <div class="assisting" @click="assist">
+                        <icon-text :class="assisting && 'assisting-button'"  icon="lnr-lighter" :text="concert.assisting"></icon-text>
+                    </div>
+                    <div class="saved" @click="save">
+                        <icon-text :class="saved && 'saved-button'" icon="lnr-bookmark"></icon-text>
+                    </div>
+                <!--<div class="share">
+                        <icon-text icon="lnr-bubble" text=""></icon-text>
+                    </div>-->
                 </div>
-                <div class="assisting" @click="assist">
-                    <icon-text :class="assisting && 'assisting-button'"  icon="lnr-lighter" :text="concert.assisting"></icon-text>
+                <div class= "concert-title">
+                    <h2>{{concert.info.title}}</h2>
                 </div>
-                <div class="saved" @click="save">
-                    <icon-text :class="saved && 'saved-button'" icon="lnr-bookmark"></icon-text>
+                <div class="genres">
+                    <div class="genre" v-for='(genre, index) in concert.genres' :key="index">
+                        <p>{{genre}}<span v-if="index < concert.genres.length - 1">,&nbsp;</span></p>
+                    </div>
                 </div>
-            <!--<div class="share">
-                    <icon-text icon="lnr-bubble" text=""></icon-text>
-                </div>-->
+                <div class="description">
+                    <p>"{{concert.info.description}}"</p>
+                </div>
+                <hr>
+                <div class= "main-info">
+                    <div class="info-datebox">
+                        <p id="month">{{formattedDate.month}}</p>
+                        <p id="day">{{formattedDate.day}}</p>
+                        <p id="year">{{formattedDate.year}}</p>
+                    </div>
+                    <div class="info-time"><p>{{formattedDate.weekDay + ', ' + concert.info.time}}</p></div>
+                    <div class="info-money"><p>{{concert.info.price + ' ' + concert.info.currency}}</p></div>
+                    <div class="info-location"><p>{{concert.location.venue + ' (' + concert.location.city + ')'}}</p></div>
+                    <!--<span v-if="concert.location.number !== 'S/N'">{{concert.location.number}}</span>-->
+                </div>
+                <h4 class="bands-title">Bands</h4>
+                <div class="bands">
+                    <div class="band" v-for="band in concert.bands" :key="band.name" :style="`background-image: url(${concert.info.poster})`">
+                        <button class="band-body" @click="goToLink(band.link)">
+                            <p class="band-name">{{band.name}}</p>
+                        </button>   
+                    </div>
+                </div>
+                <h4 class="location-title">Location</h4>
+                    <div class="location">
+                        <gmap-map :center="concert.location.coords" :zoom="15" style="width: 100%; height: 256px;">
+                            <gmap-marker :position="concert.location.coords" :clickable="true" @click="goToGMaps(concert.location.venue, concert.location.coords)"></gmap-marker>
+                        </gmap-map>
+                    </div>
             </div>
-            <div class= "concert-title">
-                <h2>{{concert.info.title}}</h2>
-            </div>
-            <div class="genres">
-                <div class="genre" v-for='(genre, index) in concert.genres' :key="index">
-                    <p>{{genre}}<span v-if="index < concert.genres.length - 1">,&nbsp;</span></p>
-                </div>
-            </div>
-            <div class="description">
-                <p>"{{concert.info.description}}"</p>
-            </div>
-            <hr>
-            <div class= "main-info">
-                <div class="info-datebox">
-                    <p id="month">{{formattedDate.month}}</p>
-                    <p id="day">{{formattedDate.day}}</p>
-                    <p id="year">{{formattedDate.year}}</p>
-                </div>
-                <div class="info-time"><p>{{formattedDate.weekDay + ', ' + concert.info.time}}</p></div>
-                <div class="info-money"><p>{{concert.info.price + ' ' + concert.info.currency}}</p></div>
-                <div class="info-location"><p>{{concert.location.venue + ' (' + concert.location.city + ')'}}</p></div>
-                <!--<span v-if="concert.location.number !== 'S/N'">{{concert.location.number}}</span>-->
-            </div>
-            <h4 class="bands-title">Bands</h4>
-            <div class="bands">
-                <div class="band" v-for="band in concert.bands" :key="band.name" :style="`background-image: url(${concert.info.poster})`">
-                    <button class="band-body" @click="goToLink(band.link)">
-                        <p class="band-name">{{band.name}}</p>
-                    </button>   
-                </div>
-            </div>
-            <h4 class="location-title">Location</h4>
-                <div class="location">
-                    <gmap-map :center="concert.location.coords" :zoom="15" style="width: 100%; height: 256px;">
-                        <gmap-marker :position="concert.location.coords" :clickable="true" @click="goToGMaps(concert.location.venue, concert.location.coords)"></gmap-marker>
-                    </gmap-map>
-                </div>
         </div>
     </div>
 </template>
