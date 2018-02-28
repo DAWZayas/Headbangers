@@ -1,7 +1,7 @@
 <template>
     <div class="form padding">
         <nuxt v-loading="loading" />
-        <el-form :model="profileModel" >
+        <el-form :model="profileModel" action="javascript:void(0)">
             <div class="text-center">
               <el-form-item prop="poster">
                 <el-upload action="" accept="image/*" :disabled="!editable"  :on-change="fileAdded" :file-list="files" :show-file-list="false">
@@ -18,7 +18,7 @@
             </el-form-item>
             <div v-if="editable" class="space-between margin-top padding-top">
                 <el-button @click="changePassword">Change Password</el-button>
-                <el-button type="primary" @click="saveProfile">Save</el-button>
+                <el-button type="primary"  @click="saveProfile" native-type="submit">Save</el-button>
             </div>
             <div class="margin-top padding-top text-center">
                 <el-button @click="logOut">Log Out</el-button>
@@ -42,7 +42,12 @@ export default {
             }
         }
     },
-    mounted () {
+    watch: {
+        profile (profile) {
+            this.profileModel = {...profile}
+        }
+    },
+    created () {
         this.profileModel = {...this.profile}
     },
     computed:{
@@ -71,7 +76,7 @@ export default {
             if(changes.length !== 0){
                 Promise.all(changes)
                 .then(() => { this.$notify({message: 'Profile updated', type: 'success', duration: 2000})})
-                .catch((error) => { this.$notify({message: error.message, type: 'error', duration: 5000})})
+                .catch((error) => { error.message && this.$notify({message: error.message, type: 'error', duration: 5000})})
             }
         },
         changePassword(){
@@ -81,7 +86,7 @@ export default {
                 return this.askPassword('New password', true)
             }).then(({value}) => this.updatePassword({currentEmail: this.profile.email, currentPassword, newPassword: value}))
             .then(() => this.$notify({message: 'Password changed', type: 'success', duration: 2000}))
-            .catch((error) => error && this.$notify({message: error.message, type: 'error', duration: 5000}))
+            .catch((error) => error && error.message && this.$notify({message: error.message, type: 'error', duration: 5000}))
         },
         askPassword(title, isNew){
             return this.$prompt(`Please enter your${isNew ? ' new ' : ' '}password`, title, {
@@ -92,7 +97,7 @@ export default {
             })
         },
         logOut () {
-            
+            this.$router.push('/')
             firebaseApp.auth().signOut().then(() => {
                 this.$notify({
                     message: 'Logged out',
@@ -101,7 +106,6 @@ export default {
                 })
                 
             })
-            this.$router.push('/')
         }
     },
     props: ['profile', 'editable'],

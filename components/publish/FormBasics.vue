@@ -51,7 +51,7 @@
             </el-row>
     
             <div class="form-buttons">
-                <el-button type="primary" native-type="submit"  @click="done">Next</el-button>
+                <el-button type="primary" native-type="submit" @click="done">Next</el-button>
             </div>
     
         </el-form>

@@ -2,7 +2,7 @@
 
     <div class="filters">
         <div class="header">
-            <icon-button icon="lnr-arrow-right" id="back-button" @click.native="hide"></icon-button>
+            <icon-button icon="lnr-cross" id="back-button" @click.native="hide"></icon-button>
             <button id="apply-button" @click="apply">Apply</button>
         </div>
         <div class="filters-form">
@@ -265,7 +265,7 @@ export default {
         height: 100%;
         right: 0;
         top: 0;
-        transition: ease-out .5s;
+        transition: right ease-out .5s;
         z-index: 20;
         background-color: white;
             .header{

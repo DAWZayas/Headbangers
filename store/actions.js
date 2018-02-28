@@ -28,7 +28,6 @@ export default {
                 updates['/users/' + user.key + '/assisting/' + concertKey] = null
             })
             state.concertsFullRef.child(concertKey).child('/posterRef').once('value').then(data => {
-                console.log(data.val())
                 dispatch('removeFile', data.val())
                 firebaseApp.database().ref().update(updates)
             })
@@ -70,7 +69,7 @@ export default {
         return new Promise(resolve => {
             firebaseApp.auth().onAuthStateChanged(user => {
                 if (user) {
-                    commit('setUserProfile', {uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL})
+                    commit('setUserProfile', {uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL, providerData: user.providerData})
                     commit('setAuthenticated', true)
                     dispatch('bindUserData', user.uid)
                     state.usersRef.child(user.uid).child('exist').set(true)
@@ -114,11 +113,11 @@ export default {
     removeFile: ({}, path) => {
         return firebaseApp.storage().ref().child(path).delete()
     },
-    updatePicture: ({dispatch}, {file, path}) => {
+    updatePicture: ({state, dispatch}, {file, path}) => {
         return dispatch('uploadFile', {file, path}).then((snapshot) => {
             return firebaseApp.auth().currentUser.updateProfile({
                 photoURL: snapshot.downloadURL
-            })
+            }).then(() => state.userProfile.photoURL = snapshot.downloadURL)
         })
     },
     updateName: ({state}, displayName) => {
@@ -126,7 +125,7 @@ export default {
     },
     updateEmail: ({state}, {newEmail, currentEmail, currentPassword}) => {
         return firebaseApp.auth().signInWithEmailAndPassword(currentEmail, currentPassword).then((user) => {
-            return firebaseApp.auth().currentUser.updateEmail(newEmail)
+            return firebaseApp.auth().currentUser.updateEmail(newEmail).then(() => state.userProfile.email = newEmail)
         })
     },
     updatePassword: ({state}, {currentEmail, currentPassword, newPassword}) => {
