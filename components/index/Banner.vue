@@ -3,18 +3,25 @@
         <div style="margin-top:-4em">
             <p>Find the best concerts around you</p>
             <div id="search-bar">
-                <input type="text" placeholder="Band, location, genre...">
-                <button>
+                <input v-model="searchQuery" type="text" placeholder="Band, location, genre...">
+                <button @click="search">
                     <span class="lnr lnr-magnifier"></span>
                 </button>
             </div>
         </div>
     </div>
 </template>
-
 <script>
     export default {
-        props: ['background']
+        props: ['background'],
+        data () {
+            searchQuery: ''
+        },
+        methods: {
+            search (){
+                this.$router.push('/search' + searchQuery.replace(' ', '+'))
+            }
+        }
     }
 </script>
 
