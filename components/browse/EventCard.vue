@@ -2,7 +2,10 @@
     <el-card class="event-card">
         <nuxt-link :to="'/concert/'+concert.key">
             <div style="overflow: hidden;">
-                <div class="likes-badge" v-if="concert.likes"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
+                <div class="badges">
+                    <div v-if="concert.likes"><icon-text icon="lnr-heart" :text="concert.likes"></icon-text></div>
+                    <div v-if="concert.assisting"><icon-text icon="lnr-users" :text="concert.assisting"></icon-text></div>
+                </div>
                 <div class="event-img full-width" :style="`background-image: url(${concert.poster})`"></div>
             </div>
             <h3 class="event-title no-margin text-center">{{concert.title}}</h3>
@@ -138,18 +141,21 @@
             transform: scale(1.05)
         }
     }
-    
-    .likes-badge{
+    .badges{
         color: #fff;
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.5);
-        margin: 0.5em;
-        padding: 0 0.5em;
         font-size: 0.8em;
-        border-radius: 0.5em;
         z-index: 5;
+
         .lnr{
             color: #fff;
+        }
+
+        > div {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 0.5em;
+            padding: 0 0.5em;
+            margin: 0.5em;
         }
     }
 

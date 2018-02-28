@@ -146,11 +146,13 @@ export default {
         state.usersRef.child(state.userProfile.uid).child('saved').child(concertID).set(true)
     },
     assistConcert: ({state}, concertID) => {
+        state.concertsFullRef.child(concertID).child('assisting').transaction((assistants) => assistants + 1)
+        state.allConcertsRef.child(concertID).child('assisting').transaction((assistants) => assistants + 1)
         state.usersRef.child(state.userProfile.uid).child('assisting').child(concertID).set(true)
     },
     leaveConcert: ({state}, concertID) => {
-        state.concertsFullRef.child(concertID).child('assistants').transaction((assistants) => likes - 1)
-        state.allConcertsRef.child(concertID).child('assistants').transaction((assistants) => likes - 1)
+        state.concertsFullRef.child(concertID).child('assisting').transaction((assistants) => assistants - 1)
+        state.allConcertsRef.child(concertID).child('assisting').transaction((assistants) => assistants - 1)
         state.usersRef.child(state.userProfile.uid).child('assisting').child(concertID).set(null)
     },
     unlikeConcert: ({state}, concertID) => {

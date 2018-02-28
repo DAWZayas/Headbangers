@@ -1,16 +1,16 @@
 <template>
-    <div class="concert-page" v-if="concert">
+    <div class="concert-page" v-if="concert" v-loading="loading">
         <div class="concert-img" :style="`background-image: url(${concert.info.poster})`"></div>
         <div class="concert-data">
             <div class="actions">
                 <div class="likes" @click="like">
                     <icon-text :class="liked && 'liked-button'" icon="lnr-heart" :text="concert.likes"></icon-text>
                 </div>
-                <div class="assisting" @click="save">
-                    <icon-text icon="lnr-lighter" text=""></icon-text>
+                <div class="assisting" @click="assist">
+                    <icon-text :class="assisting && 'assisting-button'"  icon="lnr-lighter" :text="concert.assisting"></icon-text>
                 </div>
                 <div class="saved" @click="save">
-                    <icon-text :class="saved && 'saved-button'" icon="lnr-bookmark" :text="concert.assisting"></icon-text>
+                    <icon-text :class="saved && 'saved-button'" icon="lnr-bookmark"></icon-text>
                 </div>
             <!--<div class="share">
                     <icon-text icon="lnr-bubble" text=""></icon-text>
@@ -49,7 +49,7 @@
             </div>
             <h4 class="location-title">Location</h4>
                 <div class="location">
-                    <gmap-map :center="concert.location.coords" :zoom="8" map-type-id="terrain" style="width: 100%; height: 256px;">
+                    <gmap-map :center="concert.location.coords" :zoom="15" style="width: 100%; height: 256px;">
                         <gmap-marker :position="concert.location.coords" :clickable="true" @click="goToGMaps(concert.location.venue, concert.location.coords)"></gmap-marker>
                     </gmap-map>
                 </div>
@@ -68,15 +68,15 @@
             IconText
         },
         computed:{
-            ...mapGetters({concert: 'getConcertDetails', likedConcerts: 'getUserLiked', assistingConcerts: 'getUserAssisting', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated'}),
+            ...mapGetters({concert: 'getConcertDetails', likedConcerts: 'getUserLiked', assistingConcerts: 'getUserAssisting', savedConcerts: 'getUserSaved', isAuthenticated: 'isAuthenticated', loading: 'getLoading'}),
             liked () {
-                return this.likedConcerts && this.likedConcerts.includes(this.concert.key)
+                return this.likedConcerts && this.likedConcerts.includes(this.concert['.key'])
             },
             saved () {
-                return this.savedConcerts && this.savedConcerts.includes(this.concert.key)
+                return this.savedConcerts && this.savedConcerts.includes(this.concert['.key'])
             },
             assisting () {
-                return this.assistingConcerts && this.assistingConcerts.includes(this.concert.key)
+                return this.assistingConcerts && this.assistingConcerts.includes(this.concert['.key'])
             },
 
             formattedDate(){
@@ -94,7 +94,7 @@
             ...mapMutations(['setConcertsFullRef']),
             like () {
                 if (this.isAuthenticated) {
-                    !this.liked ? this.likeConcert(this.concert.key) : this.unlikeConcert(this.concert.key)
+                    !this.liked ? this.likeConcert(this.concert['.key']) : this.unlikeConcert(this.concert['.key'])
                 } else {
                     this.$notify({
                         type: 'info',
@@ -105,7 +105,7 @@
             },
             save () {
                 if (this.isAuthenticated) {
-                    !this.saved ? this.saveConcert(this.concert.key) : this.unsaveConcert(this.concert.key)
+                    !this.saved ? this.saveConcert(this.concert['.key']) : this.unsaveConcert(this.concert['.key'])
                 } else {
                     this.$notify({
                         type: 'info',
@@ -116,7 +116,7 @@
             },
             assist () {
                 if (this.isAuthenticated) {
-                    !this.assisting ? this.assistConcert(this.concert.key) : this.leaveConcert(this.concert.key)
+                    !this.assisting ? this.assistConcert(this.concert['.key']) : this.leaveConcert(this.concert['.key'])
                 } else {
                     this.$notify({
                         type: 'info',
@@ -124,18 +124,6 @@
                         duration: 1000
                     })
                 }
-            },
-
-            assist () {
-                /*if (this.isAuthenticated) {
-                    !this.assisting ? this.???(this.id) : this.???(this.id)
-                } else {
-                    this.$notify({
-                        type: 'info',
-                        message: 'You need to login',
-                        duration: 1000
-                    })
-                }*/
             },
 
             goToGMaps (venue, point) {
@@ -184,6 +172,7 @@
                     margin-right: 5px;
                 }
         }
+
         .concert-title {
             text-align: center;
             > h2 {
@@ -197,6 +186,27 @@
             justify-content: center;
             p {
                 margin: 0;
+            }
+        }
+
+        .liked-button {
+            color: $mainColorLightest;
+            .lnr {
+                color: $secondaryColor;
+            }
+        }
+        
+        .saved-button {
+            color: $mainColorLightest;
+            .lnr {
+                color: $green;
+            }
+        }
+
+        .assisting-button {
+            color: $mainColorLightest;
+            .lnr {
+                color: $orange;
             }
         }
 
