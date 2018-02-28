@@ -99,8 +99,9 @@ export default {
                     type: 'info',
                     duration: 2000
                 })
-                this.$router.push('/')
+                
             })
+            this.$router.push('/')
         }
     },
     props: ['profile', 'editable'],
