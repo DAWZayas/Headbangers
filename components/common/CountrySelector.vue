@@ -16,7 +16,7 @@ export default {
             },
             set (country) {
                 this.setUserCountry(country)
-                this.setCountryConcertsRef()
+                this.setCountryConcertsRef(counrry)
             }
         },
         ...mapGetters({countries: 'getCountries', getUserCountry: 'getUserCountry'})
