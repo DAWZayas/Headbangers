@@ -19,9 +19,10 @@
         },
         methods: {
             search (){
-                this.$router.push('/search' + searchQuery.replace(' ', '+'))
+                console.log('aqui'),
+                this.$router.push('/search/' + searchQuery.replace(' ', '+'))
             }
-        }
+        }        
     }
 </script>
 
