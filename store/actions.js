@@ -101,8 +101,9 @@ export default {
     unbindUserData: firebaseAction(({state, dispatch}) => {
         dispatch('unbindFirebaseReference', {toUnbind: 'userData'})
     }),
-    signIn: ({state}, {email, password}) => {
-        return firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    signIn: ({state, commit}, {email, password}) => {
+        commit('setLoading', true)
+        return firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() => commit('setLoading', false))
     },
     signOut: ({state}) => {
         return firebaseApp.auth().signOut()

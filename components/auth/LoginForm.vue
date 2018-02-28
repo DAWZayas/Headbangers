@@ -1,5 +1,5 @@
 <template>
-        <el-form ref="authForm" action="javascript:void(0)">
+        <el-form v-loading="loading" ref="authForm" action="javascript:void(0)">
             <h4 class="text-center"> Login to your account </h4>
             <el-form-item label="Email" class="no-margin">
                 <el-input placeholder="" v-model="email" :autofocus="true"></el-input>
@@ -16,7 +16,7 @@
 </template>
 <script>
 import firebaseApp from '~/firebaseapp'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 export default {
     data () {
         return {
@@ -25,8 +25,12 @@ export default {
             error: ''
         }
     },
+    computed:{
+        ...mapGetters({loading: 'getLoading'})
+    },
     methods: {
         ...mapActions(['signIn', 'sendPasswordEmail']),
+        ...mapMutations(['setLoading']),
         showSignup () {
             this.$emit('signup')
         },
@@ -35,14 +39,11 @@ export default {
                 this.emitError('Please enter an email and password')
             } else {
                 this.signIn({email: this.email, password: this.password})
-                .then((user) => {
-                    this.$message({
-                        message: 'Logged in succesfully',
-                        type: 'success'
-                    })
+                .then(() => {
                     this.$router.push('/')
                 })
                 .catch((error) => {
+                    this.setLoading(false)
                     if (error.code === 'auth/wrong-password') {
                         this.emitError('Invalid password')
                     } else {

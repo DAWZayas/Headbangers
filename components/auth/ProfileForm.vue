@@ -1,7 +1,6 @@
 <template>
     <div class="form padding">
-        <nuxt v-loading="loading" />
-        <el-form :model="profileModel" action="javascript:void(0)">
+        <el-form  v-loading="loading" :model="profileModel" action="javascript:void(0)">
             <div class="text-center">
               <el-form-item prop="poster">
                 <el-upload action="" accept="image/*" :disabled="!editable"  :on-change="fileAdded" :file-list="files" :show-file-list="false">
@@ -29,7 +28,7 @@
 <script>
 import firebaseApp from '~/firebaseapp'
 import {Avatar} from '@/components/common'
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 export default {
     data () {
         return {
@@ -55,6 +54,7 @@ export default {
     },
     methods:{
         ...mapActions(['updatePicture', 'updateName', 'updateEmail', 'updatePassword', 'signOut']),
+        ...mapMutations(['setLoading']),
         fileAdded (file) {
             this.files = [file]
             this.profileModel.photoURL = URL.createObjectURL(file.raw);
@@ -74,19 +74,33 @@ export default {
                 )
             }
             if(changes.length !== 0){
+                this.setLoading(true)
                 Promise.all(changes)
-                .then(() => { this.$notify({message: 'Profile updated', type: 'success', duration: 2000})})
-                .catch((error) => { error.message && this.$notify({message: error.message, type: 'error', duration: 5000})})
+                .then(() => { 
+                    this.$notify({message: 'Profile updated', type: 'success', duration: 2000})
+                    this.setLoading(false)
+                })
+                .catch((error) => { 
+                    error.message && this.$notify({message: error.message, type: 'error', duration: 5000})
+                    this.setLoading(false)
+                })
             }
         },
         changePassword(){
+            this.setLoading(true)
             let currentPassword
             this.askPassword('Change password').then((pass) => {
                 currentPassword = pass.value
                 return this.askPassword('New password', true)
             }).then(({value}) => this.updatePassword({currentEmail: this.profile.email, currentPassword, newPassword: value}))
-            .then(() => this.$notify({message: 'Password changed', type: 'success', duration: 2000}))
-            .catch((error) => error && error.message && this.$notify({message: error.message, type: 'error', duration: 5000}))
+            .then(() => {
+                this.$notify({message: 'Password changed', type: 'success', duration: 2000})
+                this.setLoading(false)
+            })
+            .catch((error) => {
+                error && error.message && this.$notify({message: error.message, type: 'error', duration: 5000})
+                this.setLoading(false)
+            })
         },
         askPassword(title, isNew){
             return this.$prompt(`Please enter your${isNew ? ' new ' : ' '}password`, title, {
