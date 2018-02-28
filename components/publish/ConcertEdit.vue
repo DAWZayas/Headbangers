@@ -23,7 +23,6 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { Concert, BasicInfo, Location, Band, ShortConcert } from '~/schemas'
 import { strictEqual } from 'assert';
 export default {
-    middleware: 'auth',
     props: ['concert'],
     data () {
         return {

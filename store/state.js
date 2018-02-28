@@ -5,7 +5,7 @@ export default {
     isAuthenticated: null,
     countryConcertsRef: null,
     allConcertsRef: null,
-    fullConcertsRef: null,
+    concertsFullRef: null,
     countryConcerts: null,
     allConcerts: null,
     concertDetails: null,

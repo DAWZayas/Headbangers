@@ -4,8 +4,10 @@ import { WSAEHOSTUNREACH } from 'constants';
 export default {
     publishConcert: ({state, dispatch, commit}, {concert, shortConcert}) => {
         commit('setLoading', true)
-        return dispatch('uploadFile', {file: concert.info.poster.raw, path: '/posters/'+concert.author+concert.info.poster.name}).then((snapshot) => {
+        let posterRef = '/posters/'+concert.author+concert.info.poster.name;
+        return dispatch('uploadFile', {file: concert.info.poster.raw, path: posterRef}).then((snapshot) => {
             concert.info.poster = snapshot.downloadURL
+            concert.posterRef = posterRef
             shortConcert.poster = snapshot.downloadURL
             let concertKey = state.concertsFullRef.push(concert).key
             state.allConcertsRef.child(concertKey).set(shortConcert)
@@ -14,15 +16,23 @@ export default {
             return Promise.resolve(concertKey)
         })
     },
-    removeConcert: ({state, dispatch, commit}, concertKey) => {
-        return Promise.all([
-            state.concertsFullRef.child(concertKey).remove(),
-            state.allConcertsRef.child(concertKey).remove(),
-            state.usersRef.child(state.userProfile.uid).child('published').child(concertKey).remove(),
-            state.usersRef.child(state.userProfile.uid).child('liked').child(concertKey).remove(),
-            state.usersRef.child(state.userProfile.uid).child('saved').child(concertKey).remove(),
-            state.usersRef.child(state.userProfile.uid).child('assisting').child(concertKey).remove()
-        ])
+    removeConcert: ({state, dispatch}, concertKey) => {
+        state.usersRef.once('value').then(users => {
+            let updates = {}
+            updates['/concertsFull/' + concertKey] = null
+            updates['/concertsList/' + concertKey] = null
+            users.forEach(user => {
+                updates['/users/' + user.key + '/liked/' + concertKey] = null
+                updates['/users/' + user.key + '/published/' + concertKey] = null
+                updates['/users/' + user.key + '/saved/' + concertKey] = null
+                updates['/users/' + user.key + '/assisting/' + concertKey] = null
+            })
+            state.concertsFullRef.child(concertKey).child('/posterRef').once('value').then(data => {
+                console.log(data.val())
+                dispatch('removeFile', data.val())
+                firebaseApp.database().ref().update(updates)
+            })
+        })
     },
     getUserCountry: ({commit, state}) => {
         return new Promise((resolve, reject) => {
@@ -100,6 +110,9 @@ export default {
     },
     uploadFile: ({}, {file, path}) => {
         return firebaseApp.storage().ref().child(path).put(file)
+    },
+    removeFile: ({}, path) => {
+        return firebaseApp.storage().ref().child(path).delete()
     },
     updatePicture: ({dispatch}, {file, path}) => {
         return dispatch('uploadFile', {file, path}).then((snapshot) => {

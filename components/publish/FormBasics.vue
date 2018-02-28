@@ -25,13 +25,13 @@
             </el-row>
             
             <el-row>
-                <el-col :span="8">
+                <el-col :sm="8" :xs="6">
                     <el-form-item label="Price" prop="price">
                         <el-input placeholder="0.00" v-model="concert.price"> 
                         </el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="4">
+                <el-col :sm="4" :xs="6">
                     <el-form-item>
                         <br>
                         <el-select placeholder="Currency" v-model="concert.currency" filterable class="full-width">
