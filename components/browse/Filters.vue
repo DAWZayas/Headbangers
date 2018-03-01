@@ -175,7 +175,7 @@ export default {
                     returnvalue = ['assisting', 'desc'];     
                     break;
                 default:
-                    returnvalue = ['sooner', 'asc'];
+                    returnvalue = ['sooner', 'desc'];
                     break;
             }
             return returnvalue;
