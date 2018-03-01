@@ -15,7 +15,10 @@
     export default {
         props: ['background'],
         data () {
-            searchQuery: ''
+            return{
+                searchQuery: ''
+            }
+            
         },
         methods: {
             search (){
