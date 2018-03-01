@@ -15,15 +15,13 @@
     export default {
         props: ['background'],
         data () {
-            return{
+            return {
                 searchQuery: ''
             }
-            
         },
         methods: {
-            search (){
-                console.log('aqui'),
-                this.$router.push('/search/' + searchQuery.replace(' ', '+'))
+            search () {
+                this.$router.push('/search/' + this.searchQuery.replace(' ', '+'))
             }
         }        
     }

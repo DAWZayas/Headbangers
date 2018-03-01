@@ -1,28 +1,36 @@
 <template>
-    <concerts-list :concerts="results"></concerts-list>
+    <div>
+        <concerts-list :concerts="results" empty-message="No results :("></concerts-list>
+    </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import ConcertsList from '~/components/browse/ConcertsList'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 export default {
+    components: {ConcertsList},
     computed: {
         ...mapGetters({concerts: 'getCountryConcerts'}),
-        ...mapActions(['bindCountryConcerts', 'unbindCountryConcerts']),
         results () {
-            return filterResults(this.concerts, this.$router.params.query)
+            return this.concerts && this.filterResults(this.concerts, this.$route.params.query)
         }
     },
     methods: {
+        ...mapActions(['getUserCountry', 'bindCountryConcerts', 'unbindCountryConcerts']),
+        ...mapMutations(['setCountryConcertsRef']),
         filterResults (concerts, query){
-            queryClean = query.toLowerCase().replace("+"," ");
-            concertListQuery = concerts.filter(function (concert) {
-                var detail = concert.info.title+' '+concert.description+' '+concert.location.city;
-                return detail.toLowerCase().indexOf(querySpace) > -1
+            let queryClean = query.toLowerCase().replace("+"," ");
+            let concertListQuery = concerts.filter(function (concert) {
+                var detail = concert.title+' '+concert.city;
+                return detail.toLowerCase().indexOf(queryClean) > -1
             })
             return concertListQuery
         }        
     },
     mounted () {
-        this.bindCountryConcerts()
+        this.getUserCountry().then(country => {
+            this.setCountryConcertsRef(country)
+            this.bindCountryConcerts()
+        })
     },
     beforeDestroy () {
         this.unbindCountryConcerts()
