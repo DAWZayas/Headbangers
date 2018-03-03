@@ -6,5 +6,5 @@ Developed using Vue JS and Google Firebase.
 
 Link: https://headbangers-zayas.firebaseapp.com/
 <br>
-<p>Developed by [David Rosa](https://github.com/droxt), [Roselle Torres](https://github.com/roselletorres) and [Lester Pérez](https://github.com/lesterbx)</p>
+<p>Developed by <a href="https://github.com/droxt">David Rosa</a>, <a href="https://github.com/roselletorres">Rosele Torres</a> and <a href="https://github.com/lesterbx">Lester Pérez</a></p>
 
